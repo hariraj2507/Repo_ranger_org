@@ -1,5 +1,7 @@
 # RepoRanger
 
+[v0.2.0a1 prerelease](https://github.com/hariraj2507/Repo_ranger_org/releases/tag/v0.2.0a1) | [Release CI](https://github.com/hariraj2507/Repo_ranger_org/actions/runs/34799858828)
+
 RepoRanger scans repository files and Git history for potential credentials. It combines signature and entropy detection, offline structural validation, syntax context, and explainable risk scoring. JSON, Markdown, and GitHub Actions output contain redacted findings.
 
 ## Install and run
@@ -171,4 +173,4 @@ The shipped model is opt-in. It improved Brier error but reduced recall on the s
 
 ## Release process
 
-The prepared release is `v0.2.0a1`. Push the source to your RepoRanger repository and verify the Actions matrix. Pushing a matching version tag runs the matrix again, then builds and publishes a GitHub prerelease with the wheel, source archive, model JSON and model card. Publishing to PyPI is not configured.
+The published prerelease is `v0.2.0a1`. Push the source to your RepoRanger repository and verify the Actions matrix. Pushing a matching version tag runs the matrix again, then builds and publishes a GitHub prerelease with the wheel, source archive, model JSON and model card. Publishing to PyPI is not configured.

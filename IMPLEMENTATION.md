@@ -46,13 +46,16 @@
 - A reproducible experimental logistic model is trained on 200 synthetic metadata rows with group-separated partitions. It remains opt-in because recall worsened on the synthetic test set.
 - Release workflow requires all Windows/Linux test jobs to pass before a version-tag prerelease is published.
 
-## Pending external release steps
+## Completed: GitHub CI and private prerelease
 
-- Connect this checkout to the user's private RepoRanger GitHub repository.
-- Run GitHub Actions and verify every matrix job.
-- Publish the v0.2.0a1 prerelease after CI passes.
+- Source pushed to `hariraj2507/Repo_ranger_org`, a verified private repository.
+- All 64 tests and the 52-case detection benchmark passed on Windows/Linux with Python 3.10/3.12.
+- Tag `v0.2.0a1` passed the complete matrix and release job.
+- Published wheel, source archive, experimental model JSON, and model card.
 
-The GitHub account was verified as hariraj2507. The user is creating a private repository and will provide its URL. No GitHub release has been published.
+[Prerelease](https://github.com/hariraj2507/Repo_ranger_org/releases/tag/v0.2.0a1)
+
+[Successful release workflow](https://github.com/hariraj2507/Repo_ranger_org/actions/runs/34799858828)
 
 ## Beyond this release
 

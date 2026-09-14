@@ -171,6 +171,8 @@ python -m benchmarks.evaluate
 
 The shipped model is opt-in. It improved Brier error but reduced recall on the synthetic held-out set, so the baseline remains the default. See [MODEL_CARD.md](MODEL_CARD.md) for data provenance, metrics and limitations. Download the model JSON asset with a wheel installation, or use the `models/` directory from the source distribution. Model loading accepts validated JSON weights only.
 
+An [independent CredData pilot](benchmarks/creddata-pilot.md) scanned 144 labeled files from five deterministically selected repositories. Raw detection reached 18.3% positive-annotation recall and 77.3% precision among alerts with definite labels; 28 unlabeled alerts were excluded from precision. Matching is approximate by line overlap. These results expose substantial detection gaps and do not establish production readiness or risk-score calibration. See the report for reproduction, scope and category counts.
+
 ## Release process
 
 The published prerelease is `v0.2.0a1`. Push the source to your RepoRanger repository and verify the Actions matrix. Pushing a matching version tag runs the matrix again, then builds and publishes a GitHub prerelease with the wheel, source archive, model JSON and model card. Publishing to PyPI is not configured.

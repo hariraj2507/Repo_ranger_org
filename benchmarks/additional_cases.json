@@ -1,0 +1,122 @@
+[
+  {
+    "name": "GitHub family ghp_",
+    "source": "ghp_AbCdEfGhIjKlMnOpQrStUvWxYz0123456789",
+    "expected": true,
+    "path": "config.txt"
+  },
+  {
+    "name": "GitHub family gho_",
+    "source": "gho_AbCdEfGhIjKlMnOpQrStUvWxYz0123456789",
+    "expected": true,
+    "path": "config.txt"
+  },
+  {
+    "name": "GitHub family ghu_",
+    "source": "ghu_AbCdEfGhIjKlMnOpQrStUvWxYz0123456789",
+    "expected": true,
+    "path": "config.txt"
+  },
+  {
+    "name": "GitHub family ghs_",
+    "source": "ghs_AbCdEfGhIjKlMnOpQrStUvWxYz0123456789",
+    "expected": true,
+    "path": "config.txt"
+  },
+  {
+    "name": "GitHub family ghr_",
+    "source": "ghr_AbCdEfGhIjKlMnOpQrStUvWxYz0123456789",
+    "expected": true,
+    "path": "config.txt"
+  },
+  {
+    "name": "fine grained family",
+    "source": "github_pat_AbCdEfGhIjKlMnOpQrStUvWxYz0123456789AbCdEfGhIjKlMnOpQrStUvWxYz0123456789",
+    "expected": true,
+    "path": "config.txt"
+  },
+  {
+    "name": "AWS short",
+    "source": "AKIAIOSFODNN7EXAMPL",
+    "expected": false,
+    "path": "config.txt"
+  },
+  {
+    "name": "AWS embedded",
+    "source": "prefixAKIAIOSFODNN7EXAMPLE",
+    "expected": false,
+    "path": "config.txt"
+  },
+  {
+    "name": "GitHub short",
+    "source": "ghp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": false,
+    "path": "config.txt"
+  },
+  {
+    "name": "GitHub oversized",
+    "source": "ghp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": false,
+    "path": "config.txt"
+  },
+  {
+    "name": "CRLF secret",
+    "source": "# header\r\nkey=AKIAIOSFODNN7EXAMPLE\r\n",
+    "expected": true,
+    "path": "config.txt"
+  },
+  {
+    "name": "Unicode surroundings",
+    "source": "# caf\u00e9\nkey=\"ghp_AbCdEfGhIjKlMnOpQrStUvWxYz0123456789\"",
+    "expected": true,
+    "path": "config.py"
+  },
+  {
+    "name": "GitLab family",
+    "source": "glpat-Ab3Def78Ghi9Jk01LmN2",
+    "expected": true,
+    "path": "config.txt"
+  },
+  {
+    "name": "RSA key",
+    "source": "-----BEGIN RSA PRIVATE KEY-----",
+    "expected": true,
+    "path": "config.txt"
+  },
+  {
+    "name": "EC key",
+    "source": "-----BEGIN EC PRIVATE KEY-----",
+    "expected": true,
+    "path": "config.txt"
+  },
+  {
+    "name": "OpenSSH key",
+    "source": "-----BEGIN OPENSSH PRIVATE KEY-----",
+    "expected": true,
+    "path": "config.txt"
+  },
+  {
+    "name": "public key header",
+    "source": "-----BEGIN PUBLIC KEY-----",
+    "expected": false,
+    "path": "config.txt"
+  },
+  {
+    "name": "digest field",
+    "source": "\"sha256\": \"a39bd48fed05c84347219cf2be690172ffa76459ecbad024679035adc17bef641\"",
+    "expected": false,
+    "path": "config.txt"
+  },
+  {
+    "name": "type reference",
+    "source": "clientSecret: process.env.APPLICATION_CLIENT_SECRET",
+    "expected": false,
+    "path": "config.txt"
+  },
+  {
+    "name": "YAML token",
+    "source": "access_token: q7Lx9Aa2Vm3Kp8Nr5Ts1Wd6Yc4He0ZuB",
+    "expected": true,
+    "path": "config.yaml"
+  }
+]

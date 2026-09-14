@@ -1,0 +1,6 @@
+include README.md RELEASE_NOTES.md MODEL_CARD.md IMPLEMENTATION.md
+recursive-include tests *.py *.json
+recursive-include benchmarks *.py *.json *.jsonl *.md
+recursive-include models *.json
+prune tmp
+prune output

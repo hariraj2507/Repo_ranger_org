@@ -1,0 +1,53 @@
+{
+  "baseline_test": {
+    "brier": 0.3141878262974881,
+    "log_loss": 0.8141564242397374,
+    "precision": 0.42857142857142855,
+    "recall": 0.75,
+    "samples": 40
+  },
+  "data_scope": "Synthetic labeled metadata; not independently labeled production credentials",
+  "dataset_sha256": "3ef3dcf1ca983f6688421707cba0ffa1d794bf6272d54b3e2d5c4fdbb7d387fe",
+  "deployment": "experimental_opt_in; production promotion requires independent real-world evaluation",
+  "regularization": 0.001,
+  "split_groups": {
+    "test": [
+      "nonsecret-scenario-2",
+      "nonsecret-scenario-5",
+      "secret-scenario-1",
+      "secret-scenario-6"
+    ],
+    "train": [
+      "nonsecret-scenario-0",
+      "nonsecret-scenario-1",
+      "nonsecret-scenario-3",
+      "nonsecret-scenario-6",
+      "nonsecret-scenario-8",
+      "nonsecret-scenario-9",
+      "secret-scenario-0",
+      "secret-scenario-2",
+      "secret-scenario-4",
+      "secret-scenario-5",
+      "secret-scenario-7",
+      "secret-scenario-9"
+    ],
+    "validation": [
+      "nonsecret-scenario-4",
+      "nonsecret-scenario-7",
+      "secret-scenario-3",
+      "secret-scenario-8"
+    ]
+  },
+  "split_sizes": [
+    120,
+    40,
+    40
+  ],
+  "trained_test": {
+    "brier": 0.09011535696758809,
+    "log_loss": 0.2534596326207824,
+    "precision": 1.0,
+    "recall": 0.5,
+    "samples": 40
+  }
+}

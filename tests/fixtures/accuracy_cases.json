@@ -1,0 +1,194 @@
+[
+  {
+    "name": "env token",
+    "source": "TOKEN=q7Lx9Aa2Vm3Kp8Nr5Ts1Wd6Yc4He0ZuB",
+    "expected": true,
+    "path": "config.py"
+  },
+  {
+    "name": "quoted password",
+    "source": "password=\"q7Lx9Aa2Vm3Kp8Nr5Ts1Wd6Yc4He0ZuB\"",
+    "expected": true,
+    "path": "config.py"
+  },
+  {
+    "name": "camel API key",
+    "source": "const apiKey = \"q7Lx9Aa2Vm3Kp8Nr5Ts1Wd6Yc4He0ZuB\";",
+    "expected": true,
+    "path": "config.py"
+  },
+  {
+    "name": "typed secret",
+    "source": "const clientSecret: string = \"q7Lx9Aa2Vm3Kp8Nr5Ts1Wd6Yc4He0ZuB\";",
+    "expected": true,
+    "path": "config.py"
+  },
+  {
+    "name": "JSON auth",
+    "source": "{\"authorization\": \"Bearer q7Lx9Aa2Vm3Kp8Nr5Ts1Wd6Yc4He0ZuB\"}",
+    "expected": true,
+    "path": "config.py"
+  },
+  {
+    "name": "base64 secret",
+    "source": "secret=\"q7Lx9Aa2Vm3Kp8Nr5Ts1Wd6Yc4He0ZuB==\"",
+    "expected": true,
+    "path": "config.py"
+  },
+  {
+    "name": "multiline assignment",
+    "source": "api_key =\n \"q7Lx9Aa2Vm3Kp8Nr5Ts1Wd6Yc4He0ZuB\"",
+    "expected": true,
+    "path": "config.py"
+  },
+  {
+    "name": "YAML credential",
+    "source": "credentials: q7Lx9Aa2Vm3Kp8Nr5Ts1Wd6Yc4He0ZuB",
+    "expected": true,
+    "path": "config.py"
+  },
+  {
+    "name": "npm auth token",
+    "source": "//registry.npmjs.org/:_authToken=q7Lx9Aa2Vm3Kp8Nr5Ts1Wd6Yc4He0ZuB",
+    "expected": true,
+    "path": "config.py"
+  },
+  {
+    "name": "quoted GitHub",
+    "source": "token=\"ghp_AbCdEfGhIjKlMnOpQrStUvWxYz0123456789\"",
+    "expected": true,
+    "path": "config.py"
+  },
+  {
+    "name": "unlabelled GitHub",
+    "source": "Use ghp_AbCdEfGhIjKlMnOpQrStUvWxYz0123456789 here",
+    "expected": true,
+    "path": "config.py"
+  },
+  {
+    "name": "AWS signature",
+    "source": "AKIAIOSFODNN7EXAMPLE",
+    "expected": true,
+    "path": "config.py"
+  },
+  {
+    "name": "private key header",
+    "source": "-----BEGIN PRIVATE KEY-----",
+    "expected": true,
+    "path": "config.py"
+  },
+  {
+    "name": "known signature inside lockfile",
+    "source": "{\"integrity\": \"ghp_AbCdEfGhIjKlMnOpQrStUvWxYz0123456789\"}",
+    "expected": true,
+    "path": "package-lock.json"
+  },
+  {
+    "name": "unknown auth in lockfile",
+    "source": "{\"_authToken\": \"q7Lx9Aa2Vm3Kp8Nr5Ts1Wd6Yc4He0ZuB\"}",
+    "expected": true,
+    "path": "bun.lock"
+  },
+  {
+    "name": "integrity digest",
+    "source": "{\"integrity\": \"sha512-q7Lx9Aa2Vm3Kp8Nr5Ts1Wd6Yc4He0ZuBq7Lx9Aa2Vm3Kp8Nr5Ts1Wd6Yc4He0ZuB==\"}",
+    "expected": false,
+    "path": "config.py"
+  },
+  {
+    "name": "package path",
+    "source": "node_modules/@radix-ui/react-dropdown-menu",
+    "expected": false,
+    "path": "config.py"
+  },
+  {
+    "name": "long identifier",
+    "source": "export type TravelRecommendationsResponse = Record<string, unknown>;",
+    "expected": false,
+    "path": "config.py"
+  },
+  {
+    "name": "URL",
+    "source": "url=\"https://example.invalid/q7Lx9Aa2Vm3Kp8Nr5Ts1Wd6Yc4He0ZuB\"",
+    "expected": false,
+    "path": "config.py"
+  },
+  {
+    "name": "URL assigned to key",
+    "source": "api_key=\"https://example.invalid/q7Lx9Aa2Vm3Kp8Nr5Ts1Wd6Yc4He0ZuB\"",
+    "expected": false,
+    "path": "config.py"
+  },
+  {
+    "name": "UUID",
+    "source": "id=\"7618ea58-a617-4a73-b081-cb6380a2de34\"",
+    "expected": false,
+    "path": "config.py"
+  },
+  {
+    "name": "CSS utilities",
+    "source": "className=\"data-[state=open]:animate-in data-[state=closed]:animate-out\"",
+    "expected": false,
+    "path": "config.py"
+  },
+  {
+    "name": "generated checksum",
+    "source": "checksum=\"q7Lx9Aa2Vm3Kp8Nr5Ts1Wd6Yc4He0ZuB\"",
+    "expected": false,
+    "path": "config.py"
+  },
+  {
+    "name": "unlabelled random value",
+    "source": "q7Lx9Aa2Vm3Kp8Nr5Ts1Wd6Yc4He0ZuB",
+    "expected": false,
+    "path": "config.py"
+  },
+  {
+    "name": "environment reference",
+    "source": "apiKey = process.env.LONG_APPLICATION_SECRET_KEY",
+    "expected": false,
+    "path": "config.py"
+  },
+  {
+    "name": "quoted environment reference",
+    "source": "token=\"process.env.LONG_APPLICATION_SECRET_TOKEN\"",
+    "expected": false,
+    "path": "config.py"
+  },
+  {
+    "name": "template reference",
+    "source": "token=\"${LONG_APPLICATION_SECRET_TOKEN}\"",
+    "expected": false,
+    "path": "config.py"
+  },
+  {
+    "name": "placeholder",
+    "source": "password=\"your-password-here\"",
+    "expected": false,
+    "path": "config.py"
+  },
+  {
+    "name": "low entropy",
+    "source": "token=\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"",
+    "expected": false,
+    "path": "config.py"
+  },
+  {
+    "name": "unrelated camel name",
+    "source": "tokenizerConfiguration = \"q7Lx9Aa2Vm3Kp8Nr5Ts1Wd6Yc4He0ZuB\"",
+    "expected": false,
+    "path": "config.py"
+  },
+  {
+    "name": "generated type",
+    "source": "accessToken: string;",
+    "expected": false,
+    "path": "config.py"
+  },
+  {
+    "name": "environment URL",
+    "source": "VITE_PROJECT_URL=\"https://project.example.invalid\"",
+    "expected": false,
+    "path": "config.py"
+  }
+]

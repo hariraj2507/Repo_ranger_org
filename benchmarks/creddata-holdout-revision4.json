@@ -1,0 +1,149 @@
+{
+  "dataset": "https://github.com/Samsung/CredData",
+  "dataset_revision": "c09c0c52fc6dae4ae5438ae69ba486f9f8059f0d",
+  "detector_revision": 4,
+  "seed": "reporanger-external-pilot-v1",
+  "repository_offset": 5,
+  "eligible_repositories": 337,
+  "requested_repositories": 5,
+  "selected_repositories": 5,
+  "source_mode": "Original pinned source archives; no upstream obfuscation applied",
+  "matching": "Inclusive line overlap; annotation recall and alert precision use different units. Conflicting labels excluded from precision.",
+  "scope": "Independent repository sample, labeled files only; raw detection, no history, ML, live validation or risk threshold. Not a production accuracy estimate.",
+  "counts": {
+    "expected_files": 100,
+    "expected_annotations": 361,
+    "scanned_files": 80,
+    "alerts": 11,
+    "annotations_F": 260,
+    "alerts_unlabeled": 3,
+    "annotations_T": 24,
+    "positive_annotations_missed": 21,
+    "alerts_true_positive": 3,
+    "positive_annotations_detected": 3,
+    "missing_files": 20,
+    "annotations_X": 10,
+    "alerts_false_positive": 5
+  },
+  "labeled_alert_precision": 0.375,
+  "positive_annotation_recall": 0.125,
+  "categories": {
+    "AWS S3 Bucket": {
+      "missed": 1
+    },
+    "Key": {
+      "missed": 1
+    },
+    "Key:Secret": {
+      "missed": 2
+    },
+    "Nonce": {
+      "missed": 1
+    },
+    "PEM Private Key": {
+      "detected": 2
+    },
+    "Password": {
+      "missed": 12
+    },
+    "Salt": {
+      "missed": 2
+    },
+    "Token": {
+      "detected": 1
+    },
+    "URL Credentials": {
+      "missed": 1
+    },
+    "UUID": {
+      "missed": 1
+    }
+  },
+  "repositories": [
+    {
+      "id": "4fe048e4",
+      "source_commit": "a735219783127cd0495246ccee89422069da1a1c",
+      "counts": {
+        "expected_files": 23,
+        "expected_annotations": 54,
+        "scanned_files": 23,
+        "alerts": 5,
+        "annotations_F": 44,
+        "alerts_unlabeled": 3,
+        "annotations_T": 10,
+        "positive_annotations_missed": 8,
+        "alerts_true_positive": 2,
+        "positive_annotations_detected": 2,
+        "missing_files": 0
+      },
+      "archive_sha256": "7e18f66372828e4421cdb7dccaeb04ad4ee65ff66c61cbd7b424f3808ef5fa17"
+    },
+    {
+      "id": "f43ddbf5",
+      "source_commit": "d98e2ae8f8f6c5b62d8bedec6f2ab0aa49ea6639",
+      "counts": {
+        "expected_files": 2,
+        "expected_annotations": 17,
+        "scanned_files": 2,
+        "alerts": 0,
+        "annotations_X": 1,
+        "annotations_T": 5,
+        "positive_annotations_missed": 5,
+        "annotations_F": 11,
+        "missing_files": 0
+      },
+      "archive_sha256": "f607ec34fcfb2e239037c1be229b70be90a20da6d272964271fb5be2ef06d7e1"
+    },
+    {
+      "id": "f7ae636a",
+      "source_commit": "b520eb04a492de7762e80ce39bab2e6b211f3ff6",
+      "counts": {
+        "expected_files": 4,
+        "expected_annotations": 11,
+        "scanned_files": 4,
+        "alerts": 0,
+        "annotations_F": 9,
+        "annotations_X": 1,
+        "annotations_T": 1,
+        "positive_annotations_missed": 1,
+        "missing_files": 0
+      },
+      "archive_sha256": "4d8ad5416b1ed00aaf80b89725f32886ac10fd192992c945286b0232c967fb9a"
+    },
+    {
+      "id": "36d0fbbb",
+      "source_commit": "6b53d45ce27510335f5f33db510a4ee4e3a29a91",
+      "counts": {
+        "expected_files": 32,
+        "expected_annotations": 161,
+        "scanned_files": 32,
+        "alerts": 6,
+        "alerts_true_positive": 1,
+        "annotations_F": 154,
+        "annotations_T": 5,
+        "positive_annotations_detected": 1,
+        "positive_annotations_missed": 4,
+        "annotations_X": 2,
+        "alerts_false_positive": 5,
+        "missing_files": 0
+      },
+      "archive_sha256": "933573d66618d630dbf3398d17bdceec6e4d0cbe539e9225ba06dbcb7ec68813"
+    },
+    {
+      "id": "1d8ec728",
+      "source_commit": "9a32bf9709960017f944753c68ab05c8de94add0",
+      "counts": {
+        "expected_files": 39,
+        "expected_annotations": 118,
+        "scanned_files": 19,
+        "alerts": 0,
+        "annotations_F": 42,
+        "annotations_X": 6,
+        "annotations_T": 3,
+        "positive_annotations_missed": 3,
+        "missing_files": 20
+      },
+      "archive_sha256": "8f394c6f22207358406708991263a8bcfb581ebfb6fe78c708f767cd2d1d7c31"
+    }
+  ]
+}

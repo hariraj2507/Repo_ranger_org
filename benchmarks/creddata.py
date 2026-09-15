@@ -34,7 +34,7 @@ def classify_alert(start, end, rows):
         next(iter(labels), ''), 'unlabeled')
 
 
-def selected_repositories(root, count):
+def selected_repositories(root, count, offset=0):
     snapshot = json.loads((root / 'snapshot.json').read_text(encoding='utf-8'))
     entries = []
     for key, url in snapshot.items():
@@ -43,7 +43,7 @@ def selected_repositories(root, count):
         if meta.exists():
             entries.append((repo_id, key, url, meta))
     entries.sort(key=lambda x: hashlib.sha256((SEED + x[0]).encode()).hexdigest())
-    return entries[:count], len(entries)
+    return entries[offset:offset + count], len(entries)
 
 
 def download_archive(url, commit, target):
@@ -68,8 +68,8 @@ def download_archive(url, commit, target):
         temporary.unlink(missing_ok=True)
 
 
-def evaluate(root, cache, count, download=False):
-    entries, population = selected_repositories(root, count)
+def evaluate(root, cache, count, download=False, offset=0):
+    entries, population = selected_repositories(root, count, offset)
     revision = subprocess.check_output(['git', '-C', str(root), 'rev-parse', 'HEAD'], text=True).strip()
     cache.mkdir(parents=True, exist_ok=True)
     totals = Counter()
@@ -140,7 +140,7 @@ def evaluate(root, cache, count, download=False):
     tp, fp = totals['alerts_true_positive'], totals['alerts_false_positive']
     positives = totals['annotations_T']
     return {'dataset': 'https://github.com/Samsung/CredData', 'dataset_revision': revision,
-            'detector_revision': 3, 'seed': SEED, 'eligible_repositories': population,
+            'detector_revision': 4, 'seed': SEED, 'repository_offset': offset, 'eligible_repositories': population,
             'requested_repositories': count, 'selected_repositories': len(entries),
             'source_mode': 'Original pinned source archives; no upstream obfuscation applied',
             'matching': 'Inclusive line overlap; annotation recall and alert precision use different units. Conflicting labels excluded from precision.',
@@ -155,12 +155,13 @@ def main():
     parser.add_argument('--metadata', type=Path, required=True)
     parser.add_argument('--cache', type=Path, default=Path('tmp/creddata-archives'))
     parser.add_argument('--repositories', type=int, default=5)
+    parser.add_argument('--offset', type=int, default=0, help='Skip ranked repositories already used for development')
     parser.add_argument('--download', action='store_true', help='Fetch public pinned source archives')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
-    if args.repositories < 1:
-        parser.error('--repositories must be positive')
-    report = evaluate(args.metadata, args.cache, args.repositories, args.download)
+    if args.repositories < 1 or args.offset < 0:
+        parser.error('--repositories must be positive and --offset nonnegative')
+    report = evaluate(args.metadata, args.cache, args.repositories, args.download, args.offset)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
     print(json.dumps({'counts': report['counts'], 'precision': report['labeled_alert_precision'],

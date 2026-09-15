@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import math
 import re
+import base64
+import binascii
 from collections import Counter
 
 from backend.scanner.models import NormalizedTextFile
@@ -29,6 +31,18 @@ class EntropyDetector:
     })
     _VALUE = re.compile(r'[A-Za-z0-9_./+=:@%!-]+')
     _REFERENCES = ('process.env.', 'import.meta.env.', 'os.environ', 'os.getenv', 'env.')
+    _AUTH_HEADER = re.compile(
+        r'''(?i)(?<![\w.-])["']?authorization["']?\s*[:=]\s*["']?'''
+        r'''(?P<scheme>Basic|Bearer)[ \t]+(?P<value>[A-Za-z0-9_./+=-]{8,2048})(?![\w./+=-])''')
+
+    @classmethod
+    def _password_literal(cls, name, value):
+        words = re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', name).lower()
+        if not set(re.split(r'[^a-z0-9]+', words)) & {'password', 'passwd', 'pwd'}:
+            return False
+        classes = sum(bool(re.search(pattern, value)) for pattern in (r'[a-z]', r'[A-Z]', r'[0-9]', r'[^\w\s]'))
+        return (len(value) >= 12 and classes >= 3 and cls.shannon_entropy(value) >= 3.0
+                and not re.search(r'(?i)example|placeholder|changeme|your[_-]|replace[_-]', value))
 
     def __init__(self, minimum_length: int = 20, minimum_entropy: float = 4.0) -> None:
         if minimum_length < 8:
@@ -65,8 +79,10 @@ class EntropyDetector:
             if value.lower().startswith('bearer '):
                 value = value[7:].strip()
             if (not self._VALUE.fullmatch(value) or '://' in value
-                    or value.startswith(self._REFERENCES)
-                    or len(value) < self._minimum_length
+                    or value.startswith(self._REFERENCES)):
+                continue
+            strong_password = group != 'bare' and self._password_literal(match.group('name'), value)
+            if not strong_password and (len(value) < self._minimum_length
                     or self.shannon_entropy(value) < self._minimum_entropy):
                 continue
             line = text.count('\n', 0, match.start(group)) + 1
@@ -75,4 +91,23 @@ class EntropyDetector:
                 severity=Severity.MEDIUM, file_path=text_file.metadata.relative_path,
                 line_start=line, line_end=line, matched_value=value,
             ))
+        for match in self._AUTH_HEADER.finditer(text):
+            value = match.group('value')
+            if value.startswith(self._REFERENCES):
+                continue
+            if match.group('scheme').lower() == 'basic':
+                try:
+                    decoded = base64.b64decode(value, validate=True).decode('utf-8')
+                except (ValueError, UnicodeError, binascii.Error):
+                    continue
+                username, separator, password = decoded.partition(':')
+                if not username or not separator or not self._password_literal('password', password):
+                    continue
+            elif len(value) < self._minimum_length or self.shannon_entropy(value) < self._minimum_entropy:
+                continue
+            line = text.count('\n', 0, match.start('value')) + 1
+            candidates.append(DetectionCandidate(
+                detector='entropy', rule_id='high_entropy_token', category='possible_secret',
+                severity=Severity.MEDIUM, file_path=text_file.metadata.relative_path,
+                line_start=line, line_end=line, matched_value=value))
         return tuple(candidates)

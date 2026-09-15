@@ -17,3 +17,5 @@ python -m benchmarks.creddata --metadata tmp/creddata --repositories 5 --downloa
 ```
 
 Omit `--download` for an offline rerun with cached archives. A nonzero exit signals incomplete evaluation, not low detector accuracy. Sampling ranks all repositories with metadata by SHA-256 of the fixed seed plus repository ID, before reading outcomes. Archives are pinned to upstream source commits and their hashes recorded. Files are read from archives without extraction or execution. Corpus contents may contain credentials; never validate them online or redistribute the archives. Original project licenses apply to source material; upstream metadata is Apache-2.0.
+
+The CLI evaluates the current detector. To reproduce the original revision-3 pilot, use project commit `e57b8171aa64faf5bbb6780cda1be7f95759913b`. Subsequent runs can use `--offset` to skip repositories already inspected. The [revision-4 follow-up](creddata-followup.md) documents the added authentication syntaxes and an incomplete second external comparison with no measured recall gain.

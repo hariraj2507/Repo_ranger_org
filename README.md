@@ -173,6 +173,8 @@ The shipped model is opt-in. It improved Brier error but reduced recall on the s
 
 An [independent CredData pilot](benchmarks/creddata-pilot.md) scanned 144 labeled files from five deterministically selected repositories. Raw detection reached 18.3% positive-annotation recall and 77.3% precision among alerts with definite labels; 28 unlabeled alerts were excluded from precision. Matching is approximate by line overlap. These results expose substantial detection gaps and do not establish production readiness or risk-score calibration. See the report for reproduction, scope and category counts.
 
+Detector revision 4 also recognizes complex quoted password literals of 12 or more characters and Basic/Bearer authorization headers. These remain medium-severity candidate findings. The [follow-up evaluation](benchmarks/creddata-followup.md) showed no measured gain on a second, incomplete external sample; broader accuracy work remains necessary. Saved reports from earlier detector revisions cannot be compared directly with revision 4.
+
 ## Release process
 
 The published prerelease is `v0.2.0a1`. Push the source to your RepoRanger repository and verify the Actions matrix. Pushing a matching version tag runs the matrix again, then builds and publishes a GitHub prerelease with the wheel, source archive, model JSON and model card. Publishing to PyPI is not configured.

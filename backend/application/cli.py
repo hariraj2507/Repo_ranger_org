@@ -58,8 +58,8 @@ def main(arguments: list[str] | None = None) -> int:
     report = generator.as_dict(result.source, result.score, result.assessments)
     report["schema_version"] = 1
     report["scan_profile"] = {
-        "detector_revision": 5,
-        "scoring_revision": 3, "model_id": model_id,
+        "detector_revision": 6,
+        "scoring_revision": 4, "model_id": model_id,
         "history": args.history, "reflog": args.reflog,
         "max_commits": args.max_commits, "max_blobs": args.max_blobs,
         "policy": {key: (sorted(values, key=lambda rule: rule["rule_id"]) if key == "custom_rules" else sorted(set(values)))

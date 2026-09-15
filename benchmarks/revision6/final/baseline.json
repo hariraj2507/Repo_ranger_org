@@ -1,0 +1,309 @@
+{
+  "dataset": "https://github.com/Samsung/CredData",
+  "dataset_revision": "c09c0c52fc6dae4ae5438ae69ba486f9f8059f0d",
+  "detector_revision": 5,
+  "seed": "reporanger-external-pilot-v1",
+  "repository_offset": 90,
+  "eligible_repositories": 337,
+  "requested_repositories": 10,
+  "selected_repositories": 10,
+  "file_size_limit_bytes": 16777216,
+  "source_mode": "Original pinned source archives; no upstream obfuscation applied",
+  "matching": "Inclusive line overlap; annotation recall and alert precision use different units. Conflicting labels excluded from precision.",
+  "scope": "Independent repository sample, labeled files only; raw detection, no history, ML, live validation or risk threshold. Not a production accuracy estimate.",
+  "counts": {
+    "expected_files": 305,
+    "expected_annotations": 1148,
+    "scanned_files": 305,
+    "alerts": 127,
+    "annotations_T": 279,
+    "positive_annotations_missed": 175,
+    "alerts_true_positive": 89,
+    "positive_annotations_detected": 104,
+    "annotations_F": 675,
+    "alerts_ambiguous": 11,
+    "missing_files": 0,
+    "annotations_X": 194,
+    "alerts_false_positive": 9,
+    "alerts_unlabeled": 17,
+    "alerts_unknown": 1
+  },
+  "labeled_alert_precision": 0.9081632653061225,
+  "positive_annotation_recall": 0.3727598566308244,
+  "categories": {
+    "AWS Client ID": {
+      "detected": 27,
+      "missed": 10
+    },
+    "AWS Client ID:Key": {
+      "detected": 4
+    },
+    "AWS Multi": {
+      "detected": 4
+    },
+    "Alibaba Access Key ID": {
+      "missed": 1
+    },
+    "Alibaba Multi": {
+      "missed": 1
+    },
+    "Auth": {
+      "missed": 2
+    },
+    "Basic Authorization": {
+      "missed": 2
+    },
+    "Basic Authorization:Auth": {
+      "missed": 2
+    },
+    "CMD Token": {
+      "missed": 2
+    },
+    "Dropbox App secret:Secret": {
+      "missed": 1
+    },
+    "JSON Web Token": {
+      "missed": 3,
+      "detected": 1
+    },
+    "JSON Web Token:Bearer Authorization": {
+      "detected": 1
+    },
+    "JSON Web Token:Token": {
+      "detected": 1
+    },
+    "Key": {
+      "missed": 6,
+      "detected": 7
+    },
+    "Key:AWS Client ID": {
+      "detected": 10
+    },
+    "Key:Secret": {
+      "missed": 1
+    },
+    "Key:Secret:Token": {
+      "missed": 1
+    },
+    "PEM Private Key": {
+      "detected": 3,
+      "missed": 4
+    },
+    "Password": {
+      "missed": 72,
+      "detected": 13
+    },
+    "Password:Key": {
+      "missed": 1
+    },
+    "PostHog Credentials": {
+      "missed": 2
+    },
+    "PostHog Credentials:API:Key": {
+      "detected": 1
+    },
+    "SQL Password": {
+      "missed": 1
+    },
+    "Secret": {
+      "detected": 6,
+      "missed": 1
+    },
+    "Secret:Key": {
+      "detected": 7
+    },
+    "Token": {
+      "missed": 3
+    },
+    "URL Credentials": {
+      "missed": 4
+    },
+    "UUID": {
+      "missed": 52,
+      "detected": 11
+    },
+    "WunderGraph API Key": {
+      "missed": 2
+    },
+    "WunderGraph API Key:API:Key": {
+      "missed": 1,
+      "detected": 8
+    }
+  },
+  "repositories": [
+    {
+      "id": "71455799",
+      "source_commit": "7604577ba78d12fc2f39a38f3792d3bfd2ba22f3",
+      "counts": {
+        "expected_files": 43,
+        "expected_annotations": 203,
+        "scanned_files": 43,
+        "alerts": 60,
+        "annotations_T": 105,
+        "positive_annotations_missed": 41,
+        "alerts_true_positive": 49,
+        "positive_annotations_detected": 64,
+        "annotations_F": 98,
+        "alerts_ambiguous": 11,
+        "missing_files": 0
+      },
+      "archive_sha256": "912f8fd4589d6ecf63a06c608a92ad8fe44c6b8003525d3a6ee9bd530f95a987"
+    },
+    {
+      "id": "5f75c372",
+      "source_commit": "7e38458132f4537cbeeccbd262fb3f2541ddb259",
+      "counts": {
+        "expected_files": 33,
+        "expected_annotations": 106,
+        "scanned_files": 33,
+        "alerts": 0,
+        "annotations_F": 103,
+        "annotations_T": 2,
+        "positive_annotations_missed": 2,
+        "annotations_X": 1,
+        "missing_files": 0
+      },
+      "archive_sha256": "b8ed4bfc0ab4f002bbcc1e2f0680200cfdcd3cd2d449aa7fb58dbc1dcb231bc2"
+    },
+    {
+      "id": "b82c1b9d",
+      "source_commit": "22aa4f9b4689f65a8f16affc5ff2dc886e10f4a5",
+      "counts": {
+        "expected_files": 11,
+        "expected_annotations": 23,
+        "scanned_files": 11,
+        "alerts": 0,
+        "annotations_T": 5,
+        "positive_annotations_missed": 5,
+        "annotations_F": 15,
+        "annotations_X": 3,
+        "missing_files": 0
+      },
+      "archive_sha256": "d8732085c831cd36f40c4998c25ce2b18940ab1a328668fc4d358fc3242e8d98"
+    },
+    {
+      "id": "e2d958cd",
+      "source_commit": "14eb1e10c93a67d962ef242d2f22ba6ccf004993",
+      "counts": {
+        "expected_files": 19,
+        "expected_annotations": 137,
+        "scanned_files": 19,
+        "alerts": 0,
+        "annotations_F": 137,
+        "missing_files": 0
+      },
+      "archive_sha256": "4e64d90d2a1ce19eef80323d2aea0cdba0b4d726b9cc691e6a395eaf508a3fc4"
+    },
+    {
+      "id": "597acaac",
+      "source_commit": "0ba9c9116178c8c6f2d49cfeed8c819f9a34397e",
+      "counts": {
+        "expected_files": 28,
+        "expected_annotations": 71,
+        "scanned_files": 28,
+        "alerts": 5,
+        "annotations_X": 1,
+        "annotations_T": 8,
+        "positive_annotations_missed": 8,
+        "alerts_false_positive": 2,
+        "annotations_F": 62,
+        "alerts_unlabeled": 3,
+        "missing_files": 0
+      },
+      "archive_sha256": "7e97e0393ee624634851fbfbb4d46743c0ecb2206a7e2784615846dea41b81a4"
+    },
+    {
+      "id": "7ba140d7",
+      "source_commit": "75efa273298c68aecc4c858c5671d48cc75b5e49",
+      "counts": {
+        "expected_files": 30,
+        "expected_annotations": 60,
+        "scanned_files": 30,
+        "alerts": 1,
+        "annotations_T": 5,
+        "positive_annotations_missed": 5,
+        "annotations_F": 54,
+        "alerts_false_positive": 1,
+        "annotations_X": 1,
+        "missing_files": 0
+      },
+      "archive_sha256": "9711376142d7417e20e075df03418bbd212aa9406dbedb1a7019e21c149f65cc"
+    },
+    {
+      "id": "234978d9",
+      "source_commit": "431834922da00ea11fa6ddc5ceda8262bf1a73b9",
+      "counts": {
+        "expected_files": 12,
+        "expected_annotations": 31,
+        "scanned_files": 12,
+        "alerts": 1,
+        "annotations_F": 28,
+        "annotations_T": 1,
+        "positive_annotations_missed": 1,
+        "annotations_X": 2,
+        "alerts_unlabeled": 1,
+        "missing_files": 0
+      },
+      "archive_sha256": "72951941a13cd8f3701535b0d9489e6040852c64cd556334880d3ea5065dffa1"
+    },
+    {
+      "id": "1809c1ce",
+      "source_commit": "958cfb7f89c2ac49eec1f9d5109bf32791e2c01c",
+      "counts": {
+        "expected_files": 28,
+        "expected_annotations": 115,
+        "scanned_files": 28,
+        "alerts": 36,
+        "annotations_T": 82,
+        "positive_annotations_missed": 50,
+        "annotations_F": 29,
+        "alerts_true_positive": 32,
+        "positive_annotations_detected": 32,
+        "alerts_unlabeled": 4,
+        "annotations_X": 4,
+        "missing_files": 0
+      },
+      "archive_sha256": "231c29d0519b92d2370f60b69ca3b3eafdcdc073c1b4d50c55469b1792af7cdd"
+    },
+    {
+      "id": "4dccc5be",
+      "source_commit": "b9e01da6d29264b147c19f98204f75859a680a6f",
+      "counts": {
+        "expected_files": 65,
+        "expected_annotations": 242,
+        "scanned_files": 65,
+        "alerts": 16,
+        "annotations_F": 96,
+        "annotations_X": 125,
+        "alerts_unlabeled": 8,
+        "annotations_T": 21,
+        "positive_annotations_missed": 19,
+        "alerts_false_positive": 6,
+        "alerts_true_positive": 2,
+        "positive_annotations_detected": 2,
+        "missing_files": 0
+      },
+      "archive_sha256": "88f7c91de103c9485d3facb362db1b03adedd3723542b2ef3bd87d92c036c149"
+    },
+    {
+      "id": "7f0408de",
+      "source_commit": "955ff70778c388c807eaf51eb29ae5cfbb75eb60",
+      "counts": {
+        "expected_files": 36,
+        "expected_annotations": 160,
+        "scanned_files": 36,
+        "alerts": 8,
+        "annotations_T": 50,
+        "positive_annotations_missed": 44,
+        "annotations_F": 53,
+        "alerts_true_positive": 6,
+        "positive_annotations_detected": 6,
+        "annotations_X": 57,
+        "alerts_unlabeled": 1,
+        "alerts_unknown": 1,
+        "missing_files": 0
+      },
+      "archive_sha256": "43f8b1a4889f26b37066d27b9305f294a64f69e3c8fda3b3bd39dc5b57969fb2"
+    }
+  ]
+}

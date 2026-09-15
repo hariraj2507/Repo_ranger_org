@@ -15,7 +15,7 @@ from .feature_extractor import FeatureVector
 
 FEATURES = frozenset({'severity','known_signature','custom_signature','entropy_signal','validator_valid',
     'validator_invalid','validator_present','non_production_path','source_code_file','assignment_context','parsed_context',
-    'public_identifier_context', 'placeholder_context', 'comment_context'})
+    'public_identifier_context', 'placeholder_context', 'comment_context', 'jwt_structure'})
 
 
 def sigmoid(value):
@@ -107,6 +107,8 @@ def metrics(rows, weights):
     tp = sum(p>=.5 and r['label']==1 for p,r in zip(scores,rows))
     fp = sum(p>=.5 and r['label']==0 for p,r in zip(scores,rows))
     fn = sum(p<.5 and r['label']==1 for p,r in zip(scores,rows))
+    tn = sum(p<.5 and r['label']==0 for p,r in zip(scores,rows))
+    specificity = tn/(tn+fp) if tn+fp else None
     bins = []
     for i in range(10):
         indexes = [j for j,p in enumerate(scores) if min(9,int(p*10)) == i]
@@ -127,12 +129,26 @@ def metrics(rows, weights):
         level='critical' if risk>=.85 or (severity==1 and confidence>=.65) else 'high' if risk>=.65 else 'medium' if risk>=.4 else 'low'
         risk_bands[level]['samples'] += 1
         risk_bands[level]['positive'] += row['label']
-    return {'samples':len(rows), 'positive_labels':sum(r['label'] for r in rows), 'true_positive':tp,'false_positive':fp,'false_negative':fn,
+    return {'samples':len(rows), 'positive_labels':sum(r['label'] for r in rows), 'true_positive':tp,'false_positive':fp,'false_negative':fn,'true_negative':tn, 'specificity':specificity,
+            'predicts_only_one_class':all(p>=.5 for p in scores) or all(p<.5 for p in scores),
             'precision':tp/(tp+fp) if tp+fp else 0,
             'recall':tp/(tp+fn) if tp+fn else 0,
             'expected_calibration_error':ece,'reliability_bins':bins,'risk_band_label_counts':risk_bands,
             'brier':sum((p-r['label'])**2 for p,r in zip(scores,rows))/len(rows),
             'log_loss':-sum(r['label']*math.log(max(1e-12,p))+(1-r['label'])*math.log(max(1e-12,1-p)) for p,r in zip(scores,rows))/len(rows)}
+
+
+def quality_gate(baseline, learned):
+    reasons=[]
+    if learned['samples']<50: reasons.append('fewer_than_50_evaluation_candidates')
+    if learned['positive_labels']<10 or learned['samples']-learned['positive_labels']<10:
+        reasons.append('fewer_than_10_labels_in_each_class')
+    if learned.get('predicts_only_one_class'): reasons.append('classifier_predicts_only_one_class')
+    if learned.get('specificity') is None or learned['specificity']<.5: reasons.append('specificity_below_50_percent')
+    if learned['precision']<baseline['precision']: reasons.append('precision_regression')
+    if learned['recall']<baseline['recall']: reasons.append('recall_regression')
+    if learned['brier']>=baseline['brier']: reasons.append('no_brier_improvement')
+    return {'passed':not reasons, 'reasons':reasons, 'scope':'Candidate triage gate only; not a production certification'}
 
 
 def train(dataset, model_path, metrics_path, external=False):
@@ -155,7 +171,7 @@ def train(dataset, model_path, metrics_path, external=False):
             'split_sizes':[len(train_rows),len(validation),len(test)],
             'regularization':penalty, 'baseline_test':baseline, 'trained_test':learned,
             'deployment':'experimental_opt_in; production promotion requires independent real-world evaluation',
-            'candidate_quality_gate':{'minimum_test_samples':50, 'passed':len(test)>=50 and learned['precision']>=baseline['precision'] and learned['recall']>=baseline['recall'] and learned['brier']<baseline['brier']}}
+            'candidate_quality_gate':quality_gate(baseline, learned)}
     model={'schema_version':1,'kind':'logistic','weights':weights,'training':report}
     Path(model_path).write_text(json.dumps(model,indent=2,sort_keys=True)+'\n')
     Path(metrics_path).write_text(json.dumps(report,indent=2,sort_keys=True)+'\n')

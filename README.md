@@ -173,11 +173,11 @@ The shipped model is opt-in. It improved Brier error but reduced recall on the s
 
 An [independent CredData pilot](benchmarks/creddata-pilot.md) scanned 144 labeled files from five deterministically selected repositories. Raw detection reached 18.3% positive-annotation recall and 77.3% precision among alerts with definite labels; 28 unlabeled alerts were excluded from precision. Matching is approximate by line overlap. These results expose substantial detection gaps and do not establish production readiness or risk-score calibration. See the report for reproduction, scope and category counts.
 
-Detector revision 5 recognizes mixed-character password literals of at least 8 characters, XML password/token elements, literal setter calls, credential-bearing connection URLs, and Basic/Bearer headers. Shorter password candidates require contextual literals, entropy of at least 2.5 bits/character and two character classes; obvious placeholders are filtered by that rule. These remain medium-severity candidates. In a complete independent sample, positive-annotation recall increased from 12.8% to 19.7%, with labeled-alert precision changing from 93.1% to 89.6%. See the [revision-5 evaluation](benchmarks/revision5/README.md) for the full tradeoff, broader coverage and model limitations. Saved reports now use detector revision 5 and scoring revision 3.
+Detector revision 5 recognizes mixed-character password literals of at least 8 characters, XML password/token elements, literal setter calls, credential-bearing connection URLs, and Basic/Bearer headers. Shorter password candidates require contextual literals, entropy of at least 2.5 bits/character and two character classes; obvious placeholders are filtered by that rule. These remain medium-severity candidates. In a complete independent sample, positive-annotation recall increased from 12.8% to 19.7%, with labeled-alert precision changing from 93.1% to 89.6%. See the [revision-5 evaluation](benchmarks/revision5/README.md) for the full tradeoff, broader coverage and model limitations. That release used detector revision 5 and scoring revision 3.
 
 ## Release process
 
-The package version is `0.2.0a2`. Verify the Actions matrix before releasing. Pushing a matching version tag runs the matrix again, then builds and publishes a GitHub prerelease with the wheel, source archive, model JSON and model card. Publishing to PyPI is not configured.
+The package version is `0.2.0a3`. Verify the Actions matrix before releasing. Pushing a matching version tag runs the matrix again, then builds and publishes a GitHub prerelease with the wheel, source archive, model JSON and model card. Publishing to PyPI is not configured.
 
 ## Context, richer custom rules, and external ML
 
@@ -205,3 +205,11 @@ python -m benchmarks.evaluate_model benchmarks/external-holdout.jsonl models/cre
 ```
 
 Its repository-separated training, validation-only calibration and independent evaluation are documented in [MODEL_CARD.md](MODEL_CARD.md). Mixed results prevent default promotion. Risk remains a prioritization policy, not a calibrated probability of active exposure.
+
+## Structural detection and release gates (revision 6)
+
+Signed compact JWTs and private JWK material are detected by bounded offline parsing. Public-only JWKs, duplicate members and dynamic expressions are excluded. Supported JWK forms include flat JSON and JavaScript/Python literal objects. JWT signatures are not verified, so syntax alone no longer adds credential-validity confidence. Literal command-line credentials and PowerShell plaintext conversion arguments are also covered. Built-in IDs `jwt` and `private_jwk` are available in `disabled_rules`.
+
+The [revision-6 evaluation](benchmarks/revision6/README.md) records both the initial no-gain sample and the final modest gain: 104 to 107 detected positive annotations, with nine false-positive alerts in both versions. The model promotion gate now rejects all-positive/all-negative predictions and low specificity. The current model remains opt-in. Detector/scoring revisions are now 6/4.
+
+Stable `X.Y.Z` release tags must pass the explicit minimum-evidence gate; the current evidence fails because recall is below the project threshold and the final independent sample has fewer than 20 repositories. This does not prevent alpha builds, and passing it in future will not alone certify production readiness.

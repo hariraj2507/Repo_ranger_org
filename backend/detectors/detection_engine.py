@@ -1,5 +1,6 @@
 """Orchestration for all Day 2 detectors."""
 from __future__ import annotations
+from backend.detectors.structured_detector import StructuredDetector
 
 from dataclasses import dataclass
 from typing import Protocol
@@ -36,7 +37,7 @@ class DetectionEngine:
     """Run injected detectors and return deterministic, de-duplicated findings."""
 
     def __init__(self, detectors: tuple[FileDetector, ...] | None = None) -> None:
-        self._detectors = detectors or (RegexDetector(), EntropyDetector())
+        self._detectors = detectors or (RegexDetector(), StructuredDetector(), EntropyDetector())
 
     def scan(self, repository: ParsedRepository) -> DetectionResult:
         """Scan all normalized files while suppressing duplicate token findings."""

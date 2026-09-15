@@ -4,7 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 from backend.ml.classifier import CandidateClassifier
-from backend.ml.training import load_rows, metrics
+from backend.ml.training import load_rows, metrics, quality_gate
 
 def evaluate(dataset, model):
     rows=load_rows(dataset)
@@ -14,11 +14,12 @@ def evaluate(dataset, model):
     groups={r['group'] for r in rows}
     if groups & used:
         raise ValueError('Evaluation repositories overlap model development partitions')
-    return {'scope':'Independent line-labeled candidate evaluation; not active credential validation',
+    baseline=metrics(rows,dict(CandidateClassifier._DEFAULT_WEIGHTS))
+    learned=metrics(rows,trained._weights)
+    return {'quality_gate':quality_gate(baseline,learned),'scope':'Independent line-labeled candidate evaluation; not active credential validation',
             'dataset_sha256':hashlib.sha256(Path(dataset).read_bytes()).hexdigest(),
             'model_sha256':hashlib.sha256(Path(model).read_bytes()).hexdigest(),
-            'repositories':sorted(groups),'baseline':metrics(rows,dict(CandidateClassifier._DEFAULT_WEIGHTS)),
-            'trained':metrics(rows,trained._weights)}
+            'repositories':sorted(groups),'baseline':baseline, 'trained':learned}
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)

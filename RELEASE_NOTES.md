@@ -1,13 +1,10 @@
-# RepoRanger v0.2.0a2
+# RepoRanger v0.2.0a3
 
-This alpha improves contextual detection, evaluation coverage and configurable rules, while documenting remaining accuracy limits.
+- Add bounded JWT and private-JWK structural detectors. Flat JSON, JavaScript and Python JWK literals are supported; public-only keys and duplicate fields are excluded.
+- Add literal curl/wget/database command credentials and PowerShell `ConvertTo-SecureString` arguments used with `-AsPlainText`. Variable references and username-only options are excluded.
+- Correct JWT scoring: decoded structure is not evidence of a verified credential or signature.
+- Strengthen model promotion checks to reject single-class predictions and poor specificity even when class imbalance makes Brier error look favorable.
+- Add explicit stable-release acceptance checks. The current evidence fails these checks, so this remains an alpha.
+- Saved reports use detector revision 6 and scoring revision 4. New built-in IDs `jwt` and `private_jwk` can be disabled but cannot be overwritten by custom rules.
 
-- Detect mixed-character password literals of at least eight characters in quoted assignments and configuration files, XML elements, setter calls, connection URLs, and Basic/Bearer headers. Short passwords are fully masked.
-- Add configuration assignment context and safe comment/public-identifier/placeholder evidence, with explicit confidence explanations. Known built-in signatures are retained.
-- Extend bounded custom rules with literal suffixes, include/exclude paths, same-line keywords and entropy limits for current and historical scans.
-- Recover benchmark archive omissions with filtered Git-object reads. Evaluate 2,273 labeled files across 80 repositories with complete selected-file coverage.
-- On ten independent repositories, positive-annotation recall increased from 12.8% to 19.7%; labeled-alert precision changed from 93.1% to 89.6%. This is a tradeoff and broad recall remains low.
-- Add external numeric training data, repository-separated training, validation-only calibration, reliability tables and risk-band audits. The external model stays opt-in after mixed evaluation results and a failed quality gate.
-- Saved reports use detector revision 5 and scoring revision 3 and reject comparisons against older behavior.
-
-The release includes a wheel, source archive, both experimental model JSON files and model card. GitHub release publication requires all Windows/Linux Python 3.10/3.12 CI jobs to pass. There is no live credential validation, PyPI publication or claim of production readiness.
+In the final fresh sample, positive annotations detected increased from 104 to 107 out of 279, with false-positive alerts unchanged at nine. This is a modest improvement; substantial misses remain. The earlier fresh sample showed no gain. The experimental ML model remains opt-in and is not production-promoted. See `benchmarks/revision6/README.md` for complete results and limits.

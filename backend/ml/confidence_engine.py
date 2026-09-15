@@ -32,6 +32,8 @@ class ConfidenceEngine:
         """Return a bounded confidence score and concise evidence rationale."""
         score = classification.score
         rationale: list[str] = []
+        if features.value("jwt_structure"):
+            rationale.append("JWT structure decoded; signature and credential secrecy are not verified")
         for signal, reason in (('public_identifier_context', 'field name suggests a public identifier; review required'),
                                ('placeholder_context', 'value has an explicit placeholder marker'),
                                ('comment_context', 'candidate is on a comment line')):

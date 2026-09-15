@@ -199,7 +199,7 @@ def evaluate(root, cache, count, download=False, offset=0, git_fallback=False, f
     tp, fp = totals['alerts_true_positive'], totals['alerts_false_positive']
     positives = totals['annotations_T']
     return {'dataset': 'https://github.com/Samsung/CredData', 'dataset_revision': revision,
-            'detector_revision': 5, 'seed': SEED, 'repository_offset': offset, 'eligible_repositories': population,
+            'detector_revision': 6, 'seed': SEED, 'repository_offset': offset, 'eligible_repositories': population,
             'requested_repositories': count, 'selected_repositories': len(entries),
             'file_size_limit_bytes': max_file_bytes,
             'source_mode': 'Original pinned source archives; no upstream obfuscation applied',

@@ -36,6 +36,9 @@ class EntropyDetector:
     _XML = re.compile(r'''(?i)<(?P<name>password|passwd|pwd|secret|token|api[_-]?key)>[ \t]*(?P<value>[^<\r\n]{8,2048})[ \t]*</(?P=name)>''')
     _SETTER = re.compile(r'''(?i)\bset(?P<name>password|passwd|secret|token|apiKey)\s*\(\s*["'](?P<value>[^"'\r\n]{8,2048})["']\s*\)''')
     _URL = re.compile(r'''(?i)\b(?:postgres(?:ql)?|mysql|mongodb(?:\+srv)?|redis|amqps?|https?)://[^\s/:@"']{1,128}:(?P<value>[^\s/@"']{8,2048})@[^\s/"']+''')
+    _COMMAND = re.compile(r'''(?im)\b(?:curl|wget|mysql|psql|redis-cli)\b[^\r\n]{0,512}?(?:--password(?:=|[ \t]+)|--user[ \t]+|-u[ \t]+)["']?(?:[^\s:"']{1,128}:)?(?P<value>[^\s"'`;$|<>]{8,256})''')
+    _POWERSHELL = re.compile(r'(?i)\bConvertTo-SecureString\b(?P<args>[^\r\n]{1,1024})')
+    _PS_LITERAL = re.compile(r'''(?:^\s*|[ \t]+-String[ \t]+)["'](?P<value>[^"'\r\n]{8,256})["']''', re.I)
     _AUTH_HEADER = re.compile(
         r'''(?i)(?<![\w.-])["']?authorization["']?\s*[:=]\s*["']?'''
         r'''(?P<scheme>Basic|Bearer)[ \t]+(?P<value>[A-Za-z0-9_./+=-]{8,2048})(?![\w./+=-])''')
@@ -126,6 +129,27 @@ class EntropyDetector:
                 if not self._password_literal(name, value) and (len(value) < self._minimum_length or self.shannon_entropy(value) < self._minimum_entropy):
                     continue
                 line = text.count('\n', 0, match.start('value')) + 1
+                candidates.append(DetectionCandidate(detector='entropy', rule_id='high_entropy_token', category='possible_secret',
+                    severity=Severity.MEDIUM, file_path=text_file.metadata.relative_path,
+                    line_start=line, line_end=line, matched_value=value))
+        for match in self._COMMAND.finditer(text):
+            prefix = text[match.start():match.start('value')]
+            if '--password' not in prefix.lower() and not prefix.rstrip("\"'").endswith(':'):
+                continue
+            value = match.group('value')
+            if self._VALUE.fullmatch(value) and self._password_literal('password', value) and not value.startswith(self._REFERENCES):
+                line = text.count('\n', 0, match.start('value')) + 1
+                candidates.append(DetectionCandidate(detector='entropy', rule_id='high_entropy_token', category='possible_secret',
+                    severity=Severity.MEDIUM, file_path=text_file.metadata.relative_path,
+                    line_start=line, line_end=line, matched_value=value))
+        for match in self._POWERSHELL.finditer(text):
+            args = match.group('args')
+            literal = self._PS_LITERAL.search(args)
+            if not re.search(r'(?i)(?:^|\s)-AsPlainText(?:\s|$)', args) or literal is None:
+                continue
+            value = literal.group('value')
+            if self._VALUE.fullmatch(value) and self._password_literal('password', value):
+                line = text.count('\n', 0, match.start('args')+literal.start('value')) + 1
                 candidates.append(DetectionCandidate(detector='entropy', rule_id='high_entropy_token', category='possible_secret',
                     severity=Severity.MEDIUM, file_path=text_file.metadata.relative_path,
                     line_start=line, line_end=line, matched_value=value))

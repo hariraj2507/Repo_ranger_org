@@ -1,0 +1,235 @@
+{
+  "quality_gate": {
+    "passed": false,
+    "reasons": [
+      "fewer_than_50_evaluation_candidates",
+      "classifier_predicts_only_one_class",
+      "specificity_below_50_percent",
+      "precision_regression"
+    ],
+    "scope": "Candidate triage gate only; not a production certification"
+  },
+  "scope": "Independent line-labeled candidate evaluation; not active credential validation",
+  "dataset_sha256": "4a1eef898252850a7eef39c5386e81ae60edb05f362532b745a1292ed02565ff",
+  "model_sha256": "4613929126e12a5dde351e4a006f88541b07fd90afb82a08d419a1b5d1c4fa5c",
+  "repositories": [
+    "02dfa7ec",
+    "177cf0f9",
+    "55031e17",
+    "693d8e64",
+    "7c7558cf",
+    "848ad017",
+    "91cfdb2b",
+    "cd82f1a2"
+  ],
+  "baseline": {
+    "samples": 40,
+    "positive_labels": 29,
+    "true_positive": 10,
+    "false_positive": 1,
+    "false_negative": 19,
+    "true_negative": 10,
+    "specificity": 0.9090909090909091,
+    "predicts_only_one_class": false,
+    "precision": 0.9090909090909091,
+    "recall": 0.3448275862068966,
+    "expected_calibration_error": 0.375581671548967,
+    "reliability_bins": [
+      {
+        "lower": 0.0,
+        "upper": 0.1,
+        "samples": 0,
+        "mean_score": null,
+        "positive_rate": null
+      },
+      {
+        "lower": 0.1,
+        "upper": 0.2,
+        "samples": 8,
+        "mean_score": 0.176950680395449,
+        "positive_rate": 1.0
+      },
+      {
+        "lower": 0.2,
+        "upper": 0.3,
+        "samples": 6,
+        "mean_score": 0.21013784591761986,
+        "positive_rate": 1.0
+      },
+      {
+        "lower": 0.3,
+        "upper": 0.4,
+        "samples": 1,
+        "mean_score": 0.35434369377420455,
+        "positive_rate": 0.0
+      },
+      {
+        "lower": 0.4,
+        "upper": 0.5,
+        "samples": 14,
+        "mean_score": 0.4404804500718346,
+        "positive_rate": 0.35714285714285715
+      },
+      {
+        "lower": 0.5,
+        "upper": 0.6,
+        "samples": 4,
+        "mean_score": 0.52497918747894,
+        "positive_rate": 1.0
+      },
+      {
+        "lower": 0.6,
+        "upper": 0.7,
+        "samples": 0,
+        "mean_score": null,
+        "positive_rate": null
+      },
+      {
+        "lower": 0.7,
+        "upper": 0.8,
+        "samples": 4,
+        "mean_score": 0.7413280257692144,
+        "positive_rate": 0.75
+      },
+      {
+        "lower": 0.8,
+        "upper": 0.9,
+        "samples": 0,
+        "mean_score": null,
+        "positive_rate": null
+      },
+      {
+        "lower": 0.9,
+        "upper": 1.0,
+        "samples": 3,
+        "mean_score": 0.918713920386427,
+        "positive_rate": 1.0
+      }
+    ],
+    "risk_band_label_counts": {
+      "low": {
+        "samples": 14,
+        "positive": 14
+      },
+      "medium": {
+        "samples": 19,
+        "positive": 9
+      },
+      "high": {
+        "samples": 3,
+        "positive": 3
+      },
+      "critical": {
+        "samples": 4,
+        "positive": 3
+      }
+    },
+    "brier": 0.3555410780414469,
+    "log_loss": 0.9481056058265181
+  },
+  "trained": {
+    "samples": 40,
+    "positive_labels": 29,
+    "true_positive": 29,
+    "false_positive": 11,
+    "false_negative": 0,
+    "true_negative": 0,
+    "specificity": 0.0,
+    "predicts_only_one_class": true,
+    "precision": 0.725,
+    "recall": 1.0,
+    "expected_calibration_error": 0.19980643924593114,
+    "reliability_bins": [
+      {
+        "lower": 0.0,
+        "upper": 0.1,
+        "samples": 0,
+        "mean_score": null,
+        "positive_rate": null
+      },
+      {
+        "lower": 0.1,
+        "upper": 0.2,
+        "samples": 0,
+        "mean_score": null,
+        "positive_rate": null
+      },
+      {
+        "lower": 0.2,
+        "upper": 0.3,
+        "samples": 0,
+        "mean_score": null,
+        "positive_rate": null
+      },
+      {
+        "lower": 0.3,
+        "upper": 0.4,
+        "samples": 0,
+        "mean_score": null,
+        "positive_rate": null
+      },
+      {
+        "lower": 0.4,
+        "upper": 0.5,
+        "samples": 0,
+        "mean_score": null,
+        "positive_rate": null
+      },
+      {
+        "lower": 0.5,
+        "upper": 0.6,
+        "samples": 0,
+        "mean_score": null,
+        "positive_rate": null
+      },
+      {
+        "lower": 0.6,
+        "upper": 0.7,
+        "samples": 0,
+        "mean_score": null,
+        "positive_rate": null
+      },
+      {
+        "lower": 0.7,
+        "upper": 0.8,
+        "samples": 0,
+        "mean_score": null,
+        "positive_rate": null
+      },
+      {
+        "lower": 0.8,
+        "upper": 0.9,
+        "samples": 1,
+        "mean_score": 0.8893271454488829,
+        "positive_rate": 0.0
+      },
+      {
+        "lower": 0.9,
+        "upper": 1.0,
+        "samples": 39,
+        "mean_score": 0.9257161647279067,
+        "positive_rate": 0.7435897435897436
+      }
+    ],
+    "risk_band_label_counts": {
+      "low": {
+        "samples": 0,
+        "positive": 0
+      },
+      "medium": {
+        "samples": 14,
+        "positive": 14
+      },
+      "high": {
+        "samples": 19,
+        "positive": 11
+      },
+      "critical": {
+        "samples": 7,
+        "positive": 4
+      }
+    },
+    "brier": 0.230175815522966,
+    "log_loss": 0.7071955338400812
+  }
+}

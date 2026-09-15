@@ -1,5 +1,6 @@
 """One analysis pipeline for working-tree text and historical blob text."""
 from dataclasses import dataclass
+from backend.detectors.structured_detector import StructuredDetector
 
 from backend.ast.context_engine import CodeContext, ContextEngine
 from backend.detectors.deduplication import finding_identity, unique_detections
@@ -20,7 +21,7 @@ class AnalyzedFinding:
 
 class FindingAnalyzer:
     def __init__(self, detectors=None, router=None, context_engine=None):
-        self.detectors = detectors or (RegexDetector(), EntropyDetector())
+        self.detectors = detectors or (RegexDetector(), StructuredDetector(), EntropyDetector())
         self.router = router or ValidatorRouter()
         self.context_engine = context_engine or ContextEngine()
 

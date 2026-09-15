@@ -47,15 +47,16 @@ class FeatureExtractor:
         path_parts = {part.lower() for part in PurePosixPath(finding.file_path).parts}
         suffix = PurePosixPath(finding.file_path).suffix.lower()
         values = {
+            "jwt_structure": float(finding.rule_id == "jwt"),
             'public_identifier_context': float(context is not None and 'public_identifier_context' in context.evidence and finding.detector != 'regex'),
             'placeholder_context': float(context is not None and 'placeholder_context' in context.evidence and finding.detector != 'regex'),
             'comment_context': float(context is not None and 'comment_context' in context.evidence),
             "severity": self._SEVERITY[finding.severity],
-            "known_signature": 1.0 if finding.detector == "regex" else 0.0,
+            "known_signature": 1.0 if finding.detector == "regex" and finding.rule_id != "jwt" else 0.0,
             "custom_signature": 1.0 if finding.detector == "custom" else 0.0,
             "validator_invalid": 1.0 if validation is not None and not validation.is_valid else 0.0,
             "entropy_signal": 1.0 if finding.detector == "entropy" else 0.0,
-            "validator_valid": 1.0 if validation is not None and validation.is_valid else 0.0,
+            "validator_valid": 1.0 if validation is not None and validation.is_valid and finding.rule_id != "jwt" else 0.0,
             "validator_present": 1.0 if validation is not None else 0.0,
             "non_production_path": 1.0 if path_parts & self._NON_PRODUCTION_PARTS else 0.0,
             "source_code_file": 1.0 if suffix in {".py", ".js", ".jsx", ".ts", ".tsx", ".go", ".java", ".rb", ".rs"} else 0.0,

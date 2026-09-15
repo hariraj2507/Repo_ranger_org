@@ -1,14 +1,13 @@
-# RepoRanger v0.2.0a1
+# RepoRanger v0.2.0a2
 
-This prerelease completes the local CLI release foundation.
+This alpha improves contextual detection, evaluation coverage and configurable rules, while documenting remaining accuracy limits.
 
-- Historical candidates receive offline structural validation and syntax context from their own Git blob. Reports include safe validation and context metadata.
-- UTF-16 historical text is decoded instead of being treated as binary.
-- Custom credential signatures support literal prefixes, bounded alphabets and lengths, and severity. They apply to current files and history; built-in rules cannot be overwritten.
-- Repository score follows the strongest finding. Repeated weak candidates cannot inflate severity.
-- Fine-grained GitHub token detection now matches the already-supported offline validator.
-- Added a 52-case synthetic detection benchmark and an experimental trained logistic classifier with group-separated train/validation/test partitions.
-- The trained model stays opt-in because its held-out synthetic recall is lower than the baseline. These results do not establish real-world accuracy.
-- CI tests Windows/Linux on Python 3.10/3.12. Version-tag releases publish only after all test jobs pass.
+- Detect mixed-character password literals of at least eight characters in quoted assignments and configuration files, XML elements, setter calls, connection URLs, and Basic/Bearer headers. Short passwords are fully masked.
+- Add configuration assignment context and safe comment/public-identifier/placeholder evidence, with explicit confidence explanations. Known built-in signatures are retained.
+- Extend bounded custom rules with literal suffixes, include/exclude paths, same-line keywords and entropy limits for current and historical scans.
+- Recover benchmark archive omissions with filtered Git-object reads. Evaluate 2,273 labeled files across 80 repositories with complete selected-file coverage.
+- On ten independent repositories, positive-annotation recall increased from 12.8% to 19.7%; labeled-alert precision changed from 93.1% to 89.6%. This is a tradeoff and broad recall remains low.
+- Add external numeric training data, repository-separated training, validation-only calibration, reliability tables and risk-band audits. The external model stays opt-in after mixed evaluation results and a failed quality gate.
+- Saved reports use detector revision 5 and scoring revision 3 and reject comparisons against older behavior.
 
-No live credential verification is performed. Non-Python syntax context requires an optional compatible Tree-sitter provider. This is an early alpha, not a guarantee that a repository is secret-free.
+The release includes a wheel, source archive, both experimental model JSON files and model card. GitHub release publication requires all Windows/Linux Python 3.10/3.12 CI jobs to pass. There is no live credential validation, PyPI publication or claim of production readiness.

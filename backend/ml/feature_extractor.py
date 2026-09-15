@@ -47,6 +47,9 @@ class FeatureExtractor:
         path_parts = {part.lower() for part in PurePosixPath(finding.file_path).parts}
         suffix = PurePosixPath(finding.file_path).suffix.lower()
         values = {
+            'public_identifier_context': float(context is not None and 'public_identifier_context' in context.evidence and finding.detector != 'regex'),
+            'placeholder_context': float(context is not None and 'placeholder_context' in context.evidence and finding.detector != 'regex'),
+            'comment_context': float(context is not None and 'comment_context' in context.evidence),
             "severity": self._SEVERITY[finding.severity],
             "known_signature": 1.0 if finding.detector == "regex" else 0.0,
             "custom_signature": 1.0 if finding.detector == "custom" else 0.0,

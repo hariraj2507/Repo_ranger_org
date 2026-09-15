@@ -32,6 +32,11 @@ class ConfidenceEngine:
         """Return a bounded confidence score and concise evidence rationale."""
         score = classification.score
         rationale: list[str] = []
+        for signal, reason in (('public_identifier_context', 'field name suggests a public identifier; review required'),
+                               ('placeholder_context', 'value has an explicit placeholder marker'),
+                               ('comment_context', 'candidate is on a comment line')):
+            if features.value(signal):
+                rationale.append(reason)
         if features.value("validator_valid") == 1.0:
             score += 0.10
             rationale.append("provider-format validation passed")

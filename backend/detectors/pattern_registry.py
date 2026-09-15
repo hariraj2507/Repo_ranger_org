@@ -18,6 +18,10 @@ class PatternDefinition:
     severity: Severity
     description: str
     custom: bool = False
+    paths: tuple[str, ...] = ()
+    exclude_paths: tuple[str, ...] = ()
+    keywords: tuple[str, ...] = ()
+    minimum_entropy: float = 0.0
 
     def compile(self) -> re.Pattern[str]:
         """Compile this rule with multiline support, failing early if invalid."""

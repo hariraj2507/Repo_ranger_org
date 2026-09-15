@@ -2,7 +2,8 @@
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
+import re
 
 from backend.detectors.detection_engine import DetectionResult
 from backend.detectors.finding import Finding
@@ -22,6 +23,7 @@ class CodeContext:
     start_line: int
     end_line: int
     enclosing_symbols: tuple[str, ...] = ()
+    evidence: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True, slots=True)
@@ -61,10 +63,23 @@ class ContextEngine:
         """Return syntax-only context for every detection result finding."""
         file_text = {text_file.metadata.relative_path: text_file.text for text_file in detection_result.repository.files}
         enriched = tuple(
-            EnrichedFinding(finding, self._context_for(finding, file_text.get(finding.file_path)))
+            EnrichedFinding(finding, self._with_evidence(finding, file_text.get(finding.file_path)))
             for finding in detection_result.findings
         )
         return ContextResult(detection_result, enriched)
+
+    def _with_evidence(self, finding, source):
+        context = self._context_for(finding, source)
+        lines = source.splitlines() if source else []
+        line = lines[finding.line_start-1] if 0 < finding.line_start <= len(lines) else ''
+        evidence = []
+        if re.match(r'\s*(?:#|//|/\*|\*|<!--)', line):
+            evidence.append('comment_context')
+        if re.match(r'''(?i)\s*["']?[\w.-]*(?:publishable[_-]?key|client[_-]?id|public[_-]?key)["']?\s*[:=]''', line):
+            evidence.append('public_identifier_context')
+        if re.match(r'''(?i)\s*["']?[\w.-]+["']?\s*[:=]\s*["']?(?:example|placeholder|changeme|your[_-]|replace[_-])''', line):
+            evidence.append('placeholder_context')
+        return replace(context, evidence=tuple(evidence))
 
     def _context_for(self, finding: Finding, source: str | None) -> CodeContext:
         """Resolve safe context or return a deterministic line-only fallback."""
@@ -80,6 +95,11 @@ class ContextEngine:
                 )
             return CodeContext("python", None, "unparsed", finding.line_start, finding.line_end)
         language = self._LANGUAGES.get(suffix)
+        if suffix in {'.env', '.ini', '.properties', '.yaml', '.yml', '.toml', '.json', '.conf'}:
+            lines = source.splitlines()
+            line = lines[finding.line_start-1] if 0 < finding.line_start <= len(lines) else ''
+            kind = 'assignment' if re.match(r'''\s*["']?[\w.-]+["']?\s*[:=]''', line) else 'line'
+            return CodeContext('configuration', None, kind, finding.line_start, finding.line_end)
         if language is not None:
             try:
                 context = self._tree_sitter_parser.context_at_line(source, language, finding.line_start)

@@ -31,6 +31,11 @@ class EntropyDetector:
     })
     _VALUE = re.compile(r'[A-Za-z0-9_./+=:@%!-]+')
     _REFERENCES = ('process.env.', 'import.meta.env.', 'os.environ', 'os.getenv', 'env.')
+    _PLACEHOLDER = re.compile(r'(?i)example|placeholder|changeme|your[_-]|replace[_-]|^password\d*[!]?\Z|^test[_-]?password')
+    _CONFIG_SUFFIXES = ('.env', '.ini', '.properties', '.yaml', '.yml', '.toml', '.conf')
+    _XML = re.compile(r'''(?i)<(?P<name>password|passwd|pwd|secret|token|api[_-]?key)>[ \t]*(?P<value>[^<\r\n]{8,2048})[ \t]*</(?P=name)>''')
+    _SETTER = re.compile(r'''(?i)\bset(?P<name>password|passwd|secret|token|apiKey)\s*\(\s*["'](?P<value>[^"'\r\n]{8,2048})["']\s*\)''')
+    _URL = re.compile(r'''(?i)\b(?:postgres(?:ql)?|mysql|mongodb(?:\+srv)?|redis|amqps?|https?)://[^\s/:@"']{1,128}:(?P<value>[^\s/@"']{8,2048})@[^\s/"']+''')
     _AUTH_HEADER = re.compile(
         r'''(?i)(?<![\w.-])["']?authorization["']?\s*[:=]\s*["']?'''
         r'''(?P<scheme>Basic|Bearer)[ \t]+(?P<value>[A-Za-z0-9_./+=-]{8,2048})(?![\w./+=-])''')
@@ -41,8 +46,8 @@ class EntropyDetector:
         if not set(re.split(r'[^a-z0-9]+', words)) & {'password', 'passwd', 'pwd'}:
             return False
         classes = sum(bool(re.search(pattern, value)) for pattern in (r'[a-z]', r'[A-Z]', r'[0-9]', r'[^\w\s]'))
-        return (len(value) >= 12 and classes >= 3 and cls.shannon_entropy(value) >= 3.0
-                and not re.search(r'(?i)example|placeholder|changeme|your[_-]|replace[_-]', value))
+        return (len(value) >= 8 and classes >= 2 and cls.shannon_entropy(value) >= 2.5
+                and not cls._PLACEHOLDER.search(value))
 
     def __init__(self, minimum_length: int = 20, minimum_entropy: float = 4.0) -> None:
         if minimum_length < 8:
@@ -81,7 +86,8 @@ class EntropyDetector:
             if (not self._VALUE.fullmatch(value) or '://' in value
                     or value.startswith(self._REFERENCES)):
                 continue
-            strong_password = group != 'bare' and self._password_literal(match.group('name'), value)
+            config_literal = text_file.metadata.relative_path.lower().endswith(self._CONFIG_SUFFIXES)
+            strong_password = (group != 'bare' or config_literal) and self._password_literal(match.group('name'), value)
             if not strong_password and (len(value) < self._minimum_length
                     or self.shannon_entropy(value) < self._minimum_entropy):
                 continue
@@ -110,4 +116,17 @@ class EntropyDetector:
                 detector='entropy', rule_id='high_entropy_token', category='possible_secret',
                 severity=Severity.MEDIUM, file_path=text_file.metadata.relative_path,
                 line_start=line, line_end=line, matched_value=value))
+        for pattern in (self._XML, self._SETTER, self._URL):
+            for match in pattern.finditer(text):
+                value = match.group('value').strip()
+                name = match.groupdict().get('name', 'password')
+                if (not self._VALUE.fullmatch(value) or value.startswith(self._REFERENCES)
+                        or self._PLACEHOLDER.search(value)):
+                    continue
+                if not self._password_literal(name, value) and (len(value) < self._minimum_length or self.shannon_entropy(value) < self._minimum_entropy):
+                    continue
+                line = text.count('\n', 0, match.start('value')) + 1
+                candidates.append(DetectionCandidate(detector='entropy', rule_id='high_entropy_token', category='possible_secret',
+                    severity=Severity.MEDIUM, file_path=text_file.metadata.relative_path,
+                    line_start=line, line_end=line, matched_value=value))
         return tuple(candidates)

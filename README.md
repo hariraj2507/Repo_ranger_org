@@ -1,6 +1,6 @@
 # RepoRanger
 
-[v0.2.0a1 prerelease](https://github.com/hariraj2507/Repo_ranger_org/releases/tag/v0.2.0a1) | [Release CI](https://github.com/hariraj2507/Repo_ranger_org/actions/runs/34799858828)
+[Releases](https://github.com/hariraj2507/Repo_ranger_org/releases) | [CI](https://github.com/hariraj2507/Repo_ranger_org/actions)
 
 RepoRanger scans repository files and Git history for potential credentials. It combines signature and entropy detection, offline structural validation, syntax context, and explainable risk scoring. JSON, Markdown, and GitHub Actions output contain redacted findings.
 
@@ -153,7 +153,7 @@ Add rules to your explicit JSON policy:
 }
 ```
 
-Lengths describe the suffix after the literal prefix. Available alphabets: `alnum`, `hex`, `base64url`, `base64`. Rules must use unique IDs and cannot replace built-ins. Up to 100 rules are accepted. Prefixes are escaped, and lengths are bounded; arbitrary regular expressions are deliberately unsupported. Custom rules are unverified signatures, not provider-validated credentials. They apply to history as well as current files and can be disabled by ID.
+Lengths describe the variable token portion after the prefix and before an optional literal suffix. Available alphabets: `alnum`, `hex`, `base64url`, `base64`. Rules must use unique IDs and cannot replace built-ins. Up to 100 rules are accepted. Prefixes are escaped, and lengths are bounded; arbitrary regular expressions are deliberately unsupported. Custom rules are unverified signatures, not provider-validated credentials. They apply to history as well as current files and can be disabled by ID.
 
 ## Validation and scoring
 
@@ -173,8 +173,35 @@ The shipped model is opt-in. It improved Brier error but reduced recall on the s
 
 An [independent CredData pilot](benchmarks/creddata-pilot.md) scanned 144 labeled files from five deterministically selected repositories. Raw detection reached 18.3% positive-annotation recall and 77.3% precision among alerts with definite labels; 28 unlabeled alerts were excluded from precision. Matching is approximate by line overlap. These results expose substantial detection gaps and do not establish production readiness or risk-score calibration. See the report for reproduction, scope and category counts.
 
-Detector revision 4 also recognizes complex quoted password literals of 12 or more characters and Basic/Bearer authorization headers. These remain medium-severity candidate findings. The [follow-up evaluation](benchmarks/creddata-followup.md) showed no measured gain on a second, incomplete external sample; broader accuracy work remains necessary. Saved reports from earlier detector revisions cannot be compared directly with revision 4.
+Detector revision 5 recognizes mixed-character password literals of at least 8 characters, XML password/token elements, literal setter calls, credential-bearing connection URLs, and Basic/Bearer headers. Shorter password candidates require contextual literals, entropy of at least 2.5 bits/character and two character classes; obvious placeholders are filtered by that rule. These remain medium-severity candidates. In a complete independent sample, positive-annotation recall increased from 12.8% to 19.7%, with labeled-alert precision changing from 93.1% to 89.6%. See the [revision-5 evaluation](benchmarks/revision5/README.md) for the full tradeoff, broader coverage and model limitations. Saved reports now use detector revision 5 and scoring revision 3.
 
 ## Release process
 
-The published prerelease is `v0.2.0a1`. Push the source to your RepoRanger repository and verify the Actions matrix. Pushing a matching version tag runs the matrix again, then builds and publishes a GitHub prerelease with the wheel, source archive, model JSON and model card. Publishing to PyPI is not configured.
+The package version is `0.2.0a2`. Verify the Actions matrix before releasing. Pushing a matching version tag runs the matrix again, then builds and publishes a GitHub prerelease with the wheel, source archive, model JSON and model card. Publishing to PyPI is not configured.
+
+## Context, richer custom rules, and external ML
+
+Configuration assignments now receive structural context. JSON findings include safe `context.evidence`, numeric `confidence_score`, and `confidence_rationale`. Public-identifier and placeholder evidence can reduce heuristic scores but does not remove findings; those two reductions are not applied to built-in signatures. Comment context is also reported. Values of 16 characters or fewer are fully masked.
+
+Custom rules additionally accept `suffix`, `paths`, `exclude_paths`, `keywords` and `minimum_entropy`. Path globs use the same repository-relative matcher as exclusions; keywords are case-insensitive literal substrings on the matching line. Entropy applies to the complete matched token, including prefix and suffix. For example:
+
+```json
+{
+  "custom_rules": [{
+    "rule_id": "company_key", "prefix": "acme_", "suffix": "!",
+    "alphabet": "base64url", "min_length": 24, "max_length": 64,
+    "paths": ["config/*"], "exclude_paths": ["config/examples/*"],
+    "keywords": ["token", "secret"], "minimum_entropy": 3.5, "severity": "high"
+  }]
+}
+```
+
+The external-data model is opt-in:
+
+```sh
+reporanger /path/to/repository --model models/creddata-experimental.json
+python -m backend.ml.training benchmarks/external-triage.jsonl models/creddata-experimental.json output/external-training.json --external
+python -m benchmarks.evaluate_model benchmarks/external-holdout.jsonl models/creddata-experimental.json output/independent-model.json
+```
+
+Its repository-separated training, validation-only calibration and independent evaluation are documented in [MODEL_CARD.md](MODEL_CARD.md). Mixed results prevent default promotion. Risk remains a prioritization policy, not a calibrated probability of active exposure.

@@ -64,6 +64,6 @@ class Finding:
 
 def redact(value: str) -> str:
     """Return a non-reversible, human-useful preview of a matched value."""
-    if len(value) <= 8:
+    if len(value) <= 16:
         return "*" * len(value)
     return f"{value[:4]}...{value[-4:]}"

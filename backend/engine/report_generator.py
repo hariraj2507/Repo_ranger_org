@@ -18,6 +18,7 @@ class ReportGenerator:
         return {
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "repository_source": repository_source,
+            "score_interpretation": "Heuristic triage priority, not probability of active credential exposure",
             "summary": {
                 "score": score.score,
                 "risk_level": score.level.value,
@@ -60,6 +61,8 @@ class ReportGenerator:
             "risk_level": assessment.level.value,
             "risk_score": round(assessment.score, 3),
             "confidence": assessment.confidence.level.value,
+            "confidence_score": round(assessment.confidence.score, 3),
+            "confidence_rationale": list(assessment.confidence.rationale),
             "file_path": finding.file_path,
             "line_start": finding.line_start,
             "line_end": finding.line_end,
@@ -73,7 +76,7 @@ class ReportGenerator:
         if assessment.context is not None:
             context = assessment.context
             value["context"] = {"language": context.language, "symbol_kind": context.symbol_kind,
-                                "start_line": context.start_line, "end_line": context.end_line}
+                                "start_line": context.start_line, "end_line": context.end_line, "evidence": list(context.evidence)}
         if assessment.historical_source is not None:
             value["history"] = {
                 "commit_id": assessment.historical_source.commit_id,

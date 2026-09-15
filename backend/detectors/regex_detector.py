@@ -1,6 +1,8 @@
 """High-confidence, registry-driven regex secret detection."""
 from __future__ import annotations
 
+from backend.config import excluded_path
+from .entropy_detector import EntropyDetector
 from .candidate import DetectionCandidate
 from .finding import Finding
 from .pattern_registry import PatternRegistry, default_pattern_registry
@@ -22,8 +24,18 @@ class RegexDetector:
         candidates: list[DetectionCandidate] = []
         text = text_file.text
         for pattern in self._registry.patterns():
+            path = text_file.metadata.relative_path
+            if (pattern.paths and not excluded_path(path, pattern.paths)) or excluded_path(path, pattern.exclude_paths):
+                continue
             compiled = pattern.compile()
             for match in compiled.finditer(text):
+                if pattern.keywords:
+                    end = text.find("\n", match.end())
+                    line_text = text[text.rfind("\n", 0, match.start())+1:end if end >= 0 else len(text)]
+                    if not any(word.casefold() in line_text.casefold() for word in pattern.keywords):
+                        continue
+                if EntropyDetector.shannon_entropy(match.group()) < pattern.minimum_entropy:
+                    continue
                 line_start = text.count("\n", 0, match.start()) + 1
                 line_end = text.count("\n", 0, match.end()) + 1
                 candidates.append(DetectionCandidate(

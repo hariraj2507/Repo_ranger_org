@@ -1,0 +1,305 @@
+{
+  "kind": "logistic",
+  "schema_version": 1,
+  "training": {
+    "baseline_test": {
+      "brier": 0.26245431769558414,
+      "expected_calibration_error": 0.2722693515919595,
+      "false_negative": 41,
+      "false_positive": 1,
+      "log_loss": 0.7303281969277442,
+      "positive_labels": 46,
+      "precision": 0.8333333333333334,
+      "recall": 0.10869565217391304,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "mean_score": null,
+          "positive_rate": null,
+          "samples": 0,
+          "upper": 0.1
+        },
+        {
+          "lower": 0.1,
+          "mean_score": 0.16072049853674866,
+          "positive_rate": 0.3157894736842105,
+          "samples": 38,
+          "upper": 0.2
+        },
+        {
+          "lower": 0.2,
+          "mean_score": 0.20587037180094733,
+          "positive_rate": 1.0,
+          "samples": 1,
+          "upper": 0.3
+        },
+        {
+          "lower": 0.3,
+          "mean_score": 0.35434369377420455,
+          "positive_rate": 0.0,
+          "samples": 1,
+          "upper": 0.4
+        },
+        {
+          "lower": 0.4,
+          "mean_score": 0.450576863710839,
+          "positive_rate": 0.8,
+          "samples": 35,
+          "upper": 0.5
+        },
+        {
+          "lower": 0.5,
+          "mean_score": 0.52497918747894,
+          "positive_rate": 1.0,
+          "samples": 4,
+          "upper": 0.6
+        },
+        {
+          "lower": 0.6,
+          "mean_score": 0.6513548646660542,
+          "positive_rate": 0.0,
+          "samples": 1,
+          "upper": 0.7
+        },
+        {
+          "lower": 0.7,
+          "mean_score": 0.7685247834990178,
+          "positive_rate": 1.0,
+          "samples": 1,
+          "upper": 0.8
+        },
+        {
+          "lower": 0.8,
+          "mean_score": null,
+          "positive_rate": null,
+          "samples": 0,
+          "upper": 0.9
+        },
+        {
+          "lower": 0.9,
+          "mean_score": null,
+          "positive_rate": null,
+          "samples": 0,
+          "upper": 1.0
+        }
+      ],
+      "risk_band_label_counts": {
+        "critical": {
+          "positive": 1,
+          "samples": 1
+        },
+        "high": {
+          "positive": 0,
+          "samples": 1
+        },
+        "low": {
+          "positive": 13,
+          "samples": 39
+        },
+        "medium": {
+          "positive": 32,
+          "samples": 40
+        }
+      },
+      "samples": 81,
+      "true_positive": 5
+    },
+    "calibration": {
+      "method": "Platt scaling on validation partition only",
+      "offset": 2.2723312222233183,
+      "scale": 0.8990334686977712
+    },
+    "candidate_quality_gate": {
+      "minimum_test_samples": 50,
+      "passed": false
+    },
+    "data_scope": "External line-matched candidate metadata, not verified active credentials",
+    "dataset_sha256": "0473de5e62dc764f97dcbf03817b24415eae7f607245b57406da9d7b72852726",
+    "deployment": "experimental_opt_in; production promotion requires independent real-world evaluation",
+    "regularization": 0.1,
+    "sample_weighting": "equal repository weight in fit and calibration",
+    "split_groups": {
+      "test": [
+        "06dd1bf2",
+        "48fd3902",
+        "49e2a965",
+        "4bd9eea8",
+        "64c97cb8",
+        "6b03222e",
+        "8c3c80e8",
+        "98a9ba4e",
+        "b081551c",
+        "cc51a2f0",
+        "e9bab109"
+      ],
+      "train": [
+        "00408ef6",
+        "057480bf",
+        "1a2de400",
+        "1d8ec728",
+        "23689bd1",
+        "255bae6f",
+        "31423103",
+        "36d0fbbb",
+        "39def7b4",
+        "4a8d3fd4",
+        "4fe048e4",
+        "653a7746",
+        "69d49010",
+        "6d59a88a",
+        "72001588",
+        "784d78e8",
+        "8ba59c91",
+        "8d217d6c",
+        "9068b102",
+        "9d90ba70",
+        "a0abd87c",
+        "a8bdca79",
+        "ac9be8d9",
+        "b6263275",
+        "b74193f1",
+        "c8aa9b49",
+        "d518da13",
+        "de1c0bce",
+        "e51ae6e8",
+        "fdbe07ac"
+      ],
+      "validation": [
+        "34cb4bc8",
+        "38b1dfe2",
+        "55aa4858",
+        "5f62aae4",
+        "7e01f352",
+        "86050693",
+        "e097ae9a",
+        "f295f04f",
+        "f80c571b",
+        "ff43ce4d"
+      ]
+    },
+    "split_sizes": [
+      232,
+      78,
+      81
+    ],
+    "trained_test": {
+      "brier": 0.37045824267432786,
+      "expected_calibration_error": 0.3498872913079657,
+      "false_negative": 0,
+      "false_positive": 35,
+      "log_loss": 1.1491080020138613,
+      "positive_labels": 46,
+      "precision": 0.5679012345679012,
+      "recall": 1.0,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "mean_score": null,
+          "positive_rate": null,
+          "samples": 0,
+          "upper": 0.1
+        },
+        {
+          "lower": 0.1,
+          "mean_score": null,
+          "positive_rate": null,
+          "samples": 0,
+          "upper": 0.2
+        },
+        {
+          "lower": 0.2,
+          "mean_score": null,
+          "positive_rate": null,
+          "samples": 0,
+          "upper": 0.3
+        },
+        {
+          "lower": 0.3,
+          "mean_score": null,
+          "positive_rate": null,
+          "samples": 0,
+          "upper": 0.4
+        },
+        {
+          "lower": 0.4,
+          "mean_score": null,
+          "positive_rate": null,
+          "samples": 0,
+          "upper": 0.5
+        },
+        {
+          "lower": 0.5,
+          "mean_score": null,
+          "positive_rate": null,
+          "samples": 0,
+          "upper": 0.6
+        },
+        {
+          "lower": 0.6,
+          "mean_score": null,
+          "positive_rate": null,
+          "samples": 0,
+          "upper": 0.7
+        },
+        {
+          "lower": 0.7,
+          "mean_score": null,
+          "positive_rate": null,
+          "samples": 0,
+          "upper": 0.8
+        },
+        {
+          "lower": 0.8,
+          "mean_score": 0.8935626633013314,
+          "positive_rate": 0.9,
+          "samples": 10,
+          "upper": 0.9
+        },
+        {
+          "lower": 0.9,
+          "mean_score": 0.919387284914909,
+          "positive_rate": 0.5211267605633803,
+          "samples": 71,
+          "upper": 1.0
+        }
+      ],
+      "risk_band_label_counts": {
+        "critical": {
+          "positive": 29,
+          "samples": 32
+        },
+        "high": {
+          "positive": 4,
+          "samples": 10
+        },
+        "low": {
+          "positive": 0,
+          "samples": 0
+        },
+        "medium": {
+          "positive": 13,
+          "samples": 39
+        }
+      },
+      "samples": 81,
+      "true_positive": 46
+    }
+  },
+  "weights": {
+    "assignment_context": 0.2969517696510516,
+    "bias": 2.208374685720025,
+    "comment_context": 0.05086091857621149,
+    "custom_signature": 0.0,
+    "entropy_signal": 0.13719276106238892,
+    "known_signature": -0.13730226707298082,
+    "non_production_path": 0.21736665512651002,
+    "parsed_context": 0.309714214416256,
+    "placeholder_context": 0.0,
+    "public_identifier_context": -0.009706759423014725,
+    "severity": -0.038046770074860486,
+    "source_code_file": -0.09539221853617057,
+    "validator_invalid": 0.0,
+    "validator_present": -0.12263646586770335,
+    "validator_valid": -0.12263646586770335
+  }
+}

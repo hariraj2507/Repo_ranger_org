@@ -1,11 +1,13 @@
-# RepoRanger v0.2.0a5
+# RepoRanger v0.2.0a6
 
-- Add explicit context evidence and lower review priority for test scopes, test/spec/documentation filenames, expected/mock fields and likely source references. Findings remain visible.
-- Fix evidence attribution so a public identifier on a line does not penalize a different credential on that line.
-- Detect short passwords in explicit PowerShell plaintext conversions.
-- Add separate raw-detection and medium-or-higher review-queue benchmark counts.
-- Detector/scoring revisions: 8/5. ML weights remain experimental and unchanged.
+- Add an optional ML-v2 classifier trained on 1,656 current, externally labeled candidates with whole-repository partitions.
+- Add eight coarse numeric token-shape features without retaining raw credential material; default heuristic scores remain unchanged.
+- Balance partition sizes and apply inverse repository-size then equal-class-mass weighting across fit, validation selection and calibration.
+- Speed up fitting by combining identical feature/label contributions without changing the objective.
+- Add tie-aware AUROC, average precision, balanced accuracy, per-repository evaluation and feature-label ambiguity diagnostics.
 
-On 20 untouched repositories (573 files), raw detection was unchanged: 93.69% labeled precision and 43.16% annotation recall. Main review-queue precision increased from 92.98% to 93.30%, but 17 positive annotations moved to low priority along with two false-positive alerts. All findings remain available. The 80% recall milestone is not met. See `benchmarks/revision8/README.md` for limitations and full counts.
+Independent evaluation: 217 candidates from 20 untouched repositories. ML-v2 precision/recall: 92.78%/51.14%; default heuristic: 79.31%/13.07%. Specificity: 82.93%. The independent candidate gate passes, but internal development precision/recall regress, so ML-v2 remains optional. These are candidate-classification metrics, not raw detection accuracy or exposure probabilities. See `benchmarks/ml-v2/README.md` and `MODEL_CARD.md`.
 
-Validation: 119 tests and 52 synthetic regression cases pass. Alpha release; not production-certified.
+Try: `reporanger /path/to/repository --model models/creddata-v2-experimental.json`. Existing model artifacts and default behavior remain available.
+
+Validation: 138 unit/integration tests pass, including weighting, split isolation, ranking ties, privacy and backwards compatibility.

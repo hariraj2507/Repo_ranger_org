@@ -177,7 +177,7 @@ Detector revision 5 recognizes mixed-character password literals of at least 8 c
 
 ## Release process
 
-The package version is `0.2.0a5`. Verify the Actions matrix before releasing. Pushing a matching version tag runs the matrix again, then builds and publishes a GitHub prerelease with the wheel, source archive, model JSON and model card. Publishing to PyPI is not configured.
+The package version is `0.2.0a6`. Verify the Actions matrix before releasing. Pushing a matching version tag runs the matrix again, then builds and publishes a GitHub prerelease with the wheel, source archive, model JSON and model card. Publishing to PyPI is not configured.
 
 ## Context, richer custom rules, and external ML
 
@@ -227,3 +227,8 @@ This trades broader credential coverage against alerts on examples and weak test
 Findings inside Python test functions/classes, test/spec filenames, README/Markdown/reStructuredText files and example configuration files receive lower-priority evidence. Expected/mock/fixture field names and unquoted source references are also explained. These findings remain in the report. Public-identifier and placeholder evidence is matched to the actual candidate, preventing one field from lowering an unrelated finding on the same line. These heuristics do not establish that a credential is safe, and scores remain triage estimates.
 
 Short passwords in explicit PowerShell `ConvertTo-SecureString ... -AsPlainText` calls are detected. Reports use detector revision 8 and scoring revision 5. The [revision-8 evaluation](benchmarks/revision8/README.md) separates raw detection from the medium-or-higher risk review queue, including any recall cost from prioritization. Neither experimental model has been retrained or promoted.
+
+
+## Updated optional ML classifier
+
+Use `reporanger /path/to/repository --model models/creddata-v2-experimental.json` to try the new classifier, or omit `--model` to keep the default heuristic. V2 uses broader current labels, numeric token-shape features and balanced training. It passes the new independent candidate audit but still regresses on an internal development comparison, so it is not the default. See [the full ML-v2 evaluation](benchmarks/ml-v2/README.md). This model prioritizes detected candidates; it does not increase raw scanning recall or verify live credentials.

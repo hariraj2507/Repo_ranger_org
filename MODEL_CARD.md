@@ -53,3 +53,12 @@ The detector now includes weak literal password candidates without an entropy th
 ## Revision-8 context evidence
 
 New numeric features describe test scopes, expected/mock fields and likely source references. The default heuristic uses them to lower review priority; candidate detections remain visible. Existing opt-in model weights are unchanged, contain no learned weights for these new features, and do not establish calibration for this population. The separate review-queue benchmark is a policy measurement, not model validation or a probability of active exposure.
+
+
+## External model v2: 0.2.0a6
+
+`models/creddata-v2-experimental.json` is a new optional classifier trained on 1,656 current candidate labels from 60 previously inspected repositories (51 with definite candidates). It adds eight coarse token-shape features, restores original-path context in memory, balances whole-repository partition sizes and applies inverse repository-size then equal-class-mass weighting consistently in fitting, selection and validation-only calibration. Scores target balanced candidate triage, not natural-prevalence or active-exposure probabilities.
+
+On 217 candidates from 20 untouched repositories, v2 precision/recall were 92.78%/51.14%, versus 79.31%/13.07% for the default heuristic. Specificity was 82.93%; it predicts both classes. The old external model predicted everything positive. V2 improves discrimination but misses 86 positive candidate labels at threshold 0.5, and internal development comparisons still regress. It **remains opt-in**, despite passing the independent candidate gate. Raw detection and default scoring are unchanged.
+
+See [ML-v2 evaluation](benchmarks/ml-v2/README.md) for the pilot, exact splits, dataset hashes, repository-macro results, ambiguity diagnostic, weighting and limitations. Older model artifacts remain available unchanged.

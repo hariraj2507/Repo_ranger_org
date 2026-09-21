@@ -79,3 +79,22 @@ class TriageBenchmarkTests(unittest.TestCase):
             self.assertEqual(result['counts']['positive_annotations_detected'],1)
             self.assertEqual(result['triage']['counts']['low_false_positive'],1)
             self.assertEqual(result['triage']['counts']['medium_or_higher_true_positive'],1)
+
+
+class OriginalPathTests(unittest.TestCase):
+    def test_archive_paths_stay_in_memory_for_filename_features(self):
+        import hashlib,io,tarfile,tempfile
+        from collections import Counter
+        from pathlib import Path
+        from benchmarks.creddata import source_members
+        path='src/login.test.ts'
+        file_id=hashlib.sha256(path.encode()).hexdigest()[:8]
+        with tempfile.TemporaryDirectory() as root:
+            root=Path(root);archive=root/'source.tar.gz'
+            with tarfile.open(archive,'w:gz') as out:
+                member=tarfile.TarInfo('prefix/'+path);member.size=3
+                out.addfile(member,io.BytesIO(b'abc'))
+            names={}
+            items=list(source_members(archive,{file_id},root,'a'*40,'https://github.com/example/repo',False,Counter(),original_paths=names))
+            self.assertEqual(items,[(file_id,3,b'abc')])
+            self.assertEqual(names,{file_id:path})

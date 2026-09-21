@@ -1,0 +1,74 @@
+{
+  "metadata_revision": "c09c0c52fc6dae4ae5438ae69ba486f9f8059f0d",
+  "feature_schema": 2,
+  "feature_names": [
+    "assignment_context",
+    "comment_context",
+    "custom_signature",
+    "entropy_signal",
+    "jwt_structure",
+    "known_signature",
+    "non_production_path",
+    "parsed_context",
+    "placeholder_context",
+    "public_identifier_context",
+    "reference_context",
+    "severity",
+    "source_code_file",
+    "test_context",
+    "test_value_context",
+    "validator_invalid",
+    "validator_present",
+    "validator_valid",
+    "value_base64_like",
+    "value_digit_ratio_bin",
+    "value_entropy_bin",
+    "value_hex_like",
+    "value_length_bin",
+    "value_symbol_ratio_bin",
+    "value_uppercase_ratio_bin",
+    "value_uuid_like"
+  ],
+  "source_policy": "Pinned original source, never executed; original paths used only in memory; exports contain numeric features, labels and repository IDs only",
+  "development": {
+    "repository_offset": 100,
+    "repositories": 60,
+    "candidate_repositories": 51,
+    "rows": 1656,
+    "positive": 1376,
+    "negative": 280,
+    "files": 2415,
+    "purpose": "Previously inspected data; all internal partitions considered development evidence"
+  },
+  "holdout": {
+    "repository_offset": 160,
+    "repositories": 20,
+    "candidate_repositories": 18,
+    "rows": 217,
+    "positive": 176,
+    "negative": 41,
+    "files": 478,
+    "purpose": "Untouched until model procedure frozen; no tuning after independent audit"
+  },
+  "dataset_sha256": {
+    "development.jsonl": "2e84acba3de4cfc6396cc0c33c65461590a515ea159319f9ecfdc669ef296e2c",
+    "holdout.jsonl": "75ffa5f4a661528cbf5f0708516ee14ba7172e934c5df615b5571c937642ff15"
+  },
+  "promotion": {
+    "approved": false,
+    "internal_gate": {
+      "passed": false,
+      "reasons": [
+        "precision_regression",
+        "recall_regression"
+      ],
+      "scope": "Candidate triage gate only; not a production certification"
+    },
+    "independent_gate": {
+      "passed": true,
+      "reasons": [],
+      "scope": "Candidate triage gate only; not a production certification"
+    },
+    "reason": "Independent candidate gate passes, but internal development evaluation regresses precision and recall; retain opt-in"
+  }
+}

@@ -7,7 +7,7 @@ import re
 from typing import Mapping
 
 from backend.ast.context_engine import CodeContext
-from backend.detectors.finding import Finding, Severity
+from backend.detectors.finding import Finding, Severity, VALUE_SHAPE_FEATURES
 from backend.validators.validation_result import ValidationResult
 
 
@@ -15,9 +15,9 @@ from backend.validators.validation_result import ValidationResult
 class FeatureVector:
     """Named, normalized features used by the scoring classifier.
 
-    Features intentionally derive only from metadata, redacted findings, and
-    validation outcomes. Raw credentials and source snippets never enter this
-    layer.
+    Features derive from metadata, redacted findings, coarse token statistics,
+    and validation outcomes. Raw credentials and source snippets never enter
+    this layer.
     """
 
     values: Mapping[str, float]
@@ -71,4 +71,6 @@ class FeatureExtractor:
             "assignment_context": 1.0 if context is not None and context.symbol_kind == "assignment" else 0.0,
             "parsed_context": 1.0 if context is not None and context.symbol_kind not in {"unknown", "unparsed", "line"} else 0.0,
         }
+        shape = finding.value_shape or (0.0,) * len(VALUE_SHAPE_FEATURES)
+        values.update(zip(VALUE_SHAPE_FEATURES, shape))
         return FeatureVector(values)

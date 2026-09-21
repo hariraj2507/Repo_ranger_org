@@ -38,7 +38,7 @@ jobs:
         run: python -c "import os,tomllib; assert os.environ['GITHUB_REF_NAME'] == 'v' + tomllib.load(open('pyproject.toml','rb'))['project']['version']"
       - name: Enforce minimum evidence for stable version tags
         run: |
-          python -c "import re,subprocess,tomllib; version=tomllib.load(open('pyproject.toml','rb'))['project']['version']; subprocess.run(['python','-m','benchmarks.readiness','benchmarks/revision6/final/current.json','--require-ready'],check=True) if re.fullmatch(r'[0-9]+[.][0-9]+[.][0-9]+',version) else print('Alpha release: production gate remains informational')"
+          python -c "import re,subprocess,tomllib; version=tomllib.load(open('pyproject.toml','rb'))['project']['version']; subprocess.run(['python','-m','benchmarks.readiness','benchmarks/revision7/final/current.json','--require-ready'],check=True) if re.fullmatch(r'[0-9]+[.][0-9]+[.][0-9]+',version) else print('Alpha release: production gate remains informational')"
       - name: Publish GitHub prerelease
         env:
           GH_TOKEN: ${{ github.token }}

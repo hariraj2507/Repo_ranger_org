@@ -43,3 +43,8 @@ See [the complete revision-5 report](benchmarks/revision5/README.md) for provena
 ## Revision-6 promotion safeguard
 
 The newer evaluation gate additionally requires both predicted classes, at least ten examples of each ground-truth class, and at least 50% specificity. Single-class predictions cannot pass merely because a positive-heavy sample produces good Brier error. The existing external model also fails this gate on the fresh ranks 90-99 sample; see `benchmarks/revision6/final/model-audit.json`. Its weights were not retrained using that sample. JWT structure now has a separate safe metadata feature and does not receive known-credential or valid-credential boosts. Neither model is promoted to default.
+
+
+## Revision-7 candidate coverage
+
+The detector now includes weak literal password candidates without an entropy threshold. Existing model weights were not retrained or recalibrated for this broader population, and remain experimental and opt-in. Detection results in `benchmarks/revision7/` measure raw candidate detection, not model discrimination or exposure probabilities.

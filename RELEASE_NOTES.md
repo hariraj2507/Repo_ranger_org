@@ -1,10 +1,9 @@
-# RepoRanger v0.2.0a3
+# RepoRanger v0.2.0a4
 
-- Add bounded JWT and private-JWK structural detectors. Flat JSON, JavaScript and Python JWK literals are supported; public-only keys and duplicate fields are excluded.
-- Add literal curl/wget/database command credentials and PowerShell `ConvertTo-SecureString` arguments used with `-AsPlainText`. Variable references and username-only options are excluded.
-- Correct JWT scoring: decoded structure is not evidence of a verified credential or signature.
-- Strengthen model promotion checks to reject single-class predictions and poor specificity even when class imbalance makes Brier error look favorable.
-- Add explicit stable-release acceptance checks. The current evidence fails these checks, so this remains an alpha.
-- Saved reports use detector revision 6 and scoring revision 4. New built-in IDs `jwt` and `private_jwk` can be disabled but cannot be overwritten by custom rules.
+- Detect weak and short literal passwords across configuration, code, SQL, URLs and Basic authentication, without an entropy requirement.
+- Exclude dynamic references, templates, masked values and configuration markers. New medium-severity rule: `hardcoded_password`.
+- Recognize DSA and encrypted PEM private-key headers.
+- Recover interrupted benchmark downloads with bounded retries and no partial cache entries.
+- Reports use detector revision 7 and scoring revision 4; experimental ML remains opt-in.
 
-In the final fresh sample, positive annotations detected increased from 104 to 107 out of 279, with false-positive alerts unchanged at nine. This is a modest improvement; substantial misses remain. The earlier fresh sample showed no gain. The experimental ML model remains opt-in and is not production-promoted. See `benchmarks/revision6/README.md` for complete results and limits.
+On 20 independent repositories, positive-annotation recall changed from 58.46% to 67.52%; definite-label alert precision changed from 81.29% to 80.06%. See `benchmarks/revision7/README.md` for full counts, excluded labels, the earlier precision regression and limitations. This is an alpha, not a claim that accuracy is solved or production readiness established.

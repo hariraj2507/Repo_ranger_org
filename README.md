@@ -177,7 +177,7 @@ Detector revision 5 recognizes mixed-character password literals of at least 8 c
 
 ## Release process
 
-The package version is `0.2.0a3`. Verify the Actions matrix before releasing. Pushing a matching version tag runs the matrix again, then builds and publishes a GitHub prerelease with the wheel, source archive, model JSON and model card. Publishing to PyPI is not configured.
+The package version is `0.2.0a4`. Verify the Actions matrix before releasing. Pushing a matching version tag runs the matrix again, then builds and publishes a GitHub prerelease with the wheel, source archive, model JSON and model card. Publishing to PyPI is not configured.
 
 ## Context, richer custom rules, and external ML
 
@@ -210,6 +210,13 @@ Its repository-separated training, validation-only calibration and independent e
 
 Signed compact JWTs and private JWK material are detected by bounded offline parsing. Public-only JWKs, duplicate members and dynamic expressions are excluded. Supported JWK forms include flat JSON and JavaScript/Python literal objects. JWT signatures are not verified, so syntax alone no longer adds credential-validity confidence. Literal command-line credentials and PowerShell plaintext conversion arguments are also covered. Built-in IDs `jwt` and `private_jwk` are available in `disabled_rules`.
 
-The [revision-6 evaluation](benchmarks/revision6/README.md) records both the initial no-gain sample and the final modest gain: 104 to 107 detected positive annotations, with nine false-positive alerts in both versions. The model promotion gate now rejects all-positive/all-negative predictions and low specificity. The current model remains opt-in. Detector/scoring revisions are now 6/4.
+The [revision-6 evaluation](benchmarks/revision6/README.md) records both the initial no-gain sample and the final modest gain: 104 to 107 detected positive annotations, with nine false-positive alerts in both versions. The model promotion gate now rejects all-positive/all-negative predictions and low specificity. The current model remains opt-in. That release used detector/scoring revisions 6/4.
 
-Stable `X.Y.Z` release tags must pass the explicit minimum-evidence gate; the current evidence fails because recall is below the project threshold and the final independent sample has fewer than 20 repositories. This does not prevent alpha builds, and passing it in future will not alone certify production readiness.
+Stable `X.Y.Z` release tags must pass the explicit minimum-evidence gate; the current evidence fails because detection recall remains below the project threshold. This does not prevent alpha builds, and passing it in future will not alone certify production readiness.
+
+
+## Literal password coverage (revision 7)
+
+Explicit password fields now detect short and low-entropy literal values, including weak defaults such as `password123`. Supported forms include quoted assignments, config-file bare values, indexed assignments, Ruby/PHP hash arrows, XML, setter calls, SQL password clauses, connection URLs, Basic authorization headers and command arguments. Variable references, obvious templates and masked values are excluded. These findings use the medium-severity `hardcoded_password` rule; disable it through `disabled_rules` when needed. Existing stronger detections are deduplicated. DSA and encrypted PEM private-key headers are also recognized.
+
+This trades broader credential coverage against alerts on examples and weak test defaults. A literal is not proof of an active credential. See [the revision-7 comparison](benchmarks/revision7/README.md) for independent measurements and exclusions. Reports use detector revision 7 and scoring revision 4. The experimental models remain opt-in and have not been retrained for this wider candidate population.

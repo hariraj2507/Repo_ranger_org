@@ -25,7 +25,7 @@ class ImprovementTests(unittest.TestCase):
                 self.assertNotIn('h7Rk92za',repr(findings))
 
     def test_password_references_and_placeholders(self):
-        for source in ('password=process.env.DB_PASSWORD','password="password123"','<password>changeme123</password>', 'setPassword(getPassword())','postgresql://app:${DB_PASSWORD}@localhost/db'):
+        for source in ('password=process.env.DB_PASSWORD','password="${DB_PASSWORD}"','<password>changeme123</password>', 'setPassword(getPassword())','postgresql://app:${DB_PASSWORD}@localhost/db'):
             self.assertFalse(DetectionEngine().scan(repo(source)).findings)
         self.assertFalse(DetectionEngine().scan(repo('password=otherPassword42','settings.py')).findings)
 

@@ -70,7 +70,7 @@ def default_pattern_registry() -> PatternRegistry:
             Severity.HIGH, "GitLab personal access token",
         ),
         PatternDefinition(
-            "private_key_block", "private_key", r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----",
+            "private_key_block", "private_key", r"-----BEGIN (?:RSA |EC |DSA |OPENSSH |ENCRYPTED )?PRIVATE KEY-----",
             Severity.CRITICAL, "Private key block header",
         ),
     ))

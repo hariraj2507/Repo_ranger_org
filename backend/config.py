@@ -41,11 +41,11 @@ class ScanConfig:
         except (TypeError, KeyError) as exc:
             raise ValueError('Invalid custom rule fields') from exc
         identifiers = [rule.rule_id for rule in rules]
-        reserved = {p.rule_id for p in default_pattern_registry().patterns()} | {'high_entropy_token', 'jwt', 'private_jwk'}
+        reserved = {p.rule_id for p in default_pattern_registry().patterns()} | {'high_entropy_token', 'jwt', 'private_jwk', 'hardcoded_password'}
         if len(set(identifiers)) != len(identifiers) or set(identifiers) & reserved:
             raise ValueError('Custom rule IDs must be unique and cannot replace built-in rules')
         object.__setattr__(self, 'custom_rules', rules)
-        known = set(identifiers) | {p.rule_id for p in default_pattern_registry().patterns()} | {"high_entropy_token", "jwt", "private_jwk"}
+        known = set(identifiers) | {p.rule_id for p in default_pattern_registry().patterns()} | {"high_entropy_token", "jwt", "private_jwk", "hardcoded_password"}
         if set(self.disabled_rules) - known:
             raise ValueError("disabled_rules contains an unknown rule ID")
         if any(not re.fullmatch(r"[0-9a-fA-F]{64}", value) for value in self.suppress_fingerprints):

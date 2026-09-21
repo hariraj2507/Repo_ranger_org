@@ -11,6 +11,7 @@ from collections import Counter
 import csv
 from datetime import datetime, timezone
 import hashlib
+import http.client
 import json
 from pathlib import Path
 import subprocess
@@ -109,17 +110,23 @@ def download_archive(url, commit, target):
     request = urllib.request.Request(f'https://codeload.github.com/{repo}/tar.gz/{commit}',
                                      headers={'User-Agent': 'RepoRanger-external-evaluation'})
     temporary = target.with_suffix('.partial')
-    try:
-        with urllib.request.urlopen(request, timeout=90) as response, temporary.open('wb') as out:
-            total = 0
-            while chunk := response.read(1024 * 1024):
-                total += len(chunk)
-                if total > MAX_ARCHIVE:
-                    raise ValueError('Archive exceeds pilot size limit')
-                out.write(chunk)
-        temporary.replace(target)
-    finally:
-        temporary.unlink(missing_ok=True)
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(request, timeout=90) as response, temporary.open('wb') as out:
+                total = 0
+                while chunk := response.read(1024 * 1024):
+                    total += len(chunk)
+                    if total > MAX_ARCHIVE:
+                        raise ValueError('Archive exceeds pilot size limit')
+                    out.write(chunk)
+            temporary.replace(target)
+            return
+        except (http.client.IncompleteRead, ConnectionError, TimeoutError):
+            if attempt == 2:
+                raise
+        finally:
+            temporary.unlink(missing_ok=True)
+
 
 
 def evaluate(root, cache, count, download=False, offset=0, git_fallback=False, feature_rows=None, max_file_bytes=5*1024*1024):
@@ -188,7 +195,7 @@ def evaluate(root, cache, count, download=False, offset=0, git_fallback=False, f
                         cat = categories.setdefault(row['Category'], Counter())
                         cat['detected' if hit else 'missed'] += 1
             stats['missing_files'] = len(set(by_file) - seen)
-        except (OSError, ValueError, tarfile.TarError, subprocess.SubprocessError) as exc:
+        except (OSError, ValueError, http.client.IncompleteRead, tarfile.TarError, subprocess.SubprocessError) as exc:
             # Exception messages can include paths; persist only the exception type.
             stats['repository_errors'] += 1
             print(f'{repo_id}: {type(exc).__name__}', flush=True)
@@ -199,7 +206,7 @@ def evaluate(root, cache, count, download=False, offset=0, git_fallback=False, f
     tp, fp = totals['alerts_true_positive'], totals['alerts_false_positive']
     positives = totals['annotations_T']
     return {'dataset': 'https://github.com/Samsung/CredData', 'dataset_revision': revision,
-            'detector_revision': 6, 'seed': SEED, 'repository_offset': offset, 'eligible_repositories': population,
+            'detector_revision': 7, 'seed': SEED, 'repository_offset': offset, 'eligible_repositories': population,
             'requested_repositories': count, 'selected_repositories': len(entries),
             'file_size_limit_bytes': max_file_bytes,
             'source_mode': 'Original pinned source archives; no upstream obfuscation applied',

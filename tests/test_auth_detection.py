@@ -26,8 +26,8 @@ class AuthenticationDetectionTests(unittest.TestCase):
         self.assertNotIn(value, repr(findings))
         self.assertNotIn('n8V!q2Lz5xRa', repr(findings))
 
-    def test_basic_requires_credentials_and_complex_password(self):
-        for value in (b'not-a-credential', b'admin:password', b':n8V!q2Lz5xRa'):
+    def test_basic_requires_nonempty_literal_credentials(self):
+        for value in (b'not-a-credential', b'admin:', b':n8V!q2Lz5xRa'):
             self.assertFalse(self.scan('Authorization: Basic ' + base64.b64encode(value).decode()))
         self.assertFalse(self.scan('Authorization: Basic invalid===='))
 

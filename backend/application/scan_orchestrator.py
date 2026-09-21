@@ -1,6 +1,7 @@
 """Single safe entry point that composes the current-file analysis pipeline."""
 from __future__ import annotations
 from backend.detectors.structured_detector import StructuredDetector
+from backend.detectors.literal_password_detector import LiteralPasswordDetector
 
 from pathlib import Path
 from dataclasses import replace
@@ -60,7 +61,7 @@ class ScanOrchestrator:
         self._risk_engine = risk_engine or RiskEngine()
         self._score_engine = score_engine or ScoreEngine()
         registry = PatternRegistry((*default_pattern_registry().patterns(), *(rule.pattern() for rule in self._config.custom_rules)))
-        self._candidate_detectors = (RegexDetector(registry), StructuredDetector(), EntropyDetector())
+        self._candidate_detectors = (RegexDetector(registry), StructuredDetector(), EntropyDetector(), LiteralPasswordDetector())
 
     def scan(self, source: str | Path, *, history: bool = False, reflog: bool = False,
              max_commits: int = 500, max_blobs: int = 10_000) -> ScanResult:

@@ -22,3 +22,38 @@ class CredDataMatchingTests(unittest.TestCase):
         self.assertEqual(classify_alert(1, 1, rows), 'unknown')
         self.assertEqual(classify_alert(2, 2, rows), 'false_positive')
         self.assertEqual(classify_alert(3, 3, rows), 'unlabeled')
+
+
+class ArchiveDownloadTests(unittest.TestCase):
+    def test_truncated_download_retries_without_reusing_partial_bytes(self):
+        import http.client
+        import io
+        import tempfile
+        from pathlib import Path
+        from unittest.mock import patch
+        from benchmarks.creddata import download_archive
+        class Broken(io.BytesIO):
+            def read(self, size=-1):
+                raise http.client.IncompleteRead(b'partial')
+        with tempfile.TemporaryDirectory() as root:
+            target=Path(root)/'source.tar.gz'
+            with patch('benchmarks.creddata.urllib.request.urlopen', side_effect=[Broken(), io.BytesIO(b'complete')]) as fetch:
+                download_archive('https://github.com/example/repo', 'a'*40, target)
+            self.assertEqual(fetch.call_count,2)
+            self.assertEqual(target.read_bytes(),b'complete')
+            self.assertFalse(target.with_suffix('.partial').exists())
+
+    def test_repeated_truncation_is_bounded_and_leaves_no_cache(self):
+        import http.client
+        import tempfile
+        from pathlib import Path
+        from unittest.mock import patch
+        from benchmarks.creddata import download_archive
+        with tempfile.TemporaryDirectory() as root:
+            target=Path(root)/'source.tar.gz'
+            with patch('benchmarks.creddata.urllib.request.urlopen', side_effect=http.client.IncompleteRead(b'')) as fetch:
+                with self.assertRaises(http.client.IncompleteRead):
+                    download_archive('https://github.com/example/repo', 'a'*40, target)
+            self.assertEqual(fetch.call_count,3)
+            self.assertFalse(target.exists())
+            self.assertFalse(target.with_suffix('.partial').exists())

@@ -58,7 +58,7 @@ def main(arguments: list[str] | None = None) -> int:
     report = generator.as_dict(result.source, result.score, result.assessments)
     report["schema_version"] = 1
     report["scan_profile"] = {
-        "detector_revision": 6,
+        "detector_revision": 7,
         "scoring_revision": 4, "model_id": model_id,
         "history": args.history, "reflog": args.reflog,
         "max_commits": args.max_commits, "max_blobs": args.max_blobs,

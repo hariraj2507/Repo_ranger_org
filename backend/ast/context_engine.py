@@ -4,6 +4,8 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass, replace
 import re
+import hashlib
+from backend.detectors.entropy_detector import EntropyDetector
 
 from backend.detectors.detection_engine import DetectionResult
 from backend.detectors.finding import Finding
@@ -73,13 +75,27 @@ class ContextEngine:
         lines = source.splitlines() if source else []
         line = lines[finding.line_start-1] if 0 < finding.line_start <= len(lines) else ''
         evidence = []
+        scopes = context.enclosing_symbols + ((context.symbol_name,) if context.symbol_kind in {'function', 'async_function', 'class'} and context.symbol_name else ())
+        if any(re.match(r'(?:test_|Test[A-Z])', name) for name in scopes):
+            evidence.append('test_context')
         if re.match(r'\s*(?:#|//|/\*|\*|<!--)', line):
             evidence.append('comment_context')
-        if re.match(r'''(?i)\s*["']?[\w.-]*(?:publishable[_-]?key|client[_-]?id|public[_-]?key)["']?\s*[:=]''', line):
-            evidence.append('public_identifier_context')
-        if re.match(r'''(?i)\s*["']?[\w.-]+["']?\s*[:=]\s*["']?(?:example|placeholder|changeme|your[_-]|replace[_-])''', line):
-            evidence.append('placeholder_context')
-        return replace(context, evidence=tuple(evidence))
+        for match in EntropyDetector._ASSIGNMENT.finditer(line):
+            group = next(g for g in ('double', 'single', 'bare') if match.group(g) is not None)
+            value = match.group(group).strip()
+            if hashlib.sha256(value.encode()).hexdigest() != finding.fingerprint:
+                continue
+            name = re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', match.group('name')).lower()
+            words = set(re.split(r'[^a-z0-9]+', name))
+            if re.match(r'(?i)(?:example|placeholder|changeme|your[_-]|replace[_-])', value):
+                evidence.append('placeholder_context')
+            if {'public', 'key'} <= words or {'client', 'id'} <= words or 'publishable' in words:
+                evidence.append('public_identifier_context')
+            if words & {'expected', 'mock', 'dummy', 'fixture'}:
+                evidence.append('test_value_context')
+            if group == 'bare' and context.language in {'python', 'javascript', 'typescript', 'tsx', 'go', 'java', 'ruby', 'rust'}:
+                evidence.append('reference_context')
+        return replace(context, evidence=tuple(dict.fromkeys(evidence)))
 
     def _context_for(self, finding: Finding, source: str | None) -> CodeContext:
         """Resolve safe context or return a deterministic line-only fallback."""

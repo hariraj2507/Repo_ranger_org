@@ -23,6 +23,9 @@ import urllib.error
 
 from backend.analysis_pipeline import FindingAnalyzer
 from backend.ml.feature_extractor import FeatureExtractor
+from backend.ml.classifier import CandidateClassifier
+from backend.ml.confidence_engine import ConfidenceEngine
+from backend.engine.risk_engine import RiskEngine
 
 from backend.detectors.detection_engine import DetectionEngine
 from backend.scanner.models import FileMetadata, NormalizedTextFile, ParsedRepository, RepositoryMetadata
@@ -129,12 +132,14 @@ def download_archive(url, commit, target):
 
 
 
-def evaluate(root, cache, count, download=False, offset=0, git_fallback=False, feature_rows=None, max_file_bytes=5*1024*1024):
+def evaluate(root, cache, count, download=False, offset=0, git_fallback=False, feature_rows=None, max_file_bytes=5*1024*1024, triage=False):
     entries, population = selected_repositories(root, count, offset)
     revision = subprocess.check_output(['git', '-C', str(root), 'rev-parse', 'HEAD'], text=True).strip()
     cache.mkdir(parents=True, exist_ok=True)
     totals = Counter()
     categories = {}
+    priority = Counter()
+    classifier, confidence, risk = CandidateClassifier(), ConfidenceEngine(), RiskEngine()
     repositories = []
     engine = DetectionEngine()
     analyzer, extractor = FindingAnalyzer(), FeatureExtractor()
@@ -175,13 +180,26 @@ def evaluate(root, cache, count, download=False, offset=0, git_fallback=False, f
                 path = labels[0]['FilePath']
                 file = NormalizedTextFile(FileMetadata(path, len(raw), datetime.now(timezone.utc), 'utf-8'), source)
                 findings = engine.scan(ParsedRepository(RepositoryMetadata('external', 'external'), (file,))).findings
-                if feature_rows is not None:
+                if feature_rows is not None or triage:
                     analyzed = analyzer.analyze(ParsedRepository(RepositoryMetadata('external', 'external'), (file,)))
                     for item in analyzed:
                         kind = classify_alert(item.finding.line_start, item.finding.line_end, labels)
-                        if kind in ('true_positive', 'false_positive'):
+                        if feature_rows is not None and kind in ('true_positive', 'false_positive'):
                             feature_rows.append({'group': repo_id, 'label': int(kind == 'true_positive'),
                                 'features': dict(extractor.extract(item.finding, item.validation, item.context).values)})
+                if triage:
+                    retained = []
+                    for item in analyzed:
+                        vector = extractor.extract(item.finding, item.validation, item.context)
+                        assessment = risk.assess(item.finding, confidence.assess(classifier.classify(vector), vector))
+                        band = 'medium_or_higher' if assessment.score >= 0.4 else 'low'
+                        priority[band + '_' + classify_alert(item.finding.line_start, item.finding.line_end, labels)] += 1
+                        if band == 'medium_or_higher':
+                            retained.append(item.finding)
+                    for row in labels:
+                        if row['GroundTruth'] == 'T':
+                            hit = any(f.line_start <= int(row['LineEnd']) and f.line_end >= int(row['LineStart']) for f in retained)
+                            priority['positive_annotations_' + ('detected' if hit else 'missed')] += 1
                 stats['scanned_files'] += 1
                 stats['alerts'] += len(findings)
                 for finding in findings:
@@ -206,12 +224,13 @@ def evaluate(root, cache, count, download=False, offset=0, git_fallback=False, f
     tp, fp = totals['alerts_true_positive'], totals['alerts_false_positive']
     positives = totals['annotations_T']
     return {'dataset': 'https://github.com/Samsung/CredData', 'dataset_revision': revision,
-            'detector_revision': 7, 'seed': SEED, 'repository_offset': offset, 'eligible_repositories': population,
+            'detector_revision': 8, 'scoring_revision': 5 if triage else None, 'seed': SEED, 'repository_offset': offset, 'eligible_repositories': population,
             'requested_repositories': count, 'selected_repositories': len(entries),
             'file_size_limit_bytes': max_file_bytes,
             'source_mode': 'Original pinned source archives; no upstream obfuscation applied',
             'matching': 'Inclusive line overlap; annotation recall and alert precision use different units. Conflicting labels excluded from precision.',
             'scope': 'Independent repository sample, labeled files only; raw detection, no history, ML, live validation or risk threshold. Not a production accuracy estimate.',
+            'triage': {'threshold': 0.4, 'counts': dict(priority), 'scope': 'Medium-or-higher risk review queue; low-priority findings remain visible'} if triage else None,
             'counts': dict(totals), 'labeled_alert_precision': tp / (tp + fp) if tp + fp else None,
             'positive_annotation_recall': totals['positive_annotations_detected'] / positives if positives else None,
             'categories': {k: dict(v) for k, v in sorted(categories.items())}, 'repositories': repositories}
@@ -226,6 +245,7 @@ def main():
     parser.add_argument('--download', action='store_true', help='Fetch public pinned source archives')
     parser.add_argument('--git-fallback', action='store_true', help='Fetch pinned Git objects for archive omissions')
     parser.add_argument('--max-file-mib', type=int, default=5, help='Benchmark-only source size bound, 1-64 MiB')
+    parser.add_argument('--triage', action='store_true', help='Also measure the medium-or-higher risk review queue; keeps all raw findings')
     parser.add_argument('--features', type=Path, help='Export numeric, repository-grouped labeled candidate features')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
@@ -234,7 +254,7 @@ def main():
     if args.repositories < 1 or args.offset < 0:
         parser.error('--repositories must be positive and --offset nonnegative')
     rows = [] if args.features else None
-    report = evaluate(args.metadata, args.cache, args.repositories, args.download, args.offset, args.git_fallback, rows, args.max_file_mib*1024*1024)
+    report = evaluate(args.metadata, args.cache, args.repositories, args.download, args.offset, args.git_fallback, rows, args.max_file_mib*1024*1024, args.triage)
     if args.features:
         args.features.parent.mkdir(parents=True, exist_ok=True)
         args.features.write_text(''.join(json.dumps(row, sort_keys=True) + '\n' for row in rows), encoding='utf-8')

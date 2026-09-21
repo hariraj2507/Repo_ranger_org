@@ -34,7 +34,10 @@ class ConfidenceEngine:
         rationale: list[str] = []
         if features.value("jwt_structure"):
             rationale.append("JWT structure decoded; signature and credential secrecy are not verified")
-        for signal, reason in (('public_identifier_context', 'field name suggests a public identifier; review required'),
+        for signal, reason in (('reference_context', 'unquoted source value may be a reference rather than a credential'),
+                               ('test_value_context', 'field name suggests an expected or mock test value; retained for review'),
+                               ('test_context', 'candidate is inside a test function or test class; retained for review'),
+                               ('public_identifier_context', 'field name suggests a public identifier; review required'),
                                ('placeholder_context', 'value has an explicit placeholder marker'),
                                ('comment_context', 'candidate is on a comment line')):
             if features.value(signal):

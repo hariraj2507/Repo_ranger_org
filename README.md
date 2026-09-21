@@ -177,7 +177,7 @@ Detector revision 5 recognizes mixed-character password literals of at least 8 c
 
 ## Release process
 
-The package version is `0.2.0a4`. Verify the Actions matrix before releasing. Pushing a matching version tag runs the matrix again, then builds and publishes a GitHub prerelease with the wheel, source archive, model JSON and model card. Publishing to PyPI is not configured.
+The package version is `0.2.0a5`. Verify the Actions matrix before releasing. Pushing a matching version tag runs the matrix again, then builds and publishes a GitHub prerelease with the wheel, source archive, model JSON and model card. Publishing to PyPI is not configured.
 
 ## Context, richer custom rules, and external ML
 
@@ -220,3 +220,10 @@ Stable `X.Y.Z` release tags must pass the explicit minimum-evidence gate; the cu
 Explicit password fields now detect short and low-entropy literal values, including weak defaults such as `password123`. Supported forms include quoted assignments, config-file bare values, indexed assignments, Ruby/PHP hash arrows, XML, setter calls, SQL password clauses, connection URLs, Basic authorization headers and command arguments. Variable references, obvious templates and masked values are excluded. These findings use the medium-severity `hardcoded_password` rule; disable it through `disabled_rules` when needed. Existing stronger detections are deduplicated. DSA and encrypted PEM private-key headers are also recognized.
 
 This trades broader credential coverage against alerts on examples and weak test defaults. A literal is not proof of an active credential. See [the revision-7 comparison](benchmarks/revision7/README.md) for independent measurements and exclusions. Reports use detector revision 7 and scoring revision 4. The experimental models remain opt-in and have not been retrained for this wider candidate population.
+
+
+## Context-based review priority (revision 8)
+
+Findings inside Python test functions/classes, test/spec filenames, README/Markdown/reStructuredText files and example configuration files receive lower-priority evidence. Expected/mock/fixture field names and unquoted source references are also explained. These findings remain in the report. Public-identifier and placeholder evidence is matched to the actual candidate, preventing one field from lowering an unrelated finding on the same line. These heuristics do not establish that a credential is safe, and scores remain triage estimates.
+
+Short passwords in explicit PowerShell `ConvertTo-SecureString ... -AsPlainText` calls are detected. Reports use detector revision 8 and scoring revision 5. The [revision-8 evaluation](benchmarks/revision8/README.md) separates raw detection from the medium-or-higher risk review queue, including any recall cost from prioritization. Neither experimental model has been retrained or promoted.

@@ -15,7 +15,7 @@ from .feature_extractor import FeatureVector
 
 FEATURES = frozenset({'severity','known_signature','custom_signature','entropy_signal','validator_valid',
     'validator_invalid','validator_present','non_production_path','source_code_file','assignment_context','parsed_context',
-    'public_identifier_context', 'placeholder_context', 'comment_context', 'jwt_structure'})
+    'public_identifier_context', 'placeholder_context', 'comment_context', 'jwt_structure', 'test_context', 'test_value_context', 'reference_context'})
 
 
 def sigmoid(value):

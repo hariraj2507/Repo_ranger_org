@@ -48,3 +48,8 @@ The newer evaluation gate additionally requires both predicted classes, at least
 ## Revision-7 candidate coverage
 
 The detector now includes weak literal password candidates without an entropy threshold. Existing model weights were not retrained or recalibrated for this broader population, and remain experimental and opt-in. Detection results in `benchmarks/revision7/` measure raw candidate detection, not model discrimination or exposure probabilities.
+
+
+## Revision-8 context evidence
+
+New numeric features describe test scopes, expected/mock fields and likely source references. The default heuristic uses them to lower review priority; candidate detections remain visible. Existing opt-in model weights are unchanged, contain no learned weights for these new features, and do not establish calibration for this population. The separate review-queue benchmark is a policy measurement, not model validation or a probability of active exposure.

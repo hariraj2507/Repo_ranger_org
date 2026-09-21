@@ -57,3 +57,25 @@ class ArchiveDownloadTests(unittest.TestCase):
             self.assertEqual(fetch.call_count,3)
             self.assertFalse(target.exists())
             self.assertFalse(target.with_suffix('.partial').exists())
+
+
+class TriageBenchmarkTests(unittest.TestCase):
+    def test_low_priority_alerts_remain_in_raw_detection_counts(self):
+        import csv,tempfile
+        from pathlib import Path
+        from unittest.mock import patch
+        from benchmarks.creddata import evaluate
+        source='token="ghp_'+'aB3dE6gH'*4+'aB3d'+'"\nexpected_password="hunter2"\n'
+        with tempfile.TemporaryDirectory() as root:
+            root=Path(root);meta=root/'labels.csv'
+            fields=['FileID','FilePath','LineStart','LineEnd','GroundTruth','Category']
+            with meta.open('w',newline='') as output:
+                writer=csv.DictWriter(output,fieldnames=fields);writer.writeheader()
+                for line,label in ((1,'T'),(2,'F')):
+                    writer.writerow(dict(FileID='file',FilePath='app.py',LineStart=line,LineEnd=line,GroundTruth=label,Category='credential'))
+            with patch('benchmarks.creddata.selected_repositories',return_value=([('repo','a'*40,'https://github.com/example/repo',meta)],1)), patch('benchmarks.creddata.subprocess.check_output',return_value='revision'), patch('benchmarks.creddata.source_members',return_value=[('file',len(source),source.encode())]):
+                result=evaluate(root,root/'cache',1,triage=True)
+            self.assertEqual(result['counts']['alerts'],2)
+            self.assertEqual(result['counts']['positive_annotations_detected'],1)
+            self.assertEqual(result['triage']['counts']['low_false_positive'],1)
+            self.assertEqual(result['triage']['counts']['medium_or_higher_true_positive'],1)

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import PurePosixPath
+import re
 from typing import Mapping
 
 from backend.ast.context_engine import CodeContext
@@ -46,7 +47,14 @@ class FeatureExtractor:
         """Return a normalized vector suitable for scoring or future training."""
         path_parts = {part.lower() for part in PurePosixPath(finding.file_path).parts}
         suffix = PurePosixPath(finding.file_path).suffix.lower()
+        filename = PurePosixPath(finding.file_path).name.lower()
+        non_production = bool(path_parts & self._NON_PRODUCTION_PARTS or re.search(
+            r'(^test_|_test[.]|[.](?:test|spec)[.]|[.](?:example|sample)$|^readme(?:[.]|$))', filename)
+            or suffix in {'.md', '.rst'})
         values = {
+            'reference_context': float(context is not None and 'reference_context' in context.evidence and finding.detector != 'regex'),
+            'test_value_context': float(context is not None and 'test_value_context' in context.evidence and finding.detector != 'regex'),
+            'test_context': float(context is not None and 'test_context' in context.evidence and not non_production),
             "jwt_structure": float(finding.rule_id == "jwt"),
             'public_identifier_context': float(context is not None and 'public_identifier_context' in context.evidence and finding.detector != 'regex'),
             'placeholder_context': float(context is not None and 'placeholder_context' in context.evidence and finding.detector != 'regex'),
@@ -58,7 +66,7 @@ class FeatureExtractor:
             "entropy_signal": 1.0 if finding.detector == "entropy" else 0.0,
             "validator_valid": 1.0 if validation is not None and validation.is_valid and finding.rule_id != "jwt" else 0.0,
             "validator_present": 1.0 if validation is not None else 0.0,
-            "non_production_path": 1.0 if path_parts & self._NON_PRODUCTION_PARTS else 0.0,
+            "non_production_path": float(non_production),
             "source_code_file": 1.0 if suffix in {".py", ".js", ".jsx", ".ts", ".tsx", ".go", ".java", ".rb", ".rs"} else 0.0,
             "assignment_context": 1.0 if context is not None and context.symbol_kind == "assignment" else 0.0,
             "parsed_context": 1.0 if context is not None and context.symbol_kind not in {"unknown", "unparsed", "line"} else 0.0,

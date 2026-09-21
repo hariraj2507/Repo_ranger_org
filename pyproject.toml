@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "reporanger"
-version = "0.2.0a4"
+version = "0.2.0a5"
 description = "Local and historical repository credential scanning with explainable risk reports"
 readme = "README.md"
 requires-python = ">=3.10"

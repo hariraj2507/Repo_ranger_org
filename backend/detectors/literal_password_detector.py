@@ -11,6 +11,7 @@ class LiteralPasswordDetector:
     _SETTER = re.compile(EntropyDetector._SETTER.pattern.replace('{8,2048}', '{1,2048}'))
     _URL = re.compile(EntropyDetector._URL.pattern.replace('{8,2048}', '{1,2048}'))
     _COMMAND = re.compile(EntropyDetector._COMMAND.pattern.replace('{8,256}', '{1,256}'))
+    _PS_LITERAL = re.compile(EntropyDetector._PS_LITERAL.pattern.replace('{8,256}', '{1,256}'), re.I)
     _SQL = re.compile(r'''(?i)\b(?:IDENTIFIED[ \t]+BY|WITH[ \t]+PASSWORD)[ \t]+['"](?P<value>[^'"\r\n]{1,2048})['"]''')
     _INDEXED = re.compile(r'''(?i)\[["'](?:password|passwd|pwd)["']\][ \t]*=(?!=)[ \t]*['"](?P<value>[^'"\r\n]{1,2048})['"]''')
 
@@ -66,4 +67,11 @@ class LiteralPasswordDetector:
                     if '--password' not in prefix.casefold() and not prefix.rstrip("\"'").endswith(':'):continue
                 value=match.group('value')
                 if self.literal(value):add(value,match.start('value'))
+        for match in EntropyDetector._POWERSHELL.finditer(text):
+            args = match.group('args')
+            literal = self._PS_LITERAL.search(args)
+            if literal is not None and re.search(r'(?i)(?:^|\s)-AsPlainText(?:\s|$)', args):
+                value = literal.group('value')
+                if self.literal(value):
+                    add(value, match.start('args') + literal.start('value'))
         return tuple(result)

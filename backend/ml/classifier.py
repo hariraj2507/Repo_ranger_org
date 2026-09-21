@@ -37,6 +37,9 @@ class CandidateClassifier:
 
     _DEFAULT_WEIGHTS: Mapping[str, float] = {
         "bias": -1.15,
+        "test_context": -1.0,
+        "test_value_context": -0.7,
+        "reference_context": -1.2,
         'public_identifier_context': -1.0,
         'placeholder_context': -1.2,
         'comment_context': -0.35,

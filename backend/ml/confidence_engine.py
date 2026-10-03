@@ -32,6 +32,8 @@ class ConfidenceEngine:
         """Return a bounded confidence score and concise evidence rationale."""
         score = classification.score
         rationale: list[str] = []
+        if 'ml_priority_promotion' in classification.contributing_features:
+            rationale.append('ML exceeded the configured promotion threshold; baseline score retained as a floor')
         if features.value("jwt_structure"):
             rationale.append("JWT structure decoded; signature and credential secrecy are not verified")
         for signal, reason in (('reference_context', 'unquoted source value may be a reference rather than a credential'),

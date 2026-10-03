@@ -24,7 +24,7 @@ def feature_label_diagnostic(rows):
     }
 
 
-def repository_metrics(rows, weights):
+def repository_metrics(rows, weights, promotion_threshold=None, feature_transform=None, classifier=None):
     """Report equal-repository averages, excluding undefined denominators."""
     grouped = defaultdict(list)
     for row in rows:
@@ -34,7 +34,7 @@ def repository_metrics(rows, weights):
              'auroc', 'average_precision', 'balanced_accuracy')
     summaries = {}
     for group, members in sorted(grouped.items()):
-        result = metrics(members, weights)
+        result = metrics(members, weights, promotion_threshold=promotion_threshold, feature_transform=feature_transform, classifier=classifier)
         summaries[group] = {name: result[name] for name in names}
         if not result['true_positive'] + result['false_positive']:
             summaries[group]['precision'] = None
@@ -57,14 +57,14 @@ def evaluate(dataset, model):
     if groups & used:
         raise ValueError('Evaluation repositories overlap model development partitions')
     baseline=metrics(rows,dict(CandidateClassifier._DEFAULT_WEIGHTS))
-    learned=metrics(rows,trained._weights)
+    learned=metrics(rows,trained._weights,classifier=trained)
     return {'quality_gate':quality_gate(baseline,learned),'scope':'Independent line-labeled candidate evaluation; not active credential validation',
             'dataset_sha256':hashlib.sha256(Path(dataset).read_bytes()).hexdigest(),
             'model_sha256':hashlib.sha256(Path(model).read_bytes()).hexdigest(),
             'repositories':sorted(groups),'baseline':baseline, 'trained':learned,
             'repository_metrics': {
                 'baseline': repository_metrics(rows, dict(CandidateClassifier._DEFAULT_WEIGHTS)),
-                'trained': repository_metrics(rows, trained._weights),
+                'trained': repository_metrics(rows, trained._weights, classifier=trained),
             },
             'feature_label_diagnostic': feature_label_diagnostic(rows)}
 

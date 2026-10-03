@@ -1,0 +1,50 @@
+{
+  "metadata_revision": "c09c0c52fc6dae4ae5438ae69ba486f9f8059f0d",
+  "development_dataset": "../ml-v2/development.jsonl",
+  "development_ranks": [
+    100,
+    159
+  ],
+  "diagnostic_ranks": [
+    180,
+    199
+  ],
+  "planned_final_ranks": [
+    200,
+    219
+  ],
+  "policy": "baseline_floor_and_context_veto_v1",
+  "threshold_selection": "validation only; grid .5,.6,.7,.8,.9,.95,1; require gate pass; maximize recall then minimize Brier then prefer higher cutoff; otherwise disable promotions",
+  "default_promoted": false,
+  "source_policy": "Original source stays in ignored cache; no corpus code executed and no live credentials validated; committed features contain numeric metadata, labels and repository groups only",
+  "artifact_sha256": {
+    "context-veto-diagnostic.json": "ce110c47463a0f03b2f02f712158a1943acc85c6baf441806f0960757fe1a0f0",
+    "holdout-detection.json": "b5abe6f5d7f8750ea4372ee2e834ed28ae81d3618265e87be93482e15109ac2e",
+    "holdout.jsonl": "a292b40ab014356c757fdeabcd7aeb4e26baf58c5de5b4ac42aa755440b722db",
+    "independent-model.json": "caba10cafbf507327a96dcbe58795075d968bedf2928c43dd2ccddd58964b928",
+    "previous-sample-audit.json": "1a6cd69f3ca527d9d8c2a1464f1782b1fa4af3c66cce3690562acfe3d77fd603",
+    "rejected-independent-model.json": "caba10cafbf507327a96dcbe58795075d968bedf2928c43dd2ccddd58964b928",
+    "rejected-model.json": "317c44683154f49b7138e75965393c339913a24402f87d5d0f1a00d3c2f50a50",
+    "rejected-training.json": "1676c26267137fec2ca90ddd0f857eaca3d6aa580728a001a6beb6b31890cfb7",
+    "training.json": "0de1da4443652dad5e58061e398f001e4c3ca36bdbaa438833aba3a47c12ad1d",
+    "v2-fresh-audit.json": "6835bdd1747f3451a597a38694e5fa69532d6642f1b64814708740f4f8b01c1c",
+    "quick-independent\\holdout-detection.json": "8e8ccc478d5b9330458e9f8b05f6df27f8e8c47b72acd73d476f559b94efc8c7",
+    "quick-independent\\holdout.jsonl": "a20c6c91ca006332576f827d12f48b8d31f5ccbc9e073a528931f4faa7961e87",
+    "quick-independent\\model-audit.json": "464161a9d1f2ceb498227baf89c69cb800e1003145c37e90d6492c9a5e7e788f"
+  },
+  "final_evaluation": {
+    "planned_repositories": 20,
+    "completed_fixed_prefix_ranks": [
+      200,
+      202
+    ],
+    "completed_repositories": 3,
+    "files": 46,
+    "candidate_rows": 11,
+    "positive_labels": 8,
+    "negative_labels": 3,
+    "candidate_repositories": 2,
+    "complete_planned_evaluation": false,
+    "limitation": "Slow/truncated archive acquisition; fixed first-three prefix selected before labels inspected; no retuning after evaluation"
+  }
+}

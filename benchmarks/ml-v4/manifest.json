@@ -1,0 +1,27 @@
+{
+  "metadata_revision": "c09c0c52fc6dae4ae5438ae69ba486f9f8059f0d",
+  "development_rows": 4640,
+  "development_positive": 2789,
+  "development_negative": 1851,
+  "candidate_repositories": 90,
+  "development_ranks": [
+    100,
+    202
+  ],
+  "independent_ranks": [
+    203,
+    219
+  ],
+  "independent_repositories": 17,
+  "independent_files": 639,
+  "independent_rows": 288,
+  "independent_positive": 119,
+  "independent_negative": 169,
+  "trained_alert_decisions_approved": false,
+  "bundled_default_scope": "trained ranking within existing class/risk bands only",
+  "dataset_sha256": {
+    "development.jsonl": "eb824d52fe4e0103aac390d1abca58b7d6584a5b11a2fc039aa39cef8637d7e6",
+    "final\\holdout.jsonl": "e05ec6bf44c2d66e7e6849cddec7278c33f3377732899b482525fd2e3ce02de0"
+  },
+  "model_sha256": "79288cdaacfe285653c4b7eccf2252d79febe30fe041f307d7a1fa0b625107ef"
+}

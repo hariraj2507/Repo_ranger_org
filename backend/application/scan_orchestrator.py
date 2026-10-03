@@ -56,7 +56,7 @@ class ScanOrchestrator:
         self._validator_router = validator_router or ValidatorRouter()
         self._context_engine = context_engine or ContextEngine()
         self._feature_extractor = feature_extractor or FeatureExtractor()
-        self._classifier = classifier or CandidateClassifier()
+        self._classifier = classifier or CandidateClassifier.default()
         self._confidence_engine = confidence_engine or ConfidenceEngine()
         self._risk_engine = risk_engine or RiskEngine()
         self._score_engine = score_engine or ScoreEngine()

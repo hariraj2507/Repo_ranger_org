@@ -2,7 +2,7 @@
 
 ## Intended use
 
-Optional candidate ranking in RepoRanger, loaded with `--model models/experimental.json`. The default remains the transparent hand-weighted baseline. Model output does not verify whether a credential is active.
+As of 0.2.0a7, normal scans use bundled trained trees to refine ranking inside baseline classifier/risk bands. Older unrestricted classifiers remain experimental overrides. Earlier results below are historical. Model output does not verify active credentials.
 
 ## Training data and limits
 
@@ -62,3 +62,29 @@ New numeric features describe test scopes, expected/mock fields and likely sourc
 On 217 candidates from 20 untouched repositories, v2 precision/recall were 92.78%/51.14%, versus 79.31%/13.07% for the default heuristic. Specificity was 82.93%; it predicts both classes. The old external model predicted everything positive. V2 improves discrimination but misses 86 positive candidate labels at threshold 0.5, and internal development comparisons still regress. It **remains opt-in**, despite passing the independent candidate gate. Raw detection and default scoring are unchanged.
 
 See [ML-v2 evaluation](benchmarks/ml-v2/README.md) for the pilot, exact splits, dataset hashes, repository-macro results, ambiguity diagnostic, weighting and limitations. Older model artifacts remain available unchanged.
+
+
+## Follow-up generalization audit
+
+A later 2,756-candidate sample (CredData repository ranks 180-199) exposes a substantial v2 regression: precision 43.19%, recall 89.75%, and 1,451 false positives, versus the default's 74.07% precision and seven false positives. Brier error worsens from 0.2002 to 0.3807. The earlier 217-candidate result does not generalize. V2 remains experimental and must not become the default. See `benchmarks/ml-v3/v2-fresh-audit.json`.
+
+## Guarded ML-v3
+
+`models/creddata-v3-guarded.json` uses the v2 training procedure with a conservative runtime policy. It never lowers a baseline score. It promotes only above a validation-selected cutoff (0.8), and only without test, test-value, placeholder, public-identifier, reference or non-production-path signals. Existing detections remain visible. Schema 2 explicitly records the policy; unknown policies are rejected. A cutoff of 1 disables promotion.
+
+An initial floor-only experiment failed badly on ranks 180-199 (5.03% precision, 963 false positives); its model and results are preserved under `benchmarks/ml-v3/rejected-*`. That sample became diagnostic when used to identify the context problem. The context-veto policy adds two true positives without adding false positives there, but makes no change on the internal 331-row test and fails the required Brier-improvement gate. These are limited safeguards, not proof that ML is production-ready. Scores remain triage estimates.
+
+Fresh guarded-model verification on ranks 200-202 recovered all 46 files but produced only 11 definite candidate labels. Guarded and default scores were identical, with zero positive predictions at threshold 0.5. This supplies no independent accuracy gain. The planned 20-repository evaluation remains incomplete after slow/truncated downloads; see [ML-v3 evidence](benchmarks/ml-v3/README.md). No promotion is approved.
+
+
+## Bundled guarded tree ranking: 0.2.0a7
+
+Normal CLI and API scans load `backend/ml/data/default.json`: 100 gradient-boosted trees over safe numeric metadata. The development pool contains 4,640 previously inspected labels; fitting uses 2,784 rows, repository-separated validation (928 rows) selects depth four from 2/3/4, and 928 internal test rows supply development evidence. No probability calibration or active-exposure claim is made.
+
+Unrestricted trees raise internal recall from 22.33% to 72.40%, but precision falls from 95.27% to 79.09%. On fresh ranks 203-219 (17 repositories, 639/639 files, 288 labels: 119 positive / 169 negative), unrestricted precision/recall are 63.64%/70.59% (84 TP, 48 FP). Expanded ML alert decisions fail the precision gate.
+
+The bundled policy uses a configured cutoff of 0.8, a baseline floor, negative-context vetoes, baseline-positive-only refinement and explicit caps preserving classifier labels and current/historical risk levels. This cutoff is a fixed conservative policy, not a newly validated optimum. Across development data, 157 classifier scores and 148 confidence scores change. Three independent scores change while TP11/FP0 and 9.24% recall remain identical; Brier improves slightly from 0.326217 to 0.325432. Validation Brier regresses from 0.532082 to 0.532402; internal Brier improves from 0.436167 to 0.431394. The guard constrains decisions; it does not demonstrate learned accuracy gains.
+
+This limited integration makes trained ML part of normal scanning, with mixed ranking evidence. It does not solve the scanner's 90%/80% goal or establish production readiness. Both wheel and source distributions include the model. See [complete ML-v4 evidence](benchmarks/ml-v4/README.md).
+
+Independent review reproduced the audit. AUROC and average precision are unchanged for the guarded default, so a ranking-order improvement has not been demonstrated; the observed change is limited numerical score refinement.

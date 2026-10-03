@@ -43,3 +43,5 @@ reporanger /path/to/repository --model models/creddata-v2-experimental.json
 For holdout acquisition use the same source command with `--repositories 20 --offset 160` and separate outputs; use `--download` when archives are absent. Never tune weights on the independent audit and continue describing it as untouched. See `manifest.json` for hashes, feature names and promotion gates.
 
 Validation: 138 unit/integration tests pass, including weighting, split isolation, ranking ties, privacy and backwards compatibility.
+
+Later evidence: the larger ranks 180-199 audit substantially regresses precision and calibration. See [the updated model card](../../MODEL_CARD.md#follow-up-generalization-audit); the earlier passing independent gate is not evidence of broad generalization.

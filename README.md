@@ -81,7 +81,7 @@ Integration tests create isolated temporary Git repositories to verify deleted-s
 ## Current limitations
 
 - Validation is offline and structural; a positive result does not prove a credential is live.
-- Default classification uses transparent weights. An experimental trained model is available with `--model`; its lower synthetic recall prevented promotion to the default.
+- Normal scans load a bundled trained tree model for conservative ranking refinement. The transparent baseline protects alert decisions and risk levels; unrestricted ML classifiers remain experimental overrides.
 - Historical and current findings receive offline validation and syntax enrichment; active credential verification is not performed.
 - Non-Python syntax context requires an optional compatible Tree-sitter provider; otherwise scans fall back to line context.
 - No web API or frontend is implemented yet.
@@ -169,7 +169,7 @@ reporanger /path/to/repository --model models/experimental.json
 python -m benchmarks.evaluate
 ```
 
-The shipped model is opt-in. It improved Brier error but reduced recall on the synthetic held-out set, so the baseline remains the default. See [MODEL_CARD.md](MODEL_CARD.md) for data provenance, metrics and limitations. Download the model JSON asset with a wheel installation, or use the `models/` directory from the source distribution. Model loading accepts validated JSON weights only.
+This older synthetic model remains opt-in. Its lower synthetic recall prevented unrestricted promotion; normal scans now use the newer guarded tree model described below. See [MODEL_CARD.md](MODEL_CARD.md) for data provenance, metrics and limitations. Download the model JSON asset with a wheel installation, or use the `models/` directory from the source distribution. Model loading accepts bounded validated JSON weights or trees; it never loads executable serialization.
 
 An [independent CredData pilot](benchmarks/creddata-pilot.md) scanned 144 labeled files from five deterministically selected repositories. Raw detection reached 18.3% positive-annotation recall and 77.3% precision among alerts with definite labels; 28 unlabeled alerts were excluded from precision. Matching is approximate by line overlap. These results expose substantial detection gaps and do not establish production readiness or risk-score calibration. See the report for reproduction, scope and category counts.
 
@@ -177,7 +177,7 @@ Detector revision 5 recognizes mixed-character password literals of at least 8 c
 
 ## Release process
 
-The package version is `0.2.0a6`. Verify the Actions matrix before releasing. Pushing a matching version tag runs the matrix again, then builds and publishes a GitHub prerelease with the wheel, source archive, model JSON and model card. Publishing to PyPI is not configured.
+The package version is `0.2.0a7`. Verify the Actions matrix before releasing. Pushing a matching version tag runs the matrix again, then builds and publishes a GitHub prerelease with the wheel, source archive, model JSON and model card. Publishing to PyPI is not configured.
 
 ## Context, richer custom rules, and external ML
 
@@ -231,4 +231,18 @@ Short passwords in explicit PowerShell `ConvertTo-SecureString ... -AsPlainText`
 
 ## Updated optional ML classifier
 
-Use `reporanger /path/to/repository --model models/creddata-v2-experimental.json` to try the new classifier, or omit `--model` to keep the default heuristic. V2 uses broader current labels, numeric token-shape features and balanced training. It passes the new independent candidate audit but still regresses on an internal development comparison, so it is not the default. See [the full ML-v2 evaluation](benchmarks/ml-v2/README.md). This model prioritizes detected candidates; it does not increase raw scanning recall or verify live credentials.
+Use `reporanger /path/to/repository --model models/creddata-v2-experimental.json` to try the new classifier, or omit `--model` to use the bundled guarded tree model. V2 uses broader current labels, numeric token-shape features and balanced training. It passes the new independent candidate audit but still regresses on an internal development comparison, so it is not the default. See [the full ML-v2 evaluation](benchmarks/ml-v2/README.md). This model prioritizes detected candidates; it does not increase raw scanning recall or verify live credentials.
+
+
+## Trained ML in normal scans
+
+Version 0.2.0a7 automatically loads 100 learned decision trees from the installed package. No model download, training service or manual flag is needed. ML refines scores inside existing classifier and risk bands, preserving current and historical alert decisions and respecting negative context. Scoring revision 6 includes tree and runtime policy identity; create new saved-report comparison baselines after upgrading.
+
+The development pool has 4,640 numeric candidate labels from 90 repositories. Fitting uses 2,784 rows, depth selection uses 928 validation rows, and 928 internal test rows supply development evidence. Unrestricted ML still introduces too many false positives and cannot widen default alert decisions. See [ML-v4 results](benchmarks/ml-v4/README.md) for the fresh 17-repository evaluation and limitations. The 90% precision / 80% recall scanner target remains unmet.
+
+```sh
+reporanger /path/to/repository --format json
+python -m backend.ml.tree_training benchmarks/ml-v4/development.jsonl models/creddata-v4-trees.json output/tree-training.json
+```
+
+Inference and training use the Python standard library. Model data contain no credentials or source snippets. `--model` is an explicit experimental override; scores do not validate active credentials.

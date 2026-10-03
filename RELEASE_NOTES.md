@@ -1,13 +1,13 @@
-# RepoRanger v0.2.0a6
+# RepoRanger v0.2.0a7
 
-- Add an optional ML-v2 classifier trained on 1,656 current, externally labeled candidates with whole-repository partitions.
-- Add eight coarse numeric token-shape features without retaining raw credential material; default heuristic scores remain unchanged.
-- Balance partition sizes and apply inverse repository-size then equal-class-mass weighting across fit, validation selection and calibration.
-- Speed up fitting by combining identical feature/label contributions without changing the objective.
-- Add tie-aware AUROC, average precision, balanced accuracy, per-repository evaluation and feature-label ambiguity diagnostics.
+Normal scans now load a bundled trained ML model automatically. The 100-tree ensemble refines ranking inside existing classifier/risk bands, with baseline floors and negative-context safeguards for current and historical findings. No manual flag or external training dependency is needed.
 
-Independent evaluation: 217 candidates from 20 untouched repositories. ML-v2 precision/recall: 92.78%/51.14%; default heuristic: 79.31%/13.07%. Specificity: 82.93%. The independent candidate gate passes, but internal development precision/recall regress, so ML-v2 remains optional. These are candidate-classification metrics, not raw detection accuracy or exposure probabilities. See `benchmarks/ml-v2/README.md` and `MODEL_CARD.md`.
+- Expand development coverage to 4,640 labels from 90 repositories.
+- Add deterministic tree training, bounded JSON inference and model package data.
+- Include full model/policy identity in reports; scoring revision 6.
+- Complete fresh evaluation: 17 repositories, 639 files, 288 labels.
+- Reject and retry silently truncated benchmark archives.
 
-Try: `reporanger /path/to/repository --model models/creddata-v2-experimental.json`. Existing model artifacts and default behavior remain available.
+Unrestricted ML still fails precision (63.64% precision / 70.59% recall on the independent candidate sample). The guarded default preserves TP11/FP0 and risk levels, refining three scores with a small Brier improvement. Validation ranking error slightly worsens. ML integration is complete for conservative ranking; overall detection accuracy and production readiness remain unfinished. The 90%/80% scanner goal is unmet.
 
-Validation: 138 unit/integration tests pass, including weighting, split isolation, ranking ties, privacy and backwards compatibility.
+Validation: 153 tests and 52 synthetic scanner fixtures pass. See `benchmarks/ml-v4/README.md` and `MODEL_CARD.md` for complete evidence. This is an alpha prerelease.

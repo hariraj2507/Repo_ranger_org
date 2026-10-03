@@ -1,5 +1,6 @@
 """Matching must not turn ambiguous or unlabeled alerts into false positives."""
 import unittest
+import gzip
 from benchmarks.creddata import classify_alert
 
 
@@ -37,10 +38,10 @@ class ArchiveDownloadTests(unittest.TestCase):
                 raise http.client.IncompleteRead(b'partial')
         with tempfile.TemporaryDirectory() as root:
             target=Path(root)/'source.tar.gz'
-            with patch('benchmarks.creddata.urllib.request.urlopen', side_effect=[Broken(), io.BytesIO(b'complete')]) as fetch:
+            with patch('benchmarks.creddata.urllib.request.urlopen', side_effect=[Broken(), io.BytesIO(gzip.compress(b'complete'))]) as fetch:
                 download_archive('https://github.com/example/repo', 'a'*40, target)
             self.assertEqual(fetch.call_count,2)
-            self.assertEqual(target.read_bytes(),b'complete')
+            self.assertEqual(gzip.decompress(target.read_bytes()),b'complete')
             self.assertFalse(target.with_suffix('.partial').exists())
 
     def test_repeated_truncation_is_bounded_and_leaves_no_cache(self):
@@ -98,3 +99,34 @@ class OriginalPathTests(unittest.TestCase):
             items=list(source_members(archive,{file_id},root,'a'*40,'https://github.com/example/repo',False,Counter(),original_paths=names))
             self.assertEqual(items,[(file_id,3,b'abc')])
             self.assertEqual(names,{file_id:path})
+
+
+class SilentArchiveTruncationTests(unittest.TestCase):
+    def test_silent_eof_retries_and_repairs_corrupt_cache(self):
+        import io, tempfile
+        from pathlib import Path
+        from unittest.mock import patch
+        from benchmarks.creddata import download_archive
+        complete=gzip.compress(b'archive content')
+        with tempfile.TemporaryDirectory() as root:
+            target=Path(root)/'source.tar.gz'
+            target.write_bytes(complete[:-5])
+            with patch('benchmarks.creddata.urllib.request.urlopen',side_effect=[io.BytesIO(complete[:-5]),io.BytesIO(complete)]) as fetch:
+                download_archive('https://github.com/example/repo','a'*40,target)
+            self.assertEqual(fetch.call_count,2)
+            self.assertEqual(target.read_bytes(),complete)
+            self.assertFalse(target.with_suffix('.partial').exists())
+
+    def test_silent_eof_never_publishes_partial_cache(self):
+        import io, tempfile
+        from pathlib import Path
+        from unittest.mock import patch
+        from benchmarks.creddata import download_archive
+        with tempfile.TemporaryDirectory() as root:
+            target=Path(root)/'source.tar.gz'
+            with patch('benchmarks.creddata.urllib.request.urlopen',side_effect=lambda *a,**kw:io.BytesIO(gzip.compress(b'data')[:-5])) as fetch:
+                with self.assertRaises(EOFError):
+                    download_archive('https://github.com/example/repo','a'*40,target)
+            self.assertEqual(fetch.call_count,3)
+            self.assertFalse(target.exists())
+            self.assertFalse(target.with_suffix('.partial').exists())

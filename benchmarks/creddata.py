@@ -12,6 +12,8 @@ import csv
 from datetime import datetime, timezone
 import hashlib
 import http.client
+import gzip
+import zlib
 import json
 from pathlib import Path
 import subprocess
@@ -108,9 +110,25 @@ def selected_repositories(root, count, offset=0):
     return entries[offset:offset + count], len(entries)
 
 
+def validate_archive_stream(path):
+    """Read through the gzip footer so silent truncation cannot enter the cache."""
+    if path.stat().st_size > MAX_ARCHIVE:
+        raise ValueError('Archive exceeds pilot size limit')
+    expanded = 0
+    with gzip.open(path, 'rb') as source:
+        while chunk := source.read(1024 * 1024):
+            expanded += len(chunk)
+            if expanded > 20 * MAX_ARCHIVE:
+                raise ValueError('Expanded archive exceeds pilot size limit')
+
+
 def download_archive(url, commit, target):
     if target.exists():
-        return
+        try:
+            validate_archive_stream(target)
+            return
+        except (EOFError, gzip.BadGzipFile, zlib.error):
+            target.unlink()
     repo = url.removesuffix('.git').removeprefix('https://github.com/').strip('/')
     if not url.startswith('https://github.com/') or len(repo.split('/')) != 2:
         raise ValueError('Unsupported snapshot URL')
@@ -126,9 +144,10 @@ def download_archive(url, commit, target):
                     if total > MAX_ARCHIVE:
                         raise ValueError('Archive exceeds pilot size limit')
                     out.write(chunk)
+            validate_archive_stream(temporary)
             temporary.replace(target)
             return
-        except (http.client.IncompleteRead, ConnectionError, TimeoutError):
+        except (http.client.IncompleteRead, ConnectionError, TimeoutError, EOFError, gzip.BadGzipFile, zlib.error):
             if attempt == 2:
                 raise
         finally:
@@ -218,7 +237,7 @@ def evaluate(root, cache, count, download=False, offset=0, git_fallback=False, f
                         cat = categories.setdefault(row['Category'], Counter())
                         cat['detected' if hit else 'missed'] += 1
             stats['missing_files'] = len(set(by_file) - seen)
-        except (OSError, ValueError, http.client.IncompleteRead, tarfile.TarError, subprocess.SubprocessError) as exc:
+        except (OSError, ValueError, EOFError, zlib.error, http.client.IncompleteRead, tarfile.TarError, subprocess.SubprocessError) as exc:
             # Exception messages can include paths; persist only the exception type.
             stats['repository_errors'] += 1
             print(f'{repo_id}: {type(exc).__name__}', flush=True)

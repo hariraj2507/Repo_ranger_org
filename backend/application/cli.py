@@ -38,14 +38,14 @@ def main(arguments: list[str] | None = None) -> int:
     parser.add_argument("--exclude", action="append", default=[], help="Exclude a repository-relative glob; repeatable")
     parser.add_argument("--save-report", help="Save a redacted JSON snapshot to a new file")
     parser.add_argument("--compare", help="Compare with a previously saved report using identical settings")
-    parser.add_argument("--model", help="Use an experimental trained JSON classifier")
+    parser.add_argument("--model", help="Override the bundled trained ML ranking model with a JSON classifier")
     args = parser.parse_args(arguments)
     try:
         config = ScanConfig.load(args.config) if args.config else ScanConfig()
         config = replace(config, exclude=(*config.exclude, *args.exclude))
         baseline = ReportStore.load(args.compare) if args.compare else None
-        classifier = CandidateClassifier.from_file(args.model) if args.model else CandidateClassifier()
-        model_id = hashlib.sha256(json.dumps(classifier._weights, sort_keys=True).encode()).hexdigest()
+        classifier = CandidateClassifier.from_file(args.model) if args.model else CandidateClassifier.default()
+        model_id = hashlib.sha256(json.dumps(classifier.model_identity(), sort_keys=True).encode()).hexdigest()
         result = ScanOrchestrator(config=config, classifier=classifier).scan(args.source, history=args.history, reflog=args.reflog,
                                          max_commits=args.max_commits, max_blobs=args.max_blobs)
     except (RepositoryError, RuntimeError, ValueError) as exc:
@@ -59,7 +59,9 @@ def main(arguments: list[str] | None = None) -> int:
     report["schema_version"] = 1
     report["scan_profile"] = {
         "detector_revision": 8,
-        "scoring_revision": 5, "model_id": model_id,
+        "scoring_revision": 6, "model_id": model_id,
+        "model_kind": "trained_boosted_trees" if classifier._trees is not None else "logistic",
+        "ml_policy": "existing_alerts_only_v1" if classifier._existing_alerts_only else "custom_model",
         "history": args.history, "reflog": args.reflog,
         "max_commits": args.max_commits, "max_blobs": args.max_blobs,
         "policy": {key: (sorted(values, key=lambda rule: rule["rule_id"]) if key == "custom_rules" else sorted(set(values)))

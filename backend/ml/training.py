@@ -112,8 +112,8 @@ def calibrate(rows, weights, balance_groups=False, balance_classes=False):
     return result, {'method':'Platt scaling on validation partition only', 'scale':scale, 'offset':offset}
 
 
-def fit(rows, regularization, steps=2000, balance_groups=False, balance_classes=False):
-    weights = {name:0.0 for name in sorted(FEATURES | {'bias'})}
+def fit(rows, regularization, steps=2000, balance_groups=False, balance_classes=False, feature_names=None):
+    weights = {name:0.0 for name in sorted((FEATURES if feature_names is None else feature_names) | {'bias'})}
     importance = sample_weights(rows, balance_groups, balance_classes)
     # Repeated metadata vectors need one gradient contribution per label/vector.
     # Sum their original sample weights so this does not change the objective.
@@ -159,10 +159,11 @@ def ranking_metrics(labels, scores):
     }
 
 
-def metrics(rows, weights):
+def metrics(rows, weights, promotion_threshold=None, feature_transform=None, classifier=None):
     if not rows:
         raise ValueError('Evaluation requires nonempty labeled rows')
-    scores = [sigmoid(weights.get('bias',0)+sum(weights.get(k,0)*v for k,v in row['features'].items())) for row in rows]
+    scorer = classifier or CandidateClassifier(weights, promotion_threshold=promotion_threshold, feature_transform=feature_transform)
+    scores = [scorer.classify(FeatureVector(row['features'])).score for row in rows]
     tp = sum(p>=.5 and r['label']==1 for p,r in zip(scores,rows))
     fp = sum(p>=.5 and r['label']==0 for p,r in zip(scores,rows))
     fn = sum(p<.5 and r['label']==1 for p,r in zip(scores,rows))
@@ -180,7 +181,7 @@ def metrics(rows, weights):
     # Audit the existing confidence/risk policy by observed candidate labels.
     # The observed rates do not turn triage scores into exposure probabilities.
     from .confidence_engine import ConfidenceEngine
-    classifier = CandidateClassifier(weights)
+    classifier = scorer
     risk_bands = {name:{'samples':0,'positive':0} for name in ('low','medium','high','critical')}
     for row in rows:
         features=FeatureVector(row['features'])
@@ -213,7 +214,9 @@ def quality_gate(baseline, learned):
     return {'passed':not reasons, 'reasons':reasons, 'scope':'Candidate triage gate only; not a production certification'}
 
 
-def train(dataset, model_path, metrics_path, external=False):
+def train(dataset, model_path, metrics_path, external=False, guarded=False):
+    if guarded and not external:
+        raise ValueError('Guarded selection requires external repository partitions')
     rows=load_rows(dataset)
     train_rows, validation, test = split_sources(rows) if external else split_groups(rows)
     if {r['label'] for r in train_rows} != {0,1}:
@@ -223,8 +226,19 @@ def train(dataset, model_path, metrics_path, external=False):
     calibration = None
     if external:
         weights, calibration = calibrate(validation, weights, balance_groups=True, balance_classes=True)
+    threshold, selection = None, None
+    if guarded:
+        baseline_validation = metrics(validation, dict(CandidateClassifier._DEFAULT_WEIGHTS))
+        attempts = []
+        for cutoff in (.5, .6, .7, .8, .9, .95, 1.0):
+            measured = metrics(validation, weights, promotion_threshold=cutoff)
+            attempts.append({'threshold': cutoff, 'metrics': measured, 'gate': quality_gate(baseline_validation, measured)})
+        passing = [a for a in attempts if a['gate']['passed']]
+        best = min(passing, key=lambda a: (-a['metrics']['recall'], a['metrics']['brier'], -a['threshold'])) if passing else attempts[-1]
+        threshold = best['threshold']
+        selection = {'partition': 'validation only', 'passed': bool(passing), 'selected_threshold': threshold, 'candidates': attempts}
     baseline=metrics(test,dict(CandidateClassifier._DEFAULT_WEIGHTS))
-    learned=metrics(test,weights)
+    learned=metrics(test,weights,promotion_threshold=threshold)
     report={'dataset_sha256':hashlib.sha256(Path(dataset).read_bytes()).hexdigest(),
             'data_scope':'External line-matched candidate metadata, not verified active credentials' if external else 'Synthetic labeled metadata; not independently labeled production credentials',
             'calibration':calibration, 'sample_weighting':'inverse repository size, then equal total class mass in fit, validation selection and calibration' if external else 'equal row weight',
@@ -233,10 +247,13 @@ def train(dataset, model_path, metrics_path, external=False):
             'split_sizes':[len(train_rows),len(validation),len(test)],
             'split_labels':[dict(Counter(r['label'] for r in part)) for part in (train_rows,validation,test)],
             'calibration_scope':'Class-balanced candidate triage scores; not natural-prevalence or active-exposure probabilities' if external else 'Synthetic metadata',
-            'regularization':penalty, 'baseline_test':baseline, 'trained_test':learned,
+            'regularization':penalty, 'guard_selection':selection, 'baseline_test':baseline, 'trained_test':learned,
             'deployment':'experimental_opt_in; production promotion requires independent real-world evaluation',
             'candidate_quality_gate':quality_gate(baseline, learned)}
-    model={'schema_version':1,'kind':'logistic','weights':weights,'training':report}
+    model={'schema_version':2 if guarded else 1,'kind':'guarded_logistic' if guarded else 'logistic','weights':weights,'training':report}
+    if guarded:
+        model['promotion_threshold'] = threshold
+        model['promotion_policy'] = CandidateClassifier.PROMOTION_POLICY
     Path(model_path).write_text(json.dumps(model,indent=2,sort_keys=True)+'\n')
     Path(metrics_path).write_text(json.dumps(report,indent=2,sort_keys=True)+'\n')
     return report
@@ -246,8 +263,9 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('dataset'); parser.add_argument('model'); parser.add_argument('metrics')
     parser.add_argument('--external', action='store_true', help='Use repository-group splits and validation-only Platt calibration')
+    parser.add_argument('--guarded', action='store_true', help='Retain baseline scores; select validation-only ML promotion threshold')
     args=parser.parse_args()
-    report=train(args.dataset,args.model,args.metrics,args.external)
+    report=train(args.dataset,args.model,args.metrics,args.external,args.guarded)
     print(json.dumps({k:report[k] for k in ('split_sizes','regularization','candidate_quality_gate','deployment')},indent=2))
 
 if __name__=='__main__':

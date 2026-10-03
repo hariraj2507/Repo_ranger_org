@@ -1,0 +1,107 @@
+{
+  "dataset": "https://github.com/Samsung/CredData",
+  "dataset_revision": "c09c0c52fc6dae4ae5438ae69ba486f9f8059f0d",
+  "detector_revision": 8,
+  "scoring_revision": null,
+  "seed": "reporanger-external-pilot-v1",
+  "repository_offset": 200,
+  "eligible_repositories": 337,
+  "requested_repositories": 3,
+  "selected_repositories": 3,
+  "file_size_limit_bytes": 16777216,
+  "source_mode": "Original pinned source archives; no upstream obfuscation applied",
+  "path_mode": "original repository paths (not exported)",
+  "matching": "Inclusive line overlap; annotation recall and alert precision use different units. Conflicting labels excluded from precision.",
+  "scope": "Independent repository sample, labeled files only; raw detection, no history, ML, live validation or risk threshold. Not a production accuracy estimate.",
+  "triage": null,
+  "counts": {
+    "expected_files": 46,
+    "expected_annotations": 167,
+    "scanned_files": 46,
+    "alerts": 45,
+    "alerts_true_positive": 8,
+    "annotations_F": 101,
+    "annotations_T": 19,
+    "positive_annotations_detected": 8,
+    "annotations_X": 47,
+    "alerts_unlabeled": 4,
+    "positive_annotations_missed": 11,
+    "alerts_unknown": 30,
+    "alerts_false_positive": 3,
+    "missing_files": 0,
+    "git_recovered_files": 17
+  },
+  "labeled_alert_precision": 0.7272727272727273,
+  "positive_annotation_recall": 0.42105263157894735,
+  "categories": {
+    "Password": {
+      "detected": 1,
+      "missed": 1
+    },
+    "Secret": {
+      "detected": 7,
+      "missed": 8
+    },
+    "UUID": {
+      "missed": 2
+    }
+  },
+  "repositories": [
+    {
+      "id": "b76321b2",
+      "source_commit": "7704fbc5e83a35357d89458d9269a7e739964296",
+      "counts": {
+        "expected_files": 13,
+        "expected_annotations": 65,
+        "scanned_files": 13,
+        "alerts": 33,
+        "alerts_true_positive": 1,
+        "annotations_F": 33,
+        "annotations_T": 2,
+        "positive_annotations_detected": 1,
+        "annotations_X": 30,
+        "alerts_unlabeled": 1,
+        "positive_annotations_missed": 1,
+        "alerts_unknown": 29,
+        "alerts_false_positive": 2,
+        "missing_files": 0
+      },
+      "archive_sha256": "fe9c04b176e9683a6af3df35166b3ffed47c9ca680b2d1e9e8b682b74877b208"
+    },
+    {
+      "id": "19d43369",
+      "source_commit": "f6fb94a9d8b922fdcb758129d94e6d2a959f2167",
+      "counts": {
+        "expected_files": 17,
+        "expected_annotations": 20,
+        "git_recovered_files": 17,
+        "scanned_files": 17,
+        "alerts": 3,
+        "annotations_F": 20,
+        "alerts_unlabeled": 3,
+        "missing_files": 0
+      },
+      "archive_sha256": null
+    },
+    {
+      "id": "c9201a51",
+      "source_commit": "fa2771998a98a5bfdfa3c3503757668ac4f1c8ec",
+      "counts": {
+        "expected_files": 16,
+        "expected_annotations": 82,
+        "scanned_files": 16,
+        "alerts": 9,
+        "annotations_F": 48,
+        "annotations_T": 17,
+        "positive_annotations_missed": 10,
+        "alerts_true_positive": 7,
+        "positive_annotations_detected": 7,
+        "alerts_unknown": 1,
+        "annotations_X": 17,
+        "alerts_false_positive": 1,
+        "missing_files": 0
+      },
+      "archive_sha256": "822c376a788715dc81dab84d4a50190ca6e9f916e56c0c052e3b33c5d309f3f1"
+    }
+  ]
+}

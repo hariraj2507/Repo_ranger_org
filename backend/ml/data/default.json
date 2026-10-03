@@ -1,0 +1,5765 @@
+{
+  "kind": "boosted_trees",
+  "promotion_policy": "existing_alerts_only_v1",
+  "promotion_threshold": 0.8,
+  "schema_version": 4,
+  "training": {
+    "baseline_test": {
+      "auroc": 0.5305734788638967,
+      "average_precision": 0.8272851901567984,
+      "balanced_accuracy": 0.5923268139393087,
+      "brier": 0.4361669778255977,
+      "expected_calibration_error": 0.498243376133991,
+      "false_negative": 560,
+      "false_positive": 8,
+      "log_loss": 1.1882024753239202,
+      "positive_labels": 721,
+      "precision": 0.9526627218934911,
+      "predicts_only_one_class": false,
+      "recall": 0.22330097087378642,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "mean_score": 0.054317303073908585,
+          "positive_rate": 0.36363636363636365,
+          "samples": 11,
+          "upper": 0.1
+        },
+        {
+          "lower": 0.1,
+          "mean_score": 0.14555253376111826,
+          "positive_rate": 0.7647058823529411,
+          "samples": 544,
+          "upper": 0.2
+        },
+        {
+          "lower": 0.2,
+          "mean_score": 0.2631032640327453,
+          "positive_rate": 0.47619047619047616,
+          "samples": 21,
+          "upper": 0.3
+        },
+        {
+          "lower": 0.3,
+          "mean_score": 0.36418248044920337,
+          "positive_rate": 0.6607142857142857,
+          "samples": 56,
+          "upper": 0.4
+        },
+        {
+          "lower": 0.4,
+          "mean_score": 0.44231732538568375,
+          "positive_rate": 0.7322834645669292,
+          "samples": 127,
+          "upper": 0.5
+        },
+        {
+          "lower": 0.5,
+          "mean_score": 0.5256083914586757,
+          "positive_rate": 0.96875,
+          "samples": 128,
+          "upper": 0.6
+        },
+        {
+          "lower": 0.6,
+          "mean_score": null,
+          "positive_rate": null,
+          "samples": 0,
+          "upper": 0.7
+        },
+        {
+          "lower": 0.7,
+          "mean_score": 0.7685247834990178,
+          "positive_rate": 0.5555555555555556,
+          "samples": 9,
+          "upper": 0.8
+        },
+        {
+          "lower": 0.8,
+          "mean_score": 0.8249137318359602,
+          "positive_rate": 1.0,
+          "samples": 32,
+          "upper": 0.9
+        },
+        {
+          "lower": 0.9,
+          "mean_score": null,
+          "positive_rate": null,
+          "samples": 0,
+          "upper": 1.0
+        }
+      ],
+      "risk_band_label_counts": {
+        "critical": {
+          "positive": 37,
+          "samples": 41
+        },
+        "high": {
+          "positive": 0,
+          "samples": 1
+        },
+        "low": {
+          "positive": 430,
+          "samples": 577
+        },
+        "medium": {
+          "positive": 254,
+          "samples": 309
+        }
+      },
+      "samples": 928,
+      "specificity": 0.961352657004831,
+      "true_negative": 199,
+      "true_positive": 161
+    },
+    "candidate_quality_gate": {
+      "passed": false,
+      "reasons": [
+        "specificity_below_50_percent",
+        "precision_regression"
+      ],
+      "scope": "Candidate triage gate only; not a production certification"
+    },
+    "dataset_sha256": "eb824d52fe4e0103aac390d1abca58b7d6584a5b11a2fc039aa39cef8637d7e6",
+    "deployment": "Bundled trained priority refinement; baseline threshold decisions preserved, negative context vetoed, baseline score floor retained",
+    "learning_rate": 0.1,
+    "regularization": 1.0,
+    "rounds": 100,
+    "sample_weighting": "inverse repository size then equal class mass",
+    "selected_depth": 4,
+    "selection": "Minimum repository/class-balanced validation log loss; no test tuning",
+    "split_groups": {
+      "test": [
+        "0436af4a",
+        "060d335b",
+        "28728ab4",
+        "32f5ea73",
+        "35c273e2",
+        "472d4c24",
+        "5aefaef8",
+        "63800a10",
+        "660708f3",
+        "6c73b80a",
+        "8cda00f3",
+        "8f4427e8",
+        "9069e3a1",
+        "92f440ce",
+        "b88a4e51",
+        "b91cad30",
+        "bd14e9cf",
+        "c145598e",
+        "c49fdc37",
+        "d2d6eedc",
+        "e3377359"
+      ],
+      "train": [
+        "0b0a8cd6",
+        "106c7cd2",
+        "1fb36b4f",
+        "1fd3645c",
+        "271c71d8",
+        "2ba83c6a",
+        "2c47a91c",
+        "36b76643",
+        "3b7cbdd3",
+        "3d82970b",
+        "41d10ede",
+        "4764adaf",
+        "4f40bf46",
+        "50b38ef0",
+        "6482c382",
+        "661abd43",
+        "680ef0c1",
+        "6a132a15",
+        "6e2ed0e4",
+        "75e7c64d",
+        "793e12f9",
+        "83a072aa",
+        "850c2319",
+        "85d2b611",
+        "894e3377",
+        "8b8452c2",
+        "8c9b3ae9",
+        "8c9fcde7",
+        "90aebe4a",
+        "92faccc6",
+        "98800b86",
+        "99f9a6ea",
+        "9abeea1b",
+        "9bc5ca9e",
+        "a09d9e50",
+        "a5c3685e",
+        "b76321b2",
+        "bdf8ad40",
+        "c25fb835",
+        "c2eb9e71",
+        "c41bb134",
+        "d0125de6",
+        "db218f09",
+        "df70e863",
+        "e0b41e26",
+        "e4d4b33d",
+        "e5a9c76d",
+        "ec138349",
+        "ec869dbc",
+        "f06251db",
+        "f623c7b3",
+        "f8f46739",
+        "fd501154",
+        "ff527e6f"
+      ],
+      "validation": [
+        "0ce78112",
+        "0fc802c8",
+        "10e03406",
+        "1ce69180",
+        "387016a6",
+        "43e1f4ea",
+        "57c424f8",
+        "5d8870b3",
+        "67cb5d24",
+        "80815938",
+        "93ff401b",
+        "a15774b8",
+        "be221a57",
+        "c9201a51",
+        "f5e5719b"
+      ]
+    },
+    "split_sizes": [
+      2784,
+      928,
+      928
+    ],
+    "trained_test": {
+      "auroc": 0.6577552647624408,
+      "average_precision": 0.867127250919109,
+      "balanced_accuracy": 0.5286638927415627,
+      "brier": 0.2097211540077632,
+      "expected_calibration_error": 0.2076354269919969,
+      "false_negative": 199,
+      "false_positive": 138,
+      "log_loss": 0.609955160907857,
+      "positive_labels": 721,
+      "precision": 0.7909090909090909,
+      "predicts_only_one_class": false,
+      "recall": 0.723994452149792,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "mean_score": 0.05781434217353711,
+          "positive_rate": 0.0,
+          "samples": 32,
+          "upper": 0.1
+        },
+        {
+          "lower": 0.1,
+          "mean_score": 0.14130165266150724,
+          "positive_rate": 0.5185185185185185,
+          "samples": 27,
+          "upper": 0.2
+        },
+        {
+          "lower": 0.2,
+          "mean_score": 0.2577113024551474,
+          "positive_rate": 0.9230769230769231,
+          "samples": 26,
+          "upper": 0.3
+        },
+        {
+          "lower": 0.3,
+          "mean_score": 0.3355970442199935,
+          "positive_rate": 0.8962962962962963,
+          "samples": 135,
+          "upper": 0.4
+        },
+        {
+          "lower": 0.4,
+          "mean_score": 0.43311296844093855,
+          "positive_rate": 0.8333333333333334,
+          "samples": 48,
+          "upper": 0.5
+        },
+        {
+          "lower": 0.5,
+          "mean_score": 0.5264625466842894,
+          "positive_rate": 0.6666666666666666,
+          "samples": 87,
+          "upper": 0.6
+        },
+        {
+          "lower": 0.6,
+          "mean_score": 0.607796364646969,
+          "positive_rate": 0.5539568345323741,
+          "samples": 139,
+          "upper": 0.7
+        },
+        {
+          "lower": 0.7,
+          "mean_score": 0.7772044214545218,
+          "positive_rate": 0.9426751592356688,
+          "samples": 157,
+          "upper": 0.8
+        },
+        {
+          "lower": 0.8,
+          "mean_score": 0.8535801608559882,
+          "positive_rate": 0.84375,
+          "samples": 32,
+          "upper": 0.9
+        },
+        {
+          "lower": 0.9,
+          "mean_score": 0.9570259393312305,
+          "positive_rate": 0.8653061224489796,
+          "samples": 245,
+          "upper": 1.0
+        }
+      ],
+      "risk_band_label_counts": {
+        "critical": {
+          "positive": 55,
+          "samples": 61
+        },
+        "high": {
+          "positive": 195,
+          "samples": 223
+        },
+        "low": {
+          "positive": 195,
+          "samples": 279
+        },
+        "medium": {
+          "positive": 276,
+          "samples": 365
+        }
+      },
+      "samples": 928,
+      "specificity": 0.3333333333333333,
+      "true_negative": 69,
+      "true_positive": 522
+    }
+  },
+  "trees": [
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "non_production_path",
+        "left": {
+          "feature": "source_code_file",
+          "left": {
+            "value": -0.19034258090802206
+          },
+          "right": {
+            "value": -0.11708069483293096
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.15050429787281097
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.007049459006044619
+            },
+            "right": {
+              "value": 0.059747870740970745
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.20833333333333331
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_digit_ratio_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.012795509825952565
+            },
+            "right": {
+              "value": -0.17226728947979714
+            },
+            "threshold": 0.4375
+          },
+          "right": {
+            "feature": "public_identifier_context",
+            "left": {
+              "value": 0.10437056499662412
+            },
+            "right": {
+              "value": -0.17443818592305127
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "value": 0.18418003389170542
+          },
+          "right": {
+            "value": 0.03297725237561643
+          },
+          "threshold": 0.125
+        },
+        "threshold": 0.125
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "non_production_path",
+        "left": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "value": -0.10727938136858711
+          },
+          "right": {
+            "value": -0.17854149419415596
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.040148125863415214
+            },
+            "right": {
+              "value": 0.17077348132268047
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.1746324853445894
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_digit_ratio_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.002748811724909578
+            },
+            "right": {
+              "value": -0.12835006540597405
+            },
+            "threshold": 0.375
+          },
+          "right": {
+            "feature": "public_identifier_context",
+            "left": {
+              "value": 0.09426528405338952
+            },
+            "right": {
+              "value": -0.16032064874525165
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "value": 0.16742576142821036
+          },
+          "right": {
+            "value": 0.03118576275438219
+          },
+          "threshold": 0.125
+        },
+        "threshold": 0.125
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "non_production_path",
+        "left": {
+          "feature": "source_code_file",
+          "left": {
+            "value": -0.16239795644926383
+          },
+          "right": {
+            "value": -0.09494777375940854
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.13006046638667643
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.010147591825793306
+            },
+            "right": {
+              "value": 0.049795264526010574
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.20833333333333331
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_digit_ratio_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.009460720192434862
+            },
+            "right": {
+              "value": -0.1459939803366803
+            },
+            "threshold": 0.4375
+          },
+          "right": {
+            "feature": "public_identifier_context",
+            "left": {
+              "value": 0.08553337243231346
+            },
+            "right": {
+              "value": -0.14908644531700857
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "value": 0.15440820213175271
+          },
+          "right": {
+            "value": 0.029500020467153044
+          },
+          "threshold": 0.125
+        },
+        "threshold": 0.125
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "non_production_path",
+        "left": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "value": -0.08822862161635774
+          },
+          "right": {
+            "value": -0.1562079010999713
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.032565442749036215
+            },
+            "right": {
+              "value": 0.15402650149387173
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.15806360990110752
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_digit_ratio_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.0034169765813915134
+            },
+            "right": {
+              "value": -0.1093662260572508
+            },
+            "threshold": 0.375
+          },
+          "right": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.04332763114637699
+            },
+            "right": {
+              "value": 0.16951834216943507
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": 0.14741282677903342
+            },
+            "right": {
+              "value": 0.09351826068891103
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "value": 0.027912452755090817
+          },
+          "threshold": 0.125
+        },
+        "threshold": 0.125
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "value_digit_ratio_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.01748605527477352
+            },
+            "right": {
+              "value": -0.12799192880470603
+            },
+            "threshold": 0.4375
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": 0.024174399575746672
+            },
+            "right": {
+              "value": 0.15178255563484366
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "value": -0.09624419161099969
+          },
+          "right": {
+            "feature": "value_symbol_ratio_bin",
+            "left": {
+              "value": 0.13538251261910653
+            },
+            "right": {
+              "value": 0.026416222625130242
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.1875
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "value": -0.1672248789335895
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "source_code_file",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.086766402123934
+          },
+          "right": {
+            "value": -0.14584499487179767
+          },
+          "threshold": 0.20833333333333331
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.14766738580980504
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.07432103560111884
+            },
+            "right": {
+              "value": 0.07196588417690852
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.20833333333333331
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_digit_ratio_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "entropy_signal",
+            "left": {
+              "value": 0.014665129456058398
+            },
+            "right": {
+              "value": -0.0850449640058099
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.03348863649515015
+            },
+            "right": {
+              "value": 0.1542851487042519
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": 0.13161312039020998
+            },
+            "right": {
+              "value": 0.07873990048660523
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "value": 0.025005134092795495
+          },
+          "threshold": 0.125
+        },
+        "threshold": 0.125
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "value_digit_ratio_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.013196587967826285
+            },
+            "right": {
+              "value": -0.11533359849972198
+            },
+            "threshold": 0.4375
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": 0.016448640676475453
+            },
+            "right": {
+              "value": 0.13826214794503847
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "value": -0.08166245962758595
+          },
+          "right": {
+            "feature": "value_symbol_ratio_bin",
+            "left": {
+              "value": 0.1218134686140951
+            },
+            "right": {
+              "value": 0.0236735516971449
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.1875
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "value": -0.1550493326663015
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "value_digit_ratio_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.011894496836318904
+            },
+            "right": {
+              "value": -0.10892332302834624
+            },
+            "threshold": 0.4375
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": 0.014869040341252887
+            },
+            "right": {
+              "value": 0.1302123521569673
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "value": -0.076650650448136
+          },
+          "right": {
+            "feature": "value_symbol_ratio_bin",
+            "left": {
+              "value": 0.11624573819239832
+            },
+            "right": {
+              "value": 0.022416332006131686
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.1875
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "value": -0.14702439476904272
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "known_signature",
+      "left": {
+        "feature": "value_digit_ratio_bin",
+        "left": {
+          "feature": "jwt_structure",
+          "left": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.046850074540797565
+            },
+            "right": {
+              "value": 0.013180442121891576
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.14513459819330074
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "value": -0.0906084749194254
+          },
+          "right": {
+            "feature": "value_symbol_ratio_bin",
+            "left": {
+              "value": 0.111266086937641
+            },
+            "right": {
+              "value": 0.021228765198132327
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.1875
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.13955200486463318
+        },
+        "right": {
+          "value": 0.0922828292415389
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "value_digit_ratio_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.03362294743737292
+            },
+            "right": {
+              "value": 0.13109443549647412
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": 0.010644053435829116
+            },
+            "right": {
+              "value": 0.12286258015957872
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.017858456755104845
+            },
+            "right": {
+              "value": 0.1067427857854036
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "value": -0.0916745685202466
+          },
+          "threshold": 0.125
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "value": -0.13962326825859128
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "known_signature",
+      "left": {
+        "feature": "value_digit_ratio_bin",
+        "left": {
+          "feature": "jwt_structure",
+          "left": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.041616450856788216
+            },
+            "right": {
+              "value": 0.013775729987110297
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.13535762381975427
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.01634053326565181
+            },
+            "right": {
+              "value": 0.10257512937217977
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "value": -0.10014566670966865
+          },
+          "threshold": 0.125
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.1300479475341069
+        },
+        "right": {
+          "value": 0.0840026947370846
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "value_digit_ratio_bin",
+        "left": {
+          "feature": "entropy_signal",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.011099778892181108
+            },
+            "right": {
+              "value": 0.12051988230786687
+            },
+            "threshold": 0.3125
+          },
+          "right": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.11892265869184133
+            },
+            "right": {
+              "value": -0.0493799064502622
+            },
+            "threshold": 0.3125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "value": -0.06052845818563484
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.10163293220298418
+            },
+            "right": {
+              "value": 0.0363080041012645
+            },
+            "threshold": 0.45833333333333337
+          },
+          "threshold": 0.1875
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "value": -0.13354619383933092
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.009149935369570863
+            },
+            "right": {
+              "value": -0.12269215700255176
+            },
+            "threshold": 0.375
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.046955960337957486
+            },
+            "right": {
+              "value": 0.2
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.10012474095441795
+            },
+            "right": {
+              "value": -0.05666571383602312
+            },
+            "threshold": 0.4375
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": 0.13561338219186111
+            },
+            "right": {
+              "value": -0.07034029871679987
+            },
+            "threshold": 0.625
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "value": -0.1287314497462167
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "source_code_file",
+        "left": {
+          "feature": "value_digit_ratio_bin",
+          "left": {
+            "value": -0.1390461268841419
+          },
+          "right": {
+            "value": -0.0662919314928802
+          },
+          "threshold": 0.25
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.1321028691189968
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.05047051035350095
+            },
+            "right": {
+              "value": 0.06906990946415831
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.20833333333333331
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_digit_ratio_bin",
+        "left": {
+          "feature": "entropy_signal",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": 0.0946149288608099
+            },
+            "right": {
+              "value": -0.02286551360342482
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "assignment_context",
+            "left": {
+              "value": -0.06173435629547139
+            },
+            "right": {
+              "value": 0.026182460836401657
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "value_symbol_ratio_bin",
+            "left": {
+              "value": 0.09809105474341916
+            },
+            "right": {
+              "value": 0.024917585889895233
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.14959799127410664
+            },
+            "right": {
+              "value": 0.09124586263886925
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.45833333333333337
+        },
+        "threshold": 0.125
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "validator_present",
+        "left": {
+          "feature": "value_digit_ratio_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.1332604072770087
+            },
+            "right": {
+              "value": -0.0029950411929081174
+            },
+            "threshold": 0.20833333333333331
+          },
+          "right": {
+            "feature": "value_symbol_ratio_bin",
+            "left": {
+              "value": 0.0864799005460577
+            },
+            "right": {
+              "value": -0.07972906566837167
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "value": 0.12494962072003507
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": -0.12354147894193275
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.007600685158390747
+            },
+            "right": {
+              "value": -0.11536501694549069
+            },
+            "threshold": 0.375
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.03822006060351401
+            },
+            "right": {
+              "value": 0.19558926027689183
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "assignment_context",
+            "left": {
+              "value": -0.03445285838466016
+            },
+            "right": {
+              "value": 0.14095423403186844
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": 0.13183025895996953
+            },
+            "right": {
+              "value": -0.06776848915789076
+            },
+            "threshold": 0.625
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "value": -0.11992695966798057
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "source_code_file",
+        "left": {
+          "feature": "value_digit_ratio_bin",
+          "left": {
+            "value": -0.13000157322973163
+          },
+          "right": {
+            "value": -0.057223120617812276
+          },
+          "threshold": 0.25
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.12303777479859171
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.04406948687772931
+            },
+            "right": {
+              "value": 0.06144863664127753
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.20833333333333331
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "entropy_signal",
+        "left": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.15181979079484603
+            },
+            "right": {
+              "value": 0.03581578827796155
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.048535298660413534
+            },
+            "right": {
+              "value": 0.10485805143948912
+            },
+            "threshold": 0.3125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.13474974096909137
+            },
+            "right": {
+              "value": 0.004911947686495974
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.0640106951086432
+            },
+            "right": {
+              "value": 0.023078537514529145
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.3125
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_symbol_ratio_bin",
+        "left": {
+          "feature": "value_digit_ratio_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.12332285164300519
+            },
+            "right": {
+              "value": -0.002823638622012183
+            },
+            "threshold": 0.20833333333333331
+          },
+          "right": {
+            "feature": "value_symbol_ratio_bin",
+            "left": {
+              "value": 0.0808812483462474
+            },
+            "right": {
+              "value": -0.07408442505230023
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "value": -0.11546104804827083
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "value": 0.11908796873419983
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_symbol_ratio_bin",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "known_signature",
+            "left": {
+              "value": 0.0019481225443967404
+            },
+            "right": {
+              "value": 0.13056659746235738
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.1271441751779856
+            },
+            "right": {
+              "value": 0.04687011810248106
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.45833333333333337
+        },
+        "right": {
+          "value": -0.11264446793574977
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "value": 0.11572488292927885
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "source_code_file",
+        "left": {
+          "feature": "value_digit_ratio_bin",
+          "left": {
+            "value": -0.12263504213129206
+          },
+          "right": {
+            "value": -0.04877975436772237
+          },
+          "threshold": 0.25
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.11606099409163809
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.038240066138020265
+            },
+            "right": {
+              "value": 0.055925800336628244
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.20833333333333331
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "source_code_file",
+          "left": {
+            "value": 0.15676853763475126
+          },
+          "right": {
+            "value": -0.017486151535747865
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "validator_present",
+          "left": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": -0.010831464297834137
+            },
+            "right": {
+              "value": 0.06985423040336063
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "value": 0.11269580834037576
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.29166666666666663
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "public_identifier_context",
+      "left": {
+        "feature": "value_base64_like",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "known_signature",
+            "left": {
+              "value": -0.004650063819150697
+            },
+            "right": {
+              "value": 0.12630195851353573
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.12481975349693644
+            },
+            "right": {
+              "value": 0.11161778860057228
+            },
+            "threshold": 0.5625
+          },
+          "threshold": 0.45833333333333337
+        },
+        "right": {
+          "feature": "parsed_context",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.09229161967109537
+            },
+            "right": {
+              "value": 0.09947928303417053
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.15375171060675
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": -0.1447486210668033
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.013502098113737648
+            },
+            "right": {
+              "value": 0.0887800320109593
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.013497485158670603
+            },
+            "right": {
+              "value": 0.12915481733469575
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "value": -0.13748281191955405
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": -0.10954799904243034
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.012182069286133919
+            },
+            "right": {
+              "value": 0.08184672664036251
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.012220116896832023
+            },
+            "right": {
+              "value": 0.1249768821490711
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "value": -0.1312942318728478
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": -0.10720033403265328
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_entropy_bin",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": 0.04635287055301221
+            },
+            "right": {
+              "value": -0.015417585930725284
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": -0.15257207985187182
+            },
+            "right": {
+              "value": 0.06440283655256195
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.45833333333333337
+        },
+        "right": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "assignment_context",
+            "left": {
+              "value": -0.1088687822716245
+            },
+            "right": {
+              "value": 0.05864564694562657
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.06198661426578973
+            },
+            "right": {
+              "value": 0.12307673186305255
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.4375
+      },
+      "right": {
+        "value": 0.10715985310033907
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "source_code_file",
+        "left": {
+          "feature": "value_digit_ratio_bin",
+          "left": {
+            "value": -0.11834151558540212
+          },
+          "right": {
+            "value": -0.04392913971675412
+          },
+          "threshold": 0.25
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.11089901236313125
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.027371736857635373
+            },
+            "right": {
+              "value": 0.05824719150387975
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.20833333333333331
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "source_code_file",
+          "left": {
+            "value": 0.1457846899852204
+          },
+          "right": {
+            "value": -0.011409572407465504
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "validator_present",
+          "left": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": -0.009898289590629217
+            },
+            "right": {
+              "value": 0.06240786446893042
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "value": 0.10482131748210446
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.29166666666666663
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "value_entropy_bin",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": 0.0093226403014324
+            },
+            "right": {
+              "value": 0.0992234896826807
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": -0.14415274635940487
+            },
+            "right": {
+              "value": 0.06078396533771581
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.45833333333333337
+        },
+        "right": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "assignment_context",
+            "left": {
+              "value": -0.08992403317226849
+            },
+            "right": {
+              "value": 0.05396461140428106
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.0574529536673427
+            },
+            "right": {
+              "value": 0.11882985097441029
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.4375
+      },
+      "right": {
+        "value": -0.1048516477692188
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "validator_present",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.016097391234179623
+            },
+            "right": {
+              "value": -0.119228214582301
+            },
+            "threshold": 0.45833333333333337
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.060203808303707765
+            },
+            "right": {
+              "value": 0.06365612976068805
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.4375
+        },
+        "right": {
+          "value": 0.10288794120617722
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": -0.1028071071029521
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "source_code_file",
+        "left": {
+          "feature": "value_digit_ratio_bin",
+          "left": {
+            "value": -0.11482132630446151
+          },
+          "right": {
+            "value": -0.039607672312029024
+          },
+          "threshold": 0.25
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.10837019178340646
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.027196459341961528
+            },
+            "right": {
+              "value": 0.05560347505819975
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.20833333333333331
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "value": 0.15066459723347653
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.10720298366456632
+            },
+            "right": {
+              "value": -0.09780915384811846
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "known_signature",
+          "left": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": -0.010619532109986065
+            },
+            "right": {
+              "value": 0.058858019754331914
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.08881671405436993
+            },
+            "right": {
+              "value": 0.04330446253155583
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.29166666666666663
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.011266494115734587
+            },
+            "right": {
+              "value": 0.07646118610726242
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.010785411687842486
+            },
+            "right": {
+              "value": 0.11903111431043267
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "value": -0.11678067428278414
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": -0.10094860282780237
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "source_code_file",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.026182993132584032
+          },
+          "right": {
+            "value": -0.10830454590329441
+          },
+          "threshold": 0.20833333333333331
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.10502148233968236
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.027258639466103515
+            },
+            "right": {
+              "value": 0.04953472036486663
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.20833333333333331
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "value": 0.14400074010651942
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.0992206807665226
+            },
+            "right": {
+              "value": -0.0882483216048351
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "validator_present",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.00772855443936024
+            },
+            "right": {
+              "value": -0.026694362715313214
+            },
+            "threshold": 0.4375
+          },
+          "right": {
+            "value": 0.10043649254744297
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.29166666666666663
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "value_digit_ratio_bin",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.10750354350561589
+          },
+          "right": {
+            "feature": "entropy_signal",
+            "left": {
+              "value": 0.014686063640360486
+            },
+            "right": {
+              "value": -0.018813883282719743
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.20833333333333331
+        },
+        "right": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": 0.07732354366614846
+            },
+            "right": {
+              "value": -0.028300366653250843
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "value": -0.0743712120359609
+          },
+          "threshold": 0.125
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "value": -0.0989034353551119
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "validator_present",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.013830599007693806
+            },
+            "right": {
+              "value": -0.11713976135822679
+            },
+            "threshold": 0.45833333333333337
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.053674150423922054
+            },
+            "right": {
+              "value": 0.06026630899727962
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.4375
+        },
+        "right": {
+          "value": 0.09813832336727374
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": -0.09710322504286278
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "value_base64_like",
+      "left": {
+        "feature": "value_entropy_bin",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": 0.03688086512919991
+            },
+            "right": {
+              "value": -0.02096135074981822
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.12889241215157807
+          },
+          "threshold": 0.45833333333333337
+        },
+        "right": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "value": -0.11282965026173344
+          },
+          "right": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.011715436816415648
+            },
+            "right": {
+              "value": 0.10045660107659755
+            },
+            "threshold": 0.5625
+          },
+          "threshold": 0.125
+        },
+        "threshold": 0.4375
+      },
+      "right": {
+        "feature": "parsed_context",
+        "left": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": 0.01353738885590433
+            },
+            "right": {
+              "value": -0.08819850029220873
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": -0.004617296570299827
+            },
+            "right": {
+              "value": 0.1158583693790946
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": 0.1376458010371808
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "known_signature",
+      "left": {
+        "feature": "value_symbol_ratio_bin",
+        "left": {
+          "feature": "value_digit_ratio_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.10545354027416404
+            },
+            "right": {
+              "value": -0.002469488746866694
+            },
+            "threshold": 0.20833333333333331
+          },
+          "right": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.09146670951209118
+            },
+            "right": {
+              "value": 0.026003779687710993
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.1068913774858995
+            },
+            "right": {
+              "value": -0.05392712068005343
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -6.659989450524675e-05
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.08273094328408714
+        },
+        "right": {
+          "value": 0.041073434822080486
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "source_code_file",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.018818480477063235
+          },
+          "right": {
+            "value": -0.10579417468072064
+          },
+          "threshold": 0.20833333333333331
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.09931400141419264
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.024095325820751537
+            },
+            "right": {
+              "value": 0.057999909773582464
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.20833333333333331
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "value": 0.1360812897554271
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.08904619818263887
+            },
+            "right": {
+              "value": -0.08208109861016714
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.00022484679330971987
+            },
+            "right": {
+              "value": -0.06956888175010538
+            },
+            "threshold": 0.45833333333333337
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.015881585833866185
+            },
+            "right": {
+              "value": 0.13299599694108175
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.29166666666666663
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "known_signature",
+      "left": {
+        "feature": "value_symbol_ratio_bin",
+        "left": {
+          "feature": "value_digit_ratio_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.10175586938476751
+            },
+            "right": {
+              "value": -0.0024421417672374677
+            },
+            "threshold": 0.20833333333333331
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": 0.07035496435660962
+            },
+            "right": {
+              "value": -0.036551095762698146
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.10352566767283251
+            },
+            "right": {
+              "value": -0.052141088040074016
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.0021959326320402078
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.07991887833997505
+        },
+        "right": {
+          "value": 0.03983694321774062
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_symbol_ratio_bin",
+        "left": {
+          "feature": "public_identifier_context",
+          "left": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.005068895861025263
+            },
+            "right": {
+              "value": 0.02915934435547848
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.1076446174395544
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.09317309779714615
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "value": 0.09536467843780802
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.018837683870720677
+            },
+            "right": {
+              "value": -0.014434930023643348
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.1098933738003593
+            },
+            "right": {
+              "value": 0.053352212130095125
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.4375
+        },
+        "right": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "assignment_context",
+            "left": {
+              "value": -0.025004584290182427
+            },
+            "right": {
+              "value": 0.11382708562087691
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_symbol_ratio_bin",
+            "left": {
+              "value": 0.11371445669707632
+            },
+            "right": {
+              "value": -0.056261625267200216
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.03834492669231876
+        },
+        "right": {
+          "value": -0.1745624410626222
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "known_signature",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.045124668454147907
+            },
+            "right": {
+              "value": 0.07208691393589445
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.03901952393128452
+            },
+            "right": {
+              "value": 0.132704308861909
+            },
+            "threshold": 0.3125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": -0.09838876572074662
+            },
+            "right": {
+              "value": -0.016459118190327148
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.003350138769476119
+            },
+            "right": {
+              "value": 0.1310035616464608
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.07760645625595201
+        },
+        "right": {
+          "value": 0.03930757803910577
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_symbol_ratio_bin",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.011042535785683675
+            },
+            "right": {
+              "value": -0.10534567738616676
+            },
+            "threshold": 0.45833333333333337
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.04694073784432365
+            },
+            "right": {
+              "value": 0.05291233781033547
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.4375
+        },
+        "right": {
+          "value": -0.09112283699187738
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "value": 0.09353199369179606
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.0025774538935056835
+            },
+            "right": {
+              "value": -0.08382094287220146
+            },
+            "threshold": 0.375
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.002464019895186689
+            },
+            "right": {
+              "value": 0.13089694254960396
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "assignment_context",
+            "left": {
+              "value": -0.021079248857998965
+            },
+            "right": {
+              "value": 0.11110693013367796
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_symbol_ratio_bin",
+            "left": {
+              "value": 0.11038011595736595
+            },
+            "right": {
+              "value": -0.049821584793351505
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.03351244363966862
+        },
+        "right": {
+          "value": -0.15839568224337863
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "known_signature",
+      "left": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "value_digit_ratio_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.09883940902906901
+            },
+            "right": {
+              "value": -0.002780337835338098
+            },
+            "threshold": 0.20833333333333331
+          },
+          "right": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.08877864568029242
+            },
+            "right": {
+              "value": -0.016176246834068115
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "value": -0.10189044868516935
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.07525188355479984
+        },
+        "right": {
+          "value": 0.04050255586726198
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "known_signature",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.041423922804862914
+            },
+            "right": {
+              "value": 0.06470163372380523
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.03659382435360258
+            },
+            "right": {
+              "value": 0.12261561178960356
+            },
+            "threshold": 0.3125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": -0.09157415640798514
+            },
+            "right": {
+              "value": -0.011664145870137328
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.003635787161358
+            },
+            "right": {
+              "value": 0.12325951313245719
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.07230692406309673
+        },
+        "right": {
+          "value": 0.037392475118297956
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "value_symbol_ratio_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.0020350774608148816
+            },
+            "right": {
+              "value": -0.0467422421921269
+            },
+            "threshold": 0.4375
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": 0.00040320953948844466
+            },
+            "right": {
+              "value": 0.10843656907005977
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "value": -0.08906370426922966
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.029620262502995782
+        },
+        "right": {
+          "value": -0.14229921111740063
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": -0.0017529881497312901
+            },
+            "right": {
+              "value": 0.03844938325147513
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "value": -0.08739394229487034
+          },
+          "threshold": 0.375
+        },
+        "right": {
+          "value": -0.09908726958234226
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": 0.09172524565981667
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.008062639303107398
+            },
+            "right": {
+              "value": 0.052540144056545474
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": 0.0062417426426621386
+            },
+            "right": {
+              "value": 0.08326876891628379
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "value": -0.09644321191519152
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.027172042602116808
+        },
+        "right": {
+          "value": -0.12947906204064183
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_entropy_bin",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "known_signature",
+            "left": {
+              "value": 0.0034435006704614545
+            },
+            "right": {
+              "value": 0.10893191529990019
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": -0.1214169387139626
+            },
+            "right": {
+              "value": 0.05352113984643108
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.45833333333333337
+        },
+        "right": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.0715286011054841
+            },
+            "right": {
+              "value": 0.03979432988805222
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": 0.01749749867180462
+            },
+            "right": {
+              "value": 0.10420691212946856
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.4375
+      },
+      "right": {
+        "value": 0.09001030909264765
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "reference_context",
+      "left": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "feature": "public_identifier_context",
+            "left": {
+              "value": 0.004311944255200805
+            },
+            "right": {
+              "value": -0.09200400173883237
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.08655321913474211
+          },
+          "threshold": 0.375
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "value": 0.024935345842846346
+          },
+          "right": {
+            "value": -0.11917458693613288
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.625
+      },
+      "right": {
+        "value": -0.09010010840338989
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "reference_context",
+        "left": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.0022441690388664663
+            },
+            "right": {
+              "value": -0.06179154503541548
+            },
+            "threshold": 0.5625
+          },
+          "right": {
+            "value": -0.08489727832978189
+          },
+          "threshold": 0.375
+        },
+        "right": {
+          "value": -0.08737839661811736
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": 0.08856731926054384
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "reference_context",
+        "left": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.05472551116611048
+            },
+            "right": {
+              "value": 0.0022319758544801335
+            },
+            "threshold": 0.20833333333333331
+          },
+          "right": {
+            "value": -0.08324448015143081
+          },
+          "threshold": 0.375
+        },
+        "right": {
+          "value": -0.08471524739981462
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": 0.08671322497867702
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "entropy_signal",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.03679063829322602
+            },
+            "right": {
+              "value": -0.03515574062189648
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.12437021337411665
+            },
+            "right": {
+              "value": -0.04790467963940063
+            },
+            "threshold": 0.45833333333333337
+          },
+          "threshold": 0.3125
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.11720110090253258
+            },
+            "right": {
+              "value": 0.00797546663581754
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.05214959807532731
+            },
+            "right": {
+              "value": 0.024179939914189912
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.3125
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.021411241968864368
+        },
+        "right": {
+          "value": -0.11324224278554117
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_symbol_ratio_bin",
+        "left": {
+          "feature": "public_identifier_context",
+          "left": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": -0.0017080956860372574
+            },
+            "right": {
+              "value": 0.03433684598502008
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "value": -0.0900249440314364
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.0823267691918923
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "value": 0.08613656470109966
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -8.057757843710969e-06
+            },
+            "right": {
+              "value": -0.08081009501201564
+            },
+            "threshold": 0.45833333333333337
+          },
+          "right": {
+            "value": 0.10641914266554092
+          },
+          "threshold": 0.5416666666666667
+        },
+        "right": {
+          "feature": "parsed_context",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.021517422789128146
+            },
+            "right": {
+              "value": 0.09370847273576233
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "entropy_signal",
+            "left": {
+              "value": -0.005530447772520226
+            },
+            "right": {
+              "value": 0.1071611872780063
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.019674430021681913
+        },
+        "right": {
+          "value": -0.10509257197506228
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_entropy_bin",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "known_signature",
+            "left": {
+              "value": 0.002735315643743015
+            },
+            "right": {
+              "value": 0.10450074621266388
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": -0.11282150630557881
+            },
+            "right": {
+              "value": 0.05246068393981895
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.45833333333333337
+        },
+        "right": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.0636808123861511
+            },
+            "right": {
+              "value": 0.043008465785203336
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": 0.015095708538555998
+            },
+            "right": {
+              "value": 0.10049907173577458
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.4375
+      },
+      "right": {
+        "value": 0.0848520896551009
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.0005104684608152166
+            },
+            "right": {
+              "value": -0.10183884033764226
+            },
+            "threshold": 0.4375
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.001629159907994109
+            },
+            "right": {
+              "value": 0.11559324618756478
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "parsed_context",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.017461702371348004
+            },
+            "right": {
+              "value": 0.08955012422634916
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "entropy_signal",
+            "left": {
+              "value": -0.005412972244919574
+            },
+            "right": {
+              "value": 0.10375505881356276
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.018090294024034722
+        },
+        "right": {
+          "value": -0.09833065733783682
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_symbol_ratio_bin",
+        "left": {
+          "feature": "reference_context",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.051701567216845185
+            },
+            "right": {
+              "value": 0.002246735399844917
+            },
+            "threshold": 0.20833333333333331
+          },
+          "right": {
+            "value": -0.07946823658724496
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.08163739578183184
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "value": 0.08355600062654968
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "known_signature",
+      "left": {
+        "feature": "value_symbol_ratio_bin",
+        "left": {
+          "feature": "value_digit_ratio_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.09381728726345456
+            },
+            "right": {
+              "value": -0.0015757685048214242
+            },
+            "threshold": 0.20833333333333331
+          },
+          "right": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.08392963618390811
+            },
+            "right": {
+              "value": 0.001289313698279198
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "source_code_file",
+          "left": {
+            "value": -0.08700058901967445
+          },
+          "right": {
+            "feature": "value_symbol_ratio_bin",
+            "left": {
+              "value": 0.07785924369798439
+            },
+            "right": {
+              "value": -0.07796006786246641
+            },
+            "threshold": 0.375
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.05937956189342824
+        },
+        "right": {
+          "value": 0.02923823513036865
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "entropy_signal",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.034690239209985194
+            },
+            "right": {
+              "value": -0.03208388334956528
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.12065142288379567
+            },
+            "right": {
+              "value": -0.0478958978702607
+            },
+            "threshold": 0.45833333333333337
+          },
+          "threshold": 0.3125
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.10906733745778557
+            },
+            "right": {
+              "value": 0.007096980593846336
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.04824420228712295
+            },
+            "right": {
+              "value": 0.022580404487361833
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.3125
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "value": -0.09382868970233274
+        },
+        "right": {
+          "value": 0.017231204788170446
+        },
+        "threshold": 0.875
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": -0.0012824618946051679
+            },
+            "right": {
+              "value": 0.03000975131719052
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "value": -0.07906002621458519
+          },
+          "threshold": 0.375
+        },
+        "right": {
+          "value": -0.08642095420729806
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": 0.08274062299873373
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "feature": "reference_context",
+            "left": {
+              "value": 0.0014707593830964906
+            },
+            "right": {
+              "value": -0.07537612996292484
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.07739739032976388
+          },
+          "threshold": 0.375
+        },
+        "right": {
+          "value": -0.08413648251973868
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": 0.08090061444879623
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -1.716584322658181e-05
+            },
+            "right": {
+              "value": -0.07514130720849876
+            },
+            "threshold": 0.45833333333333337
+          },
+          "right": {
+            "value": 0.09451328565051029
+          },
+          "threshold": 0.5416666666666667
+        },
+        "right": {
+          "feature": "parsed_context",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.0182455817325395
+            },
+            "right": {
+              "value": 0.0887138917843821
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "entropy_signal",
+            "left": {
+              "value": 0.005199591694338887
+            },
+            "right": {
+              "value": 0.10264365346658658
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "value": -0.09060614174582036
+        },
+        "right": {
+          "value": 0.01488273517100549
+        },
+        "threshold": 0.875
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_symbol_ratio_bin",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.006810552547111178
+            },
+            "right": {
+              "value": -0.0871126485940994
+            },
+            "threshold": 0.45833333333333337
+          },
+          "right": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.0692898470680895
+            },
+            "right": {
+              "value": 0.005943648789016949
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.4375
+        },
+        "right": {
+          "value": -0.07631647582285901
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "value": 0.07961605226174849
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "value_entropy_bin",
+        "left": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.0029619496793902482
+            },
+            "right": {
+              "value": -0.10062877353929622
+            },
+            "threshold": 0.20833333333333331
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.023947373083213448
+            },
+            "right": {
+              "value": 0.05009545987778057
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": 0.11201691314363811
+            },
+            "right": {
+              "value": -0.0013748667566631466
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": -0.008814682552170763
+            },
+            "right": {
+              "value": 0.016168420473274197
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.29166666666666663
+        },
+        "threshold": 0.1875
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.014403792519983192
+        },
+        "right": {
+          "value": -0.08644664038190375
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": 0.0027194031388401377
+            },
+            "right": {
+              "value": -0.08956132584960771
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.014500275072217067
+            },
+            "right": {
+              "value": -0.0037280246490028236
+            },
+            "threshold": 0.29166666666666663
+          },
+          "threshold": 0.20833333333333331
+        },
+        "right": {
+          "value": -0.08198593554888728
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": 0.07809066852514758
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "value_entropy_bin",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.0934168355134326
+            },
+            "right": {
+              "value": -0.02070128102654716
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.07110598338934776
+            },
+            "right": {
+              "value": -0.15062780051330799
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.008906827150025779
+            },
+            "right": {
+              "value": 0.13334066475185508
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": -0.007566635000968562
+            },
+            "right": {
+              "value": 0.01502466883029951
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.29166666666666663
+        },
+        "threshold": 0.1875
+      },
+      "right": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "value": -0.08162689835716014
+        },
+        "right": {
+          "value": 0.01357711388184414
+        },
+        "threshold": 0.875
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_entropy_bin",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.009312394939383515
+            },
+            "right": {
+              "value": -0.010263456344858856
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.09575531035357614
+          },
+          "threshold": 0.5416666666666667
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "value": -0.09545864449920723
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.09660395262615078
+            },
+            "right": {
+              "value": -0.010361201332955346
+            },
+            "threshold": 0.625
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5625
+      },
+      "right": {
+        "value": 0.07658724762770104
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "value_digit_ratio_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.09070288689174727
+            },
+            "right": {
+              "value": 0.0008871891082193879
+            },
+            "threshold": 0.20833333333333331
+          },
+          "right": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.08083063175994076
+            },
+            "right": {
+              "value": -0.028160108723885094
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "value": -0.08012517713801892
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": -0.07483367207605529
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "known_signature",
+      "left": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": -0.0016096744566934168
+            },
+            "right": {
+              "value": 0.046523182858461
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.08399683936719649
+            },
+            "right": {
+              "value": 0.01900962678619173
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.08228586404199092
+            },
+            "right": {
+              "value": 0.07355640243839642
+            },
+            "threshold": 0.5416666666666667
+          },
+          "right": {
+            "value": 0.059562050599503584
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.05215523283053019
+        },
+        "right": {
+          "value": 0.02555910617685277
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_entropy_bin",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "known_signature",
+            "left": {
+              "value": 0.002336363418786377
+            },
+            "right": {
+              "value": 0.09921410514261259
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": -0.1030415554934542
+            },
+            "right": {
+              "value": 0.049225870160382976
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.45833333333333337
+        },
+        "right": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.05519953935658911
+            },
+            "right": {
+              "value": 0.04337024990179259
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": 0.014249250833565581
+            },
+            "right": {
+              "value": 0.0941480609561725
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.4375
+      },
+      "right": {
+        "value": 0.07447480842356
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "reference_context",
+      "left": {
+        "feature": "value_entropy_bin",
+        "left": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.006701778588170406
+            },
+            "right": {
+              "value": -0.09681266906182323
+            },
+            "threshold": 0.20833333333333331
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.023884234422257667
+            },
+            "right": {
+              "value": 0.05105856208314552
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.10092255402767217
+            },
+            "right": {
+              "value": -0.008313100760248666
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.008649186933032762
+            },
+            "right": {
+              "value": -0.01135509671677971
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.29166666666666663
+        },
+        "threshold": 0.1875
+      },
+      "right": {
+        "value": -0.07233043440908117
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.005318033586410174
+            },
+            "right": {
+              "value": 0.03930697230795178
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": 0.0014642445179963819
+            },
+            "right": {
+              "value": 0.09905848110411705
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "value": 0.011660177576386696
+          },
+          "right": {
+            "value": -0.07534626634892155
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.625
+      },
+      "right": {
+        "value": -0.07314188578109916
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_entropy_bin",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "known_signature",
+            "left": {
+              "value": 0.00242778384706413
+            },
+            "right": {
+              "value": 0.09756577439990757
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": -0.09779002515842415
+            },
+            "right": {
+              "value": 0.04717495957201402
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.45833333333333337
+        },
+        "right": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.05134874023361709
+            },
+            "right": {
+              "value": 0.03685795723926652
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.017015355585352804
+            },
+            "right": {
+              "value": 0.10068086689823066
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.4375
+      },
+      "right": {
+        "value": 0.07321984509651643
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "reference_context",
+      "left": {
+        "feature": "value_symbol_ratio_bin",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.04774292560220458
+            },
+            "right": {
+              "value": -0.030655979756644178
+            },
+            "threshold": 0.3125
+          },
+          "right": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.028963771344987052
+            },
+            "right": {
+              "value": 0.04112044482420105
+            },
+            "threshold": 0.3125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.07154404049079563
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "value": -0.07183833648508185
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "value_entropy_bin",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.08906412054905506
+            },
+            "right": {
+              "value": -0.022545065570016606
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.07060506674385804
+            },
+            "right": {
+              "value": -0.14320165686205347
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.005104621319945393
+            },
+            "right": {
+              "value": 0.1302228386589106
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": -0.006571738107920901
+            },
+            "right": {
+              "value": 0.015320920363675156
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.29166666666666663
+        },
+        "threshold": 0.1875
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.011117414263242814
+        },
+        "right": {
+          "value": -0.0747912016837381
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "reference_context",
+      "left": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.036823549037879495
+            },
+            "right": {
+              "value": 0.01819640884290071
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.018890587680860084
+            },
+            "right": {
+              "value": -0.007794316550410414
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.1875
+        },
+        "right": {
+          "value": -0.07586165743506919
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": -0.06940780571750958
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_entropy_bin",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "known_signature",
+            "left": {
+              "value": 0.002446504814420246
+            },
+            "right": {
+              "value": 0.09522897058342594
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": -0.09497024913791924
+            },
+            "right": {
+              "value": 0.04524414208568259
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.45833333333333337
+        },
+        "right": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": -0.09772340503209202
+            },
+            "right": {
+              "value": 0.041769557090882044
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "feature": "assignment_context",
+            "left": {
+              "value": -0.018054990698124464
+            },
+            "right": {
+              "value": 0.10351696183062889
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.4375
+      },
+      "right": {
+        "value": 0.07102440556109134
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "entropy_signal",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.030485056506838495
+            },
+            "right": {
+              "value": -0.028057219336057426
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.11872094472955362
+            },
+            "right": {
+              "value": -0.0492193884043159
+            },
+            "threshold": 0.45833333333333337
+          },
+          "threshold": 0.3125
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.09797332460365957
+            },
+            "right": {
+              "value": 0.012692117532498085
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.04287270415554471
+            },
+            "right": {
+              "value": 0.02201545267119019
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.3125
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "value": -0.07129019744937283
+        },
+        "right": {
+          "value": 0.011023949418769835
+        },
+        "threshold": 0.875
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.0010807380197818742
+            },
+            "right": {
+              "value": -0.03459639078813377
+            },
+            "threshold": 0.4375
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.0007144159877520761
+            },
+            "right": {
+              "value": 0.09865511317964787
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "value": -0.07369398542629146
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": -0.07035565382943203
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_symbol_ratio_bin",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.00010057809562534946
+            },
+            "right": {
+              "value": 0.08312090657118876
+            },
+            "threshold": 0.5416666666666667
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.08639431080735219
+            },
+            "right": {
+              "value": 0.07124879383413803
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5625
+        },
+        "right": {
+          "value": -0.06871490954234459
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "value": 0.07054426741094147
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "value_entropy_bin",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.08649559154275688
+            },
+            "right": {
+              "value": -0.020037394785754944
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.06393875974766822
+            },
+            "right": {
+              "value": -0.13561210173149557
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.09586940125626044
+            },
+            "right": {
+              "value": -0.012387431398732015
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.004698640870509653
+            },
+            "right": {
+              "value": -0.016419495253987944
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.29166666666666663
+        },
+        "threshold": 0.1875
+      },
+      "right": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "value": -0.06815717423260378
+        },
+        "right": {
+          "value": 0.010204223194499266
+        },
+        "threshold": 0.875
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "non_production_path",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.033796861205790917
+            },
+            "right": {
+              "value": 0.08754900234706824
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": -0.055201612896538105
+            },
+            "right": {
+              "value": 0.02367610444253623
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.3125
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "assignment_context",
+            "left": {
+              "value": -0.008585732372458403
+            },
+            "right": {
+              "value": -0.09593578924647528
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.07088693832505187
+            },
+            "right": {
+              "value": -0.018850015333551517
+            },
+            "threshold": 0.45833333333333337
+          },
+          "threshold": 0.3125
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": 0.06927984951142883
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "value_digit_ratio_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.08739947499610666
+            },
+            "right": {
+              "value": 0.0009576144378114452
+            },
+            "threshold": 0.20833333333333331
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.035388580065576644
+            },
+            "right": {
+              "value": 0.06828232287937346
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "value": -0.07290927908930003
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.009806911187214816
+        },
+        "right": {
+          "value": -0.06853941803167604
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "non_production_path",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.029178993403173155
+            },
+            "right": {
+              "value": 0.0855627205708829
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": -0.050381877184594186
+            },
+            "right": {
+              "value": 0.021613321373845133
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.3125
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "assignment_context",
+            "left": {
+              "value": -0.00797540267284851
+            },
+            "right": {
+              "value": -0.0890542233335489
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.06659919795724015
+            },
+            "right": {
+              "value": -0.012017238393200914
+            },
+            "threshold": 0.45833333333333337
+          },
+          "threshold": 0.3125
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": -0.0679335722311148
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": -0.0010301030830906365
+            },
+            "right": {
+              "value": 0.015412948621161182
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "value": -0.06630794844371561
+          },
+          "threshold": 0.375
+        },
+        "right": {
+          "value": -0.07153318181771988
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.009534453034724763
+        },
+        "right": {
+          "value": -0.06840984147944237
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "feature": "non_production_path",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.0813768649927637
+            },
+            "right": {
+              "value": -0.012385700545904639
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.07705534203002017
+            },
+            "right": {
+              "value": -0.006202159361079372
+            },
+            "threshold": 0.3125
+          },
+          "threshold": 0.1875
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.014756121750706348
+            },
+            "right": {
+              "value": -0.046417591527555056
+            },
+            "threshold": 0.29166666666666663
+          },
+          "right": {
+            "feature": "entropy_signal",
+            "left": {
+              "value": 0.12009785705835048
+            },
+            "right": {
+              "value": 0.04280352692961886
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.3125
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.09543589499546593
+            },
+            "right": {
+              "value": -0.0046031629126529255
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.02758493546657441
+            },
+            "right": {
+              "value": -0.08510392751427397
+            },
+            "threshold": 0.5625
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "parsed_context",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.03361468324052826
+            },
+            "right": {
+              "value": -0.027621018610958184
+            },
+            "threshold": 0.45833333333333337
+          },
+          "right": {
+            "value": 0.09977764326558657
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": 0.00014133956016201688
+            },
+            "right": {
+              "value": 0.024595397234851074
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "value": -0.06541218626984811
+          },
+          "threshold": 0.375
+        },
+        "right": {
+          "value": -0.06957796802847312
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "value": -0.06627644104006557
+        },
+        "right": {
+          "value": 0.009660729875702401
+        },
+        "threshold": 0.875
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.02595399173046325
+            },
+            "right": {
+              "value": 0.040168319176826256
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.019446783000472746
+            },
+            "right": {
+              "value": 0.08536570733928825
+            },
+            "threshold": 0.3125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": -0.0686469590931156
+            },
+            "right": {
+              "value": 0.0053434071507073196
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.003908227804187052
+            },
+            "right": {
+              "value": 0.09748961342265658
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "value": 0.06868652298638943
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "feature": "assignment_context",
+        "left": {
+          "feature": "parsed_context",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.043042571435637555
+            },
+            "right": {
+              "value": 0.06828930110467563
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.057031654886577826
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.05735356330001406
+            },
+            "right": {
+              "value": -0.12089820670629613
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.13177641008145777
+          },
+          "threshold": 0.1875
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": 0.09919058392906856
+            },
+            "right": {
+              "value": 0.00942211360057024
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "entropy_signal",
+            "left": {
+              "value": 0.07901187112386454
+            },
+            "right": {
+              "value": -0.033603531619765495
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.3125
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": -0.04327587991585794
+            },
+            "right": {
+              "value": 0.061625697881563524
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": 0.06268035557521155
+            },
+            "right": {
+              "value": -0.007273779810350537
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.3125
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.29166666666666663
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": -0.009178406563211509
+            },
+            "right": {
+              "value": 0.12011524733644399
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.0023577873075660196
+            },
+            "right": {
+              "value": 0.1286411017702852
+            },
+            "threshold": 0.1875
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.05514569981347918
+            },
+            "right": {
+              "value": -0.02068642533635867
+            },
+            "threshold": 0.3125
+          },
+          "right": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.036971386649806336
+            },
+            "right": {
+              "value": 0.021995367411489126
+            },
+            "threshold": 0.3125
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.29166666666666663
+      },
+      "right": {
+        "value": 0.06704061131956222
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "entropy_signal",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.01826226769362833
+            },
+            "right": {
+              "value": -0.015568233225440431
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.10934027931759505
+            },
+            "right": {
+              "value": -0.05105405084212172
+            },
+            "threshold": 0.45833333333333337
+          },
+          "threshold": 0.3125
+        },
+        "right": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.04030686481642265
+            },
+            "right": {
+              "value": -0.03198712272019121
+            },
+            "threshold": 0.3125
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.13584306246875125
+            },
+            "right": {
+              "value": 0.009145690248435014
+            },
+            "threshold": 0.375
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "value": -0.06563890523764908
+        },
+        "right": {
+          "value": 0.008437156458744323
+        },
+        "threshold": 0.875
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "validator_present",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "assignment_context",
+            "left": {
+              "value": -0.0013818270960852827
+            },
+            "right": {
+              "value": 0.043522767087714936
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.004620768842101264
+            },
+            "right": {
+              "value": -0.010584766066593115
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.29166666666666663
+        },
+        "right": {
+          "value": 0.06669211076727553
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": -0.06597667236638254
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "value_symbol_ratio_bin",
+        "left": {
+          "feature": "entropy_signal",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.0023359738802249254
+            },
+            "right": {
+              "value": 0.0687003844610005
+            },
+            "threshold": 0.3125
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.019974369841254072
+            },
+            "right": {
+              "value": 0.04083181931585203
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.06437020927072078
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.007861054512060822
+        },
+        "right": {
+          "value": -0.06249010576388108
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_symbol_ratio_bin",
+            "left": {
+              "value": 0.003303039014249285
+            },
+            "right": {
+              "value": -0.06187273686275544
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": 0.08737390368905001
+            },
+            "right": {
+              "value": 0.025372167141200032
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "assignment_context",
+            "left": {
+              "value": -0.019565918665678684
+            },
+            "right": {
+              "value": -0.09583917326824454
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.014938725799847298
+            },
+            "right": {
+              "value": 0.10015036438852287
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "value": 0.06455418044002846
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.0008804455715593434
+            },
+            "right": {
+              "value": -0.030057682421149253
+            },
+            "threshold": 0.4375
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.0005121025592704343
+            },
+            "right": {
+              "value": 0.08579756118185788
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "value": -0.06605862091011788
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "value": -0.05938031365948837
+        },
+        "right": {
+          "value": 0.007793918613287029
+        },
+        "threshold": 0.875
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "validator_present",
+        "left": {
+          "feature": "public_identifier_context",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.035203779843875495
+            },
+            "right": {
+              "value": 0.0013983675781730094
+            },
+            "threshold": 0.20833333333333331
+          },
+          "right": {
+            "value": -0.06423981998689238
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": 0.06345676816751322
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": -0.06278530554576746
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "value_symbol_ratio_bin",
+        "left": {
+          "feature": "public_identifier_context",
+          "left": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": -0.0010771432755088902
+            },
+            "right": {
+              "value": 0.014913402649263259
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "value": -0.06247281226246008
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.061230487988682115
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "value": -0.057142953650936
+        },
+        "right": {
+          "value": 0.007308763214493735
+        },
+        "threshold": 0.875
+      },
+      "threshold": 0.625
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.024590305148176447
+            },
+            "right": {
+              "value": 0.03140560694864412
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.007265170335905658
+            },
+            "right": {
+              "value": -0.06820475912328709
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "assignment_context",
+            "left": {
+              "value": -0.017234755242855136
+            },
+            "right": {
+              "value": -0.09363842234380693
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.013721220933957078
+            },
+            "right": {
+              "value": 0.09799376111636132
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "value": 0.0621823344716004
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "feature": "assignment_context",
+        "left": {
+          "feature": "parsed_context",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.03918457211541762
+            },
+            "right": {
+              "value": 0.06293078554168444
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.05077906927502817
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.049425187400578385
+            },
+            "right": {
+              "value": -0.11438968000948231
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.12690219442896786
+          },
+          "threshold": 0.1875
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "comment_context",
+        "left": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.0027625417950475745
+            },
+            "right": {
+              "value": 0.13881321322075513
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": 0.016503980322316005
+            },
+            "right": {
+              "value": -0.12462841830547747
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.07719754076651208
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.29166666666666663
+    },
+    {
+      "feature": "value_symbol_ratio_bin",
+      "left": {
+        "feature": "entropy_signal",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.0184923351236966
+            },
+            "right": {
+              "value": -0.01265690604773759
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.08350894419051096
+            },
+            "right": {
+              "value": -0.05645508936941081
+            },
+            "threshold": 0.45833333333333337
+          },
+          "threshold": 0.3125
+        },
+        "right": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.03594739848798318
+            },
+            "right": {
+              "value": -0.029607014344731453
+            },
+            "threshold": 0.3125
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.12184435049191132
+            },
+            "right": {
+              "value": 0.007942290551032277
+            },
+            "threshold": 0.375
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": -0.06140684293743476
+      },
+      "threshold": 0.375
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "value_symbol_ratio_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "entropy_signal",
+            "left": {
+              "value": 0.004065064726389954
+            },
+            "right": {
+              "value": -0.014802511804611024
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.0026684617807902935
+            },
+            "right": {
+              "value": 0.09476115741996957
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "value": -0.05987485182704114
+        },
+        "threshold": 0.375
+      },
+      "right": {
+        "feature": "non_production_path",
+        "left": {
+          "value": 0.006636778663759411
+        },
+        "right": {
+          "value": -0.05943642906889325
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.625
+    }
+  ],
+  "weights": {
+    "bias": 0.0
+  }
+}

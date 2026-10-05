@@ -79,7 +79,7 @@ Fresh guarded-model verification on ranks 200-202 recovered all 46 files but pro
 
 ## Bundled guarded tree ranking: 0.2.0a7
 
-Normal CLI and API scans load `backend/ml/data/default.json`: 100 gradient-boosted trees over safe numeric metadata. The development pool contains 4,640 previously inspected labels; fitting uses 2,784 rows, repository-separated validation (928 rows) selects depth four from 2/3/4, and 928 internal test rows supply development evidence. No probability calibration or active-exposure claim is made.
+In 0.2.0a7, normal CLI scans and the Python library API load `backend/ml/data/default.json`: 100 gradient-boosted trees over numeric metadata. No web API service is implemented. The development pool contains 4,640 previously inspected labels; fitting uses 2,784 rows, repository-separated validation (928 rows) selects depth four from 2/3/4, and 928 internal test rows supply development evidence. No probability calibration or active-exposure claim is made.
 
 Unrestricted trees raise internal recall from 22.33% to 72.40%, but precision falls from 95.27% to 79.09%. On fresh ranks 203-219 (17 repositories, 639/639 files, 288 labels: 119 positive / 169 negative), unrestricted precision/recall are 63.64%/70.59% (84 TP, 48 FP). Expanded ML alert decisions fail the precision gate.
 
@@ -88,3 +88,17 @@ The bundled policy uses a configured cutoff of 0.8, a baseline floor, negative-c
 This limited integration makes trained ML part of normal scanning, with mixed ranking evidence. It does not solve the scanner's 90%/80% goal or establish production readiness. Both wheel and source distributions include the model. See [complete ML-v4 evidence](benchmarks/ml-v4/README.md).
 
 Independent review reproduced the audit. AUROC and average precision are unchanged for the guarded default, so a ranking-order improvement has not been demonstrated; the observed change is limited numerical score refinement.
+
+## Local v5 experiment — not released (2026-10-05)
+
+V5 adds eight detail/format features alongside the original eight shape features, plus semantic name, usage, mapping, file-type and localization context. Legacy eight-value metadata remains supported. Features contain no raw credential values or source snippets, but finer quantized statistics remain secret-derived metadata and are not anonymization. Mapping syntax, paths and localization flags do not prove that a candidate is harmless.
+
+The development pool has 4,928 labels (2,908 positive / 2,020 negative) from 102 candidate-bearing repositories among 120 selected repositories; 4,431 of 4,431 expected files were recovered. The fixed training run reports internal candidate precision of 88.36% and recall of 89.33%. These development results do not establish independent performance, raw detection recall or readiness to replace the bundled default.
+
+The frozen v5 model was evaluated on 20 fresh repositories at ranks 220–239, recovering all 557 expected files. The candidate dataset contains 154 definite labels from 14 candidate-bearing repositories: 130 positive and 24 negative. V5 produces TP123/FP7/FN7/TN17, giving 94.62% pooled precision and recall, 70.83% specificity and Brier error 0.069265 (heuristic: 0.381049). Repository-macro precision/recall are 92.89%/96.62%; macro specificity is only 26.19% across the six negative-bearing repositories. The small, positive-heavy sample limits generalization.
+
+The relative candidate gate fails: heuristic precision is 100% with 24.62% recall, so v5's added false positives are a precision regression. For comparison, unrestricted v4 evaluated on the same new feature metadata has 95.90% precision, 90.00% recall and Brier error 0.10298. These are candidate-level comparisons, not evidence that v5 improves every metric or detects additional source credentials.
+
+The raw scanner produces 130 true-positive and 24 false-positive labeled alerts (84.42% precision), and detects 139 of 489 positive annotations (28.43% recall). Alerts and annotations use different counting units. Both stable-release accuracy thresholds fail. V5 remains an experimental override; the bundled guarded v4 model is unchanged and no new release is published. See [the complete v5 audit](benchmarks/ml-v5/README.md).
+
+Local feature changes use scoring revision 7, so comparisons require fresh report baselines; this is separate from the published a7 model's scoring revision 6. The feature changes can affect heuristic scores even though the bundled model artifact is unchanged.

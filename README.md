@@ -107,7 +107,7 @@ Example `reporanger.json`:
 
 - Exclusions match case-sensitive, repository-relative paths with `/` separators. `*` may span directories; a trailing `/` excludes everything under that root-relative folder. `**/*.lock` also matches root-level lock files. Repeat `--exclude` to add patterns to the policy.
 - Excluded current files are skipped before extraction; matching historical paths are skipped before blob reads. Existing built-in directory exclusions remain active.
-- Disabled rule IDs: `aws_access_key_id`, `github_token`, `gitlab_token`, `private_key_block`, `high_entropy_token`.
+- Built-in rule IDs accepted by `disabled_rules`: `aws_access_key_id`, `github_token`, `gitlab_token`, `private_key_block`, `high_entropy_token`, `jwt`, `private_jwk`, `hardcoded_password`. Custom rule IDs are also accepted.
 - Fingerprint suppression accepts SHA-256 hashes copied from JSON reports; it suppresses that fingerprint across paths and revisions. Do not put raw credentials in configuration.
 - Suppression applies after duplicate selection to both current and historical findings, before risk aggregation and CI policy evaluation. JSON records `suppressed_findings`; the CLI also prints a suppression count to stderr.
 - Unknown keys, unknown rule IDs, malformed hashes, and invalid configuration fail with exit code 2. Custom bounded signatures are supported below; arbitrary regular expressions are not accepted.
@@ -210,7 +210,7 @@ Its repository-separated training, validation-only calibration and independent e
 
 Signed compact JWTs and private JWK material are detected by bounded offline parsing. Public-only JWKs, duplicate members and dynamic expressions are excluded. Supported JWK forms include flat JSON and JavaScript/Python literal objects. JWT signatures are not verified, so syntax alone no longer adds credential-validity confidence. Literal command-line credentials and PowerShell plaintext conversion arguments are also covered. Built-in IDs `jwt` and `private_jwk` are available in `disabled_rules`.
 
-The [revision-6 evaluation](benchmarks/revision6/README.md) records both the initial no-gain sample and the final modest gain: 104 to 107 detected positive annotations, with nine false-positive alerts in both versions. The model promotion gate now rejects all-positive/all-negative predictions and low specificity. The current model remains opt-in. That release used detector/scoring revisions 6/4.
+The [revision-6 evaluation](benchmarks/revision6/README.md) records both the initial no-gain sample and the final modest gain: 104 to 107 detected positive annotations, with nine false-positive alerts in both versions. That revision added rejection of all-positive/all-negative predictions and low specificity to the model promotion gate. Its experimental model remained opt-in. That release used detector/scoring revisions 6/4.
 
 Stable `X.Y.Z` release tags must pass the explicit minimum-evidence gate; the current evidence fails because detection recall remains below the project threshold. This does not prevent alpha builds, and passing it in future will not alone certify production readiness.
 
@@ -219,19 +219,19 @@ Stable `X.Y.Z` release tags must pass the explicit minimum-evidence gate; the cu
 
 Explicit password fields now detect short and low-entropy literal values, including weak defaults such as `password123`. Supported forms include quoted assignments, config-file bare values, indexed assignments, Ruby/PHP hash arrows, XML, setter calls, SQL password clauses, connection URLs, Basic authorization headers and command arguments. Variable references, obvious templates and masked values are excluded. These findings use the medium-severity `hardcoded_password` rule; disable it through `disabled_rules` when needed. Existing stronger detections are deduplicated. DSA and encrypted PEM private-key headers are also recognized.
 
-This trades broader credential coverage against alerts on examples and weak test defaults. A literal is not proof of an active credential. See [the revision-7 comparison](benchmarks/revision7/README.md) for independent measurements and exclusions. Reports use detector revision 7 and scoring revision 4. The experimental models remain opt-in and have not been retrained for this wider candidate population.
+This trades broader credential coverage against alerts on examples and weak test defaults. A literal is not proof of an active credential. See [the revision-7 comparison](benchmarks/revision7/README.md) for independent measurements and exclusions. That release used detector revision 7 and scoring revision 4; its experimental models remained opt-in and had not been retrained for the wider candidate population.
 
 
 ## Context-based review priority (revision 8)
 
 Findings inside Python test functions/classes, test/spec filenames, README/Markdown/reStructuredText files and example configuration files receive lower-priority evidence. Expected/mock/fixture field names and unquoted source references are also explained. These findings remain in the report. Public-identifier and placeholder evidence is matched to the actual candidate, preventing one field from lowering an unrelated finding on the same line. These heuristics do not establish that a credential is safe, and scores remain triage estimates.
 
-Short passwords in explicit PowerShell `ConvertTo-SecureString ... -AsPlainText` calls are detected. Reports use detector revision 8 and scoring revision 5. The [revision-8 evaluation](benchmarks/revision8/README.md) separates raw detection from the medium-or-higher risk review queue, including any recall cost from prioritization. Neither experimental model has been retrained or promoted.
+Short passwords in explicit PowerShell `ConvertTo-SecureString ... -AsPlainText` calls are detected. That release used detector revision 8 and scoring revision 5. The [revision-8 evaluation](benchmarks/revision8/README.md) separates raw detection from the medium-or-higher risk review queue, including any recall cost from prioritization. Neither experimental model had been retrained or promoted at that stage.
 
 
 ## Updated optional ML classifier
 
-Use `reporanger /path/to/repository --model models/creddata-v2-experimental.json` to try the new classifier, or omit `--model` to use the bundled guarded tree model. V2 uses broader current labels, numeric token-shape features and balanced training. It passes the new independent candidate audit but still regresses on an internal development comparison, so it is not the default. See [the full ML-v2 evaluation](benchmarks/ml-v2/README.md). This model prioritizes detected candidates; it does not increase raw scanning recall or verify live credentials.
+The older v2 classifier remains an experimental override (`--model models/creddata-v2-experimental.json`). Its first independent audit passed, but a later 2,756-candidate sample produced 1,451 false positives and only 43.19% precision; the earlier result did not generalize. See [the original ML-v2 evaluation](benchmarks/ml-v2/README.md) and [the follow-up audit](benchmarks/ml-v3/v2-fresh-audit.json). Omitting `--model` uses the bundled guarded tree model. Candidate scoring does not increase raw scanning recall or verify live credentials.
 
 
 ## Trained ML in normal scans
@@ -245,4 +245,12 @@ reporanger /path/to/repository --format json
 python -m backend.ml.tree_training benchmarks/ml-v4/development.jsonl models/creddata-v4-trees.json output/tree-training.json
 ```
 
-Inference and training use the Python standard library. Model data contain no credentials or source snippets. `--model` is an explicit experimental override; scores do not validate active credentials.
+Inference and training use the Python standard library. Model data contain no raw credentials or source snippets. Numeric shape features are derived from credential candidates; quantization is not anonymization. `--model` is an explicit experimental override; scores do not validate active credentials.
+
+## Local v5 work — not released (2026-10-05)
+
+The current checkout adds finer numeric shape features and semantic context, with scoring revision 7. Local regression checks pass 165 tests and 52 synthetic detector fixtures. Published 0.2.0a7 remains the release described above; these local changes have not completed release CI or been published.
+
+The v5 development pool contains 4,928 candidate labels from 102 candidate-bearing repositories, with all 4,431 expected files recovered. Independent evaluation on 20 fresh repositories (ranks 220–239) recovered all 557 files. V5 candidate precision and recall are both 94.62%, but this positive-heavy sample has only 24 negative candidates and the model adds seven false positives versus the heuristic's zero, failing the relative promotion gate.
+
+Raw scanner precision is 84.42% among definitively labeled alerts and positive-annotation recall is 28.43%; both miss the 90%/80% release targets. V5 remains an experimental override, the bundled guarded v4 model is unchanged, and a7 remains the latest published release. See [the complete v5 evaluation](benchmarks/ml-v5/README.md), [implementation status](IMPLEMENTATION.md) and [model evidence](MODEL_CARD.md).

@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "reasons": [
+    "positive_annotation_recall_below_80_percent",
+    "labeled_alert_precision_below_90_percent"
+  ],
+  "scope": "Minimum detector evidence only; not a certification of active-exposure accuracy or operational readiness"
+}

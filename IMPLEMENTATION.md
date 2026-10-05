@@ -1,5 +1,7 @@
 # Implementation progress
 
+Status as of 2026-10-05: the CLI core is implemented and 0.2.0a7 is published. Richer v5 features have been evaluated locally; v5 remains experimental and no new release is published. The sections below retain the earlier milestones as historical evidence.
+
 ## Completed: CLI release foundation
 
 - Reachable Git history and local reflog flags, historical scoring and report provenance.
@@ -46,7 +48,7 @@
 - A reproducible experimental logistic model is trained on 200 synthetic metadata rows with group-separated partitions. It remains opt-in because recall worsened on the synthetic test set.
 - Release workflow requires all Windows/Linux test jobs to pass before a version-tag prerelease is published.
 
-## Completed: GitHub CI and private prerelease
+## Historical milestone: first GitHub prerelease (0.2.0a1)
 
 - Source pushed to `hariraj2507/Repo_ranger_org`, a verified private repository.
 - All 64 tests and the 52-case detection benchmark passed on Windows/Linux with Python 3.10/3.12.
@@ -57,7 +59,30 @@
 
 [Successful release workflow](https://github.com/hariraj2507/Repo_ranger_org/actions/runs/34799858828)
 
-## Beyond this release
+## Completed: published 0.2.0a7
 
-- Web API and frontend dashboard.
-- Independently labeled real-world accuracy evaluation before promoting the trained model.
+- Added literal-password and JWT/private-JWK detection, richer custom rules, offline validation and contextual review priority.
+- Bundled 100 trained trees for conservative numerical score refinement inside existing classifier and risk bands; unrestricted ML remains experimental.
+- Included model and runtime-policy identity in saved reports (scoring revision 6).
+- Passed 153 tests and 52 synthetic detector fixtures across Windows/Linux with Python 3.10/3.12 before publishing the alpha artifacts.
+
+[Published a7](https://github.com/hariraj2507/Repo_ranger_org/releases/tag/v0.2.0a7) · [Successful release CI](https://github.com/hariraj2507/Repo_ranger_org/actions/runs/37121064050)
+
+## Current local work: v5 features and evaluation
+
+- Added finer quantized value shapes and semantic context, retaining legacy eight-value metadata support. Derived statistics are not anonymized credentials.
+- Corrected `.env` configuration recognition and named mapping evidence independently of translation semantics.
+- Bumped scoring revision to 7 because PHP/context changes can alter heuristic scores; saved-report comparisons require a fresh baseline.
+- Passed 165 local tests and 52 synthetic detector fixtures. These changes are not yet released or verified by a new release CI run.
+- Built and installed the current wheel locally; a scan outside the checkout verified bundled model loading, the explicit v5 override, redaction and scoring revision 7.
+- Prepared 4,928 labeled candidates (2,908 positive / 2,020 negative), spanning 102 candidate-bearing repositories among 120 selected repositories and all 4,431 expected files.
+- Completed the frozen-model audit on 20 fresh repositories at ranks 220–239, recovering 557/557 files. V5 candidate precision/recall are both 94.62%, but seven false positives versus the heuristic's zero fail the relative promotion gate. The bundled guarded v4 model remains unchanged.
+- Raw scanner labeled-alert precision is 84.42% and positive-annotation recall is 28.43%, failing both stable-release targets. Candidate results do not solve missed detections. See [the v5 evaluation](benchmarks/ml-v5/README.md) for counts, repository-macro metrics and sample limitations.
+
+## Remaining
+
+- Improve model precision/generalization before reconsidering unrestricted default deployment; v5 stays an experimental override.
+- Update release evidence and complete Windows/Linux release CI before publishing the next package; local installed-wheel verification has passed.
+- Improve independently measured detection toward the 90% precision / 80% recall goal. CI still checks the stored revision-8 report (93.69% labeled-alert precision / 43.16% annotation recall); the fresh v5 audit also fails. These measurements use different units and are not production guarantees.
+- Build the web API service and frontend dashboard; neither is implemented. The existing API is a Python library interface.
+- Establish broader production evidence. Validation remains offline; active credential verification and PyPI publishing are not configured.

@@ -14,7 +14,11 @@ from .classifier import CandidateClassifier
 from .feature_extractor import FeatureVector
 from backend.detectors.finding import VALUE_SHAPE_FEATURES
 
-FEATURES = frozenset({'severity','known_signature','custom_signature','entropy_signal','validator_valid',
+FEATURES = frozenset({'credential_name_context','password_name_context','token_name_context',
+    'public_metadata_context','quoted_literal_context','credential_usage_context','xml_value_context','password_literal_signal',
+    'private_key_structure','configuration_file','documentation_file',
+    'mapping_literal_context','localization_resource_context','php_source_file',
+    'severity','known_signature','custom_signature','entropy_signal','validator_valid',
     'validator_invalid','validator_present','non_production_path','source_code_file','assignment_context','parsed_context',
     'public_identifier_context', 'placeholder_context', 'comment_context', 'jwt_structure', 'test_context', 'test_value_context', 'reference_context'}) | frozenset(VALUE_SHAPE_FEATURES)
 

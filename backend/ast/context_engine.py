@@ -6,6 +6,7 @@ from dataclasses import dataclass, replace
 import re
 import hashlib
 from backend.detectors.entropy_detector import EntropyDetector
+from backend.detectors.literal_password_detector import LiteralPasswordDetector
 
 from backend.detectors.detection_engine import DetectionResult
 from backend.detectors.finding import Finding
@@ -50,6 +51,7 @@ class ContextEngine:
     _LANGUAGES = {
         ".js": "javascript", ".jsx": "javascript", ".ts": "typescript", ".tsx": "tsx",
         ".go": "go", ".java": "java", ".rb": "ruby", ".rs": "rust",
+        ".php": "php",
     }
 
     def __init__(
@@ -80,21 +82,42 @@ class ContextEngine:
             evidence.append('test_context')
         if re.match(r'\s*(?:#|//|/\*|\*|<!--)', line):
             evidence.append('comment_context')
-        for match in EntropyDetector._ASSIGNMENT.finditer(line):
+        for match in LiteralPasswordDetector._ASSIGNMENT.finditer(line):
             group = next(g for g in ('double', 'single', 'bare') if match.group(g) is not None)
             value = match.group(group).strip()
             if hashlib.sha256(value.encode()).hexdigest() != finding.fingerprint:
                 continue
             name = re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', match.group('name')).lower()
             words = set(re.split(r'[^a-z0-9]+', name))
+            if words & {'password', 'passwd', 'pwd', 'passphrase'}:
+                evidence.append('password_name_context')
+            if words & {'token', 'jwt'}:
+                evidence.append('token_name_context')
+            if (words & {'password', 'passwd', 'pwd', 'passphrase', 'secret', 'credential', 'credentials', 'authorization'}
+                    or {'api', 'key'} <= words or {'private', 'key'} <= words):
+                evidence.append('credential_name_context')
+            if words & {'id', 'uuid', 'guid', 'fingerprint', 'checksum', 'digest', 'algorithm', 'encoding', 'certificate', 'cert', 'version', 'length'}:
+                evidence.append('public_metadata_context')
+            if group in {'double', 'single'}:
+                evidence.append('quoted_literal_context')
+                if '=>' in match.group(0)[:match.start(group)-match.start()]:
+                    evidence.append('mapping_literal_context')
             if re.match(r'(?i)(?:example|placeholder|changeme|your[_-]|replace[_-])', value):
                 evidence.append('placeholder_context')
             if {'public', 'key'} <= words or {'client', 'id'} <= words or 'publishable' in words:
                 evidence.append('public_identifier_context')
             if words & {'expected', 'mock', 'dummy', 'fixture'}:
                 evidence.append('test_value_context')
-            if group == 'bare' and context.language in {'python', 'javascript', 'typescript', 'tsx', 'go', 'java', 'ruby', 'rust'}:
+            if group == 'bare' and context.language in {'python', 'javascript', 'typescript', 'tsx', 'go', 'java', 'ruby', 'rust', 'php'}:
                 evidence.append('reference_context')
+        for pattern in (LiteralPasswordDetector._XML, LiteralPasswordDetector._SETTER, LiteralPasswordDetector._URL,
+                        LiteralPasswordDetector._COMMAND, LiteralPasswordDetector._SQL,
+                        LiteralPasswordDetector._INDEXED, EntropyDetector._AUTH_HEADER):
+            for match in pattern.finditer(line):
+                if hashlib.sha256(match.group('value').strip().encode()).hexdigest() == finding.fingerprint:
+                    evidence.append('credential_usage_context')
+                    if pattern is LiteralPasswordDetector._XML:
+                        evidence.append('xml_value_context')
         return replace(context, evidence=tuple(dict.fromkeys(evidence)))
 
     def _context_for(self, finding: Finding, source: str | None) -> CodeContext:

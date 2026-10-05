@@ -1,0 +1,24 @@
+{
+  "detector_revision": 8,
+  "development_ranks": [
+    100,
+    219
+  ],
+  "evaluated": "2026-10-05",
+  "files": {
+    "development.jsonl": "133afe448364e2f1ab23b176fe2e2f6c85f7a6ac416b6c008619f3487c5bf0b9",
+    "final/holdout-detection.json": "3a4b755783b923c88d4a385df96d1876561fcf8c23133d735c521b7725ea89c9",
+    "final/holdout.jsonl": "fe8d2d9506fca2028794953e69f3bc4818e4afaf6ce741d7e0e80b9beb886180",
+    "final/raw-tree-audit.json": "03e814742db6ee2b3d5555d3d13fe27e42fa09b2d553fbcb68b4869a9dfed75f",
+    "final/readiness.json": "9ee9cf18516fa41f74a5a6e997b197fa7c45b0b2e3888a1f7a9cd033c576401b",
+    "final/v4-reference-audit.json": "b373a7a6e395c97efcb67f9378813336c247100cf387a10811c90bac74d0f32b",
+    "tree-training.json": "c9c6c19b517a4237fb80b9d7e1c45ded08d3aa8f67af59180f61ac9054136c9a"
+  },
+  "independent_ranks": [
+    220,
+    239
+  ],
+  "model_policy": "experimental override; bundled guarded v4 unchanged",
+  "model_sha256": "36df24cedb71488cc6e9f3cff48a8aea5555589717771fb0b0b1758755831277",
+  "scoring_revision": 7
+}

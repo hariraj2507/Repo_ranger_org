@@ -1,0 +1,6908 @@
+{
+  "kind": "boosted_trees",
+  "schema_version": 4,
+  "training": {
+    "baseline_test": {
+      "auroc": 0.48903999356240446,
+      "average_precision": 0.7923928048360633,
+      "balanced_accuracy": 0.5978568171454628,
+      "brier": 0.43603592304989014,
+      "expected_calibration_error": 0.5055897641217487,
+      "false_negative": 565,
+      "false_positive": 8,
+      "log_loss": 1.1928858327259362,
+      "positive_labels": 731,
+      "precision": 0.9540229885057471,
+      "predicts_only_one_class": false,
+      "recall": 0.2270861833105335,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "mean_score": 0.05451692117422541,
+          "positive_rate": 0.0,
+          "samples": 5,
+          "upper": 0.1
+        },
+        {
+          "lower": 0.1,
+          "mean_score": 0.14388432852712704,
+          "positive_rate": 0.7679738562091504,
+          "samples": 612,
+          "upper": 0.2
+        },
+        {
+          "lower": 0.2,
+          "mean_score": 0.2397892409747944,
+          "positive_rate": 0.5833333333333334,
+          "samples": 12,
+          "upper": 0.3
+        },
+        {
+          "lower": 0.3,
+          "mean_score": 0.38614479181924666,
+          "positive_rate": 0.17777777777777778,
+          "samples": 90,
+          "upper": 0.4
+        },
+        {
+          "lower": 0.4,
+          "mean_score": 0.4451601429496726,
+          "positive_rate": 0.7741935483870968,
+          "samples": 93,
+          "upper": 0.5
+        },
+        {
+          "lower": 0.5,
+          "mean_score": 0.5253050581255514,
+          "positive_rate": 0.9398496240601504,
+          "samples": 133,
+          "upper": 0.6
+        },
+        {
+          "lower": 0.6,
+          "mean_score": null,
+          "positive_rate": null,
+          "samples": 0,
+          "upper": 0.7
+        },
+        {
+          "lower": 0.7,
+          "mean_score": 0.7685247834990178,
+          "positive_rate": 1.0,
+          "samples": 9,
+          "upper": 0.8
+        },
+        {
+          "lower": 0.8,
+          "mean_score": 0.8249137318359602,
+          "positive_rate": 1.0,
+          "samples": 32,
+          "upper": 0.9
+        },
+        {
+          "lower": 0.9,
+          "mean_score": null,
+          "positive_rate": null,
+          "samples": 0,
+          "upper": 1.0
+        }
+      ],
+      "risk_band_label_counts": {
+        "critical": {
+          "positive": 41,
+          "samples": 41
+        },
+        "high": {
+          "positive": 0,
+          "samples": 1
+        },
+        "low": {
+          "positive": 477,
+          "samples": 630
+        },
+        "medium": {
+          "positive": 213,
+          "samples": 314
+        }
+      },
+      "samples": 986,
+      "specificity": 0.9686274509803922,
+      "true_negative": 247,
+      "true_positive": 166
+    },
+    "candidate_quality_gate": {
+      "passed": false,
+      "reasons": [
+        "precision_regression"
+      ],
+      "scope": "Candidate triage gate only; not a production certification"
+    },
+    "dataset_sha256": "133afe448364e2f1ab23b176fe2e2f6c85f7a6ac416b6c008619f3487c5bf0b9",
+    "deployment": "experimental pending independent evaluation",
+    "learning_rate": 0.1,
+    "regularization": 1.0,
+    "rounds": 100,
+    "sample_weighting": "inverse repository size then equal class mass",
+    "selected_depth": 4,
+    "selection": "Minimum repository/class-balanced validation log loss; no test tuning",
+    "split_groups": {
+      "test": [
+        "060d335b",
+        "0b0a8cd6",
+        "0ce78112",
+        "1ce69180",
+        "28728ab4",
+        "29d5ecae",
+        "2c47a91c",
+        "472d4c24",
+        "5d8870b3",
+        "661abd43",
+        "680ef0c1",
+        "6a132a15",
+        "6c73b80a",
+        "850c2319",
+        "8cda00f3",
+        "8f4427e8",
+        "92faccc6",
+        "93ff401b",
+        "98800b86",
+        "a09d9e50",
+        "b76321b2",
+        "bbb6c1c3",
+        "df70e863"
+      ],
+      "train": [
+        "0064e882",
+        "0f133e09",
+        "0fc802c8",
+        "10e03406",
+        "110f8d35",
+        "1ca5e942",
+        "1fb36b4f",
+        "2ba83c6a",
+        "32f5ea73",
+        "36b76643",
+        "3b7cbdd3",
+        "3d82970b",
+        "41d10ede",
+        "4764adaf",
+        "4aaa1466",
+        "4f40bf46",
+        "50b38ef0",
+        "57c424f8",
+        "5aefaef8",
+        "6482c382",
+        "660708f3",
+        "67cb5d24",
+        "6e2ed0e4",
+        "73ae7ce6",
+        "75e7c64d",
+        "80815938",
+        "85d2b611",
+        "894e3377",
+        "8b8452c2",
+        "8c9b3ae9",
+        "8c9fcde7",
+        "9069e3a1",
+        "90aebe4a",
+        "92f440ce",
+        "99f9a6ea",
+        "9abeea1b",
+        "9bc5ca9e",
+        "a15774b8",
+        "a5c3685e",
+        "b91cad30",
+        "bd14e9cf",
+        "bdf8ad40",
+        "c145598e",
+        "c25fb835",
+        "c2eb9e71",
+        "c49fdc37",
+        "c9201a51",
+        "d0125de6",
+        "db218f09",
+        "e0b41e26",
+        "e3377359",
+        "e4d4b33d",
+        "e5a9c76d",
+        "ec138349",
+        "ef35cd4d",
+        "f06251db",
+        "f5e5719b",
+        "f623c7b3",
+        "f8f46739",
+        "ff527e6f"
+      ],
+      "validation": [
+        "0436af4a",
+        "106c7cd2",
+        "1fd3645c",
+        "271c71d8",
+        "35c273e2",
+        "387016a6",
+        "43e1f4ea",
+        "533c47c6",
+        "57154bcf",
+        "63800a10",
+        "793e12f9",
+        "83a072aa",
+        "a53cc03a",
+        "b88a4e51",
+        "be221a57",
+        "c41bb134",
+        "d2d6eedc",
+        "ec869dbc",
+        "fd501154"
+      ]
+    },
+    "split_sizes": [
+      2956,
+      986,
+      986
+    ],
+    "trained_test": {
+      "auroc": 0.8596604168343124,
+      "average_precision": 0.9407847095857867,
+      "balanced_accuracy": 0.7780209758321933,
+      "brier": 0.13005334956646938,
+      "expected_calibration_error": 0.08720247959935355,
+      "false_negative": 78,
+      "false_positive": 86,
+      "log_loss": 0.41899180729428115,
+      "positive_labels": 731,
+      "precision": 0.8836265223274695,
+      "predicts_only_one_class": false,
+      "recall": 0.893296853625171,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "mean_score": 0.05264339495776892,
+          "positive_rate": 0.1891891891891892,
+          "samples": 148,
+          "upper": 0.1
+        },
+        {
+          "lower": 0.1,
+          "mean_score": 0.14726085848994733,
+          "positive_rate": 0.20512820512820512,
+          "samples": 39,
+          "upper": 0.2
+        },
+        {
+          "lower": 0.2,
+          "mean_score": 0.2652284503937798,
+          "positive_rate": 0.52,
+          "samples": 25,
+          "upper": 0.3
+        },
+        {
+          "lower": 0.3,
+          "mean_score": 0.36198293617663585,
+          "positive_rate": 0.88,
+          "samples": 25,
+          "upper": 0.4
+        },
+        {
+          "lower": 0.4,
+          "mean_score": 0.45097429895898483,
+          "positive_rate": 0.7,
+          "samples": 10,
+          "upper": 0.5
+        },
+        {
+          "lower": 0.5,
+          "mean_score": 0.5605512241301097,
+          "positive_rate": 0.813953488372093,
+          "samples": 43,
+          "upper": 0.6
+        },
+        {
+          "lower": 0.6,
+          "mean_score": 0.659512894810134,
+          "positive_rate": 0.8833333333333333,
+          "samples": 60,
+          "upper": 0.7
+        },
+        {
+          "lower": 0.7,
+          "mean_score": 0.7733599181994644,
+          "positive_rate": 0.7794117647058824,
+          "samples": 68,
+          "upper": 0.8
+        },
+        {
+          "lower": 0.8,
+          "mean_score": 0.8419291518155639,
+          "positive_rate": 0.7064220183486238,
+          "samples": 109,
+          "upper": 0.9
+        },
+        {
+          "lower": 0.9,
+          "mean_score": 0.9525027052059705,
+          "positive_rate": 0.9477124183006536,
+          "samples": 459,
+          "upper": 1.0
+        }
+      ],
+      "risk_band_label_counts": {
+        "critical": {
+          "positive": 60,
+          "samples": 62
+        },
+        "high": {
+          "positive": 194,
+          "samples": 204
+        },
+        "low": {
+          "positive": 69,
+          "samples": 239
+        },
+        "medium": {
+          "positive": 408,
+          "samples": 481
+        }
+      },
+      "samples": 986,
+      "specificity": 0.6627450980392157,
+      "true_negative": 169,
+      "true_positive": 653
+    }
+  },
+  "trees": [
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.19687984563226235
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "value": -0.18610339040201854
+          },
+          "right": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.04863766113571771
+            },
+            "right": {
+              "value": 0.028915740562792377
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "feature": "value_digit_ratio_detail_bin",
+        "left": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "documentation_file",
+            "left": {
+              "value": 0.07607191847998163
+            },
+            "right": {
+              "value": -0.136868834418274
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": -0.18782263380277742
+            },
+            "right": {
+              "value": 0.027108427953106064
+            },
+            "threshold": 0.34375
+          },
+          "threshold": 0.40625
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "value_path_like",
+            "left": {
+              "value": 0.16753458681843958
+            },
+            "right": {
+              "value": -0.11969073657592118
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": -0.17825400428823077
+            },
+            "right": {
+              "value": 0.09196513684572744
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.03125
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.17926039111291145
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "value": -0.1695124895900011
+          },
+          "right": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.04420479244398464
+            },
+            "right": {
+              "value": 0.02631968002676584
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "feature": "value_digit_ratio_detail_bin",
+        "left": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "documentation_file",
+            "left": {
+              "value": 0.0686027464964499
+            },
+            "right": {
+              "value": -0.12406942192778853
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": -0.1707541546934257
+            },
+            "right": {
+              "value": 0.02458121577604096
+            },
+            "threshold": 0.34375
+          },
+          "threshold": 0.40625
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "value_path_like",
+            "left": {
+              "value": 0.1519586247795755
+            },
+            "right": {
+              "value": -0.10885797360714894
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": -0.16247546086146303
+            },
+            "right": {
+              "value": 0.08397087995765817
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.03125
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.16592688178541426
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "value": -0.1566612917769414
+          },
+          "right": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.04021395870979216
+            },
+            "right": {
+              "value": 0.02396459317956277
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "feature": "value_digit_ratio_detail_bin",
+        "left": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "configuration_file",
+            "left": {
+              "value": -0.003143343598620841
+            },
+            "right": {
+              "value": 0.1744283641082836
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": -0.157589587989287
+            },
+            "right": {
+              "value": 0.02229624587793083
+            },
+            "threshold": 0.34375
+          },
+          "threshold": 0.40625
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "value_path_like",
+            "left": {
+              "value": 0.13949312232629352
+            },
+            "right": {
+              "value": -0.09958469694515287
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": -0.15005872894713274
+            },
+            "right": {
+              "value": 0.07692511998084606
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.03125
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.15550453855009377
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "value": -0.14637884341515828
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.022019470533515068
+            },
+            "right": {
+              "value": -0.03976203890632211
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "feature": "value_digit_ratio_detail_bin",
+        "left": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "documentation_file",
+            "left": {
+              "value": 0.05852533118666353
+            },
+            "right": {
+              "value": -0.11309507496475933
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": -0.14708581595509493
+            },
+            "right": {
+              "value": 0.02022806000431405
+            },
+            "threshold": 0.34375
+          },
+          "threshold": 0.40625
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "reference_context",
+            "left": {
+              "value": 0.1270941404205384
+            },
+            "right": {
+              "value": -0.13283536744611618
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": -0.13997598663015343
+            },
+            "right": {
+              "value": 0.07064629029875055
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.03125
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.14715180948735482
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "value": -0.13793185099951585
+          },
+          "right": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.035471757172555594
+            },
+            "right": {
+              "value": 0.022445206015056146
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "feature": "value_digit_ratio_detail_bin",
+        "left": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "credential_usage_context",
+            "left": {
+              "value": 0.06192034463029215
+            },
+            "right": {
+              "value": -0.09156334124665028
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": -0.13847156660762136
+            },
+            "right": {
+              "value": 0.018354520295226943
+            },
+            "threshold": 0.34375
+          },
+          "threshold": 0.40625
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "value_path_like",
+            "left": {
+              "value": 0.12162270505730684
+            },
+            "right": {
+              "value": -0.10188198447582081
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": -0.13157281866895465
+            },
+            "right": {
+              "value": 0.06500042696972573
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.03125
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.14032290953992704
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "value": -0.13083600938014622
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.02064787245133406
+            },
+            "right": {
+              "value": -0.0351616336122716
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "feature": "value_digit_ratio_detail_bin",
+        "left": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "configuration_file",
+            "left": {
+              "value": -0.0071990039999890775
+            },
+            "right": {
+              "value": 0.15337866972090364
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "token_name_context",
+            "left": {
+              "value": -0.12135502554546945
+            },
+            "right": {
+              "value": 0.13378688068223651
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.40625
+        },
+        "right": {
+          "feature": "public_identifier_context",
+          "left": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.11003675153426373
+            },
+            "right": {
+              "value": -0.06179987277906584
+            },
+            "threshold": 0.09375
+          },
+          "right": {
+            "value": -0.16035574424608048
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.03125
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.1346474250525147
+        },
+        "right": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.07376003542161928
+            },
+            "right": {
+              "value": 0.1289145929702255
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.1433551236379865
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "feature": "value_digit_ratio_detail_bin",
+        "left": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "documentation_file",
+            "left": {
+              "value": 0.04811463419200594
+            },
+            "right": {
+              "value": -0.10509761827426621
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": -0.12589978821015685
+            },
+            "right": {
+              "value": 0.026287702439538235
+            },
+            "threshold": 0.34375
+          },
+          "threshold": 0.40625
+        },
+        "right": {
+          "feature": "public_identifier_context",
+          "left": {
+            "feature": "reference_context",
+            "left": {
+              "value": 0.09740707251262104
+            },
+            "right": {
+              "value": -0.14495501451464335
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.15054662076178324
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.03125
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_uppercase_ratio_detail_bin",
+      "left": {
+        "feature": "value_digit_ratio_detail_bin",
+        "left": {
+          "feature": "value_length_detail_bin",
+          "left": {
+            "feature": "configuration_file",
+            "left": {
+              "value": -0.050545957157008284
+            },
+            "right": {
+              "value": 0.0961019382884432
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "token_name_context",
+            "left": {
+              "value": -0.15134817569274317
+            },
+            "right": {
+              "value": 0.055168242309542405
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.0703125
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": 0.12017806661110071
+            },
+            "right": {
+              "value": -0.11059189703627365
+            },
+            "threshold": 0.875
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.000553880873130672
+            },
+            "right": {
+              "value": -0.1337227856144744
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.09375
+      },
+      "right": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "php_source_file",
+          "left": {
+            "feature": "known_signature",
+            "left": {
+              "value": 0.07257021917811857
+            },
+            "right": {
+              "value": 0.17001430364273348
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.1464868496560427
+            },
+            "right": {
+              "value": 0.044002978527996346
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.1413711462565507
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.15625
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.12917570109841553
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "value": -0.11683307350691952
+          },
+          "right": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.01847257962226335
+            },
+            "right": {
+              "value": 0.021965613669631692
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "feature": "configuration_file",
+        "left": {
+          "feature": "token_name_context",
+          "left": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": 0.11696344329576878
+            },
+            "right": {
+              "value": -0.03583545008443191
+            },
+            "threshold": 0.28125
+          },
+          "right": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.14223420581725404
+            },
+            "right": {
+              "value": -0.011264903397576766
+            },
+            "threshold": 0.03125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "quoted_literal_context",
+          "left": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.14256261593996863
+            },
+            "right": {
+              "value": 0.004753006499348947
+            },
+            "threshold": 0.09375
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.11230191590775898
+            },
+            "right": {
+              "value": 0.11688336417875972
+            },
+            "threshold": 0.03125
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_uppercase_ratio_detail_bin",
+      "left": {
+        "feature": "value_digit_ratio_bin",
+        "left": {
+          "feature": "value_length_detail_bin",
+          "left": {
+            "feature": "configuration_file",
+            "left": {
+              "value": -0.041081351144475954
+            },
+            "right": {
+              "value": 0.07835898006226727
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "token_name_context",
+            "left": {
+              "value": -0.14178041978174255
+            },
+            "right": {
+              "value": 0.05989516794807829
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.0703125
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "value": -0.1147411274381873
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.11166093840190493
+            },
+            "right": {
+              "value": 0.016296605799536533
+            },
+            "threshold": 0.45833333333333337
+          },
+          "threshold": 0.1875
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "php_source_file",
+          "left": {
+            "feature": "known_signature",
+            "left": {
+              "value": 0.06387576540142731
+            },
+            "right": {
+              "value": 0.16035566376457558
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.12729506469340177
+            },
+            "right": {
+              "value": 0.04328173956611562
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.13311031953764596
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.15625
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.12486530036621997
+        },
+        "right": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.056266854663269986
+            },
+            "right": {
+              "value": 0.12489786995872512
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.1279083356732403
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "feature": "configuration_file",
+        "left": {
+          "feature": "token_name_context",
+          "left": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": 0.10879598177030843
+            },
+            "right": {
+              "value": -0.03127092273939045
+            },
+            "threshold": 0.28125
+          },
+          "right": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": 0.1342180324490199
+            },
+            "right": {
+              "value": -0.017331579241088975
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "quoted_literal_context",
+          "left": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.13373136448628237
+            },
+            "right": {
+              "value": -0.0002613457614357227
+            },
+            "threshold": 0.09375
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.10356629481860113
+            },
+            "right": {
+              "value": 0.10828424008293702
+            },
+            "threshold": 0.03125
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_uppercase_ratio_detail_bin",
+      "left": {
+        "feature": "password_name_context",
+        "left": {
+          "feature": "token_name_context",
+          "left": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": -0.015508548928605771
+            },
+            "right": {
+              "value": -0.1322903598430652
+            },
+            "threshold": 0.28125
+          },
+          "right": {
+            "value": 0.12121220762725174
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.12120191175112383
+          },
+          "right": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.04296777758938269
+            },
+            "right": {
+              "value": -0.1054436192391643
+            },
+            "threshold": 0.0703125
+          },
+          "threshold": 0.20833333333333331
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "php_source_file",
+          "left": {
+            "feature": "known_signature",
+            "left": {
+              "value": 0.05634868925026502
+            },
+            "right": {
+              "value": 0.15212360644952475
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": 0.1386710756466206
+            },
+            "right": {
+              "value": -0.06675308623629518
+            },
+            "threshold": 0.53125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.1263633549819153
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.15625
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.1188472845273526
+        },
+        "right": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.05095628206450881
+            },
+            "right": {
+              "value": 0.11217957246919459
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.12385112496786865
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "feature": "configuration_file",
+        "left": {
+          "feature": "token_name_context",
+          "left": {
+            "feature": "known_signature",
+            "left": {
+              "value": -0.03134854986655113
+            },
+            "right": {
+              "value": 0.08165906803250517
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.1278695556122267
+            },
+            "right": {
+              "value": -0.016358363017639776
+            },
+            "threshold": 0.03125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "quoted_literal_context",
+          "left": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.12842688825760343
+            },
+            "right": {
+              "value": -0.0022511856602852875
+            },
+            "threshold": 0.09375
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.09647239940376927
+            },
+            "right": {
+              "value": 0.1024311745125902
+            },
+            "threshold": 0.03125
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.1162032957692739
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "value": -0.10486953209790806
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.01805228556104178
+            },
+            "right": {
+              "value": -0.0025930891212627475
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "feature": "value_entropy_detail_bin",
+        "left": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "value": 0.14315318270154156
+          },
+          "right": {
+            "value": -0.07264718795807881
+          },
+          "threshold": 0.0625
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": -0.050477919966678754
+            },
+            "right": {
+              "value": 0.072153932437331
+            },
+            "threshold": 0.34375
+          },
+          "right": {
+            "feature": "value_path_like",
+            "left": {
+              "value": 0.06779232405003978
+            },
+            "right": {
+              "value": -0.08826558995103152
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.03125
+        },
+        "threshold": 0.28125
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.1138537806124172
+        },
+        "right": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.043261320570239126
+            },
+            "right": {
+              "value": 0.10419593707789453
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.11812737925046479
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "feature": "configuration_file",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.06894391539961973
+            },
+            "right": {
+              "value": -0.09637752783433506
+            },
+            "threshold": 0.3125
+          },
+          "right": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.03959333046516449
+            },
+            "right": {
+              "value": 0.07542093738955098
+            },
+            "threshold": 0.3125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "quoted_literal_context",
+          "left": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.12448929773559136
+            },
+            "right": {
+              "value": -0.0015268483121605335
+            },
+            "threshold": 0.09375
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.0892621058520289
+            },
+            "right": {
+              "value": 0.09538835292310503
+            },
+            "threshold": 0.03125
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "token_name_context",
+      "left": {
+        "feature": "value_entropy_bin",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.11174793319220598
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.09933268474558181
+            },
+            "right": {
+              "value": 0.009447235689047428
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.20833333333333331
+        },
+        "right": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "credential_usage_context",
+            "left": {
+              "value": 0.05460184656785423
+            },
+            "right": {
+              "value": -0.05877156636519135
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.09143193691569622
+            },
+            "right": {
+              "value": 0.018008699865737336
+            },
+            "threshold": 0.09375
+          },
+          "threshold": 0.40625
+        },
+        "threshold": 0.1875
+      },
+      "right": {
+        "feature": "credential_name_context",
+        "left": {
+          "value": 0.11589633592691095
+        },
+        "right": {
+          "value": -0.020422835995937024
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "token_name_context",
+      "left": {
+        "feature": "configuration_file",
+        "left": {
+          "feature": "known_signature",
+          "left": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.07530311231163453
+            },
+            "right": {
+              "value": 0.0008972253745861705
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "php_source_file",
+            "left": {
+              "value": 0.13253259287786684
+            },
+            "right": {
+              "value": -0.06607073238071547
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "value": -0.10003339172182744
+          },
+          "right": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": 0.10373389591494396
+            },
+            "right": {
+              "value": 0.016485105230910926
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.1875
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_symbol_ratio_detail_bin",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "value": 0.043185305966234565
+          },
+          "right": {
+            "value": 0.11638786866240974
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.016666372688517946
+        },
+        "threshold": 0.03125
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "token_name_context",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.10928333348256343
+        },
+        "right": {
+          "feature": "configuration_file",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.05626819191617899
+            },
+            "right": {
+              "value": 0.012040902198756823
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.08574818717780755
+            },
+            "right": {
+              "value": -0.07048114360732381
+            },
+            "threshold": 0.09375
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "feature": "credential_name_context",
+        "left": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": 0.004046474390573962
+            },
+            "right": {
+              "value": 0.09521126716731605
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.11858529391404699
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.02104506665006535
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "value_length_detail_bin",
+        "left": {
+          "feature": "credential_usage_context",
+          "left": {
+            "feature": "documentation_file",
+            "left": {
+              "value": 0.038641861213406646
+            },
+            "right": {
+              "value": -0.0871008191615581
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": 0.008665705371362839
+            },
+            "right": {
+              "value": -0.10641961860762708
+            },
+            "threshold": 0.28125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "token_name_context",
+          "left": {
+            "feature": "value_hex_like",
+            "left": {
+              "value": -0.13085732964451943
+            },
+            "right": {
+              "value": 0.08681490192322143
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": 0.11217960160056054
+            },
+            "right": {
+              "value": 0.031225447053908246
+            },
+            "threshold": 0.03125
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.0859375
+      },
+      "right": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "php_source_file",
+          "left": {
+            "feature": "entropy_signal",
+            "left": {
+              "value": 0.11262697358296184
+            },
+            "right": {
+              "value": 0.032990425685803675
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": 0.12543779499219462
+            },
+            "right": {
+              "value": -0.06594554793345901
+            },
+            "threshold": 0.53125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.11915774800264414
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.125
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.10816879500627685
+        },
+        "right": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.029195862257369656
+            },
+            "right": {
+              "value": 0.09458894149161982
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.11286108107107218
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "feature": "value_entropy_detail_bin",
+        "left": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "value": 0.13924299322592942
+          },
+          "right": {
+            "value": -0.06145896005965158
+          },
+          "threshold": 0.0625
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "feature": "credential_usage_context",
+            "left": {
+              "value": -0.005212922412985047
+            },
+            "right": {
+              "value": -0.11541606883828136
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "public_identifier_context",
+            "left": {
+              "value": 0.05127462890601116
+            },
+            "right": {
+              "value": -0.11657857064915325
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.03125
+        },
+        "threshold": 0.28125
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.1065685186964494
+      },
+      "right": {
+        "feature": "value_path_like",
+        "left": {
+          "feature": "value_uppercase_ratio_detail_bin",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.01670415835083913
+            },
+            "right": {
+              "value": -0.08299057612980422
+            },
+            "threshold": 0.0859375
+          },
+          "right": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.1131956302834387
+            },
+            "right": {
+              "value": 0.013532640401857738
+            },
+            "threshold": 0.03125
+          },
+          "threshold": 0.28125
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": -0.16376929814346317
+            },
+            "right": {
+              "value": -0.07422208393760495
+            },
+            "threshold": 0.265625
+          },
+          "right": {
+            "value": 0.1317635363029797
+          },
+          "threshold": 0.7083333333333333
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.10508372981173911
+        },
+        "right": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.028191976724957286
+            },
+            "right": {
+              "value": 0.08893496296763581
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.10971007543715335
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "feature": "value_entropy_detail_bin",
+        "left": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "value": 0.13254191564640913
+          },
+          "right": {
+            "value": -0.058197864286752235
+          },
+          "threshold": 0.0625
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.1055790738925868
+            },
+            "right": {
+              "value": -0.1258506086577933
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.024453102734773118
+            },
+            "right": {
+              "value": 0.03966846342800828
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.29166666666666663
+        },
+        "threshold": 0.28125
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "token_name_context",
+      "left": {
+        "feature": "value_entropy_detail_bin",
+        "left": {
+          "feature": "credential_usage_context",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.028924160511340138
+            },
+            "right": {
+              "value": 0.059320751796033105
+            },
+            "threshold": 0.29166666666666663
+          },
+          "right": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": -0.060364505918094585
+            },
+            "right": {
+              "value": 0.12778595708896898
+            },
+            "threshold": 0.0390625
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": -0.11266250934601203
+            },
+            "right": {
+              "value": 0.004866490664393013
+            },
+            "threshold": 0.28125
+          },
+          "right": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.11736343149018565
+            },
+            "right": {
+              "value": -0.023477249515688844
+            },
+            "threshold": 0.4375
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.40625
+      },
+      "right": {
+        "feature": "credential_name_context",
+        "left": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.005361767358193494
+            },
+            "right": {
+              "value": 0.08938860521916313
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.11446723486949956
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.027502631790307215
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.10328692498348208
+      },
+      "right": {
+        "feature": "localization_resource_context",
+        "left": {
+          "feature": "value_path_like",
+          "left": {
+            "feature": "token_name_context",
+            "left": {
+              "value": 0.007434725219086076
+            },
+            "right": {
+              "value": 0.09288400205308832
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.1334406797657612
+            },
+            "right": {
+              "value": 0.12385317720246079
+            },
+            "threshold": 0.7083333333333333
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "value": -0.15866971843323155
+          },
+          "right": {
+            "value": -0.06305290098693858
+          },
+          "threshold": 0.40625
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.10199244631466418
+      },
+      "right": {
+        "feature": "configuration_file",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.0254503429963764
+            },
+            "right": {
+              "value": -0.08099838682676773
+            },
+            "threshold": 0.3125
+          },
+          "right": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.02221072303696163
+            },
+            "right": {
+              "value": 0.05711356060790071
+            },
+            "threshold": 0.3125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.1167011492609636
+            },
+            "right": {
+              "value": 0.010815210642830796
+            },
+            "threshold": 0.375
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": 0.02360041031913017
+            },
+            "right": {
+              "value": -0.1273681782442068
+            },
+            "threshold": 0.15625
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "token_name_context",
+      "left": {
+        "feature": "value_entropy_detail_bin",
+        "left": {
+          "feature": "credential_usage_context",
+          "left": {
+            "feature": "documentation_file",
+            "left": {
+              "value": 0.04308999485716548
+            },
+            "right": {
+              "value": -0.0630913440355488
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": 0.011388433641673044
+            },
+            "right": {
+              "value": -0.08553387456796746
+            },
+            "threshold": 0.28125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "feature": "documentation_file",
+            "left": {
+              "value": -0.10042721897533896
+            },
+            "right": {
+              "value": 0.04828088945752235
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.04689627395604212
+            },
+            "right": {
+              "value": 0.07284816334844708
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.03125
+        },
+        "threshold": 0.40625
+      },
+      "right": {
+        "feature": "credential_name_context",
+        "left": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.013333104661567674
+            },
+            "right": {
+              "value": 0.08396784439596634
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.11077822901101758
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.03465038320495319
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.10124161225498657
+      },
+      "right": {
+        "feature": "localization_resource_context",
+        "left": {
+          "feature": "value_path_like",
+          "left": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": -1.2989888425174611e-05
+            },
+            "right": {
+              "value": 0.043158411051237376
+            },
+            "threshold": 0.125
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.12382907543025475
+            },
+            "right": {
+              "value": 0.11322003882654488
+            },
+            "threshold": 0.7083333333333333
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "value": -0.1456738368669964
+          },
+          "right": {
+            "value": -0.05242683970253581
+          },
+          "threshold": 0.40625
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.10002992434535414
+      },
+      "right": {
+        "feature": "configuration_file",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.02091928215702625
+            },
+            "right": {
+              "value": -0.07499963746957615
+            },
+            "threshold": 0.3125
+          },
+          "right": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.028054711742159746
+            },
+            "right": {
+              "value": -0.10190066949903764
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "quoted_literal_context",
+          "left": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.11497549442281173
+            },
+            "right": {
+              "value": -0.013481431519554742
+            },
+            "threshold": 0.09375
+          },
+          "right": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.05611591223708258
+            },
+            "right": {
+              "value": 0.09670435726041708
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "token_name_context",
+      "left": {
+        "feature": "value_entropy_detail_bin",
+        "left": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": -0.01229794100343062
+            },
+            "right": {
+              "value": 0.06299667487175147
+            },
+            "threshold": 0.09375
+          },
+          "right": {
+            "value": 0.14436231710338376
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "credential_usage_context",
+          "left": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.09031989730367757
+            },
+            "right": {
+              "value": -0.005983958285311044
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.11104513764546194
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.40625
+      },
+      "right": {
+        "feature": "credential_name_context",
+        "left": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.013136073418742261
+            },
+            "right": {
+              "value": 0.08103801125758239
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.10911570111690026
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.035155875031221404
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.0987354609444725
+      },
+      "right": {
+        "feature": "documentation_file",
+        "left": {
+          "feature": "credential_usage_context",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.008757040096789348
+            },
+            "right": {
+              "value": 0.07716944319570446
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": 0.017608646647313708
+            },
+            "right": {
+              "value": -0.10019877148839931
+            },
+            "threshold": 0.28125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_uppercase_ratio_detail_bin",
+          "left": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.10967093247247955
+            },
+            "right": {
+              "value": 0.08469989560595165
+            },
+            "threshold": 0.09375
+          },
+          "right": {
+            "feature": "credential_usage_context",
+            "left": {
+              "value": -0.032667402396743504
+            },
+            "right": {
+              "value": 0.12344313285173025
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.03125
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "configuration_file",
+        "left": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.04108725110223639
+            },
+            "right": {
+              "value": 0.015837760288148033
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": -0.12735040357869717
+            },
+            "right": {
+              "value": 0.09749915787736163
+            },
+            "threshold": 0.09375
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "quoted_literal_context",
+          "left": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.10178364158607026
+            },
+            "right": {
+              "value": -0.010494363169021486
+            },
+            "threshold": 0.09375
+          },
+          "right": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.05382064095879222
+            },
+            "right": {
+              "value": 0.09572183615925464
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": 0.10846007809233185
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.09765600394075195
+      },
+      "right": {
+        "feature": "documentation_file",
+        "left": {
+          "feature": "credential_usage_context",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.006673347686778958
+            },
+            "right": {
+              "value": 0.0708168408664575
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": 0.01708665417352269
+            },
+            "right": {
+              "value": -0.09251224206076553
+            },
+            "threshold": 0.28125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_uppercase_ratio_detail_bin",
+          "left": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.10498498869165421
+            },
+            "right": {
+              "value": 0.08108587174992342
+            },
+            "threshold": 0.09375
+          },
+          "right": {
+            "feature": "credential_usage_context",
+            "left": {
+              "value": -0.03147750803789859
+            },
+            "right": {
+              "value": 0.11958218380265702
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.03125
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "configuration_file",
+      "left": {
+        "feature": "token_name_context",
+        "left": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.013389603468105166
+            },
+            "right": {
+              "value": -0.09365007243875806
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "credential_usage_context",
+            "left": {
+              "value": -0.06749636490430508
+            },
+            "right": {
+              "value": 0.1013041450490291
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.40625
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "value": 0.1069298453313527
+          },
+          "right": {
+            "value": -0.038038622076195655
+          },
+          "threshold": 0.03125
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_symbol_ratio_detail_bin",
+        "left": {
+          "feature": "quoted_literal_context",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.036421773888334036
+            },
+            "right": {
+              "value": 0.11042909278217183
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.08068371346602989
+            },
+            "right": {
+              "value": 0.1013552284048449
+            },
+            "threshold": 0.03125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "value": 0.025000516157965943
+          },
+          "right": {
+            "value": -0.12366599459970769
+          },
+          "threshold": 0.15625
+        },
+        "threshold": 0.09375
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_entropy_detail_bin",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.09159164166356155
+            },
+            "right": {
+              "value": -0.016241546986290514
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": 0.09009137017453049
+            },
+            "right": {
+              "value": 0.006554256535264704
+            },
+            "threshold": 0.28125
+          },
+          "threshold": 0.1875
+        },
+        "right": {
+          "feature": "token_name_context",
+          "left": {
+            "feature": "credential_usage_context",
+            "left": {
+              "value": -0.05736288405447039
+            },
+            "right": {
+              "value": 0.09889704442214857
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": 0.012037530526633209
+            },
+            "right": {
+              "value": 0.10363228085388765
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.40625
+      },
+      "right": {
+        "value": 0.1069888957450383
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "configuration_file",
+      "left": {
+        "feature": "token_name_context",
+        "left": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.0034330322214460845
+            },
+            "right": {
+              "value": 0.13434613388085925
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "validator_present",
+            "left": {
+              "value": -0.058622490028444156
+            },
+            "right": {
+              "value": 0.10354047052807464
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.40625
+        },
+        "right": {
+          "feature": "credential_name_context",
+          "left": {
+            "value": 0.10388114245628793
+          },
+          "right": {
+            "value": -0.04229075603474204
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_symbol_ratio_detail_bin",
+        "left": {
+          "feature": "quoted_literal_context",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.030516149477520023
+            },
+            "right": {
+              "value": 0.10876849543065448
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.07546678400737185
+            },
+            "right": {
+              "value": 0.09982069522957664
+            },
+            "threshold": 0.03125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "value": 0.02304302351154236
+          },
+          "right": {
+            "value": -0.12136054554672633
+          },
+          "threshold": 0.15625
+        },
+        "threshold": 0.09375
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.0957276417945473
+      },
+      "right": {
+        "feature": "documentation_file",
+        "left": {
+          "feature": "credential_usage_context",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.00602706714937422
+            },
+            "right": {
+              "value": 0.06763860548940462
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": 0.013517279847044626
+            },
+            "right": {
+              "value": -0.08881027851539863
+            },
+            "threshold": 0.28125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_uppercase_ratio_detail_bin",
+          "left": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.10108876381667038
+            },
+            "right": {
+              "value": 0.07412548129000159
+            },
+            "threshold": 0.09375
+          },
+          "right": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.09287454189165896
+            },
+            "right": {
+              "value": -0.03942296406879604
+            },
+            "threshold": 0.4375
+          },
+          "threshold": 0.03125
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "configuration_file",
+      "left": {
+        "feature": "assignment_context",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.04753507365826879
+            },
+            "right": {
+              "value": 0.061372736358046534
+            },
+            "threshold": 0.09375
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.02667297264882626
+            },
+            "right": {
+              "value": 0.045451510933733605
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "value": -0.11098128323616868
+          },
+          "right": {
+            "value": 0.09095630696096495
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_symbol_ratio_detail_bin",
+        "left": {
+          "feature": "quoted_literal_context",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.024997702812997027
+            },
+            "right": {
+              "value": 0.10766813563617442
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.07092075298697152
+            },
+            "right": {
+              "value": 0.09784281393653181
+            },
+            "threshold": 0.03125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "value": 0.021674860469707374
+          },
+          "right": {
+            "value": -0.11836186627951867
+          },
+          "threshold": 0.15625
+        },
+        "threshold": 0.09375
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.09474031479310625
+      },
+      "right": {
+        "feature": "localization_resource_context",
+        "left": {
+          "feature": "credential_name_context",
+          "left": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": -0.02968630656762385
+            },
+            "right": {
+              "value": 0.0497959799593154
+            },
+            "threshold": 0.34375
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.005558342463857702
+            },
+            "right": {
+              "value": 0.05222073999643059
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "value": -0.12437943873435967
+          },
+          "right": {
+            "value": -0.0293623429250819
+          },
+          "threshold": 0.40625
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "configuration_file",
+      "left": {
+        "feature": "validator_present",
+        "left": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.009625845992180469
+            },
+            "right": {
+              "value": -0.08500706715814756
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "token_name_context",
+            "left": {
+              "value": -0.054971745084437834
+            },
+            "right": {
+              "value": 0.10328750055184839
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.40625
+        },
+        "right": {
+          "value": 0.10187347682615225
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_symbol_ratio_detail_bin",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.06704558932532065
+            },
+            "right": {
+              "value": 0.11157389283382063
+            },
+            "threshold": 0.20833333333333331
+          },
+          "right": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.10589418344564366
+            },
+            "right": {
+              "value": 0.09962178972163438
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.375
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "value": 0.02037750763070701
+          },
+          "right": {
+            "value": -0.11536312211910396
+          },
+          "threshold": 0.15625
+        },
+        "threshold": 0.09375
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.09348321871998282
+      },
+      "right": {
+        "feature": "configuration_file",
+        "left": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.060312299445802214
+            },
+            "right": {
+              "value": -0.06946463968111839
+            },
+            "threshold": 0.0625
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.09605327218352118
+            },
+            "right": {
+              "value": -0.0013880069000195125
+            },
+            "threshold": 0.29166666666666663
+          },
+          "threshold": 0.28125
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.11014411455506988
+            },
+            "right": {
+              "value": 0.008280030362054179
+            },
+            "threshold": 0.375
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": 0.018734864933328484
+            },
+            "right": {
+              "value": -0.11249875368932023
+            },
+            "threshold": 0.15625
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "value_length_detail_bin",
+        "left": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "entropy_signal",
+            "left": {
+              "value": -0.011026845015087827
+            },
+            "right": {
+              "value": 0.04740631162181134
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.12493672952797422
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "feature": "token_name_context",
+            "left": {
+              "value": -0.11787117343690977
+            },
+            "right": {
+              "value": 0.01345696511416137
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.04668999833844774
+            },
+            "right": {
+              "value": 0.0825425033470289
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.40625
+        },
+        "threshold": 0.0703125
+      },
+      "right": {
+        "feature": "php_source_file",
+        "left": {
+          "feature": "known_signature",
+          "left": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": -0.031234477390456858
+            },
+            "right": {
+              "value": 0.07254837031739246
+            },
+            "threshold": 0.53125
+          },
+          "right": {
+            "value": 0.11044684050887128
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "known_signature",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.11479644296857952
+            },
+            "right": {
+              "value": -0.039617607986180435
+            },
+            "threshold": 0.8125
+          },
+          "right": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": -0.051028555936861314
+            },
+            "right": {
+              "value": -0.11459590847183208
+            },
+            "threshold": 0.40625
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.125
+    },
+    {
+      "feature": "value_path_like",
+      "left": {
+        "feature": "localization_resource_context",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.09218064913993151
+          },
+          "right": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.009886293304971568
+            },
+            "right": {
+              "value": 0.025407842818866423
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.20833333333333331
+        },
+        "right": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "value": -0.1131755378781315
+          },
+          "right": {
+            "value": -0.024658816365816814
+          },
+          "threshold": 0.40625
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "php_source_file",
+          "left": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": -0.04056539242099012
+            },
+            "right": {
+              "value": -0.1343694569090711
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": 0.014687679431428928
+            },
+            "right": {
+              "value": -0.057738042637078324
+            },
+            "threshold": 0.09375
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": 0.11452800595303976
+        },
+        "threshold": 0.7083333333333333
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "value_length_detail_bin",
+        "left": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": 0.0028541518798738826
+            },
+            "right": {
+              "value": 0.09330600741310772
+            },
+            "threshold": 0.03125
+          },
+          "right": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.007660974640586723
+            },
+            "right": {
+              "value": -0.11593766861352382
+            },
+            "threshold": 0.3125
+          },
+          "threshold": 0.09375
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "feature": "token_name_context",
+            "left": {
+              "value": -0.11454376441965285
+            },
+            "right": {
+              "value": 0.01272777305292902
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.04551154471928741
+            },
+            "right": {
+              "value": 0.07955907821826938
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.40625
+        },
+        "threshold": 0.0703125
+      },
+      "right": {
+        "feature": "php_source_file",
+        "left": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": 0.11167165515854745
+            },
+            "right": {
+              "value": 0.016967820049991672
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.057615587077410116
+            },
+            "right": {
+              "value": -0.052354792775703075
+            },
+            "threshold": 0.03125
+          },
+          "threshold": 0.40625
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "value": -0.09566240747205064
+          },
+          "right": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.1161157136742477
+            },
+            "right": {
+              "value": -0.09663265789600343
+            },
+            "threshold": 0.1328125
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.125
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.09113278095552284
+      },
+      "right": {
+        "feature": "value_path_like",
+        "left": {
+          "feature": "localization_resource_context",
+          "left": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.010130604770397247
+            },
+            "right": {
+              "value": 0.024199483254689833
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": -0.10648872670956133
+            },
+            "right": {
+              "value": -0.025351341522049483
+            },
+            "threshold": 0.40625
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "php_source_file",
+            "left": {
+              "value": -0.1218769147873928
+            },
+            "right": {
+              "value": -0.03171803409558841
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.10728904555615255
+          },
+          "threshold": 0.7083333333333333
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_uppercase_ratio_detail_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.004580562021383113
+            },
+            "right": {
+              "value": -0.07667290126589507
+            },
+            "threshold": 0.0703125
+          },
+          "right": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": 0.008628955971732083
+            },
+            "right": {
+              "value": 0.11602167432299687
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "value_base64_like",
+          "left": {
+            "value": -0.139387575658001
+          },
+          "right": {
+            "value": 0.08427906113238436
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.59375
+      },
+      "right": {
+        "value": 0.09715094252294249
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "documentation_file",
+      "left": {
+        "feature": "credential_usage_context",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.043901615061365536
+            },
+            "right": {
+              "value": -0.04041655318227058
+            },
+            "threshold": 0.3125
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": 0.06602866080823781
+            },
+            "right": {
+              "value": -0.1250062397725603
+            },
+            "threshold": 0.59375
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.07118780947867114
+            },
+            "right": {
+              "value": 0.04494228562862087
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.12355274794353997
+            },
+            "right": {
+              "value": -0.11751210343148633
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.28125
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_uppercase_ratio_detail_bin",
+        "left": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": 0.008222343627786647
+            },
+            "right": {
+              "value": -0.11138615228876417
+            },
+            "threshold": 0.28125
+          },
+          "right": {
+            "value": 0.07194410968330207
+          },
+          "threshold": 0.09375
+        },
+        "right": {
+          "feature": "credential_usage_context",
+          "left": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": 0.06297856154730096
+            },
+            "right": {
+              "value": -0.09885709237450772
+            },
+            "threshold": 0.09375
+          },
+          "right": {
+            "value": 0.11500291761226658
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.03125
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.09063160897470579
+      },
+      "right": {
+        "feature": "value_symbol_ratio_detail_bin",
+        "left": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": 0.05120091933392939
+            },
+            "right": {
+              "value": -0.021329221231307496
+            },
+            "threshold": 0.28125
+          },
+          "right": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.09910106749666042
+            },
+            "right": {
+              "value": 0.00871509649985232
+            },
+            "threshold": 0.4375
+          },
+          "threshold": 0.03125
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.04856880499159408
+            },
+            "right": {
+              "value": 0.049943074328680254
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_symbol_ratio_bin",
+            "left": {
+              "value": -0.11701991604912372
+            },
+            "right": {
+              "value": -0.017728294926479045
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.09375
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "value_entropy_bin",
+      "left": {
+        "feature": "non_production_path",
+        "left": {
+          "value": -0.08485819139328254
+        },
+        "right": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.02924353088852523
+            },
+            "right": {
+              "value": 0.11241036160279286
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.11154854233940054
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_entropy_detail_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_detail_bin",
+          "left": {
+            "value": 0.12502909242906912
+          },
+          "right": {
+            "value": -0.05745746387288846
+          },
+          "threshold": 0.0625
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.09248021577266832
+            },
+            "right": {
+              "value": -0.10002585965616916
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "localization_resource_context",
+            "left": {
+              "value": 0.00904455524857996
+            },
+            "right": {
+              "value": -0.10311112370784814
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.29166666666666663
+        },
+        "threshold": 0.28125
+      },
+      "threshold": 0.1875
+    },
+    {
+      "feature": "value_path_like",
+      "left": {
+        "feature": "value_uppercase_ratio_bin",
+        "left": {
+          "feature": "value_length_detail_bin",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": -0.004030620798551387
+            },
+            "right": {
+              "value": 0.06462284489550706
+            },
+            "threshold": 0.0390625
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.09303979573700392
+            },
+            "right": {
+              "value": 0.05500580115548101
+            },
+            "threshold": 0.375
+          },
+          "threshold": 0.0703125
+        },
+        "right": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.024063389503280828
+            },
+            "right": {
+              "value": -0.14029280275487463
+            },
+            "threshold": 0.1328125
+          },
+          "right": {
+            "value": 0.10627761425651415
+          },
+          "threshold": 0.53125
+        },
+        "threshold": 0.125
+      },
+      "right": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "php_source_file",
+          "left": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": -0.02836604991268914
+            },
+            "right": {
+              "value": -0.12295164580363652
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": 0.01644968535782892
+            },
+            "right": {
+              "value": -0.05413793214153389
+            },
+            "threshold": 0.09375
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": 0.09714538490493224
+        },
+        "threshold": 0.7083333333333333
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_digit_ratio_bin",
+      "left": {
+        "feature": "value_entropy_bin",
+        "left": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.05495419684428892
+            },
+            "right": {
+              "value": 0.10042995801469157
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.0949823947542337
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.11747713127144188
+            },
+            "right": {
+              "value": -0.06405393978138975
+            },
+            "threshold": 0.0625
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.058512232700770675
+            },
+            "right": {
+              "value": 0.004536856280569446
+            },
+            "threshold": 0.29166666666666663
+          },
+          "threshold": 0.28125
+        },
+        "threshold": 0.1875
+      },
+      "right": {
+        "value": -0.1544207564683047
+      },
+      "threshold": 0.875
+    },
+    {
+      "feature": "configuration_file",
+      "left": {
+        "feature": "assignment_context",
+        "left": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "known_signature",
+            "left": {
+              "value": -0.04057680153602309
+            },
+            "right": {
+              "value": 0.09912658857148479
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.024286504814620438
+            },
+            "right": {
+              "value": 0.038765746003805494
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "value": -0.10281904243008624
+          },
+          "right": {
+            "value": 0.08195737585998884
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_symbol_ratio_detail_bin",
+        "left": {
+          "feature": "quoted_literal_context",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.0027789845106438106
+            },
+            "right": {
+              "value": 0.10172417788558173
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.05618987400101941
+            },
+            "right": {
+              "value": 0.08843145921918594
+            },
+            "threshold": 0.03125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "value": 0.016113473206693534
+          },
+          "right": {
+            "value": -0.10662351224383489
+          },
+          "threshold": 0.15625
+        },
+        "threshold": 0.09375
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.08901741099431637
+      },
+      "right": {
+        "feature": "value_symbol_ratio_detail_bin",
+        "left": {
+          "feature": "configuration_file",
+          "left": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.00965127919102736
+            },
+            "right": {
+              "value": -0.09923917446836111
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.10721303091554116
+            },
+            "right": {
+              "value": 0.008672129508531391
+            },
+            "threshold": 0.375
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.01884367376607858
+            },
+            "right": {
+              "value": -0.12147939146208019
+            },
+            "threshold": 0.1328125
+          },
+          "right": {
+            "feature": "value_symbol_ratio_bin",
+            "left": {
+              "value": -0.10907344200420631
+            },
+            "right": {
+              "value": -0.003320031931932746
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.09375
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "value_path_like",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.08776233872949599
+        },
+        "right": {
+          "feature": "localization_resource_context",
+          "left": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.008929415955800815
+            },
+            "right": {
+              "value": 0.021275894613626816
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": -0.0951130349575683
+            },
+            "right": {
+              "value": -0.01996532036039876
+            },
+            "threshold": 0.40625
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "php_source_file",
+          "left": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": -0.026507617638016547
+            },
+            "right": {
+              "value": -0.11893932778734716
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": 0.014786792339426461
+            },
+            "right": {
+              "value": -0.05409250604031407
+            },
+            "threshold": 0.09375
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": 0.09289491451540792
+        },
+        "threshold": 0.7083333333333333
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_digit_ratio_bin",
+        "left": {
+          "feature": "credential_name_context",
+          "left": {
+            "feature": "token_name_context",
+            "left": {
+              "value": -0.02342568166086726
+            },
+            "right": {
+              "value": 0.0870048785895265
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.013706290983053149
+            },
+            "right": {
+              "value": 0.030471201642660935
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.1469296831800522
+        },
+        "threshold": 0.875
+      },
+      "right": {
+        "value": 0.09250567593540134
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_uppercase_ratio_bin",
+      "left": {
+        "feature": "value_length_detail_bin",
+        "left": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.009190088149761471
+            },
+            "right": {
+              "value": -0.0436406404952131
+            },
+            "threshold": 0.09375
+          },
+          "right": {
+            "value": 0.1136578458805905
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "token_name_context",
+          "left": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": -0.10770985598524492
+            },
+            "right": {
+              "value": 0.02605579369653358
+            },
+            "threshold": 0.375
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.009918862443456022
+            },
+            "right": {
+              "value": 0.07724131645505428
+            },
+            "threshold": 0.09375
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.0703125
+      },
+      "right": {
+        "feature": "php_source_file",
+        "left": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "value": 0.1049490847794198
+          },
+          "right": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": -0.029987836663434242
+            },
+            "right": {
+              "value": 0.06987464547585118
+            },
+            "threshold": 0.53125
+          },
+          "threshold": 0.40625
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "value": -0.08522455469965175
+          },
+          "right": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.10982026613798622
+            },
+            "right": {
+              "value": -0.07587656378148713
+            },
+            "threshold": 0.1328125
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.125
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.08678007539567412
+      },
+      "right": {
+        "feature": "localization_resource_context",
+        "left": {
+          "feature": "documentation_file",
+          "left": {
+            "feature": "credential_usage_context",
+            "left": {
+              "value": 0.021400875046218883
+            },
+            "right": {
+              "value": -0.02595685162214407
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": -0.0676390159640233
+            },
+            "right": {
+              "value": 0.012158891791333653
+            },
+            "threshold": 0.03125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "value": -0.09153028948099005
+          },
+          "right": {
+            "value": -0.021193729718450207
+          },
+          "threshold": 0.40625
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "value_path_like",
+      "left": {
+        "feature": "value_digit_ratio_bin",
+        "left": {
+          "feature": "localization_resource_context",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.013823545654865625
+            },
+            "right": {
+              "value": -0.017611805148499946
+            },
+            "threshold": 0.1015625
+          },
+          "right": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": -0.08572274066373137
+            },
+            "right": {
+              "value": -0.01987171415147319
+            },
+            "threshold": 0.40625
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.13727098076414246
+        },
+        "threshold": 0.875
+      },
+      "right": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "php_source_file",
+          "left": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": -0.02240678668833966
+            },
+            "right": {
+              "value": -0.11590455854191449
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": 0.01460202627786158
+            },
+            "right": {
+              "value": -0.04903835223498588
+            },
+            "threshold": 0.09375
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": 0.08572993660777134
+        },
+        "threshold": 0.7083333333333333
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_uppercase_ratio_detail_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.004470262233403698
+            },
+            "right": {
+              "value": -0.06958513282254195
+            },
+            "threshold": 0.0703125
+          },
+          "right": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": 0.005790799052299061
+            },
+            "right": {
+              "value": 0.1057478011611714
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "php_source_file",
+            "left": {
+              "value": -0.15329210201670654
+            },
+            "right": {
+              "value": -0.07086055921587446
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.07791423203973419
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.59375
+      },
+      "right": {
+        "value": 0.08977029598455927
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_path_like",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.08559788541395769
+        },
+        "right": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.013915931581134168
+            },
+            "right": {
+              "value": 0.07367868801383415
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.06645055626953565
+            },
+            "right": {
+              "value": 0.005859602066973921
+            },
+            "threshold": 0.29166666666666663
+          },
+          "threshold": 0.28125
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "value_length_detail_bin",
+          "left": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": -0.02328158681023983
+            },
+            "right": {
+              "value": -0.11627504800708993
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "public_identifier_context",
+            "left": {
+              "value": 0.07615744924133105
+            },
+            "right": {
+              "value": -0.07664951806129486
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.265625
+        },
+        "right": {
+          "value": 0.0786494007438362
+        },
+        "threshold": 0.7083333333333333
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "public_identifier_context",
+      "left": {
+        "feature": "value_length_detail_bin",
+        "left": {
+          "feature": "value_path_like",
+          "left": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.004766030687495441
+            },
+            "right": {
+              "value": 0.031049299140955895
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.10791603273540146
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": 0.10604713114410672
+        },
+        "threshold": 0.2578125
+      },
+      "right": {
+        "value": -0.09261463796241567
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "configuration_file",
+      "left": {
+        "feature": "assignment_context",
+        "left": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "known_signature",
+            "left": {
+              "value": -0.03575377992513686
+            },
+            "right": {
+              "value": 0.0912581493854877
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.022189761221784954
+            },
+            "right": {
+              "value": 0.03617707826642846
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "value": -0.09765136572589385
+          },
+          "right": {
+            "value": 0.07580469926762469
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "quoted_literal_context",
+        "left": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.014019981953565956
+            },
+            "right": {
+              "value": 0.10090481190979933
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.06797379937857752
+            },
+            "right": {
+              "value": -0.06795320611816082
+            },
+            "threshold": 0.03125
+          },
+          "threshold": 0.09375
+        },
+        "right": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.005533403499793976
+            },
+            "right": {
+              "value": -0.08497665279750993
+            },
+            "threshold": 0.0390625
+          },
+          "right": {
+            "value": 0.07659537736338082
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_symbol_ratio_detail_bin",
+      "left": {
+        "feature": "value_digit_ratio_detail_bin",
+        "left": {
+          "feature": "documentation_file",
+          "left": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": 0.01768673731345793
+            },
+            "right": {
+              "value": -0.06158651739559397
+            },
+            "threshold": 0.40625
+          },
+          "right": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": -0.07587629406729529
+            },
+            "right": {
+              "value": 0.1059834160376181
+            },
+            "threshold": 0.0390625
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": 0.11446047560690498
+            },
+            "right": {
+              "value": -0.12487237507925844
+            },
+            "threshold": 0.875
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": -0.06812893552639154
+            },
+            "right": {
+              "value": 0.03730793114347344
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.4375
+        },
+        "threshold": 0.03125
+      },
+      "right": {
+        "feature": "value_digit_ratio_detail_bin",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": -0.00499959711985893
+            },
+            "right": {
+              "value": -0.12212159463138916
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.08596849870421727
+            },
+            "right": {
+              "value": -0.11205360003353677
+            },
+            "threshold": 0.1328125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_symbol_ratio_bin",
+          "left": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.11481118272310478
+            },
+            "right": {
+              "value": 0.06118164356926769
+            },
+            "threshold": 0.28125
+          },
+          "right": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": 0.11678026574407215
+            },
+            "right": {
+              "value": -0.09150088963304784
+            },
+            "threshold": 0.375
+          },
+          "threshold": 0.125
+        },
+        "threshold": 0.09375
+      },
+      "threshold": 0.09375
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.08470360087276835
+      },
+      "right": {
+        "feature": "value_symbol_ratio_detail_bin",
+        "left": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.008785776241791993
+            },
+            "right": {
+              "value": 0.11264094899942374
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.07636391082717832
+            },
+            "right": {
+              "value": 0.010043987866664193
+            },
+            "threshold": 0.29166666666666663
+          },
+          "threshold": 0.28125
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.044361652210394044
+            },
+            "right": {
+              "value": 0.04247069780559255
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_symbol_ratio_bin",
+            "left": {
+              "value": -0.09659549889408724
+            },
+            "right": {
+              "value": -0.0023340678707817314
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.09375
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "configuration_file",
+      "left": {
+        "feature": "assignment_context",
+        "left": {
+          "feature": "token_name_context",
+          "left": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": 0.008547112459692306
+            },
+            "right": {
+              "value": -0.037188286774785785
+            },
+            "threshold": 0.40625
+          },
+          "right": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": 0.1022022883587696
+            },
+            "right": {
+              "value": -0.07044767166482341
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "value": -0.09507224459511587
+          },
+          "right": {
+            "value": 0.06943898336819751
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "quoted_literal_context",
+        "left": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.015610420195721848
+            },
+            "right": {
+              "value": 0.09923316838372116
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.06431802248602396
+            },
+            "right": {
+              "value": -0.057475415579961754
+            },
+            "threshold": 0.03125
+          },
+          "threshold": 0.09375
+        },
+        "right": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": -0.004895442884090674
+            },
+            "right": {
+              "value": -0.0917899102167307
+            },
+            "threshold": 0.375
+          },
+          "right": {
+            "value": 0.0740307314694565
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "comment_context",
+      "left": {
+        "feature": "localization_resource_context",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.07051325849936985
+            },
+            "right": {
+              "value": -0.0004973947031568114
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": 0.06679108887131573
+            },
+            "right": {
+              "value": -0.0017449380746721553
+            },
+            "threshold": 0.28125
+          },
+          "threshold": 0.1875
+        },
+        "right": {
+          "value": -0.11304768347632653
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_symbol_ratio_detail_bin",
+        "left": {
+          "value": 0.10918858911814514
+        },
+        "right": {
+          "value": -0.08318767080428008
+        },
+        "threshold": 0.09375
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.08286047008478356
+      },
+      "right": {
+        "feature": "value_symbol_ratio_detail_bin",
+        "left": {
+          "feature": "configuration_file",
+          "left": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.00799402588825512
+            },
+            "right": {
+              "value": -0.09172751629162831
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.10461653766296027
+            },
+            "right": {
+              "value": 0.007308521420600212
+            },
+            "threshold": 0.375
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.04192354650951041
+            },
+            "right": {
+              "value": 0.03963154815617932
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.03201716215827138
+            },
+            "right": {
+              "value": -0.11109892332376625
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.09375
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "public_identifier_context",
+      "left": {
+        "feature": "value_length_detail_bin",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.006351242960253552
+            },
+            "right": {
+              "value": 0.04474124935387308
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.029203132073977175
+            },
+            "right": {
+              "value": -0.12430455011271857
+            },
+            "threshold": 0.15625
+          },
+          "threshold": 0.5625
+        },
+        "right": {
+          "value": 0.10297085093036529
+        },
+        "threshold": 0.2578125
+      },
+      "right": {
+        "value": -0.08936543032623577
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_digit_ratio_bin",
+      "left": {
+        "feature": "credential_name_context",
+        "left": {
+          "feature": "token_name_context",
+          "left": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": -0.031070165652494736
+            },
+            "right": {
+              "value": 0.028262941251497455
+            },
+            "threshold": 0.34375
+          },
+          "right": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": 0.035788627824410835
+            },
+            "right": {
+              "value": 0.09647974957271788
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_length_detail_bin",
+          "left": {
+            "feature": "documentation_file",
+            "left": {
+              "value": 0.032223981480829514
+            },
+            "right": {
+              "value": -0.03732362664345811
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_bin",
+            "left": {
+              "value": -0.08625421767041291
+            },
+            "right": {
+              "value": 0.0983772906071017
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.0703125
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": -0.11647281620182018
+      },
+      "threshold": 0.875
+    },
+    {
+      "feature": "value_path_like",
+      "left": {
+        "feature": "localization_resource_context",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.08172249620002664
+          },
+          "right": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.008531990843745691
+            },
+            "right": {
+              "value": 0.018335739083044103
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.20833333333333331
+        },
+        "right": {
+          "feature": "value_uppercase_ratio_detail_bin",
+          "left": {
+            "value": -0.030126924974349118
+          },
+          "right": {
+            "value": -0.09082915147757563
+          },
+          "threshold": 0.03125
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "value_length_detail_bin",
+          "left": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": -0.01893555666585074
+            },
+            "right": {
+              "value": -0.1095609684563576
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "public_identifier_context",
+            "left": {
+              "value": 0.06554430062122457
+            },
+            "right": {
+              "value": -0.07003862020578994
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.265625
+        },
+        "right": {
+          "value": 0.06551873807118024
+        },
+        "threshold": 0.7083333333333333
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_uppercase_ratio_detail_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_detail_bin",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.006188205579285764
+            },
+            "right": {
+              "value": -0.06593373354614838
+            },
+            "threshold": 0.0859375
+          },
+          "right": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": 0.006730926394530293
+            },
+            "right": {
+              "value": 0.10770086874838125
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.28125
+        },
+        "right": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "php_source_file",
+            "left": {
+              "value": -0.14222706922109576
+            },
+            "right": {
+              "value": -0.06426446238439247
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.06731640021370977
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.59375
+      },
+      "right": {
+        "value": 0.08395734588654505
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_path_like",
+      "left": {
+        "feature": "value_length_detail_bin",
+        "left": {
+          "feature": "value_length_detail_bin",
+          "left": {
+            "feature": "public_metadata_context",
+            "left": {
+              "value": 0.004721013673179544
+            },
+            "right": {
+              "value": 0.12041915723565953
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": -0.07901927031836344
+            },
+            "right": {
+              "value": 0.011210194214053983
+            },
+            "threshold": 0.28125
+          },
+          "threshold": 0.1015625
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "documentation_file",
+            "left": {
+              "value": 0.10114195515744231
+            },
+            "right": {
+              "value": 0.02918291211694848
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.037488110414536924
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.1640625
+      },
+      "right": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "value_length_detail_bin",
+          "left": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": -0.017808437160409647
+            },
+            "right": {
+              "value": -0.10642829460163768
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "public_identifier_context",
+            "left": {
+              "value": 0.06318152800100883
+            },
+            "right": {
+              "value": -0.06836728984676903
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.265625
+        },
+        "right": {
+          "value": 0.06020618987181153
+        },
+        "threshold": 0.7083333333333333
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_symbol_ratio_detail_bin",
+      "left": {
+        "feature": "value_digit_ratio_detail_bin",
+        "left": {
+          "feature": "source_code_file",
+          "left": {
+            "feature": "configuration_file",
+            "left": {
+              "value": -0.05063189609044695
+            },
+            "right": {
+              "value": 0.035888519171424875
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.025629035972233073
+            },
+            "right": {
+              "value": -0.09538498219924074
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "value_digit_ratio_bin",
+            "left": {
+              "value": 0.11252827052431989
+            },
+            "right": {
+              "value": -0.10891783686461094
+            },
+            "threshold": 0.875
+          },
+          "right": {
+            "feature": "credential_usage_context",
+            "left": {
+              "value": -0.017456074534690943
+            },
+            "right": {
+              "value": 0.09560666619677578
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.4375
+        },
+        "threshold": 0.03125
+      },
+      "right": {
+        "feature": "value_digit_ratio_detail_bin",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": -0.0012834542992930618
+            },
+            "right": {
+              "value": -0.11583275184715176
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.07729873037586658
+            },
+            "right": {
+              "value": -0.10562460365766012
+            },
+            "threshold": 0.1328125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "parsed_context",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.12877325490278985
+            },
+            "right": {
+              "value": -0.09810288466696626
+            },
+            "threshold": 0.0390625
+          },
+          "right": {
+            "value": -0.10814366233796323
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.09375
+      },
+      "threshold": 0.09375
+    },
+    {
+      "feature": "localization_resource_context",
+      "left": {
+        "feature": "value_symbol_ratio_detail_bin",
+        "left": {
+          "feature": "php_source_file",
+          "left": {
+            "feature": "configuration_file",
+            "left": {
+              "value": -0.002700126738613311
+            },
+            "right": {
+              "value": 0.054909896398529605
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.09069550515473768
+            },
+            "right": {
+              "value": -0.03705868429167302
+            },
+            "threshold": 0.8125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.014963246952602037
+            },
+            "right": {
+              "value": 0.0998558249357745
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_symbol_ratio_bin",
+            "left": {
+              "value": -0.08566206444486271
+            },
+            "right": {
+              "value": 0.005556735529268695
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.09375
+      },
+      "right": {
+        "feature": "value_entropy_detail_bin",
+        "left": {
+          "value": -0.07994113319245447
+        },
+        "right": {
+          "value": -0.01687677025963862
+        },
+        "threshold": 0.40625
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.08135795280793168
+      },
+      "right": {
+        "feature": "value_entropy_detail_bin",
+        "left": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.0024848884835378822
+            },
+            "right": {
+              "value": 0.10637258548945527
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.002128396442881193
+            },
+            "right": {
+              "value": -0.0770658297654171
+            },
+            "threshold": 0.0625
+          },
+          "threshold": 0.0625
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.08969535633526082
+            },
+            "right": {
+              "value": -0.08040889793106393
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "php_source_file",
+            "left": {
+              "value": 0.00992408618213187
+            },
+            "right": {
+              "value": -0.04600147200282529
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.29166666666666663
+        },
+        "threshold": 0.28125
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.07992594766900377
+      },
+      "right": {
+        "feature": "value_entropy_detail_bin",
+        "left": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": -0.002251557061233639
+            },
+            "right": {
+              "value": 0.10257739510746058
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.001986370089947729
+            },
+            "right": {
+              "value": -0.07374985405617246
+            },
+            "threshold": 0.0625
+          },
+          "threshold": 0.0625
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.08694999281801385
+            },
+            "right": {
+              "value": -0.07608387454333619
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "php_source_file",
+            "left": {
+              "value": 0.008950158722557033
+            },
+            "right": {
+              "value": -0.04187214858841745
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.29166666666666663
+        },
+        "threshold": 0.28125
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "comment_context",
+      "left": {
+        "feature": "localization_resource_context",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.0646418833112904
+            },
+            "right": {
+              "value": 0.011774023319057286
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": 0.0638130689869084
+            },
+            "right": {
+              "value": -0.0017093927659425998
+            },
+            "threshold": 0.28125
+          },
+          "threshold": 0.1875
+        },
+        "right": {
+          "value": -0.10463248252853662
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_symbol_ratio_detail_bin",
+        "left": {
+          "value": 0.10145660450674654
+        },
+        "right": {
+          "value": -0.07249823982044205
+        },
+        "threshold": 0.09375
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_uppercase_ratio_detail_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.004189813438490141
+            },
+            "right": {
+              "value": -0.05543784158188474
+            },
+            "threshold": 0.0703125
+          },
+          "right": {
+            "feature": "credential_usage_context",
+            "left": {
+              "value": 0.00901177023601549
+            },
+            "right": {
+              "value": 0.11084303189395638
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "php_source_file",
+            "left": {
+              "value": -0.13561367782457254
+            },
+            "right": {
+              "value": -0.05119345865149369
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.061309451828379914
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.59375
+      },
+      "right": {
+        "value": 0.08056527405048386
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "token_name_context",
+      "left": {
+        "feature": "credential_name_context",
+        "left": {
+          "feature": "known_signature",
+          "left": {
+            "feature": "php_source_file",
+            "left": {
+              "value": -0.04121527364832454
+            },
+            "right": {
+              "value": 0.07599121049885793
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "php_source_file",
+            "left": {
+              "value": 0.0909520947309006
+            },
+            "right": {
+              "value": -0.04945928347963079
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "localization_resource_context",
+            "left": {
+              "value": 0.019730410572956603
+            },
+            "right": {
+              "value": -0.05971638383727571
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.11637321428944132
+            },
+            "right": {
+              "value": 0.041003081306984074
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.15625
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "credential_name_context",
+        "left": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.020183193325555505
+            },
+            "right": {
+              "value": 0.06162572296675161
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.09502283686305506
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.0717469536263831
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_path_like",
+      "left": {
+        "feature": "value_length_detail_bin",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": -0.0005109857298755791
+            },
+            "right": {
+              "value": 0.08795005224410349
+            },
+            "threshold": 0.53125
+          },
+          "right": {
+            "value": -0.07869472622583606
+          },
+          "threshold": 0.5625
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "documentation_file",
+            "left": {
+              "value": 0.0968848622611041
+            },
+            "right": {
+              "value": 0.02758127885277535
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.03320068031534488
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.1640625
+      },
+      "right": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "value_length_detail_bin",
+          "left": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": -0.015350904829147534
+            },
+            "right": {
+              "value": -0.10336463681376751
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "public_identifier_context",
+            "left": {
+              "value": 0.059129686485352065
+            },
+            "right": {
+              "value": -0.06525626469875416
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.265625
+        },
+        "right": {
+          "value": 0.05845034910477975
+        },
+        "threshold": 0.7083333333333333
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.07831747425025652
+      },
+      "right": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "value_length_detail_bin",
+          "left": {
+            "feature": "value_path_like",
+            "left": {
+              "value": 0.0030703028290423803
+            },
+            "right": {
+              "value": -0.0959779713783952
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.09352150356801588
+          },
+          "threshold": 0.2578125
+        },
+        "right": {
+          "value": -0.08236620918274196
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "value_digit_ratio_bin",
+      "left": {
+        "feature": "value_digit_ratio_detail_bin",
+        "left": {
+          "feature": "parsed_context",
+          "left": {
+            "feature": "comment_context",
+            "left": {
+              "value": -0.017641012546462605
+            },
+            "right": {
+              "value": 0.0918622694163343
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.11630371348473079
+            },
+            "right": {
+              "value": -0.009015620769357838
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.1108245595651491
+            },
+            "right": {
+              "value": 0.001234496281690976
+            },
+            "threshold": 0.4375
+          },
+          "right": {
+            "feature": "value_symbol_ratio_bin",
+            "left": {
+              "value": -0.07342804873740456
+            },
+            "right": {
+              "value": 0.03622079814375785
+            },
+            "threshold": 0.125
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.03125
+      },
+      "right": {
+        "value": -0.10122913656269256
+      },
+      "threshold": 0.875
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.07740579585002273
+      },
+      "right": {
+        "feature": "value_entropy_detail_bin",
+        "left": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.0006411641218438523
+            },
+            "right": {
+              "value": 0.09668428024499397
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.0024817354498766035
+            },
+            "right": {
+              "value": -0.06910266281796143
+            },
+            "threshold": 0.0625
+          },
+          "threshold": 0.0625
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.0819710041461002
+            },
+            "right": {
+              "value": -0.07221243183872972
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "localization_resource_context",
+            "left": {
+              "value": 0.005465643568890356
+            },
+            "right": {
+              "value": -0.0781573534857935
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.29166666666666663
+        },
+        "threshold": 0.28125
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "token_name_context",
+      "left": {
+        "feature": "value_entropy_detail_bin",
+        "left": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": -0.0069160143950707425
+            },
+            "right": {
+              "value": 0.04092848399501575
+            },
+            "threshold": 0.09375
+          },
+          "right": {
+            "value": 0.09802771653808567
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "credential_usage_context",
+          "left": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": -0.06936686653254885
+            },
+            "right": {
+              "value": -0.006683176453384615
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.09042722044888404
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.40625
+      },
+      "right": {
+        "feature": "value_symbol_ratio_detail_bin",
+        "left": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.02119919493241658
+            },
+            "right": {
+              "value": 0.0589001667415207
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.0922324969659668
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": -0.06859343082872459
+        },
+        "threshold": 0.03125
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.07578118465539142
+      },
+      "right": {
+        "feature": "credential_name_context",
+        "left": {
+          "feature": "token_name_context",
+          "left": {
+            "feature": "known_signature",
+            "left": {
+              "value": -0.028657270073761967
+            },
+            "right": {
+              "value": 0.020951659747516563
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": 0.030074388597766455
+            },
+            "right": {
+              "value": 0.09007531681515206
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "value_length_bin",
+            "left": {
+              "value": 0.03007942973546734
+            },
+            "right": {
+              "value": -0.014351471890592047
+            },
+            "threshold": 0.375
+          },
+          "right": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.11222615179497802
+            },
+            "right": {
+              "value": 0.039546047444476456
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.15625
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "value_digit_ratio_bin",
+      "left": {
+        "feature": "value_digit_ratio_detail_bin",
+        "left": {
+          "feature": "parsed_context",
+          "left": {
+            "feature": "source_code_file",
+            "left": {
+              "value": -0.034141541864967886
+            },
+            "right": {
+              "value": 0.0009201595222586058
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "assignment_context",
+            "left": {
+              "value": 0.11306896756447969
+            },
+            "right": {
+              "value": -0.008634406602466267
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.10927543150955432
+            },
+            "right": {
+              "value": 0.0021733493390886935
+            },
+            "threshold": 0.4375
+          },
+          "right": {
+            "feature": "parsed_context",
+            "left": {
+              "value": 0.0021785812289123402
+            },
+            "right": {
+              "value": -0.10004188349282445
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.03125
+      },
+      "right": {
+        "value": -0.09374939644046638
+      },
+      "threshold": 0.875
+    },
+    {
+      "feature": "configuration_file",
+      "left": {
+        "feature": "assignment_context",
+        "left": {
+          "feature": "parsed_context",
+          "left": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.013180428308020057
+            },
+            "right": {
+              "value": 0.02157609488460784
+            },
+            "threshold": 0.03125
+          },
+          "right": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.10582412890106606
+            },
+            "right": {
+              "value": -0.05496761932124472
+            },
+            "threshold": 0.09375
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "value": -0.08674738750720258
+          },
+          "right": {
+            "value": 0.05492478499830498
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "quoted_literal_context",
+        "left": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.0964743265123009
+            },
+            "right": {
+              "value": 0.010712768473489155
+            },
+            "threshold": 0.0859375
+          },
+          "right": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": -0.05320683366139939
+            },
+            "right": {
+              "value": 0.05302576640103394
+            },
+            "threshold": 0.0390625
+          },
+          "threshold": 0.09375
+        },
+        "right": {
+          "feature": "value_base64_like",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.011037204193322572
+            },
+            "right": {
+              "value": -0.08314230321871459
+            },
+            "threshold": 0.0390625
+          },
+          "right": {
+            "value": 0.06913377602326146
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.07596465333830078
+      },
+      "right": {
+        "feature": "value_entropy_detail_bin",
+        "left": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.0015399278766754848
+            },
+            "right": {
+              "value": 0.09495365247600486
+            },
+            "threshold": 0.1875
+          },
+          "right": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": -0.021122620517072522
+            },
+            "right": {
+              "value": -0.08443339274739554
+            },
+            "threshold": 0.3125
+          },
+          "threshold": 0.0625
+        },
+        "right": {
+          "feature": "value_length_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.07703249986600924
+            },
+            "right": {
+              "value": -0.06762566537085002
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "php_source_file",
+            "left": {
+              "value": 0.00788023108118766
+            },
+            "right": {
+              "value": -0.035719590729112696
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.29166666666666663
+        },
+        "threshold": 0.28125
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "localization_resource_context",
+      "left": {
+        "feature": "mapping_literal_context",
+        "left": {
+          "feature": "value_length_bin",
+          "left": {
+            "value": -0.07444061949195302
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": 0.003415741810904133
+            },
+            "right": {
+              "value": -0.051683749903001265
+            },
+            "threshold": 0.59375
+          },
+          "threshold": 0.20833333333333331
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "value": 0.09172412349980583
+          },
+          "right": {
+            "value": 0.011933041630025393
+          },
+          "threshold": 0.0625
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_entropy_detail_bin",
+        "left": {
+          "value": -0.07055592292067488
+        },
+        "right": {
+          "value": -0.007991963309317208
+        },
+        "threshold": 0.40625
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_uppercase_ratio_detail_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.004686123676093223
+            },
+            "right": {
+              "value": -0.055646746044782126
+            },
+            "threshold": 0.0703125
+          },
+          "right": {
+            "feature": "credential_name_context",
+            "left": {
+              "value": 0.005149999788035143
+            },
+            "right": {
+              "value": 0.08989022259217228
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "value": 0.052755081302330864
+          },
+          "right": {
+            "feature": "php_source_file",
+            "left": {
+              "value": -0.12357918426898913
+            },
+            "right": {
+              "value": -0.035753939164235554
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.03125
+        },
+        "threshold": 0.59375
+      },
+      "right": {
+        "value": 0.07688634493531409
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "public_identifier_context",
+      "left": {
+        "feature": "value_length_detail_bin",
+        "left": {
+          "feature": "value_path_like",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.003361794091970618
+            },
+            "right": {
+              "value": -0.05964010125040173
+            },
+            "threshold": 0.5625
+          },
+          "right": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": -0.011804924483615182
+            },
+            "right": {
+              "value": -0.09587380033299153
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": 0.09138405794543991
+        },
+        "threshold": 0.2578125
+      },
+      "right": {
+        "value": -0.0783045794197895
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_digit_ratio_bin",
+      "left": {
+        "feature": "public_identifier_context",
+        "left": {
+          "feature": "value_length_detail_bin",
+          "left": {
+            "feature": "value_path_like",
+            "left": {
+              "value": 0.002466454627705025
+            },
+            "right": {
+              "value": -0.08889949747620579
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": 0.08877583411589306
+          },
+          "threshold": 0.2578125
+        },
+        "right": {
+          "value": -0.07631101411884436
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "value": -0.08805507740800714
+      },
+      "threshold": 0.875
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.07309974220952471
+      },
+      "right": {
+        "feature": "configuration_file",
+        "left": {
+          "feature": "assignment_context",
+          "left": {
+            "feature": "parsed_context",
+            "left": {
+              "value": -0.003089568874963086
+            },
+            "right": {
+              "value": 0.0682086211545843
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": -0.08537716868965922
+            },
+            "right": {
+              "value": 0.053089390943348296
+            },
+            "threshold": 0.09375
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "quoted_literal_context",
+          "left": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": 0.09820342113684684
+            },
+            "right": {
+              "value": -0.014821449083762686
+            },
+            "threshold": 0.09375
+          },
+          "right": {
+            "feature": "value_base64_like",
+            "left": {
+              "value": -0.052031638176065965
+            },
+            "right": {
+              "value": 0.06679608040199396
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.20833333333333331
+    },
+    {
+      "feature": "localization_resource_context",
+      "left": {
+        "feature": "mapping_literal_context",
+        "left": {
+          "feature": "token_name_context",
+          "left": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": 0.0062714672023933314
+            },
+            "right": {
+              "value": -0.024952155980308196
+            },
+            "threshold": 0.40625
+          },
+          "right": {
+            "feature": "value_symbol_ratio_detail_bin",
+            "left": {
+              "value": 0.08021147215936297
+            },
+            "right": {
+              "value": -0.062323762899471224
+            },
+            "threshold": 0.03125
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "value": 0.08823167132086121
+          },
+          "right": {
+            "value": 0.010425803173973729
+          },
+          "threshold": 0.0625
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_entropy_detail_bin",
+        "left": {
+          "value": -0.0671080828038646
+        },
+        "right": {
+          "value": -0.007960264658035877
+        },
+        "threshold": 0.40625
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "validator_present",
+      "left": {
+        "feature": "value_uppercase_ratio_detail_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_bin",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.0035924995966695275
+            },
+            "right": {
+              "value": -0.05003344567932157
+            },
+            "threshold": 0.0703125
+          },
+          "right": {
+            "feature": "credential_usage_context",
+            "left": {
+              "value": 0.007987483343752306
+            },
+            "right": {
+              "value": 0.10888363596649567
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.125
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "value": 0.05067246607738849
+          },
+          "right": {
+            "feature": "php_source_file",
+            "left": {
+              "value": -0.115228032536323
+            },
+            "right": {
+              "value": -0.03223420646078503
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.03125
+        },
+        "threshold": 0.59375
+      },
+      "right": {
+        "value": 0.07380991287855096
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "documentation_file",
+      "left": {
+        "feature": "credential_usage_context",
+        "left": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "php_source_file",
+            "left": {
+              "value": 0.0072514203342559595
+            },
+            "right": {
+              "value": -0.0755700714977181
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": 0.05236179531549782
+            },
+            "right": {
+              "value": -0.07385703179958093
+            },
+            "threshold": 0.59375
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.06629799630069859
+            },
+            "right": {
+              "value": 0.04887552417615147
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.12190428329114805
+            },
+            "right": {
+              "value": -0.10184757241073022
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.28125
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "credential_usage_context",
+        "left": {
+          "feature": "token_name_context",
+          "left": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": -0.018646199522816122
+            },
+            "right": {
+              "value": -0.10190115155655129
+            },
+            "threshold": 0.09375
+          },
+          "right": {
+            "value": 0.06387004864658043
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "value": -0.06377016854105916
+          },
+          "right": {
+            "value": 0.11276404971588468
+          },
+          "threshold": 0.0625
+        },
+        "threshold": 0.5
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_digit_ratio_bin",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.07224024726482951
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": 0.0022799597575712295
+            },
+            "right": {
+              "value": 0.06507374903009541
+            },
+            "threshold": 0.28125
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.03826832717307892
+            },
+            "right": {
+              "value": 0.008538801500244005
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.03125
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "value": -0.08471197073937765
+      },
+      "threshold": 0.875
+    },
+    {
+      "feature": "documentation_file",
+      "left": {
+        "feature": "credential_usage_context",
+        "left": {
+          "feature": "value_entropy_bin",
+          "left": {
+            "feature": "php_source_file",
+            "left": {
+              "value": 0.045904245329143875
+            },
+            "right": {
+              "value": -0.07547367257045048
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.029550858464789772
+            },
+            "right": {
+              "value": 0.029459277613681323
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.3125
+        },
+        "right": {
+          "feature": "value_entropy_detail_bin",
+          "left": {
+            "feature": "non_production_path",
+            "left": {
+              "value": -0.06302905422454368
+            },
+            "right": {
+              "value": 0.0439785945042537
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "non_production_path",
+            "left": {
+              "value": 0.11857994885717725
+            },
+            "right": {
+              "value": -0.09932821907768989
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.28125
+        },
+        "threshold": 0.5
+      },
+      "right": {
+        "feature": "value_uppercase_ratio_detail_bin",
+        "left": {
+          "feature": "value_digit_ratio_detail_bin",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": -0.07525812862656497
+            },
+            "right": {
+              "value": 0.06625111410847337
+            },
+            "threshold": 0.0390625
+          },
+          "right": {
+            "value": 0.06208625242853591
+          },
+          "threshold": 0.09375
+        },
+        "right": {
+          "feature": "credential_usage_context",
+          "left": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": 0.04156300946546627
+            },
+            "right": {
+              "value": -0.08976323912428985
+            },
+            "threshold": 0.09375
+          },
+          "right": {
+            "value": 0.10414679567276618
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.03125
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_digit_ratio_bin",
+      "left": {
+        "feature": "value_length_bin",
+        "left": {
+          "value": -0.07107909358118722
+        },
+        "right": {
+          "feature": "documentation_file",
+          "left": {
+            "feature": "credential_usage_context",
+            "left": {
+              "value": 0.014049864760682432
+            },
+            "right": {
+              "value": -0.02112740678512714
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_entropy_detail_bin",
+            "left": {
+              "value": -0.02830166615023394
+            },
+            "right": {
+              "value": 0.052881456443241354
+            },
+            "threshold": 0.53125
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.20833333333333331
+      },
+      "right": {
+        "value": -0.08181954503184469
+      },
+      "threshold": 0.875
+    },
+    {
+      "feature": "value_path_like",
+      "left": {
+        "feature": "value_length_detail_bin",
+        "left": {
+          "feature": "value_length_detail_bin",
+          "left": {
+            "feature": "public_metadata_context",
+            "left": {
+              "value": 0.00360783845005322
+            },
+            "right": {
+              "value": 0.11425046200395401
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_uppercase_ratio_detail_bin",
+            "left": {
+              "value": -0.07097984470530601
+            },
+            "right": {
+              "value": 0.012546555556976091
+            },
+            "threshold": 0.28125
+          },
+          "threshold": 0.1015625
+        },
+        "right": {
+          "feature": "value_symbol_ratio_detail_bin",
+          "left": {
+            "feature": "documentation_file",
+            "left": {
+              "value": 0.09266719065350976
+            },
+            "right": {
+              "value": 0.027296045430784534
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "value": -0.03063277406420882
+          },
+          "threshold": 0.09375
+        },
+        "threshold": 0.1640625
+      },
+      "right": {
+        "feature": "value_length_bin",
+        "left": {
+          "feature": "php_source_file",
+          "left": {
+            "feature": "quoted_literal_context",
+            "left": {
+              "value": -0.00732625879644426
+            },
+            "right": {
+              "value": -0.0908506213797328
+            },
+            "threshold": 0.5
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": 0.011272490523412414
+            },
+            "right": {
+              "value": -0.0314371800295758
+            },
+            "threshold": 0.09375
+          },
+          "threshold": 0.5
+        },
+        "right": {
+          "value": 0.04527624084519108
+        },
+        "threshold": 0.7083333333333333
+      },
+      "threshold": 0.5
+    },
+    {
+      "feature": "value_length_bin",
+      "left": {
+        "value": -0.06999599901766038
+      },
+      "right": {
+        "feature": "value_symbol_ratio_detail_bin",
+        "left": {
+          "feature": "value_uppercase_ratio_detail_bin",
+          "left": {
+            "feature": "value_length_detail_bin",
+            "left": {
+              "value": 0.01080278299818127
+            },
+            "right": {
+              "value": -0.05351452775927554
+            },
+            "threshold": 0.1015625
+          },
+          "right": {
+            "feature": "public_identifier_context",
+            "left": {
+              "value": 0.07501787376405157
+            },
+            "right": {
+              "value": -0.05663534119703067
+            },
+            "threshold": 0.5
+          },
+          "threshold": 0.28125
+        },
+        "right": {
+          "feature": "non_production_path",
+          "left": {
+            "feature": "value_entropy_bin",
+            "left": {
+              "value": 0.03829945503896878
+            },
+            "right": {
+              "value": -0.060721135161674156
+            },
+            "threshold": 0.3125
+          },
+          "right": {
+            "feature": "value_digit_ratio_detail_bin",
+            "left": {
+              "value": 0.03502241945889077
+            },
+            "right": {
+              "value": -0.05069355526599874
+            },
+            "threshold": 0.09375
+          },
+          "threshold": 0.5
+        },
+        "threshold": 0.03125
+      },
+      "threshold": 0.20833333333333331
+    }
+  ],
+  "weights": {
+    "bias": 0.0
+  }
+}

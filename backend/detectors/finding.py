@@ -13,15 +13,23 @@ VALUE_SHAPE_FEATURES = (
     "value_length_bin", "value_entropy_bin", "value_digit_ratio_bin",
     "value_uppercase_ratio_bin", "value_symbol_ratio_bin", "value_uuid_like",
     "value_hex_like", "value_base64_like",
+    "value_length_detail_bin", "value_entropy_detail_bin",
+    "value_digit_ratio_detail_bin", "value_uppercase_ratio_detail_bin",
+    "value_symbol_ratio_detail_bin", "value_url_like", "value_path_like",
+    "value_repeated_pattern",
 )
+
+_LEGACY_VALUE_SHAPE_FEATURE_COUNT = 8
 
 
 def _value_shape(value: str) -> tuple[float, ...]:
-    """Reduce an ephemeral value to coarse statistics, never token fragments.
+    """Reduce an ephemeral value to quantized statistics, never token fragments.
 
     Length uses capped powers-of-two bins, entropy uses whole-bit bins capped
-    at eight bits, and character ratios use quarter-width bins. Format flags
-    describe syntax only; they do not assert that a token is a credential.
+    at eight bits, and character ratios use quarter-width bins. The additional
+    detail bins use four-character lengths, half-bit entropy, and sixteenth-width
+    ratios. Format flags describe syntax only; they do not assert that a token
+    is a credential.
     """
     length = len(value)
     if not length:
@@ -31,6 +39,12 @@ def _value_shape(value: str) -> tuple[float, ...]:
     digit_count = sum(count for char, count in counts.items() if char.isdigit())
     uppercase_count = sum(count for char, count in counts.items() if char.isupper())
     symbol_count = sum(count for char, count in counts.items() if not char.isalnum())
+    url_like = re.fullmatch(r"https?://[^\s/?#]+(?:[/?#][^\s]*)?", value, re.IGNORECASE) is not None
+    path_like = not url_like and ("/" in value or "\\" in value)
+    repeated_pattern = length >= 12 and any(
+        length % size == 0 and length // size >= 3 and value == value[:size] * (length // size)
+        for size in range(1, 9)
+    )
     return (
         min(length.bit_length(), 12) / 12.0,
         min(int(entropy), 8) / 8.0,
@@ -40,6 +54,14 @@ def _value_shape(value: str) -> tuple[float, ...]:
         float(re.fullmatch(r"[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}", value) is not None),
         float(length >= 16 and re.fullmatch(r"[0-9a-fA-F]+", value) is not None),
         float(length >= 16 and re.fullmatch(r"[A-Za-z0-9+/_-]+={0,2}", value) is not None),
+        min(length // 4, 64) / 64.0,
+        min(math.floor(entropy * 2), 16) / 16.0,
+        (16 * digit_count // length) / 16.0,
+        (16 * uppercase_count // length) / 16.0,
+        (16 * symbol_count // length) / 16.0,
+        float(url_like),
+        float(path_like),
+        float(repeated_pattern),
     )
 
 
@@ -76,11 +98,14 @@ class Finding:
         """Keep optional shape metadata immutable, numeric, and normalized."""
         if not isinstance(self.value_shape, tuple) or (
             self.value_shape and (
-                len(self.value_shape) != len(VALUE_SHAPE_FEATURES)
+                len(self.value_shape) not in (_LEGACY_VALUE_SHAPE_FEATURE_COUNT, len(VALUE_SHAPE_FEATURES))
                 or any(type(value) not in (int, float) or not 0 <= value <= 1 for value in self.value_shape)
             )
         ):
-            raise ValueError("value_shape must be an empty tuple or eight numbers in [0, 1]")
+            raise ValueError(
+                f"value_shape must be an empty tuple, eight legacy numbers, or "
+                f"{len(VALUE_SHAPE_FEATURES)} numbers in [0, 1]"
+            )
 
     @classmethod
     def from_match(

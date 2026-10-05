@@ -59,7 +59,7 @@ def main(arguments: list[str] | None = None) -> int:
     report["schema_version"] = 1
     report["scan_profile"] = {
         "detector_revision": 8,
-        "scoring_revision": 6, "model_id": model_id,
+        "scoring_revision": 7, "model_id": model_id,
         "model_kind": "trained_boosted_trees" if classifier._trees is not None else "logistic",
         "ml_policy": "existing_alerts_only_v1" if classifier._existing_alerts_only else "custom_model",
         "history": args.history, "reflog": args.reflog,

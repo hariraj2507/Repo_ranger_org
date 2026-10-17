@@ -72,7 +72,12 @@ class ReportGenerator:
         }
         if assessment.validation is not None:
             value["validation"] = {"provider": assessment.validation.provider, "format_valid": assessment.validation.is_valid,
-                                   "reasons": list(assessment.validation.reasons), "live_verified": False}
+                                   "reasons": list(assessment.validation.reasons),
+                                   "live_verified": assessment.validation.details.get('live_verified') is True}
+            if 'live_check_status' in assessment.validation.details:
+                value['validation']['live_check'] = {
+                    'status': assessment.validation.details['live_check_status'],
+                    'reason': assessment.validation.details['live_check_reason']}
         if assessment.context is not None:
             context = assessment.context
             value["context"] = {"language": context.language, "symbol_kind": context.symbol_kind,

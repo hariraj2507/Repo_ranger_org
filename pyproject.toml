@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "reporanger"
-version = "0.2.0a7"
+version = "0.2.0a8"
 description = "Local and historical repository credential scanning with explainable risk reports"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -12,9 +12,11 @@ dependencies = []
 
 [project.scripts]
 reporanger = "backend.application.cli:main"
+reporanger-web = "backend.web.__main__:main"
 
 [tool.setuptools.packages.find]
 include = ["backend*"]
 
 [tool.setuptools.package-data]
 "backend.ml" = ["data/*.json"]
+"backend.web" = ["static/*.html", "static/*.css", "static/*.js"]

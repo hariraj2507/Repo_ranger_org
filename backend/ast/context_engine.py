@@ -53,6 +53,43 @@ class ContextEngine:
         ".go": "go", ".java": "java", ".rb": "ruby", ".rs": "rust",
         ".php": "php",
     }
+    _MAPPING_ENTRY = re.compile(
+        r'''(?P<key_quote>["'])(?P<key>[^"'\r\n]{1,128})(?P=key_quote)'''
+        r'''\s*(?:=>|:)\s*(?P<value_quote>["'])(?P<value>[^"'\r\n]{1,2048})(?P=value_quote)'''
+    )
+
+    @classmethod
+    def _translation_values(cls, source: str) -> frozenset[str]:
+        """Return fingerprints supported by a dictionary of display strings.
+
+        This is weak scoring evidence, never a detector exclusion. Require
+        multiple quoted map entries and a majority of display-like neighbors;
+        neither a locale path nor a credential field name establishes it.
+        """
+        entries = list(cls._MAPPING_ENTRY.finditer(source))
+        if len(entries) < 3:
+            return frozenset()
+
+        def text_shape(value):
+            return (sum(c.isalpha() for c in value) >= 2
+                    and not any(c.isdigit() for c in value)
+                    and all(word.islower() or word.isupper() or word.istitle()
+                            for word in re.findall(r'[^\W\d_]+', value))
+                    and all(c.isalpha() or c.isspace() or c in ".,!?;:()-_" for c in value))
+
+        def display_like(entry):
+            value = entry.group('value').strip()
+            return text_shape(value) and (
+                any(c.isspace() for c in value)
+                or any(c.isalpha() and not c.isascii() for c in value)
+                or value.istitle()
+                or re.sub(r'\W+', '', value).casefold()
+                   == re.sub(r'\W+', '', entry.group('key')).casefold())
+
+        if sum(display_like(entry) for entry in entries) / len(entries) < .6:
+            return frozenset()
+        return frozenset(hashlib.sha256(entry.group('value').strip().encode()).hexdigest()
+                         for entry in entries if text_shape(entry.group('value').strip()))
 
     def __init__(
         self,
@@ -66,17 +103,26 @@ class ContextEngine:
     def enrich(self, detection_result: DetectionResult) -> ContextResult:
         """Return syntax-only context for every detection result finding."""
         file_text = {text_file.metadata.relative_path: text_file.text for text_file in detection_result.repository.files}
+        candidate_paths = {finding.file_path for finding in detection_result.findings}
+        translation_values = {path: self._translation_values(file_text[path])
+                              for path in candidate_paths if path in file_text}
         enriched = tuple(
-            EnrichedFinding(finding, self._with_evidence(finding, file_text.get(finding.file_path)))
+            EnrichedFinding(finding, self._with_evidence(
+                finding, file_text.get(finding.file_path), translation_values.get(finding.file_path, frozenset())))
             for finding in detection_result.findings
         )
         return ContextResult(detection_result, enriched)
 
-    def _with_evidence(self, finding, source):
+    def _with_evidence(self, finding, source, translation_values=frozenset()):
         context = self._context_for(finding, source)
         lines = source.splitlines() if source else []
         line = lines[finding.line_start-1] if 0 < finding.line_start <= len(lines) else ''
         evidence = []
+        if any(hashlib.sha256(match.group('value').strip().encode()).hexdigest() == finding.fingerprint
+               for match in self._MAPPING_ENTRY.finditer(line)):
+            evidence.append('mapping_literal_context')
+            if finding.fingerprint in translation_values:
+                evidence.append('translation_map_context')
         scopes = context.enclosing_symbols + ((context.symbol_name,) if context.symbol_kind in {'function', 'async_function', 'class'} and context.symbol_name else ())
         if any(re.match(r'(?:test_|Test[A-Z])', name) for name in scopes):
             evidence.append('test_context')

@@ -1,0 +1,55 @@
+{
+  "candidate_metrics": {
+    "false_negative": 26,
+    "false_positive": 274,
+    "negative_labels": 345,
+    "positive_labels": 124,
+    "precision": 0.26344086021505375,
+    "recall": 0.7903225806451613,
+    "samples": 469,
+    "specificity": 0.20579710144927535,
+    "true_negative": 71,
+    "true_positive": 98
+  },
+  "candidate_repositories": 18,
+  "deployment": "Candidate acceptance does not authorize default promotion or certify full scanner accuracy.",
+  "evidence_sha256": {
+    "candidate_report_sha256": "d557768d9a9d67e33d0b4aaa5ec7e33f1b909623a52ed682dee573c64ce4613e",
+    "coverage_report_sha256": "fc9ced5b3a5f5aa1cdce2d5462d89ab9425b32d407f3352fe902856e835a0c3f",
+    "dataset_sha256": "0404b516266d515a8873f3cba4779b4bd9d6eb2cf1a6b0c98672146ab00a6726",
+    "model_sha256": "f6583cb17695c2978eccc095c9eceb86fc4719ae6d124544517e056339d772e3"
+  },
+  "full_scanner_gate": {
+    "passed": false,
+    "reasons": [
+      "positive_annotation_recall_below_80_percent",
+      "labeled_alert_precision_below_90_percent",
+      "independent_evaluation_not_established"
+    ],
+    "scope": "Minimum detector evidence only; not a certification of active-exposure accuracy or operational readiness"
+  },
+  "full_scanner_readiness_established": false,
+  "independence": "diagnostic",
+  "macro_specificity": 0.6435850439882698,
+  "negative_bearing_repositories": 12,
+  "passed": false,
+  "policy": {
+    "complete_file_coverage_required": true,
+    "minimum_macro_specificity": 0.5,
+    "minimum_negative_bearing_repositories": 5,
+    "minimum_negative_candidates": 100,
+    "minimum_positive_candidates": 100,
+    "minimum_precision": 0.9,
+    "minimum_recall": 0.8,
+    "minimum_selected_repositories": 20,
+    "minimum_specificity": 0.5
+  },
+  "reasons": [
+    "independent_evaluation_not_established",
+    "pooled_precision_below_90_percent",
+    "pooled_recall_below_80_percent",
+    "pooled_specificity_below_50_percent"
+  ],
+  "scope": "Line-labeled candidate triage only; emitted candidates exclude detector misses. Scores are not active-exposure probabilities.",
+  "selected_repositories": 20
+}

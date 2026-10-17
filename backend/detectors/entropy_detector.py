@@ -36,7 +36,7 @@ class EntropyDetector:
     _XML = re.compile(r'''(?i)<(?P<name>password|passwd|pwd|secret|token|api[_-]?key)>[ \t]*(?P<value>[^<\r\n]{8,2048})[ \t]*</(?P=name)>''')
     _SETTER = re.compile(r'''(?i)\bset(?P<name>password|passwd|secret|token|apiKey)\s*\(\s*["'](?P<value>[^"'\r\n]{8,2048})["']\s*\)''')
     _URL = re.compile(r'''(?i)\b(?:postgres(?:ql)?|mysql|mongodb(?:\+srv)?|redis|amqps?|https?)://[^\s/:@"']{1,128}:(?P<value>[^\s/@"']{8,2048})@[^\s/"']+''')
-    _COMMAND = re.compile(r'''(?im)\b(?:curl|wget|mysql|psql|redis-cli)\b[^\r\n]{0,512}?(?:--password(?:=|[ \t]+)|--user[ \t]+|-u[ \t]+)["']?(?:[^\s:"']{1,128}:)?(?P<value>[^\s"'`;$|<>]{8,256})''')
+    _COMMAND = re.compile(r'''(?im)\b(?:curl|wget|mysql|psql|redis-cli)\b[^\r\n]{0,512}?(?:--password(?:=|[ \t]+)|--user[ \t]+|-u[ \t]+)(?P<quote>["'])?(?:[^\s:"']{1,128}:)?(?P<value>[^"'\r\n`;$|<>]{8,256}?)(?(quote)(?P=quote)|(?=\s|$|[;|]))''')
     _POWERSHELL = re.compile(r'(?i)\bConvertTo-SecureString\b(?P<args>[^\r\n]{1,1024})')
     _PS_LITERAL = re.compile(r'''(?:^\s*|[ \t]+-String[ \t]+)["'](?P<value>[^"'\r\n]{8,256})["']''', re.I)
     _AUTH_HEADER = re.compile(

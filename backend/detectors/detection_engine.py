@@ -1,5 +1,6 @@
 """Orchestration for all Day 2 detectors."""
 from __future__ import annotations
+from backend.detectors.authorization_detector import AuthorizationDetector
 from backend.detectors.structured_detector import StructuredDetector
 from backend.detectors.literal_password_detector import LiteralPasswordDetector
 
@@ -38,7 +39,7 @@ class DetectionEngine:
     """Run injected detectors and return deterministic, de-duplicated findings."""
 
     def __init__(self, detectors: tuple[FileDetector, ...] | None = None) -> None:
-        self._detectors = detectors or (RegexDetector(), StructuredDetector(), EntropyDetector(), LiteralPasswordDetector())
+        self._detectors = detectors or (RegexDetector(), StructuredDetector(), AuthorizationDetector(), EntropyDetector(), LiteralPasswordDetector())
 
     def scan(self, repository: ParsedRepository) -> DetectionResult:
         """Scan all normalized files while suppressing duplicate token findings."""

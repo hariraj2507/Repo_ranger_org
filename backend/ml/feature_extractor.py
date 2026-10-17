@@ -55,9 +55,11 @@ class FeatureExtractor:
             **{name: float(context is not None and name in context.evidence) for name in (
                 'credential_name_context', 'password_name_context', 'token_name_context',
                 'public_metadata_context', 'quoted_literal_context', 'credential_usage_context', 'xml_value_context',
-                'mapping_literal_context')},
+                'mapping_literal_context', 'translation_map_context')},
             'localization_resource_context': float(bool(path_parts & {'locale', 'locales', 'lang', 'languages', 'i18n', 'l10n', 'translation', 'translations', 'messages'})),
             'php_source_file': float(suffix == '.php'),
+            'auth_response_structure': float(finding.rule_id == 'ntlm_authenticate'),
+            'authorization_literal_signal': float(finding.rule_id == 'authorization_literal'),
             'password_literal_signal': float(finding.rule_id == 'hardcoded_password'),
             'private_key_structure': float(finding.rule_id == 'private_jwk' or finding.category == 'private_key'),
             'configuration_file': float(filename == '.env' or filename.startswith('.env.') or

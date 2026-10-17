@@ -5,6 +5,7 @@ remain in ignored local storage; do not redistribute them or commit the corpus.
 """
 from __future__ import annotations
 
+from backend.revisions import DETECTOR_REVISION, SCORING_REVISION
 import argparse
 import binascii
 from collections import Counter
@@ -248,7 +249,7 @@ def evaluate(root, cache, count, download=False, offset=0, git_fallback=False, f
     tp, fp = totals['alerts_true_positive'], totals['alerts_false_positive']
     positives = totals['annotations_T']
     return {'dataset': 'https://github.com/Samsung/CredData', 'dataset_revision': revision,
-            'detector_revision': 8, 'scoring_revision': 5 if triage else None, 'seed': SEED, 'repository_offset': offset, 'eligible_repositories': population,
+            'detector_revision': DETECTOR_REVISION, 'scoring_revision': SCORING_REVISION if triage else None, 'seed': SEED, 'repository_offset': offset, 'eligible_repositories': population,
             'requested_repositories': count, 'selected_repositories': len(entries),
             'file_size_limit_bytes': max_file_bytes,
             'source_mode': 'Original pinned source archives; no upstream obfuscation applied',

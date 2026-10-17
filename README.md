@@ -4,6 +4,8 @@
 
 RepoRanger scans repository files and Git history for potential credentials. It combines signature and entropy detection, offline structural validation, syntax context, and explainable risk scoring. JSON, Markdown, and GitHub Actions output contain redacted findings.
 
+The current checkout is `0.2.0a8`, an alpha candidate awaiting release CI. The latest published GitHub prerelease is `0.2.0a7`. The local dashboard and optional GitHub authentication checks described below are new a8 work. The completed fresh audit covers 20 repositories and all 416 labeled files; raw scanner precision is 72.87% and positive-annotation recall is 31.40%, below the 90% / 80% targets. Distribution remains through the private GitHub repository.
+
 ## Install and run
 
 Requires Python 3.10+ and Git on PATH for remote, history, and reflog scans.
@@ -53,6 +55,30 @@ JSON includes scan counters, skipped file reasons, and history truncation flags.
 
 History and reflog scans each have their own limits. Repeated historical blob findings are deduplicated across both scans; the first encountered commit provides provenance. Current and historical occurrences are reported separately. Identical blobs reuse analysis for the same file extension, while every distinct included path is retained (with the first encountered commit at that path). This is not a complete inventory of every commit containing a credential. Shallow local checkouts are marked incomplete; fetch full history with `git fetch --unshallow` before scanning. With `--fail-on`, shallow history returns exit code 2.
 
+## Local dashboard
+
+```sh
+reporanger-web --root /path/to/allowed/projects --port 8765
+# From the checkout:
+python -m backend.web --root /path/to/allowed/projects --port 8765
+```
+
+Open `http://127.0.0.1:8765` in a browser. The dashboard starts scans, shows progress and recent results, filters redacted findings, displays coverage warnings, and downloads redacted JSON reports. Choose a local folder within `--root` or an exact public `https://github.com/OWNER/REPOSITORY` URL; optional Git history uses the same scanner and bundled guarded model as the CLI. Git must be installed for remote and history scans. The default allowed root is the current folder.
+
+The standard-library service binds only to loopback. It checks request hosts, origins and a session token; local scans reject paths outside the allowed root and skip symbolic links and junctions. Public GitHub clones disable credential helpers, prompts, hooks and redirects. Repository code is not executed. One worker processes a bounded queue, with a five-minute total scan deadline, at most 500 commits / 10,000 historical blobs, and explicit input/report limits. Coverage warnings must be reviewed before interpreting a clean report.
+
+Up to 20 recent scan records are kept in memory for the server session. Stopping the service discards them; download reports you need to retain. The dashboard does not expose custom policies, model overrides, reflogs, comparison baselines, or online credential checks. It is a local tool, without hosted accounts or durable server storage.
+
+## Optional GitHub authentication checks
+
+```sh
+reporanger /path/to/repository --verify-github --format json
+```
+
+Scans remain offline unless `--verify-github` is explicitly supplied. This option sends at most 20 distinct structurally valid detected GitHub user tokens to `https://api.github.com/user` using a read-only `GET`. Supported families include classic and fine-grained personal access tokens, OAuth access tokens and GitHub App user access tokens. Installation and refresh tokens are skipped because that endpoint cannot establish their validity.
+
+Reports contain only fixed statuses (`active`, `inactive`, `inconclusive`, `skipped`) and safe reasons. HTTP 200 means authentication succeeded at that moment; 401 means it was rejected. Rate limits, redirects, unsupported families and network failures do not establish inactivity. Response bodies and account identities are not read, and credential values are not retained by the verifier or written to its logs. Repeated values are cached by fingerprint in memory. The report profile records the opt-in setting; comparison baselines must use matching verification settings. All verification tests use mocked responses, and no CredData credentials were checked online.
+
 ## GitHub Actions usage
 
 Install RepoRanger from your checked-out source, then run:
@@ -68,7 +94,7 @@ Install RepoRanger from your checked-out source, then run:
 - run: reporanger . --history --format github --fail-on high
 ```
 
-The included CI workflow runs tests on Windows and Linux and checks the installed CLI. Its tests use synthetic credentials, so it does not enforce a secret-scanning policy against those fixtures.
+The included CI workflow runs all tests and the 52-case detector benchmark on Windows and Linux with Python 3.10 and 3.12. It checks the installed CLI, bundled model and dashboard outside the checkout, then validates the current release evidence. Its tests use synthetic credentials, so it does not enforce a secret-scanning policy against those fixtures.
 
 ## Development
 
@@ -80,11 +106,11 @@ Integration tests create isolated temporary Git repositories to verify deleted-s
 
 ## Current limitations
 
-- Validation is offline and structural; a positive result does not prove a credential is live.
+- Default validation is offline and structural; a positive result does not prove a credential is live. Optional GitHub user-token authentication requires `--verify-github`.
 - Normal scans load a bundled trained tree model for conservative ranking refinement. The transparent baseline protects alert decisions and risk levels; unrestricted ML classifiers remain experimental overrides.
-- Historical and current findings receive offline validation and syntax enrichment; active credential verification is not performed.
+- Historical and current findings receive offline validation and syntax enrichment. Other providers have no online verification integration.
 - Non-Python syntax context requires an optional compatible Tree-sitter provider; otherwise scans fall back to line context.
-- No web API or frontend is implemented yet.
+- The dashboard/API is confined to the local computer and has bounded, temporary storage.
 - Detection can produce false positives and false negatives; a clean report is not proof that a repository contains no secrets.
 
 ## Scan policy
@@ -107,7 +133,7 @@ Example `reporanger.json`:
 
 - Exclusions match case-sensitive, repository-relative paths with `/` separators. `*` may span directories; a trailing `/` excludes everything under that root-relative folder. `**/*.lock` also matches root-level lock files. Repeat `--exclude` to add patterns to the policy.
 - Excluded current files are skipped before extraction; matching historical paths are skipped before blob reads. Existing built-in directory exclusions remain active.
-- Built-in rule IDs accepted by `disabled_rules`: `aws_access_key_id`, `github_token`, `gitlab_token`, `private_key_block`, `high_entropy_token`, `jwt`, `private_jwk`, `hardcoded_password`. Custom rule IDs are also accepted.
+- Built-in rule IDs accepted by `disabled_rules`: `aws_access_key_id`, `github_token`, `gitlab_token`, `private_key_block`, `high_entropy_token`, `jwt`, `private_jwk`, `hardcoded_password`, `authorization_literal`, `ntlm_authenticate`. Custom rule IDs are also accepted.
 - Fingerprint suppression accepts SHA-256 hashes copied from JSON reports; it suppresses that fingerprint across paths and revisions. Do not put raw credentials in configuration.
 - Suppression applies after duplicate selection to both current and historical findings, before risk aggregation and CI policy evaluation. JSON records `suppressed_findings`; the CLI also prints a suppression count to stderr.
 - Unknown keys, unknown rule IDs, malformed hashes, and invalid configuration fail with exit code 2. Custom bounded signatures are supported below; arbitrary regular expressions are not accepted.
@@ -134,7 +160,7 @@ Comparison groups findings by path, rule, fingerprint, and historical blob/sourc
 
 Entropy screening now requires a credential-related assignment (for example `token`, `password`, `apiKey`, or `clientSecret`). It inspects the assigned value as a whole, rather than arbitrary fragments of identifiers, URLs, or dependency hashes. Environment references and URL values are not entropy candidates. Known credential signatures remain active regardless of assignment context, including in lockfiles and generated files.
 
-This improves precision at a recall cost: an unrecognized credential without a recognizable field assignment can be missed. Entropy also retains minimum length and diversity requirements and supports common single-line literal formats; it is not a complete parser for every language or credential syntax. Public or publishable keys may still require manual review. No live validity checks are performed.
+This improves precision at a recall cost: an unrecognized credential without a recognizable field assignment can be missed. Entropy also retains minimum length and diversity requirements and supports common single-line literal formats; it is not a complete parser for every language or credential syntax. Public or publishable keys may still require manual review. Default scans perform no live validity checks.
 
 The expanded 52-case detection benchmark covers 28 positive and 24 negative examples. They are regression tests, not an independent production benchmark. On the Cherry Blossom test repository, an unchanged 101-file/40-commit scan dropped from 3,063 potential findings to two low-confidence findings for one `.env` value (current and historical), with no exclusions. This reduction is not a claim that every removed finding was manually verified or that every secret can be found.
 
@@ -177,7 +203,9 @@ Detector revision 5 recognizes mixed-character password literals of at least 8 c
 
 ## Release process
 
-The package version is `0.2.0a7`. Verify the Actions matrix before releasing. Pushing a matching version tag runs the matrix again, then builds and publishes a GitHub prerelease with the wheel, source archive, model JSON and model card. Publishing to PyPI is not configured.
+The package version is `0.2.0a8`; release CI and publication remain pending. Distribution is through the private GitHub repository and its releases. Pushing a matching version tag runs the Windows/Linux Python 3.10/3.12 matrix, then builds and publishes a GitHub prerelease with the wheel, source archive, model JSON and model card. CI binds the current independent detector report to its report hash, detector/scoring revisions and detector/feature code hashes. The [current evidence manifest](benchmarks/revision9/release-evidence.json) points directly to the fresh ranks 260–279 audit and passes evidence validation while failing scanner readiness. Alpha tags require valid evidence from at least 20 selected repositories with complete file coverage. Stable `X.Y.Z` tags additionally require the unchanged 90% labeled-alert precision / 80% positive-annotation recall thresholds. Evidence validity and accuracy readiness are separate results; neither certifies production readiness.
+
+`.github/workflows/pypi.yml` is an unused manual publishing scaffold, disabled unless the repository variable `PYPI_ENABLED` equals `true`. Keep it disabled for the chosen private GitHub distribution. PyPI/TestPyPI setup and publication are outside the current release scope.
 
 ## Context, richer custom rules, and external ML
 
@@ -242,15 +270,34 @@ The development pool has 4,640 numeric candidate labels from 90 repositories. Fi
 
 ```sh
 reporanger /path/to/repository --format json
+# Historical v4 training requires the trainer at commit 9ca9bcbc2f33dcfb29c138c0dac92ec2fbaa222d:
 python -m backend.ml.tree_training benchmarks/ml-v4/development.jsonl models/creddata-v4-trees.json output/tree-training.json
 ```
 
 Inference and training use the Python standard library. Model data contain no raw credentials or source snippets. Numeric shape features are derived from credential candidates; quantization is not anonymization. `--model` is an explicit experimental override; scores do not validate active credentials.
 
-## Local v5 work — not released (2026-10-05)
+The current tree trainer uses the later six-configuration v6 grid, so running the historical v4 command in this checkout trains a new experiment rather than reproducing the saved v4 model. See the [v4 reproduction notes](benchmarks/ml-v4/README.md).
 
-The current checkout adds finer numeric shape features and semantic context, with scoring revision 7. Local regression checks pass 165 tests and 52 synthetic detector fixtures. Published 0.2.0a7 remains the release described above; these local changes have not completed release CI or been published.
+## Historical v5 experiment (2026-10-05)
+
+The v5 stage added finer numeric shape features and semantic context, with scoring revision 7. At that stage, local regression checks passed 165 tests and 52 synthetic detector fixtures. These results are preserved as historical evidence.
 
 The v5 development pool contains 4,928 candidate labels from 102 candidate-bearing repositories, with all 4,431 expected files recovered. Independent evaluation on 20 fresh repositories (ranks 220–239) recovered all 557 files. V5 candidate precision and recall are both 94.62%, but this positive-heavy sample has only 24 negative candidates and the model adds seven false positives versus the heuristic's zero, failing the relative promotion gate.
 
-Raw scanner precision is 84.42% among definitively labeled alerts and positive-annotation recall is 28.43%; both miss the 90%/80% release targets. V5 remains an experimental override, the bundled guarded v4 model is unchanged, and a7 remains the latest published release. See [the complete v5 evaluation](benchmarks/ml-v5/README.md), [implementation status](IMPLEMENTATION.md) and [model evidence](MODEL_CARD.md).
+Raw scanner precision was 84.42% among definitively labeled alerts and positive-annotation recall was 28.43%; both missed the 90%/80% release targets. V5 remains an experimental override. See [the complete v5 evaluation](benchmarks/ml-v5/README.md).
+
+## V6 experiment and a8 evaluation (2026-10-06)
+
+V6 uses 140 previously inspected development repositories (ranks 100–239), complete coverage of 4,988 expected labeled files, six predeclared tree configurations and validation-only threshold selection. All six validation policies failed. The selected model is an experimental override; the bundled guarded v4 artifact remains unchanged.
+
+The frozen v6 audit recovered 662/662 files from 20 new repositories (ranks 240–259). Its 469 definite candidate labels give v6 28.93% precision, 93.55% recall, 17.39% specificity and 44.61% repository-macro specificity. The strict candidate-readiness gate fails. Raw detection on that sample separately gives 26.44% labeled-alert precision and 52.74% positive-annotation recall. Candidate recall excludes missed source annotations and cannot stand in for scanner recall. These results provide no production accuracy claim.
+
+The initial v6 model and results are retained in [ML-v6 evidence](benchmarks/ml-v6/README.md). Once the ranks 240–259 audit was used to diagnose localization false positives, that sample became development evidence for any subsequent tuning. See [revision-9 detector evidence](benchmarks/revision9/README.md), [implementation status](IMPLEMENTATION.md) and [model evidence](MODEL_CARD.md) for the current release candidate's evidence.
+
+## V7 fresh audit and a8 status
+
+V7 adds source-derived JSON translation-map context and uses a model frozen before evaluating fresh ranks 260–279. All 416 expected labeled files across 20 repositories were recovered. The 188 definite emitted candidates contain 137 positive and 51 negative labels. V7 produces TP111/FP13/FN26/TN38: 89.52% precision, 81.02% candidate recall, 74.51% specificity and 75.13% repository-macro specificity. The strict gate fails because precision is below 90% and there are fewer than 100 negative candidates; the relative gate also fails precision regression against the heuristic. V7 remains an experimental `--model models/creddata-v7-trees.json` override. The bundled guarded v4 model is unchanged.
+
+On the reused ranks 240–259 diagnostic sample, v7 has only 26.34% precision and 79.03% candidate recall. This is inspected evidence, and the fresh sample has a different composition; the two results do not establish a broad improvement over v6. Raw scanning on fresh ranks 260–279 separately produces 137 true-positive and 51 false-positive definite alerts (72.87% precision), detecting 141 of 449 positive source annotations (31.40% recall). Candidate scoring excludes detector misses and cannot replace annotation recall. See [the complete v7 audit](benchmarks/ml-v7/README.md).
+
+Local validation passed 245 regression tests, all 52 synthetic detector fixtures and an installed-wheel smoke check outside the checkout, including the CLI, bundled model, authorization formats, redaction, protected API, dashboard assets, scan worker and HTTP report download. Desktop and mobile dashboard views were inspected. Browser automation did not complete a file-save download check; the HTTP attachment, report equality and redaction checks passed. The candidate awaits release CI and private GitHub publication; PyPI remains outside scope.

@@ -1,6 +1,7 @@
 """Command-line interface for RepoRanger scans and CI policy checks."""
 from __future__ import annotations
 
+from backend.revisions import DETECTOR_REVISION, SCORING_REVISION
 import argparse
 import json
 import hashlib
@@ -8,6 +9,8 @@ from backend.ml.classifier import CandidateClassifier
 import sys
 from dataclasses import replace, asdict
 from backend.config import ScanConfig
+from backend.validators.live_github import GitHubLiveVerifier
+from backend.validators.router import ValidatorRouter
 
 from backend.engine.github_action import GitHubAction
 from backend.engine.report_generator import ReportGenerator
@@ -39,6 +42,7 @@ def main(arguments: list[str] | None = None) -> int:
     parser.add_argument("--save-report", help="Save a redacted JSON snapshot to a new file")
     parser.add_argument("--compare", help="Compare with a previously saved report using identical settings")
     parser.add_argument("--model", help="Override the bundled trained ML ranking model with a JSON classifier")
+    parser.add_argument("--verify-github", action="store_true", help="Send detected GitHub user tokens to api.github.com for a read-only authentication check (at most 20 unique tokens)")
     args = parser.parse_args(arguments)
     try:
         config = ScanConfig.load(args.config) if args.config else ScanConfig()
@@ -46,7 +50,8 @@ def main(arguments: list[str] | None = None) -> int:
         baseline = ReportStore.load(args.compare) if args.compare else None
         classifier = CandidateClassifier.from_file(args.model) if args.model else CandidateClassifier.default()
         model_id = hashlib.sha256(json.dumps(classifier.model_identity(), sort_keys=True).encode()).hexdigest()
-        result = ScanOrchestrator(config=config, classifier=classifier).scan(args.source, history=args.history, reflog=args.reflog,
+        router = ValidatorRouter(live_github=GitHubLiveVerifier() if args.verify_github else None)
+        result = ScanOrchestrator(config=config, classifier=classifier, validator_router=router).scan(args.source, history=args.history, reflog=args.reflog,
                                          max_commits=args.max_commits, max_blobs=args.max_blobs)
     except (RepositoryError, RuntimeError, ValueError) as exc:
         print(f"RepoRanger error: {exc}", file=sys.stderr)
@@ -58,11 +63,12 @@ def main(arguments: list[str] | None = None) -> int:
     report = generator.as_dict(result.source, result.score, result.assessments)
     report["schema_version"] = 1
     report["scan_profile"] = {
-        "detector_revision": 8,
-        "scoring_revision": 7, "model_id": model_id,
+        "detector_revision": DETECTOR_REVISION,
+        "scoring_revision": SCORING_REVISION, "model_id": model_id,
         "model_kind": "trained_boosted_trees" if classifier._trees is not None else "logistic",
         "ml_policy": "existing_alerts_only_v1" if classifier._existing_alerts_only else "custom_model",
         "history": args.history, "reflog": args.reflog,
+        "live_verification": {"github": args.verify_github, "max_checks": 20 if args.verify_github else 0},
         "max_commits": args.max_commits, "max_blobs": args.max_blobs,
         "policy": {key: (sorted(values, key=lambda rule: rule["rule_id"]) if key == "custom_rules" else sorted(set(values)))
                    for key, values in asdict(config).items()},

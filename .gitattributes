@@ -1,0 +1,14 @@
+*.py text eol=lf
+*.json text eol=lf
+*.jsonl text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+*.md text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+
+# Frozen v6 artifacts are byte-hashed; preserve their original line endings.
+benchmarks/ml-v6/**/*.json -text -diff
+benchmarks/ml-v6/**/*.jsonl -text -diff
+models/creddata-v6-trees.json -text -diff

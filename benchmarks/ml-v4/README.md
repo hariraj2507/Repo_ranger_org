@@ -26,15 +26,19 @@ Raw scanner recall is separate: 139/290 positive annotations detected (47.93%), 
 
 ## Reproduce
 
+The frozen v4 trainer is at commit `9ca9bcbc2f33dcfb29c138c0dac92ec2fbaa222d` (the a7 implementation). Run the training command in a separate checkout of that commit with the saved v4 dataset. The current trainer uses the later six-configuration grid and does **not** reproduce v4 training. Do not overwrite the frozen model with a run of the current trainer.
+
 ```sh
+# With the frozen v4 trainer:
 python -m backend.ml.tree_training benchmarks/ml-v4/development.jsonl models/creddata-v4-trees.json output/tree-training.json
+# Evaluate the preserved numeric data and models:
 python -m benchmarks.evaluate_model benchmarks/ml-v4/final/holdout.jsonl models/creddata-v4-trees.json output/raw-tree-audit.json
 python -m benchmarks.evaluate_model benchmarks/ml-v4/final/holdout.jsonl backend/ml/data/default.json output/default-policy-audit.json
 reporanger /path/to/repository --format json
 ```
 
-Acquire with `--repositories 17 --offset 203 --git-fallback --original-paths --max-file-mib 16`; add `--download` when needed. JSON model loading bounds size to 1 MB, depth to six and count to 200 trees, rejects malformed models/policies, and uses no executable serialization.
+Create the output directory before running these commands. To reproduce source extraction, also use the frozen v4 feature/detector code; later code changes alter the population and feature semantics. Acquire with `--repositories 17 --offset 203 --git-fallback --original-paths --max-file-mib 16`; add `--download` when needed. JSON model loading bounds size to 1 MB, depth to six and count to 200 trees, rejects malformed models/policies, and uses no executable serialization.
 
-153 tests pass, including deterministic learning, automatic loading, full development class/current+historical-risk preservation, invalid model rejection, and complete model/policy report identity. All 52 scanner fixtures pass. Scoring revision 6 requires new saved-report baselines. Unrestricted decision expansion remains experimental.
+At the a7 release, 153 tests passed, including deterministic learning, automatic loading, full development class/current+historical-risk preservation, invalid model rejection, and complete model/policy report identity. All 52 scanner fixtures passed. That release used scoring revision 6. See the root README for current revisions and validation; unrestricted decision expansion remains experimental.
 
 Independent review reproduced the audit. AUROC and average precision are unchanged for the guarded default, so a ranking-order improvement has not been demonstrated; the observed change is limited numerical score refinement.

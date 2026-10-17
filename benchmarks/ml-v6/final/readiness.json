@@ -1,0 +1,53 @@
+{
+  "candidate_metrics": {
+    "false_negative": 8,
+    "false_positive": 285,
+    "negative_labels": 345,
+    "positive_labels": 124,
+    "precision": 0.2892768079800499,
+    "recall": 0.9354838709677419,
+    "samples": 469,
+    "specificity": 0.17391304347826086,
+    "true_negative": 60,
+    "true_positive": 116
+  },
+  "candidate_repositories": 18,
+  "deployment": "Candidate acceptance does not authorize default promotion or certify full scanner accuracy.",
+  "evidence_sha256": {
+    "candidate_report_sha256": "086aec948a4ae73b4ceade795b26ccc9c71ea7da2643560b0c0fac9d56bd31f9",
+    "coverage_report_sha256": "9fb00f5be72dbe408e323dc11c5029a2f3406356c12204aea6d0623933965bfe",
+    "dataset_sha256": "4954684ea4dc5ffb54760717bc5d0048ff8bff90318648c82ac7618a4bf9dfae",
+    "model_sha256": "43534cebbfa630decc8e792eb6a7c2d908c357b56ecf80bd7b0eb04b51a91afd"
+  },
+  "full_scanner_gate": {
+    "passed": false,
+    "reasons": [
+      "positive_annotation_recall_below_80_percent",
+      "labeled_alert_precision_below_90_percent"
+    ],
+    "scope": "Minimum detector evidence only; not a certification of active-exposure accuracy or operational readiness"
+  },
+  "full_scanner_readiness_established": false,
+  "independence": "independent",
+  "macro_specificity": 0.44607771260997064,
+  "negative_bearing_repositories": 12,
+  "passed": false,
+  "policy": {
+    "complete_file_coverage_required": true,
+    "minimum_macro_specificity": 0.5,
+    "minimum_negative_bearing_repositories": 5,
+    "minimum_negative_candidates": 100,
+    "minimum_positive_candidates": 100,
+    "minimum_precision": 0.9,
+    "minimum_recall": 0.8,
+    "minimum_selected_repositories": 20,
+    "minimum_specificity": 0.5
+  },
+  "reasons": [
+    "pooled_precision_below_90_percent",
+    "pooled_specificity_below_50_percent",
+    "macro_specificity_below_50_percent"
+  ],
+  "scope": "Line-labeled candidate triage only; emitted candidates exclude detector misses. Scores are not active-exposure probabilities.",
+  "selected_repositories": 20
+}

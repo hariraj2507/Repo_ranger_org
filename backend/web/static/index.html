@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#0e5b53">
+  <title>RepoRanger · Scan dashboard</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to dashboard</a>
+  <div id="announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="icon-shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></symbol>
+    <symbol id="icon-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="icon-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3V7Z"/></symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="icon-download" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M4 15v5h16v-5"/></symbol>
+    <symbol id="icon-file" viewBox="0 0 24 24"><path d="M14 3H5v18h14V8l-5-5Zm0 0v5h5M8 13h8M8 17h6"/></symbol>
+    <symbol id="icon-git" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="6" r="2"/><path d="M6 7v10m12-9a9 9 0 0 1-9 9H6"/></symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="icon-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.1"/></symbol>
+    <symbol id="icon-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  </svg>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Workspace navigation">
+      <a class="brand" href="/" aria-label="RepoRanger home">
+        <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="#icon-shield"/></svg></span>
+        <span>Repo<span class="brand-light">Ranger</span><small>REPOSITORY SECURITY</small></span>
+      </a>
+      <div class="workspace-label">YOUR WORKSPACE</div>
+      <a class="nav-link active" href="#main-content" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#icon-grid"/></svg>Scan dashboard<span class="nav-dot"></span></a>
+      <button class="nav-link" id="new-scan" type="button"><svg class="icon" aria-hidden="true"><use href="#icon-plus"/></svg>New scan</button>
+
+      <div class="recent-heading"><span class="workspace-label">RECENT SCANS</span><span id="recent-count" class="small-count">0</span></div>
+      <div id="recent-scans" class="recent-scans"><p class="sidebar-empty">Your scans will appear here.</p></div>
+      <p class="session-note">Results stay available for this server session.</p>
+
+      <div class="sidebar-bottom">
+        <div class="privacy-symbol"><svg class="icon" aria-hidden="true"><use href="#icon-shield"/></svg></div>
+        <strong>Built for careful review.</strong>
+        <p>Credential previews and downloaded reports are redacted.</p>
+        <div class="local-indicator"><span class="status-dot"></span>Local dashboard</div>
+      </div>
+    </aside>
+
+    <main id="main-content" class="main-content">
+      <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <strong>Scan dashboard</strong></div><div class="connection" id="connection-status"><span class="status-dot"></span><span id="connection-label">Connecting</span></div></header>
+      <div class="page-content">
+        <section class="page-intro" aria-labelledby="page-title"><div><p class="eyebrow">SEE WHAT NEEDS ATTENTION</p><h1 id="page-title">Repository security, in view.</h1><p class="intro-text">Find potential credentials. Understand the context. Prioritize your next step.</p></div><div class="intro-badge"><svg class="icon" aria-hidden="true"><use href="#icon-shield"/></svg><span>Redacted by default</span></div></section>
+
+        <section class="panel scan-panel" aria-labelledby="scan-heading">
+          <div class="section-heading"><div><div class="heading-line"><span class="section-icon"><svg class="icon" aria-hidden="true"><use href="#icon-folder"/></svg></span><h2 id="scan-heading">Start a repository scan</h2></div><p>Scan a local folder or a public GitHub repository.</p></div><span class="quiet-tag">CURRENT FILES + OPTIONAL HISTORY</span></div>
+          <form id="scan-form">
+            <label class="field-label" for="source">Repository path or GitHub URL</label>
+            <div class="source-row"><div class="input-with-icon"><svg class="icon" aria-hidden="true"><use href="#icon-folder"/></svg><input id="source" name="source" type="text" placeholder=". or https://github.com/owner/repository" required maxlength="2048" autocomplete="off" spellcheck="false" aria-describedby="source-help"></div><button class="button primary" id="start-scan" type="submit"><span id="start-label">Start scan</span><svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></button></div>
+            <p id="source-help" class="field-help">Use “.” for your allowed local folder. Public GitHub URLs use https://github.com/owner/repository.</p>
+            <div class="scan-options"><label class="checkbox-label"><input type="checkbox" id="include-history" name="history"><span><strong>Include Git history</strong><small>Also look for credentials in earlier revisions.</small></span></label><details class="scan-limits"><summary>History limits <svg class="icon" aria-hidden="true"><use href="#icon-chevron"/></svg></summary><div class="limit-fields"><label for="max-commits">Maximum commits<input id="max-commits" name="max_commits" type="number" min="1" max="500" step="1" value="500" required></label><label for="max-blobs">Maximum file revisions<input id="max-blobs" name="max_blobs" type="number" min="1" max="10000" step="1" value="10000" required></label></div></details></div>
+            <div class="allowed-root"><svg class="icon" aria-hidden="true"><use href="#icon-info"/></svg><span>Allowed local folder: <code id="allowed-root">Connecting…</code></span></div>
+          </form>
+          <div id="form-error" class="notice error" role="alert" hidden></div>
+        </section>
+
+        <div id="scan-status" class="scan-status" role="status" aria-live="polite" hidden><span class="spinner" aria-hidden="true"></span><div><strong id="scan-status-title">Scan in progress</strong><p id="scan-status-description">Reviewing repository files.</p></div><span class="running-pill">IN PROGRESS</span></div>
+        <div id="scan-error" class="notice error report-error" role="alert" hidden></div>
+
+        <section class="report-section" aria-labelledby="report-heading">
+          <div class="report-heading"><div><p class="eyebrow">REPOSITORY OVERVIEW</p><h2 id="report-heading">Your scan results</h2><p id="report-source" class="report-source">Start a scan to see what needs your attention.</p></div><div class="report-actions"><span id="report-time" class="report-time"></span><a id="download-report" class="button secondary" href="#" download hidden><svg class="icon" aria-hidden="true"><use href="#icon-download"/></svg>Download JSON</a></div></div>
+
+          <div id="empty-report" class="panel empty-report"><div class="empty-art" aria-hidden="true"><span class="art-orbit orbit-one"></span><span class="art-orbit orbit-two"></span><span class="art-file file-one"><svg class="icon"><use href="#icon-file"/></svg></span><span class="art-file file-two"><svg class="icon"><use href="#icon-git"/></svg></span><span class="art-shield"><svg class="icon"><use href="#icon-shield"/></svg></span><span class="art-check"><svg class="icon"><use href="#icon-check"/></svg></span></div><h3>A good place to start.</h3><p>Choose a repository above. Your report will bring potential<br class="desktop-break"> credentials, their locations, and review context together.</p><button id="empty-start" class="text-button" type="button">Choose a repository <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></button></div>
+
+          <div id="report-content" hidden>
+            <div class="summary-grid">
+              <article class="panel score-card"><div><span class="card-label">REVIEW PRIORITY</span><span id="risk-level" class="badge low">Low</span></div><div class="score-number"><strong id="risk-score">0</strong><span>/ 100</span></div><p id="score-explanation">A triage score to guide review.</p><div class="score-track" aria-hidden="true"><span id="score-fill"></span></div></article>
+              <article class="panel metric-card"><div class="metric-top"><span class="card-label">POTENTIAL FINDINGS</span><svg class="icon" aria-hidden="true"><use href="#icon-shield"/></svg></div><strong id="finding-count" class="metric-number">0</strong><p id="finding-description">Across the scanned repository</p><div class="risk-counts" aria-label="Findings by risk"><span><i class="risk-dot critical"></i><b id="critical-count">0</b> Critical</span><span><i class="risk-dot high"></i><b id="high-count">0</b> High</span><span><i class="risk-dot medium"></i><b id="medium-count">0</b> Medium</span><span><i class="risk-dot low"></i><b id="low-count">0</b> Low</span></div></article>
+              <article class="panel metric-card coverage-card"><div class="metric-top"><span class="card-label">SCAN COVERAGE</span><svg class="icon" aria-hidden="true"><use href="#icon-file"/></svg></div><div class="coverage-numbers"><div><strong id="files-scanned" class="metric-number">0</strong><span>files scanned</span></div><div><strong id="files-skipped" class="metric-number secondary-number">0</strong><span>files skipped</span></div></div><p id="history-summary">Current files only</p><details id="coverage-details" class="coverage-details" hidden><summary>View coverage details</summary><div id="coverage-detail-content"></div></details></article>
+            </div>
+            <div id="coverage-warning" class="notice warning" role="status" hidden></div>
+            <section class="panel findings-panel" aria-labelledby="findings-heading"><div class="findings-heading"><div><h3 id="findings-heading">Findings to review <span id="visible-count" class="small-count">0</span></h3><p>Redacted previews, with the evidence behind each finding.</p></div><span class="quiet-tag">SORTED BY PRIORITY</span></div>
+              <div class="filter-bar"><div class="input-with-icon search-input"><svg class="icon" aria-hidden="true"><use href="#icon-search"/></svg><input id="finding-search" type="search" placeholder="Search file, rule, or category…" aria-label="Search findings" autocomplete="off"></div><label class="filter-select"><span class="sr-only">Filter by risk</span><select id="risk-filter"><option value="all">All risk levels</option><option value="critical">Critical</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></label><label class="filter-select"><span class="sr-only">Filter by source</span><select id="scope-filter"><option value="all">All sources</option><option value="current">Current files</option><option value="history">Git history</option></select></label><button id="clear-filters" type="button" class="text-button clear-filters" hidden>Clear filters</button></div>
+              <div class="finding-columns" aria-hidden="true"><span>RISK</span><span>FINDING / LOCATION</span><span>CONFIDENCE</span><span></span></div><div id="findings-list" class="findings-list"></div><div id="findings-empty" class="findings-empty" hidden><span class="empty-mini"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><h4 id="findings-empty-title">No findings detected</h4><p id="findings-empty-text">A clean scan is a useful signal, but does not guarantee that every credential has been found.</p></div><div id="finding-pagination" class="finding-pagination" hidden><span id="finding-page-label"></span><button id="load-more" class="button secondary" type="button">Show more findings</button></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="review-notes" aria-label="Understanding your results"><article><span class="note-icon"><svg class="icon" aria-hidden="true"><use href="#icon-shield"/></svg></span><div><h3>Safe to inspect and share</h3><p>Previews hide credential values. Every JSON download uses the same redacted report.</p></div></article><article><span class="note-icon"><svg class="icon" aria-hidden="true"><use href="#icon-grid"/></svg></span><div><h3>Context helps you prioritize</h3><p>Detection, code context, and ML-assisted ranking guide review. Scores are not proof of active exposure.</p></div></article><article><span class="note-icon"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div><h3>Validation stays offline</h3><p>Format checks help assess a match. Credentials are never tested against live provider services.</p></div></article></section>
+        <footer class="page-footer"><span>RepoRanger</span><span>A considered approach to repository security.</span></footer>
+      </div>
+    </main>
+  </div>
+  <noscript><p class="noscript-message">Enable JavaScript to start scans and review results.</p></noscript>
+</body>
+</html>

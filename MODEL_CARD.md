@@ -1,8 +1,8 @@
-# Experimental triage model
+# RepoRanger model card
 
 ## Intended use
 
-As of 0.2.0a7, normal scans use bundled trained trees to refine ranking inside baseline classifier/risk bands. Older unrestricted classifiers remain experimental overrides. Earlier results below are historical. Model output does not verify active credentials.
+Normal scans in the `0.2.0a8` candidate awaiting release CI retain the bundled guarded v4 trees introduced in a7, refining scores inside baseline classifier/risk bands. Unrestricted v5/v6/v7 models remain experimental overrides. The fresh v7 audit is complete and fails candidate readiness; earlier results below are historical. Model output does not verify active credentials; the separate CLI-only `--verify-github` option performs bounded opt-in authentication checks and is not used in model evaluation.
 
 ## Training data and limits
 
@@ -79,7 +79,7 @@ Fresh guarded-model verification on ranks 200-202 recovered all 46 files but pro
 
 ## Bundled guarded tree ranking: 0.2.0a7
 
-In 0.2.0a7, normal CLI scans and the Python library API load `backend/ml/data/default.json`: 100 gradient-boosted trees over numeric metadata. No web API service is implemented. The development pool contains 4,640 previously inspected labels; fitting uses 2,784 rows, repository-separated validation (928 rows) selects depth four from 2/3/4, and 928 internal test rows supply development evidence. No probability calibration or active-exposure claim is made.
+In 0.2.0a7, normal CLI scans and the Python library API load `backend/ml/data/default.json`: 100 gradient-boosted trees over numeric metadata. The a8 local dashboard uses the same guarded model. The development pool contains 4,640 previously inspected labels; fitting uses 2,784 rows, repository-separated validation (928 rows) selects depth four from 2/3/4, and 928 internal test rows supply development evidence. No probability calibration or active-exposure claim is made.
 
 Unrestricted trees raise internal recall from 22.33% to 72.40%, but precision falls from 95.27% to 79.09%. On fresh ranks 203-219 (17 repositories, 639/639 files, 288 labels: 119 positive / 169 negative), unrestricted precision/recall are 63.64%/70.59% (84 TP, 48 FP). Expanded ML alert decisions fail the precision gate.
 
@@ -89,7 +89,7 @@ This limited integration makes trained ML part of normal scanning, with mixed ra
 
 Independent review reproduced the audit. AUROC and average precision are unchanged for the guarded default, so a ranking-order improvement has not been demonstrated; the observed change is limited numerical score refinement.
 
-## Local v5 experiment — not released (2026-10-05)
+## Historical v5 experiment (2026-10-05)
 
 V5 adds eight detail/format features alongside the original eight shape features, plus semantic name, usage, mapping, file-type and localization context. Legacy eight-value metadata remains supported. Features contain no raw credential values or source snippets, but finer quantized statistics remain secret-derived metadata and are not anonymization. Mapping syntax, paths and localization flags do not prove that a candidate is harmless.
 
@@ -102,3 +102,34 @@ The relative candidate gate fails: heuristic precision is 100% with 24.62% recal
 The raw scanner produces 130 true-positive and 24 false-positive labeled alerts (84.42% precision), and detects 139 of 489 positive annotations (28.43% recall). Alerts and annotations use different counting units. Both stable-release accuracy thresholds fail. V5 remains an experimental override; the bundled guarded v4 model is unchanged and no new release is published. See [the complete v5 audit](benchmarks/ml-v5/README.md).
 
 Local feature changes use scoring revision 7, so comparisons require fresh report baselines; this is separate from the published a7 model's scoring revision 6. The feature changes can affect heuristic scores even though the bundled model artifact is unchanged.
+
+## Frozen v6 experiment: a8 development (2026-10-06)
+
+`models/creddata-v6-trees.json` remains an opt-in experiment. Development expands to previously inspected ranks 100–239: 140 selected repositories, complete 4,988-file recovery and 5,144 definite candidate labels (3,100 positive / 2,044 negative) in 117 candidate-bearing repositories. Whole-repository partitions contain 3,086/1,029/1,029 training/validation/internal-test rows across 69/22/26 repositories. Numeric data exclude credential values, snippets and original paths; derived value statistics are not anonymization.
+
+The six predeclared configurations combine depths 2/3/4 with regularization 5 or 15 and stronger leaf-vector/source requirements. All use 100 rounds, learning rate 0.08, minimum leaf weight 8 and split gain 0.1. Thirteen fixed thresholds are checked on validation only. The policy requires 90% precision, 80% recall and 50% specificity in both pooled and balanced-weighted metrics, plus at least 50% equal-repository specificity across five negative-bearing repositories. **Every configuration fails that policy.** The selected fallback has depth 3, regularization 15, at least 20 vectors from 3 sources and raw cutoff 0.35. The runtime logit offset maps that cutoff to score 0.5 without calibrating probabilities. See `benchmarks/ml-v6/tree-training.json` for the complete settings, partitions and failures.
+
+The frozen v6 audit used 20 initially untouched ranks 240–259 and recovered 662/662 labeled files. Among 469 definite candidates (124 positive / 345 negative) in 18 repositories, v6 has TP116/FP285/FN8/TN60: 28.93% precision, 93.55% recall, 17.39% specificity and Brier error 0.453557. The heuristic has TP14/FP22, 38.89% precision, 11.29% recall and Brier 0.280848. V6 equal-repository precision/recall are 81.57%/94.32%; macro specificity is 44.61% across 12 negative-bearing repositories. Both the relative comparison gate and strict candidate-readiness gate fail. Strong repository-size effects prevent interpreting the macro precision as pooled accuracy.
+
+Raw scanning separately detects 125/237 positive annotations (52.74% recall), with 124 true and 345 false definite alerts (26.44% precision), plus separate ambiguous/unknown/unlabeled alerts. Candidate recall excludes missed source annotations; its units cannot be substituted for raw detector recall. The 90%/80% full-scanner gate also fails. The bundled guarded v4 model is unchanged, and these results do not authorize unrestricted default promotion or establish active-exposure accuracy.
+
+Subsequent diagnostics identified 263 v6 ML false positives as JSON localization labels. Once that audit informed further context or model changes, ranks 240–259 became development evidence for those changes. The saved results remain the evaluation of the originally frozen v6 model; a future model requires fresh independent evidence. See [the complete v6 audit](benchmarks/ml-v6/README.md) and [revision-9 evidence](benchmarks/revision9/README.md).
+
+## Frozen v7 experiment and completed fresh audit
+
+V7 adds source-derived translation-map context and retrains on the same inspected ranks 100–239, with 5,144 definite candidate labels and whole-repository partitions of 3,086/1,029/1,029 rows. The six fixed configurations and thirteen validation thresholds retain the v6 policy. Every configuration fails that policy. The selected failed fallback has depth 3, regularization 15, 100 trees, at least 20 leaf vectors from three sources and runtime threshold 0.5. Its pooled validation precision/recall are 90.71%/93.61%, but repository/class-weighted precision is 73.10%; favorable pooled values do not override the failed policy.
+
+The model and source were frozen before the fresh ranks 260–279 audit; [freeze.json](benchmarks/ml-v7/freeze.json) records their identities. The completed audit selected 20 repositories and recovered all 416 expected labeled files. It contains 188 definite emitted candidates from 16 repositories: 137 positive and 51 negative labels.
+
+| Candidate classifier at runtime score 0.5 | TP | FP | FN | TN | Precision | Recall | Specificity | Brier |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Heuristic | 9 | 0 | 128 | 51 | 100.00% | 6.57% | 100.00% | 0.422022 |
+| V7 | 111 | 13 | 26 | 38 | 89.52% | 81.02% | 74.51% | 0.142297 |
+
+V7 repository-macro precision/recall are 89.08%/86.96%; macro specificity is 75.13% across nine negative-bearing repositories. The strict candidate gate fails because precision is below 90% and only 51 negative labels are available against the unchanged minimum of 100. The relative gate also fails precision regression against the heuristic. These results do not authorize default promotion.
+
+The reused ranks 240–259 diagnostic has TP98/FP274/FN26/TN71: 26.34% precision, 79.03% recall and 20.58% specificity. V6's originally frozen results on that sample were 28.93% precision and 93.55% recall. V7 therefore does not establish a broad improvement; inspected diagnostic data and the differently composed fresh sample must remain separate.
+
+Raw scanning on the fresh sample yields 137 true-positive and 51 false-positive definite alerts, or 72.87% labeled-alert precision. It detects 141/449 positive annotations, or 31.40% annotation recall, and misses 308. Another 7 ambiguous, 88 unknown and 21 unlabeled alerts are excluded from definite precision. Candidate recall counts only emitted candidates and cannot substitute for annotation recall. Both full-scanner targets fail. The current release manifest validates this fresh evidence but does not pass stable readiness.
+
+V7 JSON/JSONL artifacts use canonical UTF-8/LF. The training report records CRLF-to-LF normalization of development data before model freeze, with unchanged parsed rows and the original hash. Source hashes use `utf8-lf-v1`; frozen v6 artifacts retain their original bytes through targeted Git attributes. Reproduction details, dataset/model hashes and limits are in [ML-v7 evidence](benchmarks/ml-v7/README.md). The bundled guarded v4 model remains unchanged, scores are not active-exposure probabilities, and corpus credentials were never checked online.

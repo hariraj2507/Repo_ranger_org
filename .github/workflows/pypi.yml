@@ -1,0 +1,172 @@
+name: Publish existing release to a Python index
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Python package index
+        required: true
+        type: choice
+        default: testpypi
+        options: [testpypi, pypi]
+      release_tag:
+        description: Published GitHub release tag (for example v0.2.0a8)
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify-release:
+    if: vars.PYPI_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify published release, exact tag commit, and four successful matrix jobs
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+          INDEX_TARGET: ${{ inputs.target }}
+        shell: python {0}
+        run: |
+          import base64, json, os, re, subprocess, tomllib
+
+          tag = os.environ['RELEASE_TAG']
+          target = os.environ['INDEX_TARGET']
+          repository = os.environ['GITHUB_REPOSITORY']
+          if target not in {'testpypi', 'pypi'} or not re.fullmatch(
+                  r'v[0-9]+\.[0-9]+\.[0-9]+(?:(?:a|b|rc)[0-9]+)?', tag):
+              raise SystemExit('Invalid release tag or index target')
+
+          def api(endpoint, *, pages=False):
+              command = ['gh', 'api', endpoint]
+              if pages:
+                  command += ['--paginate', '--slurp']
+              return json.loads(subprocess.check_output(command, text=True))
+
+          release = api(f'repos/{repository}/releases/tags/{tag}')
+          if release.get('tag_name') != tag or release.get('draft') or not release.get('published_at'):
+              raise SystemExit('A nondraft, published GitHub release is required')
+          tag_object = api(f'repos/{repository}/git/ref/tags/{tag}')['object']
+          for _ in range(5):
+              if tag_object['type'] == 'commit':
+                  break
+              if tag_object['type'] != 'tag':
+                  raise SystemExit('Tag does not identify a commit')
+              tag_object = api(f'repos/{repository}/git/tags/{tag_object["sha"]}')['object']
+          if tag_object['type'] != 'commit' or not re.fullmatch(r'[0-9a-f]{40}', tag_object['sha']):
+              raise SystemExit('Could not resolve the exact release commit')
+          commit = tag_object['sha']
+          project = api(f'repos/{repository}/contents/pyproject.toml?ref={commit}')
+          version = tomllib.loads(base64.b64decode(project['content']).decode('utf-8'))['project']['version']
+          if tag != 'v' + version:
+              raise SystemExit('Release tag does not match the version at its exact commit')
+
+          expected_jobs = {f'test ({system}, {python})' for system in
+                           ('ubuntu-latest', 'windows-latest') for python in ('3.10', '3.12')}
+          runs = [run for page in api(
+              f'repos/{repository}/actions/workflows/tests.yml/runs?head_sha={commit}&event=push&status=success&per_page=100',
+              pages=True) for run in page['workflow_runs']]
+          tested = False
+          for run in runs:
+              if (run.get('head_sha') != commit or run.get('head_branch') != tag
+                      or run.get('conclusion') != 'success' or run.get('status') != 'completed'):
+                  continue
+              jobs = [job for page in api(
+                  f'repos/{repository}/actions/runs/{run["id"]}/jobs?filter=latest&per_page=100',
+                  pages=True) for job in page['jobs']]
+              completed = {job['name'] for job in jobs
+                           if job.get('status') == 'completed' and job.get('conclusion') == 'success'}
+              if expected_jobs <= completed and 'release' in completed:
+                  tested = True
+                  break
+          if not tested:
+              raise SystemExit('The exact release tag commit needs all four successful test jobs and its release job')
+
+          assets = release.get('assets', [])
+          wheel_name = f'reporanger-{version}-py3-none-any.whl'
+          sdist_name = f'reporanger-{version}.tar.gz'
+          selected = []
+          for name in (wheel_name, sdist_name):
+              matching = [asset for asset in assets if asset.get('name') == name and asset.get('state') == 'uploaded']
+              if len(matching) != 1 or matching[0].get('size', 0) <= 0:
+                  raise SystemExit(f'Expected exactly one published distribution: {name}')
+              selected.append(matching[0])
+          with open('verified-release.json', 'w', encoding='utf-8') as output:
+              json.dump({'tag': tag, 'commit': commit, 'version': version, 'assets': selected}, output)
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
+              output.write(f'wheel={wheel_name}\nsdist={sdist_name}\n')
+      - name: Download only the verified release distributions
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+          WHEEL_NAME: ${{ steps.release.outputs.wheel }}
+          SDIST_NAME: ${{ steps.release.outputs.sdist }}
+        run: |
+          gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --dir dist \
+            --pattern "$WHEEL_NAME" --pattern "$SDIST_NAME"
+      - name: Verify downloaded asset identities and distribution metadata
+        shell: python {0}
+        run: |
+          from email.parser import BytesParser
+          import hashlib, json, pathlib, tarfile, zipfile
+
+          release = json.loads(pathlib.Path('verified-release.json').read_text(encoding='utf-8'))
+          paths = sorted(pathlib.Path('dist').iterdir())
+          if {path.name for path in paths} != {asset['name'] for asset in release['assets']}:
+              raise SystemExit('Unexpected distribution files')
+          for asset in release['assets']:
+              path = pathlib.Path('dist') / asset['name']
+              if path.stat().st_size != asset['size']:
+                  raise SystemExit('Downloaded asset size differs from the published release')
+              digest = asset.get('digest')
+              if digest and digest != 'sha256:' + hashlib.sha256(path.read_bytes()).hexdigest():
+                  raise SystemExit('Downloaded asset digest differs from the published release')
+              if path.suffix == '.whl':
+                  with zipfile.ZipFile(path) as archive:
+                      members = [name for name in archive.namelist() if name.endswith('.dist-info/METADATA')]
+                      if len(members) != 1:
+                          raise SystemExit('Invalid wheel metadata')
+                      metadata = BytesParser().parsebytes(archive.read(members[0]))
+              else:
+                  with tarfile.open(path, 'r:gz') as archive:
+                      expected = f'reporanger-{release["version"]}/PKG-INFO'
+                      member = archive.getmember(expected)
+                      if not member.isfile():
+                          raise SystemExit('Invalid source distribution metadata')
+                      metadata = BytesParser().parsebytes(archive.extractfile(member).read())
+              if metadata['Name'] != 'reporanger' or metadata['Version'] != release['version']:
+                  raise SystemExit('Distribution metadata differs from the release tag')
+      - uses: actions/upload-artifact@v4
+        with:
+          name: verified-release-distributions
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 1
+  publish:
+    needs: verify-release
+    if: vars.PYPI_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.target }}
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: verified-release-distributions
+          path: dist
+      # Configure this workflow and its dedicated environment as a Trusted
+      # Publisher in the chosen index before enabling PYPI_ENABLED.
+      # https://docs.pypi.org/trusted-publishers/using-a-publisher/
+      - name: Publish to TestPyPI with OIDC
+        if: inputs.target == 'testpypi'
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+      - name: Publish to PyPI with OIDC
+        if: inputs.target == 'pypi'
+        uses: pypa/gh-action-pypi-publish@release/v1

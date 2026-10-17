@@ -1,0 +1,52 @@
+{
+  "candidate_metrics": {
+    "false_negative": 26,
+    "false_positive": 13,
+    "negative_labels": 51,
+    "positive_labels": 137,
+    "precision": 0.8951612903225806,
+    "recall": 0.8102189781021898,
+    "samples": 188,
+    "specificity": 0.7450980392156863,
+    "true_negative": 38,
+    "true_positive": 111
+  },
+  "candidate_repositories": 16,
+  "deployment": "Candidate acceptance does not authorize default promotion or certify full scanner accuracy.",
+  "evidence_sha256": {
+    "candidate_report_sha256": "4d7a91afd0592f9cd40b009142fe41735d9309ab93b82bf8e1fa8ec97d203104",
+    "coverage_report_sha256": "e8668d3dd2a334c7d6a6533b619830e9ebbd8c58317181aaae098a609662c194",
+    "dataset_sha256": "763e834f0137d51e9f344b034ed547d7fe92f30ec8b5090d60d59fd1d1795bda",
+    "model_sha256": "f6583cb17695c2978eccc095c9eceb86fc4719ae6d124544517e056339d772e3"
+  },
+  "full_scanner_gate": {
+    "passed": false,
+    "reasons": [
+      "positive_annotation_recall_below_80_percent",
+      "labeled_alert_precision_below_90_percent"
+    ],
+    "scope": "Minimum detector evidence only; not a certification of active-exposure accuracy or operational readiness"
+  },
+  "full_scanner_readiness_established": false,
+  "independence": "independent",
+  "macro_specificity": 0.7513227513227513,
+  "negative_bearing_repositories": 9,
+  "passed": false,
+  "policy": {
+    "complete_file_coverage_required": true,
+    "minimum_macro_specificity": 0.5,
+    "minimum_negative_bearing_repositories": 5,
+    "minimum_negative_candidates": 100,
+    "minimum_positive_candidates": 100,
+    "minimum_precision": 0.9,
+    "minimum_recall": 0.8,
+    "minimum_selected_repositories": 20,
+    "minimum_specificity": 0.5
+  },
+  "reasons": [
+    "need_at_least_100_negative_candidate_labels",
+    "pooled_precision_below_90_percent"
+  ],
+  "scope": "Line-labeled candidate triage only; emitted candidates exclude detector misses. Scores are not active-exposure probabilities.",
+  "selected_repositories": 20
+}

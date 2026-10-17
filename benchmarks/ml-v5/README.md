@@ -22,17 +22,21 @@ The v4 reference uses the new feature extraction, including changed PHP semantic
 
 Raw scanning detects 139/489 positive annotations: **28.43% recall**. Definite alerts contain 130 true and 24 false positives: **84.42% labeled-alert precision**. Another 8 ambiguous, 72 unknown and 57 unlabeled alerts are separate. The scanner misses 350 positive annotations, including 122 NTLM-related and 57 UUID annotations. Generic annotated values require scope review before being treated as credential categories. ML evaluates only supplied candidates; its candidate recall cannot replace scanner recall.
 
-`final/readiness.json` fails the existing 90% labeled-alert precision / 80% annotation-recall targets. Coverage is complete, with 489 positive and 1,802 negative annotations. Local regression checks passed 165 tests and all 52 detector fixtures. Detector revision remains 8; scoring revision 7 requires new saved-report baselines. These changes are not released; the latest published version remains `v0.2.0a7`.
+`final/readiness.json` fails the existing 90% labeled-alert precision / 80% annotation-recall targets. Coverage is complete, with 489 positive and 1,802 negative annotations. At this historical v5 stage, local regression checks passed 165 tests and all 52 detector fixtures, using detector revision 8 and scoring revision 7. These are frozen experiment results; see the root README for the current a8 release status and revisions.
 
-The current wheel was built and installed in an isolated local target. A synthetic scan outside the checkout verified automatic loading of all 100 bundled trees, explicit v5 override loading, report redaction and scoring revision 7. Cross-platform CI for these changes remains pending.
+The v5-stage wheel was built and installed in an isolated local target. A synthetic scan outside the checkout verified automatic loading of all 100 bundled trees, explicit v5 override loading, report redaction and scoring revision 7. This historical local check does not establish the status of later release CI.
 
 ## Reproduce
 
+The frozen v5 trainer and feature semantics are at commit `add1e006e680ef8b41ccc98e621dc64595b71c20`. Run training in a separate checkout of that commit with the preserved v5 dataset. The current six-configuration trainer does **not** reproduce the v5 model; do not use it to overwrite the frozen artifact.
+
 ```sh
+# With the frozen v5 trainer:
 python -m backend.ml.tree_training benchmarks/ml-v5/development.jsonl models/creddata-v5-trees.json output/v5-training.json
+# Evaluate the preserved numeric data and model:
 python -m benchmarks.evaluate_model benchmarks/ml-v5/final/holdout.jsonl models/creddata-v5-trees.json output/v5-audit.json
 python -m benchmarks.readiness benchmarks/ml-v5/final/holdout-detection.json --require-ready
 reporanger /path/to/repository --model models/creddata-v5-trees.json --format json
 ```
 
-The readiness command intentionally fails. Source acquisition uses `python -m benchmarks.creddata` with `--repositories 20 --offset 220 --git-fallback --original-paths --max-file-mib 16` and optional `--download`. Original source stays in ignored caches. Hashes and per-repository metrics are recorded in the audit. `pre-localization.jsonl` and `pre-localization-training.json` preserve the earlier finer-shape/field-context pilot before localization/PHP evidence; it was not independently evaluated.
+Create the output directory before running these commands. The readiness command intentionally fails. Source acquisition uses `python -m benchmarks.creddata` with `--repositories 20 --offset 220 --git-fallback --original-paths --max-file-mib 16` and optional `--download`; use the frozen commit to reproduce its detector and feature semantics. Original source stays in ignored caches. Hashes and per-repository metrics are recorded in the audit. `pre-localization.jsonl` and `pre-localization-training.json` preserve the earlier finer-shape/field-context pilot before localization/PHP evidence; it was not independently evaluated.

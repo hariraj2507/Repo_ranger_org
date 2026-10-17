@@ -1,0 +1,2140 @@
+{
+  "baseline_test": {
+    "auroc": 0.4777777777777778,
+    "average_precision": 0.8000194438641313,
+    "balanced_accuracy": 0.6097279221766225,
+    "brier": 0.4393742365258704,
+    "expected_calibration_error": 0.5013579947316997,
+    "false_negative": 592,
+    "false_positive": 4,
+    "log_loss": 1.1992409967945044,
+    "positive_labels": 774,
+    "precision": 0.978494623655914,
+    "predicts_only_one_class": false,
+    "recall": 0.2351421188630491,
+    "reliability_bins": [
+      {
+        "lower": 0.0,
+        "mean_score": 0.07561217199634443,
+        "positive_rate": 0.46153846153846156,
+        "samples": 13,
+        "upper": 0.1
+      },
+      {
+        "lower": 0.1,
+        "mean_score": 0.1453769369039824,
+        "positive_rate": 0.7906976744186046,
+        "samples": 602,
+        "upper": 0.2
+      },
+      {
+        "lower": 0.2,
+        "mean_score": 0.22992223799258749,
+        "positive_rate": 0.6666666666666666,
+        "samples": 24,
+        "upper": 0.3
+      },
+      {
+        "lower": 0.3,
+        "mean_score": 0.38550888810035494,
+        "positive_rate": 0.24,
+        "samples": 100,
+        "upper": 0.4
+      },
+      {
+        "lower": 0.4,
+        "mean_score": 0.4450994847248989,
+        "positive_rate": 0.6730769230769231,
+        "samples": 104,
+        "upper": 0.5
+      },
+      {
+        "lower": 0.5,
+        "mean_score": 0.5257693581018462,
+        "positive_rate": 0.9731543624161074,
+        "samples": 149,
+        "upper": 0.6
+      },
+      {
+        "lower": 0.6,
+        "mean_score": 0.6513548646660542,
+        "positive_rate": 1.0,
+        "samples": 2,
+        "upper": 0.7
+      },
+      {
+        "lower": 0.7,
+        "mean_score": 0.7685247834990178,
+        "positive_rate": 1.0,
+        "samples": 3,
+        "upper": 0.8
+      },
+      {
+        "lower": 0.8,
+        "mean_score": 0.8249137318359602,
+        "positive_rate": 1.0,
+        "samples": 32,
+        "upper": 0.9
+      },
+      {
+        "lower": 0.9,
+        "mean_score": null,
+        "positive_rate": null,
+        "samples": 0,
+        "upper": 1.0
+      }
+    ],
+    "risk_band_label_counts": {
+      "critical": {
+        "positive": 35,
+        "samples": 35
+      },
+      "high": {
+        "positive": 4,
+        "samples": 5
+      },
+      "low": {
+        "positive": 498,
+        "samples": 639
+      },
+      "medium": {
+        "positive": 237,
+        "samples": 350
+      }
+    },
+    "samples": 1029,
+    "specificity": 0.984313725490196,
+    "true_negative": 251,
+    "true_positive": 182
+  },
+  "candidate_quality_gate": {
+    "passed": false,
+    "reasons": [
+      "precision_regression"
+    ],
+    "scope": "Candidate triage gate only; not a production certification"
+  },
+  "data_scope": "Development line-matched candidate metadata; not verified active credentials.",
+  "dataset_normalization": {
+    "encoding": "utf8-lf-v1",
+    "operation": "CRLF-to-LF only after fitting, before model freeze; parsed rows unchanged.",
+    "original_dataset_sha256": "69bf7ca63db2c9f691643e7684b106a88c3e9a72eed57473b7cedc945ca9c5a0"
+  },
+  "dataset_sha256": "1e6b4c154c45ff795d8fa1e9c5dc6e7bb77ab43c644eb8dd2dd818ddeaf28fe5",
+  "decision_threshold": 0.5,
+  "deployment": "Experimental opt-in only; validation or independent readiness failures do not authorize default promotion.",
+  "learning_rate": 0.08,
+  "raw_trained_test": {
+    "auroc": 0.8547474286872372,
+    "average_precision": 0.9439686881466421,
+    "balanced_accuracy": 0.7578355373157015,
+    "brier": 0.15910736431989284,
+    "expected_calibration_error": 0.16213077195022357,
+    "false_negative": 214,
+    "false_positive": 53,
+    "log_loss": 0.47999407868939764,
+    "positive_labels": 774,
+    "precision": 0.9135399673735726,
+    "predicts_only_one_class": false,
+    "recall": 0.7235142118863049,
+    "reliability_bins": [
+      {
+        "lower": 0.0,
+        "mean_score": 0.07624587236081753,
+        "positive_rate": 0.15384615384615385,
+        "samples": 13,
+        "upper": 0.1
+      },
+      {
+        "lower": 0.1,
+        "mean_score": 0.148617239314575,
+        "positive_rate": 0.3227848101265823,
+        "samples": 158,
+        "upper": 0.2
+      },
+      {
+        "lower": 0.2,
+        "mean_score": 0.24935080716343944,
+        "positive_rate": 0.40816326530612246,
+        "samples": 49,
+        "upper": 0.3
+      },
+      {
+        "lower": 0.3,
+        "mean_score": 0.36352771945012696,
+        "positive_rate": 0.6105263157894737,
+        "samples": 95,
+        "upper": 0.4
+      },
+      {
+        "lower": 0.4,
+        "mean_score": 0.46046517016491295,
+        "positive_rate": 0.8217821782178217,
+        "samples": 101,
+        "upper": 0.5
+      },
+      {
+        "lower": 0.5,
+        "mean_score": 0.538692266032492,
+        "positive_rate": 0.5961538461538461,
+        "samples": 52,
+        "upper": 0.6
+      },
+      {
+        "lower": 0.6,
+        "mean_score": 0.6276510944076215,
+        "positive_rate": 0.8804347826086957,
+        "samples": 92,
+        "upper": 0.7
+      },
+      {
+        "lower": 0.7,
+        "mean_score": 0.769745404658351,
+        "positive_rate": 0.9691358024691358,
+        "samples": 162,
+        "upper": 0.8
+      },
+      {
+        "lower": 0.8,
+        "mean_score": 0.84391528695215,
+        "positive_rate": 0.8695652173913043,
+        "samples": 115,
+        "upper": 0.9
+      },
+      {
+        "lower": 0.9,
+        "mean_score": 0.9475494705836396,
+        "positive_rate": 0.9947916666666666,
+        "samples": 192,
+        "upper": 1.0
+      }
+    ],
+    "risk_band_label_counts": {
+      "critical": {
+        "positive": 55,
+        "samples": 57
+      },
+      "high": {
+        "positive": 173,
+        "samples": 188
+      },
+      "low": {
+        "positive": 201,
+        "samples": 371
+      },
+      "medium": {
+        "positive": 345,
+        "samples": 413
+      }
+    },
+    "samples": 1029,
+    "specificity": 0.792156862745098,
+    "true_negative": 202,
+    "true_positive": 560
+  },
+  "regularization": 15.0,
+  "rounds": 100,
+  "runtime_logit_offset": -0.0,
+  "sample_weighting": "Inverse repository size then equal global class mass; repeated feature vectors retain original weighted mass.",
+  "score_scope": "Decision-threshold-shifted class-balanced candidate triage scores; not natural-prevalence or active-exposure probabilities.",
+  "selected_depth": 3,
+  "selected_settings": {
+    "depth": 3,
+    "learning_rate": 0.08,
+    "min_leaf_sources": 3,
+    "min_leaf_vectors": 20,
+    "min_leaf_weight": 8.0,
+    "min_split_gain": 0.1,
+    "regularization": 15.0,
+    "rounds": 100
+  },
+  "selection": "Minimize repository/class-balanced validation log loss among fixed configurations passing the precision policy; if none pass, minimize that loss and retain explicit policy failure. No test or independent tuning.",
+  "split_groups": {
+    "test": [
+      "060d335b",
+      "0f133e09",
+      "0fc802c8",
+      "28728ab4",
+      "2e6b3af5",
+      "36b76643",
+      "3b7cbdd3",
+      "57c424f8",
+      "680ef0c1",
+      "6c73b80a",
+      "8035fc42",
+      "80815938",
+      "850c2319",
+      "8c9b3ae9",
+      "8c9fcde7",
+      "8cda00f3",
+      "8f4427e8",
+      "93ff401b",
+      "a15774b8",
+      "a53cc03a",
+      "a5c3685e",
+      "afdd01d8",
+      "bbb6c1c3",
+      "c25fb835",
+      "c9b945fa",
+      "fd501154"
+    ],
+    "train": [
+      "0064e882",
+      "0ce78112",
+      "106c7cd2",
+      "10e03406",
+      "110f8d35",
+      "1ca5e942",
+      "1e007c58",
+      "1fb36b4f",
+      "1fd3645c",
+      "271c71d8",
+      "29d5ecae",
+      "2ba83c6a",
+      "2c47a91c",
+      "32f5ea73",
+      "35c273e2",
+      "372310b3",
+      "3d82970b",
+      "43e1f4ea",
+      "4764adaf",
+      "4aaa1466",
+      "4f40bf46",
+      "50b38ef0",
+      "533c47c6",
+      "5aefaef8",
+      "5d8870b3",
+      "63800a10",
+      "660708f3",
+      "661abd43",
+      "67cb5d24",
+      "73ae7ce6",
+      "75e7c64d",
+      "793e12f9",
+      "85d2b611",
+      "894e3377",
+      "9069e3a1",
+      "90aebe4a",
+      "98800b86",
+      "99f9a6ea",
+      "9bc5ca9e",
+      "a09d9e50",
+      "aec12e7f",
+      "b76321b2",
+      "b88a4e51",
+      "bd14e9cf",
+      "bdf8ad40",
+      "be221a57",
+      "c145598e",
+      "c2eb9e71",
+      "c41bb134",
+      "c49fdc37",
+      "cecc6b48",
+      "cfdcc4f3",
+      "d2d68c6f",
+      "d2d6eedc",
+      "df70e863",
+      "e0b41e26",
+      "e13d78bf",
+      "e3377359",
+      "e4d4b33d",
+      "e5a9c76d",
+      "eb8448ad",
+      "ec138349",
+      "ec869dbc",
+      "ef35cd4d",
+      "f008dd40",
+      "f06251db",
+      "f5e5719b",
+      "f623c7b3",
+      "f8f46739"
+    ],
+    "validation": [
+      "0436af4a",
+      "0b0a8cd6",
+      "1ce69180",
+      "387016a6",
+      "41d10ede",
+      "46c52073",
+      "472d4c24",
+      "57154bcf",
+      "6482c382",
+      "6a132a15",
+      "6e2ed0e4",
+      "83a072aa",
+      "8b8452c2",
+      "92f440ce",
+      "92faccc6",
+      "9abeea1b",
+      "b91cad30",
+      "c9201a51",
+      "d0125de6",
+      "db218f09",
+      "f129be24",
+      "ff527e6f"
+    ]
+  },
+  "split_labels": [
+    {
+      "0": 1605,
+      "1": 1481
+    },
+    {
+      "0": 184,
+      "1": 845
+    },
+    {
+      "0": 255,
+      "1": 774
+    }
+  ],
+  "split_sizes": [
+    3086,
+    1029,
+    1029
+  ],
+  "trained_test": {
+    "auroc": 0.8547474286872372,
+    "average_precision": 0.9439686881466421,
+    "balanced_accuracy": 0.7578355373157015,
+    "brier": 0.15910736431989284,
+    "expected_calibration_error": 0.16213077195022357,
+    "false_negative": 214,
+    "false_positive": 53,
+    "log_loss": 0.47999407868939764,
+    "positive_labels": 774,
+    "precision": 0.9135399673735726,
+    "predicts_only_one_class": false,
+    "recall": 0.7235142118863049,
+    "reliability_bins": [
+      {
+        "lower": 0.0,
+        "mean_score": 0.07624587236081753,
+        "positive_rate": 0.15384615384615385,
+        "samples": 13,
+        "upper": 0.1
+      },
+      {
+        "lower": 0.1,
+        "mean_score": 0.148617239314575,
+        "positive_rate": 0.3227848101265823,
+        "samples": 158,
+        "upper": 0.2
+      },
+      {
+        "lower": 0.2,
+        "mean_score": 0.24935080716343944,
+        "positive_rate": 0.40816326530612246,
+        "samples": 49,
+        "upper": 0.3
+      },
+      {
+        "lower": 0.3,
+        "mean_score": 0.36352771945012696,
+        "positive_rate": 0.6105263157894737,
+        "samples": 95,
+        "upper": 0.4
+      },
+      {
+        "lower": 0.4,
+        "mean_score": 0.46046517016491295,
+        "positive_rate": 0.8217821782178217,
+        "samples": 101,
+        "upper": 0.5
+      },
+      {
+        "lower": 0.5,
+        "mean_score": 0.538692266032492,
+        "positive_rate": 0.5961538461538461,
+        "samples": 52,
+        "upper": 0.6
+      },
+      {
+        "lower": 0.6,
+        "mean_score": 0.6276510944076215,
+        "positive_rate": 0.8804347826086957,
+        "samples": 92,
+        "upper": 0.7
+      },
+      {
+        "lower": 0.7,
+        "mean_score": 0.769745404658351,
+        "positive_rate": 0.9691358024691358,
+        "samples": 162,
+        "upper": 0.8
+      },
+      {
+        "lower": 0.8,
+        "mean_score": 0.84391528695215,
+        "positive_rate": 0.8695652173913043,
+        "samples": 115,
+        "upper": 0.9
+      },
+      {
+        "lower": 0.9,
+        "mean_score": 0.9475494705836396,
+        "positive_rate": 0.9947916666666666,
+        "samples": 192,
+        "upper": 1.0
+      }
+    ],
+    "risk_band_label_counts": {
+      "critical": {
+        "positive": 55,
+        "samples": 57
+      },
+      "high": {
+        "positive": 173,
+        "samples": 188
+      },
+      "low": {
+        "positive": 201,
+        "samples": 371
+      },
+      "medium": {
+        "positive": 345,
+        "samples": 413
+      }
+    },
+    "samples": 1029,
+    "specificity": 0.792156862745098,
+    "true_negative": 202,
+    "true_positive": 560
+  },
+  "training_candidates": [
+    {
+      "settings": {
+        "depth": 2,
+        "learning_rate": 0.08,
+        "min_leaf_sources": 2,
+        "min_leaf_vectors": 8,
+        "min_leaf_weight": 8.0,
+        "min_split_gain": 0.1,
+        "regularization": 5.0,
+        "rounds": 100
+      },
+      "validation_loss": 0.6032569993320045,
+      "validation_threshold_policy": {
+        "candidates": [
+          {
+            "macro_specificity": 0.43854224058769514,
+            "passed": false,
+            "pooled": {
+              "precision": 0.842479674796748,
+              "recall": 0.9810650887573964,
+              "specificity": 0.15760869565217392
+            },
+            "repository_class_weighted": {
+              "precision": 0.6436610660017967,
+              "recall": 0.9252034484230248,
+              "specificity": 0.4877956304077559
+            },
+            "threshold": 0.35
+          },
+          {
+            "macro_specificity": 0.4426744719926538,
+            "passed": false,
+            "pooled": {
+              "precision": 0.8471794871794872,
+              "recall": 0.9775147928994082,
+              "specificity": 0.19021739130434784
+            },
+            "repository_class_weighted": {
+              "precision": 0.6443227035698643,
+              "recall": 0.9249760661238401,
+              "specificity": 0.48939718461148934
+            },
+            "threshold": 0.4
+          },
+          {
+            "macro_specificity": 0.4681496786042241,
+            "passed": false,
+            "pooled": {
+              "precision": 0.8607863974495218,
+              "recall": 0.9585798816568047,
+              "specificity": 0.28804347826086957
+            },
+            "repository_class_weighted": {
+              "precision": 0.6449510118810392,
+              "recall": 0.8660082565352714,
+              "specificity": 0.5232578141264674
+            },
+            "threshold": 0.45
+          },
+          {
+            "macro_specificity": 0.5817860422405877,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9029345372460497,
+              "recall": 0.9467455621301775,
+              "specificity": 0.532608695652174
+            },
+            "repository_class_weighted": {
+              "precision": 0.626115256339273,
+              "recall": 0.7356708277901014,
+              "specificity": 0.5606941436387359
+            },
+            "threshold": 0.5
+          },
+          {
+            "macro_specificity": 0.5917860422405877,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9003601440576231,
+              "recall": 0.8875739644970414,
+              "specificity": 0.5489130434782609
+            },
+            "repository_class_weighted": {
+              "precision": 0.611398746348996,
+              "recall": 0.6755269169124796,
+              "specificity": 0.570639278613532
+            },
+            "threshold": 0.55
+          },
+          {
+            "macro_specificity": 0.6291414141414141,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9090909090909091,
+              "recall": 0.863905325443787,
+              "specificity": 0.6032608695652174
+            },
+            "repository_class_weighted": {
+              "precision": 0.6378081276092478,
+              "recall": 0.6238915752298783,
+              "specificity": 0.6457109152115343
+            },
+            "threshold": 0.6
+          },
+          {
+            "macro_specificity": 0.6291414141414141,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9073604060913706,
+              "recall": 0.8461538461538461,
+              "specificity": 0.6032608695652174
+            },
+            "repository_class_weighted": {
+              "precision": 0.6263265460434628,
+              "recall": 0.5938357580045522,
+              "specificity": 0.6457109152115343
+            },
+            "threshold": 0.65
+          },
+          {
+            "macro_specificity": 0.6408080808080808,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9106002554278416,
+              "recall": 0.8437869822485207,
+              "specificity": 0.6195652173913043
+            },
+            "repository_class_weighted": {
+              "precision": 0.6329085611132541,
+              "recall": 0.5743061449745764,
+              "specificity": 0.6668983766795785
+            },
+            "threshold": 0.7
+          },
+          {
+            "macro_specificity": 0.6778741965105602,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9251968503937008,
+              "recall": 0.834319526627219,
+              "specificity": 0.6902173913043478
+            },
+            "repository_class_weighted": {
+              "precision": 0.6580847570511758,
+              "recall": 0.554137073677928,
+              "specificity": 0.7120919301906802
+            },
+            "threshold": 0.75
+          },
+          {
+            "macro_specificity": 0.7317171717171718,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9302325581395349,
+              "recall": 0.7100591715976331,
+              "specificity": 0.7554347826086957
+            },
+            "repository_class_weighted": {
+              "precision": 0.6838702950089883,
+              "recall": 0.4768231188773177,
+              "specificity": 0.7795810799157473
+            },
+            "threshold": 0.8
+          },
+          {
+            "macro_specificity": 0.800734618916437,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9800362976406534,
+              "recall": 0.6390532544378699,
+              "specificity": 0.9402173913043478
+            },
+            "repository_class_weighted": {
+              "precision": 0.6869383693574409,
+              "recall": 0.389322449017056,
+              "specificity": 0.8225722624155617
+            },
+            "threshold": 0.85
+          },
+          {
+            "macro_specificity": 0.9722222222222222,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9978768577494692,
+              "recall": 0.5562130177514792,
+              "specificity": 0.9945652173913043
+            },
+            "repository_class_weighted": {
+              "precision": 0.9561842948218059,
+              "recall": 0.2803321671013795,
+              "specificity": 0.9871542006575549
+            },
+            "threshold": 0.9
+          },
+          {
+            "macro_specificity": 1.0,
+            "passed": false,
+            "pooled": {
+              "precision": 1.0,
+              "recall": 0.021301775147928994,
+              "specificity": 1.0
+            },
+            "repository_class_weighted": {
+              "precision": 1.0,
+              "recall": 0.08356299495038155,
+              "specificity": 1.0
+            },
+            "threshold": 0.95
+          }
+        ],
+        "fallback": "Highest weighted precision retaining pooled and weighted recall >= .80; failed policy remains failed.",
+        "negative_bearing_repositories": 12,
+        "partition": "validation only",
+        "passed": false,
+        "selected_metrics": {
+          "macro_specificity": 0.4681496786042241,
+          "passed": false,
+          "pooled": {
+            "precision": 0.8607863974495218,
+            "recall": 0.9585798816568047,
+            "specificity": 0.28804347826086957
+          },
+          "repository_class_weighted": {
+            "precision": 0.6449510118810392,
+            "recall": 0.8660082565352714,
+            "specificity": 0.5232578141264674
+          },
+          "threshold": 0.45
+        },
+        "selected_threshold": 0.45
+      }
+    },
+    {
+      "settings": {
+        "depth": 2,
+        "learning_rate": 0.08,
+        "min_leaf_sources": 3,
+        "min_leaf_vectors": 20,
+        "min_leaf_weight": 8.0,
+        "min_split_gain": 0.1,
+        "regularization": 15.0,
+        "rounds": 100
+      },
+      "validation_loss": 0.5597515752103556,
+      "validation_threshold_policy": {
+        "candidates": [
+          {
+            "macro_specificity": 0.44680670339761247,
+            "passed": false,
+            "pooled": {
+              "precision": 0.8525773195876288,
+              "recall": 0.978698224852071,
+              "specificity": 0.22282608695652173
+            },
+            "repository_class_weighted": {
+              "precision": 0.6376886159082801,
+              "recall": 0.8958711318281969,
+              "specificity": 0.4909987388152229
+            },
+            "threshold": 0.35
+          },
+          {
+            "macro_specificity": 0.488886593204775,
+            "passed": false,
+            "pooled": {
+              "precision": 0.8984547461368654,
+              "recall": 0.9633136094674556,
+              "specificity": 0.5
+            },
+            "repository_class_weighted": {
+              "precision": 0.6450442992288626,
+              "recall": 0.8687368441254879,
+              "specificity": 0.5219505146221577
+            },
+            "threshold": 0.4
+          },
+          {
+            "macro_specificity": 0.4977640036730946,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9014557670772676,
+              "recall": 0.9526627218934911,
+              "specificity": 0.5217391304347826
+            },
+            "repository_class_weighted": {
+              "precision": 0.6217049138906321,
+              "recall": 0.7646336481487542,
+              "specificity": 0.5347356192532234
+            },
+            "threshold": 0.45
+          },
+          {
+            "macro_specificity": 0.581097337006428,
+            "passed": false,
+            "pooled": {
+              "precision": 0.8976470588235295,
+              "recall": 0.9029585798816568,
+              "specificity": 0.5271739130434783
+            },
+            "repository_class_weighted": {
+              "precision": 0.6193560434928759,
+              "recall": 0.7152407242275786,
+              "specificity": 0.5604272179381136
+            },
+            "threshold": 0.5
+          },
+          {
+            "macro_specificity": 0.5891414141414141,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9002403846153846,
+              "recall": 0.8863905325443787,
+              "specificity": 0.5489130434782609
+            },
+            "repository_class_weighted": {
+              "precision": 0.6105060533214931,
+              "recall": 0.6777723171169286,
+              "specificity": 0.5675911593225555
+            },
+            "threshold": 0.55
+          },
+          {
+            "macro_specificity": 0.6091414141414141,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9037037037037037,
+              "recall": 0.8662721893491124,
+              "specificity": 0.5760869565217391
+            },
+            "repository_class_weighted": {
+              "precision": 0.6138499283322612,
+              "recall": 0.6252937660748507,
+              "specificity": 0.6066510372670451
+            },
+            "threshold": 0.6
+          },
+          {
+            "macro_specificity": 0.7158080808080808,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9112801013941698,
+              "recall": 0.850887573964497,
+              "specificity": 0.6195652173913043
+            },
+            "repository_class_weighted": {
+              "precision": 0.7353948703868224,
+              "recall": 0.5946193711969039,
+              "specificity": 0.7860478198558806
+            },
+            "threshold": 0.65
+          },
+          {
+            "macro_specificity": 0.7248301193755738,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9142125480153649,
+              "recall": 0.8449704142011835,
+              "specificity": 0.6358695652173914
+            },
+            "repository_class_weighted": {
+              "precision": 0.7516081138407394,
+              "recall": 0.5925093612593082,
+              "specificity": 0.804187162032948
+            },
+            "threshold": 0.7
+          },
+          {
+            "macro_specificity": 0.76856290174472,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9290586630286494,
+              "recall": 0.8059171597633136,
+              "specificity": 0.717391304347826
+            },
+            "repository_class_weighted": {
+              "precision": 0.789322940583277,
+              "recall": 0.5394701003901945,
+              "specificity": 0.8560108055272474
+            },
+            "threshold": 0.75
+          },
+          {
+            "macro_specificity": 0.921028466483012,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9452054794520548,
+              "recall": 0.7349112426035503,
+              "specificity": 0.8043478260869565
+            },
+            "repository_class_weighted": {
+              "precision": 0.9238575421032243,
+              "recall": 0.42183852529562954,
+              "specificity": 0.9652329274939537
+            },
+            "threshold": 0.8
+          },
+          {
+            "macro_specificity": 0.9674012855831037,
+            "passed": false,
+            "pooled": {
+              "precision": 0.985239852398524,
+              "recall": 0.6319526627218935,
+              "specificity": 0.9565217391304348
+            },
+            "repository_class_weighted": {
+              "precision": 0.959315533234373,
+              "recall": 0.3469539547641312,
+              "specificity": 0.9852857207531992
+            },
+            "threshold": 0.85
+          },
+          {
+            "macro_specificity": 1.0,
+            "passed": false,
+            "pooled": {
+              "precision": 1.0,
+              "recall": 0.5763313609467455,
+              "specificity": 1.0
+            },
+            "repository_class_weighted": {
+              "precision": 1.0,
+              "recall": 0.21613621232938274,
+              "specificity": 1.0
+            },
+            "threshold": 0.9
+          },
+          {
+            "macro_specificity": 1.0,
+            "passed": false,
+            "pooled": {
+              "precision": 1.0,
+              "recall": 0.3136094674556213,
+              "specificity": 1.0
+            },
+            "repository_class_weighted": {
+              "precision": 1.0,
+              "recall": 0.07215598294128184,
+              "specificity": 1.0
+            },
+            "threshold": 0.95
+          }
+        ],
+        "fallback": "Highest weighted precision retaining pooled and weighted recall >= .80; failed policy remains failed.",
+        "negative_bearing_repositories": 12,
+        "partition": "validation only",
+        "passed": false,
+        "selected_metrics": {
+          "macro_specificity": 0.488886593204775,
+          "passed": false,
+          "pooled": {
+            "precision": 0.8984547461368654,
+            "recall": 0.9633136094674556,
+            "specificity": 0.5
+          },
+          "repository_class_weighted": {
+            "precision": 0.6450442992288626,
+            "recall": 0.8687368441254879,
+            "specificity": 0.5219505146221577
+          },
+          "threshold": 0.4
+        },
+        "selected_threshold": 0.4
+      }
+    },
+    {
+      "settings": {
+        "depth": 3,
+        "learning_rate": 0.08,
+        "min_leaf_sources": 2,
+        "min_leaf_vectors": 8,
+        "min_leaf_weight": 8.0,
+        "min_split_gain": 0.1,
+        "regularization": 5.0,
+        "rounds": 100
+      },
+      "validation_loss": 0.5629530023916564,
+      "validation_threshold_policy": {
+        "candidates": [
+          {
+            "macro_specificity": 0.47435491276400366,
+            "passed": false,
+            "pooled": {
+              "precision": 0.889247311827957,
+              "recall": 0.978698224852071,
+              "specificity": 0.44021739130434784
+            },
+            "repository_class_weighted": {
+              "precision": 0.6490190694509311,
+              "recall": 0.921480063273875,
+              "specificity": 0.5016757668401122
+            },
+            "threshold": 0.35
+          },
+          {
+            "macro_specificity": 0.4784871441689624,
+            "passed": false,
+            "pooled": {
+              "precision": 0.8944504896626768,
+              "recall": 0.9727810650887574,
+              "specificity": 0.47282608695652173
+            },
+            "repository_class_weighted": {
+              "precision": 0.6496583786646649,
+              "recall": 0.9211010927752339,
+              "specificity": 0.5032773210438456
+            },
+            "threshold": 0.4
+          },
+          {
+            "macro_specificity": 0.5017860422405876,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9042316258351893,
+              "recall": 0.9609467455621302,
+              "specificity": 0.532608695652174
+            },
+            "repository_class_weighted": {
+              "precision": 0.6588659637691838,
+              "recall": 0.8916929820806779,
+              "specificity": 0.5383175899454444
+            },
+            "threshold": 0.45
+          },
+          {
+            "macro_specificity": 0.5051193755739211,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9035187287173666,
+              "recall": 0.9420118343195266,
+              "specificity": 0.5380434782608695
+            },
+            "repository_class_weighted": {
+              "precision": 0.6522376752786287,
+              "recall": 0.8596804293040807,
+              "specificity": 0.5416326349370433
+            },
+            "threshold": 0.5
+          },
+          {
+            "macro_specificity": 0.5891414141414141,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9032634032634033,
+              "recall": 0.9171597633136095,
+              "specificity": 0.5489130434782609
+            },
+            "repository_class_weighted": {
+              "precision": 0.6311237100291816,
+              "recall": 0.7398238357888369,
+              "specificity": 0.5675911593225555
+            },
+            "threshold": 0.55
+          },
+          {
+            "macro_specificity": 0.5924747474747475,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9031877213695395,
+              "recall": 0.9053254437869822,
+              "specificity": 0.5543478260869565
+            },
+            "repository_class_weighted": {
+              "precision": 0.628984801405543,
+              "recall": 0.7274458752263221,
+              "specificity": 0.5709062043141543
+            },
+            "threshold": 0.6
+          },
+          {
+            "macro_specificity": 0.5924747474747475,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9027283511269276,
+              "recall": 0.9005917159763314,
+              "specificity": 0.5543478260869565
+            },
+            "repository_class_weighted": {
+              "precision": 0.6091866928378841,
+              "recall": 0.6688570361363947,
+              "specificity": 0.5709062043141543
+            },
+            "threshold": 0.65
+          },
+          {
+            "macro_specificity": 0.5958080808080808,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9003690036900369,
+              "recall": 0.8662721893491124,
+              "specificity": 0.5597826086956522
+            },
+            "repository_class_weighted": {
+              "precision": 0.6090098623125009,
+              "recall": 0.6631969283663667,
+              "specificity": 0.5742212493057531
+            },
+            "threshold": 0.7
+          },
+          {
+            "macro_specificity": 0.6845408631772268,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9182389937106918,
+              "recall": 0.863905325443787,
+              "specificity": 0.6467391304347826
+            },
+            "repository_class_weighted": {
+              "precision": 0.7076407780880437,
+              "recall": 0.662179820447433,
+              "specificity": 0.7264228079183368
+            },
+            "threshold": 0.75
+          },
+          {
+            "macro_specificity": 0.7734182736455463,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9216710182767625,
+              "recall": 0.8355029585798817,
+              "specificity": 0.6739130434782609
+            },
+            "repository_class_weighted": {
+              "precision": 0.8208218491457978,
+              "recall": 0.5821824151713357,
+              "specificity": 0.8729147272105515
+            },
+            "threshold": 0.8
+          },
+          {
+            "macro_specificity": 0.8267240587695133,
+            "passed": false,
+            "pooled": {
+              "precision": 0.96987087517934,
+              "recall": 0.8,
+              "specificity": 0.8858695652173914
+            },
+            "repository_class_weighted": {
+              "precision": 0.850735572942981,
+              "recall": 0.49126429066605554,
+              "specificity": 0.9138060224445835
+            },
+            "threshold": 0.85
+          },
+          {
+            "macro_specificity": 0.8840679522497704,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9841549295774648,
+              "recall": 0.6615384615384615,
+              "specificity": 0.9510869565217391
+            },
+            "repository_class_weighted": {
+              "precision": 0.9095202200869293,
+              "recall": 0.4061676876816567,
+              "specificity": 0.9595941220683091
+            },
+            "threshold": 0.9
+          },
+          {
+            "macro_specificity": 1.0,
+            "passed": false,
+            "pooled": {
+              "precision": 1.0,
+              "recall": 0.5798816568047337,
+              "specificity": 1.0
+            },
+            "repository_class_weighted": {
+              "precision": 1.0,
+              "recall": 0.2092088929731865,
+              "specificity": 1.0
+            },
+            "threshold": 0.95
+          }
+        ],
+        "fallback": "Highest weighted precision retaining pooled and weighted recall >= .80; failed policy remains failed.",
+        "negative_bearing_repositories": 12,
+        "partition": "validation only",
+        "passed": false,
+        "selected_metrics": {
+          "macro_specificity": 0.5017860422405876,
+          "passed": false,
+          "pooled": {
+            "precision": 0.9042316258351893,
+            "recall": 0.9609467455621302,
+            "specificity": 0.532608695652174
+          },
+          "repository_class_weighted": {
+            "precision": 0.6588659637691838,
+            "recall": 0.8916929820806779,
+            "specificity": 0.5383175899454444
+          },
+          "threshold": 0.45
+        },
+        "selected_threshold": 0.45
+      }
+    },
+    {
+      "settings": {
+        "depth": 3,
+        "learning_rate": 0.08,
+        "min_leaf_sources": 3,
+        "min_leaf_vectors": 20,
+        "min_leaf_weight": 8.0,
+        "min_split_gain": 0.1,
+        "regularization": 15.0,
+        "rounds": 100
+      },
+      "validation_loss": 0.4665455070062395,
+      "validation_threshold_policy": {
+        "candidates": [
+          {
+            "macro_specificity": 0.5736317722681359,
+            "passed": false,
+            "pooled": {
+              "precision": 0.898471615720524,
+              "recall": 0.9739644970414201,
+              "specificity": 0.4945652173913043
+            },
+            "repository_class_weighted": {
+              "precision": 0.7220077085160531,
+              "recall": 0.8652882125878532,
+              "specificity": 0.6668408797106389
+            },
+            "threshold": 0.35
+          },
+          {
+            "macro_specificity": 0.5830532598714416,
+            "passed": false,
+            "pooled": {
+              "precision": 0.903010033444816,
+              "recall": 0.9585798816568047,
+              "specificity": 0.5271739130434783
+            },
+            "repository_class_weighted": {
+              "precision": 0.7203015972543105,
+              "recall": 0.8381539248851444,
+              "specificity": 0.6745386724963253
+            },
+            "threshold": 0.4
+          },
+          {
+            "macro_specificity": 0.5891414141414141,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9072398190045249,
+              "recall": 0.9491124260355029,
+              "specificity": 0.5543478260869565
+            },
+            "repository_class_weighted": {
+              "precision": 0.7205443307480727,
+              "recall": 0.8278642224496245,
+              "specificity": 0.6789214202904128
+            },
+            "threshold": 0.45
+          },
+          {
+            "macro_specificity": 0.6724747474747476,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9071100917431193,
+              "recall": 0.936094674556213,
+              "specificity": 0.5597826086956522
+            },
+            "repository_class_weighted": {
+              "precision": 0.7310198275413574,
+              "recall": 0.8027868297981613,
+              "specificity": 0.704613018975303
+            },
+            "threshold": 0.5
+          },
+          {
+            "macro_specificity": 0.7064967860422406,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9144893111638955,
+              "recall": 0.9112426035502958,
+              "specificity": 0.6086956521739131
+            },
+            "repository_class_weighted": {
+              "precision": 0.7666612623874255,
+              "recall": 0.7347633676851657,
+              "specificity": 0.7763696105817067
+            },
+            "threshold": 0.55
+          },
+          {
+            "macro_specificity": 0.7223301193755739,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9180722891566265,
+              "recall": 0.901775147928994,
+              "specificity": 0.6304347826086957
+            },
+            "repository_class_weighted": {
+              "precision": 0.7893481332148888,
+              "recall": 0.7251023705621443,
+              "specificity": 0.8064932802879733
+            },
+            "threshold": 0.6
+          },
+          {
+            "macro_specificity": 0.7256634527089072,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9166666666666666,
+              "recall": 0.8721893491124261,
+              "specificity": 0.6358695652173914
+            },
+            "repository_class_weighted": {
+              "precision": 0.7775831301621985,
+              "recall": 0.6649218553779238,
+              "specificity": 0.8098083252795719
+            },
+            "threshold": 0.65
+          },
+          {
+            "macro_specificity": 0.7323301193755739,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9183417085427136,
+              "recall": 0.8650887573964497,
+              "specificity": 0.6467391304347826
+            },
+            "repository_class_weighted": {
+              "precision": 0.7755886305124682,
+              "recall": 0.6344075990720113,
+              "specificity": 0.8164384152627694
+            },
+            "threshold": 0.7
+          },
+          {
+            "macro_specificity": 0.8338406795224977,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9304589707927677,
+              "recall": 0.7917159763313609,
+              "specificity": 0.7282608695652174
+            },
+            "repository_class_weighted": {
+              "precision": 0.8833097165453221,
+              "recall": 0.6158396254387822,
+              "specificity": 0.9186440507683615
+            },
+            "threshold": 0.75
+          },
+          {
+            "macro_specificity": 0.8664738292011019,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9309838472834068,
+              "recall": 0.7502958579881657,
+              "specificity": 0.7445652173913043
+            },
+            "repository_class_weighted": {
+              "precision": 0.8995852462471429,
+              "recall": 0.5313135227039228,
+              "specificity": 0.9406929840496515
+            },
+            "threshold": 0.8
+          },
+          {
+            "macro_specificity": 0.9090909090909091,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9795221843003413,
+              "recall": 0.6792899408284023,
+              "specificity": 0.9347826086956522
+            },
+            "repository_class_weighted": {
+              "precision": 0.930828058581135,
+              "recall": 0.38523629130186837,
+              "specificity": 0.9713722186082653
+            },
+            "threshold": 0.85
+          },
+          {
+            "macro_specificity": 0.9951790633608816,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9864603481624759,
+              "recall": 0.6035502958579881,
+              "specificity": 0.9619565217391305
+            },
+            "repository_class_weighted": {
+              "precision": 0.993601728008368,
+              "recall": 0.29016035331801243,
+              "specificity": 0.9981315200956444
+            },
+            "threshold": 0.9
+          },
+          {
+            "macro_specificity": 1.0,
+            "passed": false,
+            "pooled": {
+              "precision": 1.0,
+              "recall": 0.5218934911242603,
+              "specificity": 1.0
+            },
+            "repository_class_weighted": {
+              "precision": 1.0,
+              "recall": 0.100010314591409,
+              "specificity": 1.0
+            },
+            "threshold": 0.95
+          }
+        ],
+        "fallback": "Highest weighted precision retaining pooled and weighted recall >= .80; failed policy remains failed.",
+        "negative_bearing_repositories": 12,
+        "partition": "validation only",
+        "passed": false,
+        "selected_metrics": {
+          "macro_specificity": 0.6724747474747476,
+          "passed": false,
+          "pooled": {
+            "precision": 0.9071100917431193,
+            "recall": 0.936094674556213,
+            "specificity": 0.5597826086956522
+          },
+          "repository_class_weighted": {
+            "precision": 0.7310198275413574,
+            "recall": 0.8027868297981613,
+            "specificity": 0.704613018975303
+          },
+          "threshold": 0.5
+        },
+        "selected_threshold": 0.5
+      }
+    },
+    {
+      "settings": {
+        "depth": 4,
+        "learning_rate": 0.08,
+        "min_leaf_sources": 2,
+        "min_leaf_vectors": 8,
+        "min_leaf_weight": 8.0,
+        "min_split_gain": 0.1,
+        "regularization": 5.0,
+        "rounds": 100
+      },
+      "validation_loss": 0.6064917544573274,
+      "validation_threshold_policy": {
+        "candidates": [
+          {
+            "macro_specificity": 0.4481841138659321,
+            "passed": false,
+            "pooled": {
+              "precision": 0.8540372670807453,
+              "recall": 0.9763313609467456,
+              "specificity": 0.23369565217391305
+            },
+            "repository_class_weighted": {
+              "precision": 0.6443776239892811,
+              "recall": 0.9213284750744186,
+              "specificity": 0.4915325902164672
+            },
+            "threshold": 0.35
+          },
+          {
+            "macro_specificity": 0.47710973370064275,
+            "passed": false,
+            "pooled": {
+              "precision": 0.8926247288503254,
+              "recall": 0.9739644970414201,
+              "specificity": 0.46195652173913043
+            },
+            "repository_class_weighted": {
+              "precision": 0.6494325892803321,
+              "recall": 0.9211768868749622,
+              "specificity": 0.5027434696426011
+            },
+            "threshold": 0.4
+          },
+          {
+            "macro_specificity": 0.48124196510560147,
+            "passed": false,
+            "pooled": {
+              "precision": 0.8978021978021978,
+              "recall": 0.9668639053254438,
+              "specificity": 0.4945652173913043
+            },
+            "repository_class_weighted": {
+              "precision": 0.6416552920251437,
+              "recall": 0.8875243065956248,
+              "specificity": 0.5043450238463346
+            },
+            "threshold": 0.45
+          },
+          {
+            "macro_specificity": 0.4845752984389348,
+            "passed": false,
+            "pooled": {
+              "precision": 0.8977777777777778,
+              "recall": 0.9562130177514793,
+              "specificity": 0.5
+            },
+            "repository_class_weighted": {
+              "precision": 0.6304876397972536,
+              "recall": 0.8400645678157935,
+              "specificity": 0.5076600688379332
+            },
+            "threshold": 0.5
+          },
+          {
+            "macro_specificity": 0.5842860422405877,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9035187287173666,
+              "recall": 0.9420118343195266,
+              "specificity": 0.5380434782608695
+            },
+            "repository_class_weighted": {
+              "precision": 0.6468955671924269,
+              "recall": 0.8090434507630611,
+              "specificity": 0.5583880253837107
+            },
+            "threshold": 0.55
+          },
+          {
+            "macro_specificity": 0.5842860422405877,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9011627906976745,
+              "recall": 0.9171597633136095,
+              "specificity": 0.5380434782608695
+            },
+            "repository_class_weighted": {
+              "precision": 0.6274685723879871,
+              "recall": 0.7438235131950187,
+              "specificity": 0.5583880253837107
+            },
+            "threshold": 0.6
+          },
+          {
+            "macro_specificity": 0.5884527089072543,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9019836639439907,
+              "recall": 0.914792899408284,
+              "specificity": 0.5434782608695652
+            },
+            "repository_class_weighted": {
+              "precision": 0.6321871759931552,
+              "recall": 0.7436719249955623,
+              "specificity": 0.5673242336219334
+            },
+            "threshold": 0.65
+          },
+          {
+            "macro_specificity": 0.5905188246097337,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9038004750593824,
+              "recall": 0.9005917159763314,
+              "specificity": 0.5597826086956522
+            },
+            "repository_class_weighted": {
+              "precision": 0.6070294796927882,
+              "recall": 0.6671259966974401,
+              "specificity": 0.5681250107238001
+            },
+            "threshold": 0.7
+          },
+          {
+            "macro_specificity": 0.6085629017447199,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9097472924187726,
+              "recall": 0.8946745562130177,
+              "specificity": 0.592391304347826
+            },
+            "repository_class_weighted": {
+              "precision": 0.6269390608345651,
+              "recall": 0.6648103562712602,
+              "specificity": 0.6044036950779351
+            },
+            "threshold": 0.75
+          },
+          {
+            "macro_specificity": 0.6816138659320478,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9427828348504551,
+              "recall": 0.8579881656804734,
+              "specificity": 0.7608695652173914
+            },
+            "repository_class_weighted": {
+              "precision": 0.6790308519278957,
+              "recall": 0.6586135773757371,
+              "specificity": 0.6886818349434016
+            },
+            "threshold": 0.8
+          },
+          {
+            "macro_specificity": 0.7982690541781451,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9486486486486486,
+              "recall": 0.8307692307692308,
+              "specificity": 0.7934782608695652
+            },
+            "repository_class_weighted": {
+              "precision": 0.7780304952730471,
+              "recall": 0.5327102123642377,
+              "specificity": 0.8480195535780614
+            },
+            "threshold": 0.85
+          },
+          {
+            "macro_specificity": 0.9042355371900826,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9791356184798807,
+              "recall": 0.7775147928994083,
+              "specificity": 0.9239130434782609
+            },
+            "repository_class_weighted": {
+              "precision": 0.9190210767877187,
+              "recall": 0.42933898308123647,
+              "specificity": 0.9621690846694203
+            },
+            "threshold": 0.9
+          },
+          {
+            "macro_specificity": 0.9166666666666666,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9983633387888707,
+              "recall": 0.7218934911242604,
+              "specificity": 0.9945652173913043
+            },
+            "repository_class_weighted": {
+              "precision": 0.9296771290171191,
+              "recall": 0.3396461403153337,
+              "specificity": 0.97430840131511
+            },
+            "threshold": 0.95
+          }
+        ],
+        "fallback": "Highest weighted precision retaining pooled and weighted recall >= .80; failed policy remains failed.",
+        "negative_bearing_repositories": 12,
+        "partition": "validation only",
+        "passed": false,
+        "selected_metrics": {
+          "macro_specificity": 0.47710973370064275,
+          "passed": false,
+          "pooled": {
+            "precision": 0.8926247288503254,
+            "recall": 0.9739644970414201,
+            "specificity": 0.46195652173913043
+          },
+          "repository_class_weighted": {
+            "precision": 0.6494325892803321,
+            "recall": 0.9211768868749622,
+            "specificity": 0.5027434696426011
+          },
+          "threshold": 0.4
+        },
+        "selected_threshold": 0.4
+      }
+    },
+    {
+      "settings": {
+        "depth": 4,
+        "learning_rate": 0.08,
+        "min_leaf_sources": 3,
+        "min_leaf_vectors": 20,
+        "min_leaf_weight": 8.0,
+        "min_split_gain": 0.1,
+        "regularization": 15.0,
+        "rounds": 100
+      },
+      "validation_loss": 0.508971495670828,
+      "validation_threshold_policy": {
+        "candidates": [
+          {
+            "macro_specificity": 0.49821854912764,
+            "passed": false,
+            "pooled": {
+              "precision": 0.8524251805985552,
+              "recall": 0.9775147928994082,
+              "specificity": 0.22282608695652173
+            },
+            "repository_class_weighted": {
+              "precision": 0.723326836958563,
+              "recall": 0.9237254634783241,
+              "specificity": 0.6466741828119037
+            },
+            "threshold": 0.35
+          },
+          {
+            "macro_specificity": 0.5319651056014693,
+            "passed": false,
+            "pooled": {
+              "precision": 0.8970427163198248,
+              "recall": 0.9692307692307692,
+              "specificity": 0.4891304347826087
+            },
+            "repository_class_weighted": {
+              "precision": 0.7243486864317985,
+              "recall": 0.8940899704845834,
+              "specificity": 0.6597535421423932
+            },
+            "threshold": 0.4
+          },
+          {
+            "macro_specificity": 0.5816758494031221,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9010011123470523,
+              "recall": 0.9585798816568047,
+              "specificity": 0.5163043478260869
+            },
+            "repository_class_weighted": {
+              "precision": 0.7199712838814265,
+              "recall": 0.8381539248851444,
+              "specificity": 0.6740048210950808
+            },
+            "threshold": 0.45
+          },
+          {
+            "macro_specificity": 0.5891414141414141,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9066059225512528,
+              "recall": 0.9420118343195266,
+              "specificity": 0.5543478260869565
+            },
+            "repository_class_weighted": {
+              "precision": 0.7136151650245536,
+              "recall": 0.8000652117803335,
+              "specificity": 0.6789214202904128
+            },
+            "threshold": 0.5
+          },
+          {
+            "macro_specificity": 0.6849747474747474,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9104477611940298,
+              "recall": 0.9384615384615385,
+              "specificity": 0.5760869565217391
+            },
+            "repository_class_weighted": {
+              "precision": 0.7445702002954461,
+              "recall": 0.7828978481918879,
+              "specificity": 0.731421643689971
+            },
+            "threshold": 0.55
+          },
+          {
+            "macro_specificity": 0.6933080808080808,
+            "passed": false,
+            "pooled": {
+              "precision": 0.911318553092182,
+              "recall": 0.9242603550295858,
+              "specificity": 0.5869565217391305
+            },
+            "repository_class_weighted": {
+              "precision": 0.7500761550408097,
+              "recall": 0.7524233929218448,
+              "specificity": 0.7492940601664163
+            },
+            "threshold": 0.6
+          },
+          {
+            "macro_specificity": 0.7106634527089072,
+            "passed": false,
+            "pooled": {
+              "precision": 0.915576694411415,
+              "recall": 0.9112426035502958,
+              "specificity": 0.6141304347826086
+            },
+            "repository_class_weighted": {
+              "precision": 0.7740655874619915,
+              "recall": 0.7355558438972435,
+              "specificity": 0.7853058188199292
+            },
+            "threshold": 0.65
+          },
+          {
+            "macro_specificity": 0.7189967860422405,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9149198520345253,
+              "recall": 0.8781065088757396,
+              "specificity": 0.625
+            },
+            "repository_class_weighted": {
+              "precision": 0.7821638989462462,
+              "recall": 0.706709669028092,
+              "specificity": 0.8031782352963746
+            },
+            "threshold": 0.7
+          },
+          {
+            "macro_specificity": 0.7256634527089072,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9100671140939597,
+              "recall": 0.8023668639053254,
+              "specificity": 0.6358695652173914
+            },
+            "repository_class_weighted": {
+              "precision": 0.7630688071302211,
+              "recall": 0.6125378959062658,
+              "specificity": 0.8098083252795719
+            },
+            "threshold": 0.75
+          },
+          {
+            "macro_specificity": 0.7845523415977961,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9093484419263456,
+              "recall": 0.7597633136094675,
+              "specificity": 0.6521739130434783
+            },
+            "repository_class_weighted": {
+              "precision": 0.7789939885561123,
+              "recall": 0.5681391624061712,
+              "specificity": 0.838814968956061
+            },
+            "threshold": 0.8
+          },
+          {
+            "macro_specificity": 0.8404958677685951,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9196428571428571,
+              "recall": 0.7313609467455622,
+              "specificity": 0.7065217391304348
+            },
+            "repository_class_weighted": {
+              "precision": 0.8486770170025547,
+              "recall": 0.47985564516342716,
+              "specificity": 0.9144395498174839
+            },
+            "threshold": 0.85
+          },
+          {
+            "macro_specificity": 0.9111570247933884,
+            "passed": false,
+            "pooled": {
+              "precision": 0.9840989399293286,
+              "recall": 0.659171597633136,
+              "specificity": 0.9510869565217391
+            },
+            "repository_class_weighted": {
+              "precision": 0.9326634796425708,
+              "recall": 0.385425776551189,
+              "specificity": 0.9721729957101318
+            },
+            "threshold": 0.9
+          },
+          {
+            "macro_specificity": 1.0,
+            "passed": false,
+            "pooled": {
+              "precision": 1.0,
+              "recall": 0.570414201183432,
+              "specificity": 1.0
+            },
+            "repository_class_weighted": {
+              "precision": 1.0,
+              "recall": 0.16296851701971599,
+              "specificity": 1.0
+            },
+            "threshold": 0.95
+          }
+        ],
+        "fallback": "Highest weighted precision retaining pooled and weighted recall >= .80; failed policy remains failed.",
+        "negative_bearing_repositories": 12,
+        "partition": "validation only",
+        "passed": false,
+        "selected_metrics": {
+          "macro_specificity": 0.5319651056014693,
+          "passed": false,
+          "pooled": {
+            "precision": 0.8970427163198248,
+            "recall": 0.9692307692307692,
+            "specificity": 0.4891304347826087
+          },
+          "repository_class_weighted": {
+            "precision": 0.7243486864317985,
+            "recall": 0.8940899704845834,
+            "specificity": 0.6597535421423932
+          },
+          "threshold": 0.4
+        },
+        "selected_threshold": 0.4
+      }
+    }
+  ],
+  "validation_policy": {
+    "minimum_macro_specificity": 0.5,
+    "minimum_negative_bearing_repositories": 5,
+    "minimum_precision": 0.9,
+    "minimum_recall": 0.8,
+    "minimum_specificity": 0.5,
+    "objective": "Repository/class-balanced log loss; thresholds require pooled and weighted precision, recall, specificity and equal-repository specificity.",
+    "threshold_candidates": [
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95
+    ]
+  },
+  "validation_threshold_policy": {
+    "candidates": [
+      {
+        "macro_specificity": 0.5736317722681359,
+        "passed": false,
+        "pooled": {
+          "precision": 0.898471615720524,
+          "recall": 0.9739644970414201,
+          "specificity": 0.4945652173913043
+        },
+        "repository_class_weighted": {
+          "precision": 0.7220077085160531,
+          "recall": 0.8652882125878532,
+          "specificity": 0.6668408797106389
+        },
+        "threshold": 0.35
+      },
+      {
+        "macro_specificity": 0.5830532598714416,
+        "passed": false,
+        "pooled": {
+          "precision": 0.903010033444816,
+          "recall": 0.9585798816568047,
+          "specificity": 0.5271739130434783
+        },
+        "repository_class_weighted": {
+          "precision": 0.7203015972543105,
+          "recall": 0.8381539248851444,
+          "specificity": 0.6745386724963253
+        },
+        "threshold": 0.4
+      },
+      {
+        "macro_specificity": 0.5891414141414141,
+        "passed": false,
+        "pooled": {
+          "precision": 0.9072398190045249,
+          "recall": 0.9491124260355029,
+          "specificity": 0.5543478260869565
+        },
+        "repository_class_weighted": {
+          "precision": 0.7205443307480727,
+          "recall": 0.8278642224496245,
+          "specificity": 0.6789214202904128
+        },
+        "threshold": 0.45
+      },
+      {
+        "macro_specificity": 0.6724747474747476,
+        "passed": false,
+        "pooled": {
+          "precision": 0.9071100917431193,
+          "recall": 0.936094674556213,
+          "specificity": 0.5597826086956522
+        },
+        "repository_class_weighted": {
+          "precision": 0.7310198275413574,
+          "recall": 0.8027868297981613,
+          "specificity": 0.704613018975303
+        },
+        "threshold": 0.5
+      },
+      {
+        "macro_specificity": 0.7064967860422406,
+        "passed": false,
+        "pooled": {
+          "precision": 0.9144893111638955,
+          "recall": 0.9112426035502958,
+          "specificity": 0.6086956521739131
+        },
+        "repository_class_weighted": {
+          "precision": 0.7666612623874255,
+          "recall": 0.7347633676851657,
+          "specificity": 0.7763696105817067
+        },
+        "threshold": 0.55
+      },
+      {
+        "macro_specificity": 0.7223301193755739,
+        "passed": false,
+        "pooled": {
+          "precision": 0.9180722891566265,
+          "recall": 0.901775147928994,
+          "specificity": 0.6304347826086957
+        },
+        "repository_class_weighted": {
+          "precision": 0.7893481332148888,
+          "recall": 0.7251023705621443,
+          "specificity": 0.8064932802879733
+        },
+        "threshold": 0.6
+      },
+      {
+        "macro_specificity": 0.7256634527089072,
+        "passed": false,
+        "pooled": {
+          "precision": 0.9166666666666666,
+          "recall": 0.8721893491124261,
+          "specificity": 0.6358695652173914
+        },
+        "repository_class_weighted": {
+          "precision": 0.7775831301621985,
+          "recall": 0.6649218553779238,
+          "specificity": 0.8098083252795719
+        },
+        "threshold": 0.65
+      },
+      {
+        "macro_specificity": 0.7323301193755739,
+        "passed": false,
+        "pooled": {
+          "precision": 0.9183417085427136,
+          "recall": 0.8650887573964497,
+          "specificity": 0.6467391304347826
+        },
+        "repository_class_weighted": {
+          "precision": 0.7755886305124682,
+          "recall": 0.6344075990720113,
+          "specificity": 0.8164384152627694
+        },
+        "threshold": 0.7
+      },
+      {
+        "macro_specificity": 0.8338406795224977,
+        "passed": false,
+        "pooled": {
+          "precision": 0.9304589707927677,
+          "recall": 0.7917159763313609,
+          "specificity": 0.7282608695652174
+        },
+        "repository_class_weighted": {
+          "precision": 0.8833097165453221,
+          "recall": 0.6158396254387822,
+          "specificity": 0.9186440507683615
+        },
+        "threshold": 0.75
+      },
+      {
+        "macro_specificity": 0.8664738292011019,
+        "passed": false,
+        "pooled": {
+          "precision": 0.9309838472834068,
+          "recall": 0.7502958579881657,
+          "specificity": 0.7445652173913043
+        },
+        "repository_class_weighted": {
+          "precision": 0.8995852462471429,
+          "recall": 0.5313135227039228,
+          "specificity": 0.9406929840496515
+        },
+        "threshold": 0.8
+      },
+      {
+        "macro_specificity": 0.9090909090909091,
+        "passed": false,
+        "pooled": {
+          "precision": 0.9795221843003413,
+          "recall": 0.6792899408284023,
+          "specificity": 0.9347826086956522
+        },
+        "repository_class_weighted": {
+          "precision": 0.930828058581135,
+          "recall": 0.38523629130186837,
+          "specificity": 0.9713722186082653
+        },
+        "threshold": 0.85
+      },
+      {
+        "macro_specificity": 0.9951790633608816,
+        "passed": false,
+        "pooled": {
+          "precision": 0.9864603481624759,
+          "recall": 0.6035502958579881,
+          "specificity": 0.9619565217391305
+        },
+        "repository_class_weighted": {
+          "precision": 0.993601728008368,
+          "recall": 0.29016035331801243,
+          "specificity": 0.9981315200956444
+        },
+        "threshold": 0.9
+      },
+      {
+        "macro_specificity": 1.0,
+        "passed": false,
+        "pooled": {
+          "precision": 1.0,
+          "recall": 0.5218934911242603,
+          "specificity": 1.0
+        },
+        "repository_class_weighted": {
+          "precision": 1.0,
+          "recall": 0.100010314591409,
+          "specificity": 1.0
+        },
+        "threshold": 0.95
+      }
+    ],
+    "fallback": "Highest weighted precision retaining pooled and weighted recall >= .80; failed policy remains failed.",
+    "negative_bearing_repositories": 12,
+    "partition": "validation only",
+    "passed": false,
+    "selected_metrics": {
+      "macro_specificity": 0.6724747474747476,
+      "passed": false,
+      "pooled": {
+        "precision": 0.9071100917431193,
+        "recall": 0.936094674556213,
+        "specificity": 0.5597826086956522
+      },
+      "repository_class_weighted": {
+        "precision": 0.7310198275413574,
+        "recall": 0.8027868297981613,
+        "specificity": 0.704613018975303
+      },
+      "threshold": 0.5
+    },
+    "selected_threshold": 0.5
+  }
+}

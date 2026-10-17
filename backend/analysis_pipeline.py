@@ -1,5 +1,6 @@
 """One analysis pipeline for working-tree text and historical blob text."""
 from dataclasses import dataclass
+from backend.detectors.authorization_detector import AuthorizationDetector
 from backend.detectors.structured_detector import StructuredDetector
 from backend.detectors.literal_password_detector import LiteralPasswordDetector
 
@@ -22,7 +23,7 @@ class AnalyzedFinding:
 
 class FindingAnalyzer:
     def __init__(self, detectors=None, router=None, context_engine=None):
-        self.detectors = detectors or (RegexDetector(), StructuredDetector(), EntropyDetector(), LiteralPasswordDetector())
+        self.detectors = detectors or (RegexDetector(), StructuredDetector(), AuthorizationDetector(), EntropyDetector(), LiteralPasswordDetector())
         self.router = router or ValidatorRouter()
         self.context_engine = context_engine or ContextEngine()
 
